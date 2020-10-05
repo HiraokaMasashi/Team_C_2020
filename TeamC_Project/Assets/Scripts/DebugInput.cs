@@ -21,6 +21,7 @@ public class DebugInput : MonoBehaviour
         if (input.GetA_ButtonDown())
         {
             Debug.Log("Push A");
+            FadeScene.Instance.ChangeNextScene("Select");
         }
         if (input.GetB_ButtonDown())
         {
