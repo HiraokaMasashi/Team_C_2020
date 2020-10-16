@@ -238,6 +238,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6946863030387500479, guid: 53faab826a864ad4fac7ec0204e5714e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53faab826a864ad4fac7ec0204e5714e, type: 3}
 --- !u!114 &554860464 stripped
@@ -500,3 +505,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43e05fd0d9d254c4aad76a7e167e9614, type: 3}
+--- !u!1001 &7835805514415114399
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093353519856419141, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893896703693483624, guid: 624db8ce97f4fd1489bf907560d457fb,
+        type: 3}
+      propertyPath: m_Name
+      value: Screw
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
