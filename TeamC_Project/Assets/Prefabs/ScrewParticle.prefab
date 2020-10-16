@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3471573869152313289}
   - component: {fileID: 4486419651312017731}
   m_Layer: 0
-  m_Name: Screw
+  m_Name: ScrewParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
