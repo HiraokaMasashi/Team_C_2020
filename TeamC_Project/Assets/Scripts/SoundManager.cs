@@ -120,7 +120,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError(name + "という名前のBGMファイルは存在しません。");
+            Debug.LogError("指定された名前のBGMファイルが存在しません。");
             return 0;
         }
     }
@@ -154,6 +154,14 @@ public class SoundManager : MonoBehaviour
         PlayBgm(GetBgmIndex(name));
     }
 
+    public void PlayBgmByClip(AudioClip clip)
+    {
+        bgmAudioSource.clip = clip;
+        bgmAudioSource.loop = true;
+        bgmAudioSource.volume = BgmVolume * MasterVolume;
+        bgmAudioSource.Play();
+    }
+
     public void StopBgm()
     {
         bgmAudioSource.Stop();
@@ -171,6 +179,14 @@ public class SoundManager : MonoBehaviour
     public void PlaySeByName(string name)
     {
         PlaySe(GetSeIndex(name));
+    }
+
+    public void PlaySeByClip(AudioClip clip)
+    {
+        seAudioSource.clip = clip;
+        seAudioSource.loop = false;
+        seAudioSource.volume = SeVolume * MasterVolume;
+        seAudioSource.Play();
     }
 
     public void StopSe()

@@ -5,19 +5,24 @@ using UnityEngine;
 public class SoundTest : MonoBehaviour
 {
     SoundManager sm;
+    //[SerializeField]
+    //string bgmName;
+    //[SerializeField]
+    //string seName;
+
     [SerializeField]
-    string bgmName;
+    AudioClip bgmClip;
     [SerializeField]
-    string seName;
+    AudioClip seClip;
 
     void Start()
     {
         sm = SoundManager.Instance;
-        sm.PlayBgmByName(bgmName);
+        sm.PlayBgmByClip(bgmClip);
     }
 
     public void OnClick()
     {
-        sm.PlaySeByName(seName);
+        sm.PlaySeByClip(seClip);
     }
 }

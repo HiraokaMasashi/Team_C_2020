@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110d01049bf240b4090a652e9c4be61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmName: play
-  seName: button
+  bgmClip: {fileID: 8300000, guid: 1693422da8e37634aa97b65724cfe122, type: 3}
+  seClip: {fileID: 8300000, guid: 67677e0cbe7de7948b3943c27e1472e0, type: 3}
 --- !u!4 &585610980
 Transform:
   m_ObjectHideFlags: 0
