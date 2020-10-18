@@ -43,7 +43,7 @@ public class ParticlaManager : MonoBehaviour
         if (p == null) return;
 
         p.Stop();
-        Destroy(p.gameObject);
+        Destroy(particle, p.main.duration);
     }
 
     public void DestroyParticle(GameObject particle, float destroyTime = 0.0f)
