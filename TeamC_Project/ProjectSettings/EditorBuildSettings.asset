@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Select.unity
     guid: baa527daa98e98044af71bc90270db19
+  - enabled: 1
+    path: Assets/Scenes/Ushirogata.unity
+    guid: a1310846dba003b4a8fc58b91355a274
   m_configObjects: {}
