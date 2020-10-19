@@ -5,18 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(ParticlaManager))]
 public class Screw : MonoBehaviour
 {
+    /// <summary>
+    /// スクリューを使用中か
+    /// </summary>
     public bool IsUseScrew
     {
         get;
         private set;
     } = false;
 
-    private bool existScrew = false;
+    private bool existScrew = false;//スクリューが存在しているか
 
     private InputManager inputManager;
     private ParticlaManager particlaManager;
 
-    private GameObject screw;
+    private GameObject screw;//スクリュー
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,7 @@ public class Screw : MonoBehaviour
         if (IsUseScrew)
         {
             Debug.Log("スクリュー使用中");
+            screw.transform.position = transform.position;
             GenerateScrew();
         }
         else
@@ -41,13 +45,15 @@ public class Screw : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// スクリューの生成
+    /// </summary>
     private void GenerateScrew()
     {
         if (existScrew) return;
 
-        //スクリューパーティクル生成
-        screw = particlaManager.GenerateParticle();
-        screw.transform.position = transform.position;
+        //スクリューパーティクルの生成
+        screw = particlaManager.GenerateParticleInChildren();
         screw.transform.rotation = transform.rotation;
         //あたり判定を付ける
         screw.GetComponent<BoxCollider>().enabled = true;
@@ -55,6 +61,9 @@ public class Screw : MonoBehaviour
         existScrew = true;
     }
 
+    /// <summary>
+    /// スクリューの停止
+    /// </summary>
     private void StopScrew()
     {
         if (!existScrew) return;
@@ -64,5 +73,19 @@ public class Screw : MonoBehaviour
         //あたり判定をはずす
         screw.GetComponent<BoxCollider>().enabled = false;
         existScrew = false;
+        EnemyStartRecovery();
+    }
+
+    /// <summary>
+    /// 敵のスタン回復処理を実行
+    /// </summary>
+    private void EnemyStartRecovery()
+    {
+        List<GameObject> enemies = transform.GetChild(0).GetComponent<ScrewCollision>().GetEnemies();
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].GetComponent<SetUpScrew>().LeaveScrew();
+        }
     }
 }

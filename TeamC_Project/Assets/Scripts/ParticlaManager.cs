@@ -66,4 +66,18 @@ public class ParticlaManager : MonoBehaviour
 
         return obj;
     }
+
+    /// <summary>
+    /// パーティクルを子オブジェクトで生成
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
+    public GameObject GenerateParticleInChildren(int num = 0)
+    {
+        GameObject particle = particles[num].gameObject;
+        GameObject obj = Instantiate(particle, Vector3.zero, Quaternion.identity);
+        obj.transform.parent = transform;
+
+        return obj;
+    }
 }
