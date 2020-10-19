@@ -45,9 +45,12 @@ public class Screw : MonoBehaviour
     {
         if (existScrew) return;
 
+        //スクリューパーティクル生成
         screw = particlaManager.GenerateParticle();
         screw.transform.position = transform.position;
         screw.transform.rotation = transform.rotation;
+        //あたり判定を付ける
+        screw.GetComponent<BoxCollider>().enabled = true;
         particlaManager.StartParticle(screw);
         existScrew = true;
     }
@@ -56,7 +59,10 @@ public class Screw : MonoBehaviour
     {
         if (!existScrew) return;
 
+        //パーティクルの生成を止める
         particlaManager.StopParticle(screw);
+        //あたり判定をはずす
+        screw.GetComponent<BoxCollider>().enabled = false;
         existScrew = false;
     }
 }
