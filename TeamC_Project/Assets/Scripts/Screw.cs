@@ -35,9 +35,10 @@ public class Screw : MonoBehaviour
 
         if (IsUseScrew)
         {
+            GenerateScrew();
             Debug.Log("スクリュー使用中");
             screw.transform.position = transform.position;
-            GenerateScrew();
+            EnemyStanMove();
         }
         else
         {
@@ -82,10 +83,22 @@ public class Screw : MonoBehaviour
     private void EnemyStartRecovery()
     {
         List<GameObject> enemies = transform.GetChild(0).GetComponent<ScrewCollision>().GetEnemies();
+        int max = enemies.Count;
+
+        for (int i = 0; i < max; i++)
+        {
+            enemies[i].GetComponent<SetUpScrew>().LeaveScrew();
+            transform.GetChild(0).GetComponent<ScrewCollision>().RemoveEnemy(enemies[i]);
+        }
+    }
+
+    private void EnemyStanMove()
+    {
+        List<GameObject> enemies = transform.GetChild(0).GetComponent<ScrewCollision>().GetEnemies();
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponent<SetUpScrew>().LeaveScrew();
+            enemies[i].GetComponent<SetUpScrew>().StanMove(transform.position);
         }
     }
 }

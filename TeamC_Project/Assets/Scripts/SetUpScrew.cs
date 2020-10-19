@@ -32,7 +32,6 @@ public class SetUpScrew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StanMove();
         Recovery();
     }
 
@@ -57,9 +56,11 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// スタン中の敵の並べ替え
     /// </summary>
-    private void StanMove()
+    public void StanMove(Vector3 basePosition)
     {
-
+        float x = transform.position.x;
+        Vector3 position = basePosition + new Vector3(x, 0.0f, 0.0f);
+        transform.position = position;
     }
 
     /// <summary>
