@@ -27,9 +27,9 @@ public class ScrewCollision : MonoBehaviour
         }
     }
 
-    public void RemoveEnemy(GameObject obj)
+    public void RemoveEnemy(int index)
     {
-        enemies.Remove(obj);
+        enemies.RemoveAt(index);
     }
 
     /// <summary>
