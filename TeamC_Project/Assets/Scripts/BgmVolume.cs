@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BgmVolume : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Slider slider;
+    SoundManager sm;
+
     void Start()
     {
-        
+        slider = GetComponent<Slider>();
+        sm = SoundManager.Instance;
+        slider.value = sm.BgmVolume;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnValueChanged()
     {
-        
+        sm.BgmVolume = slider.value;
     }
 }
