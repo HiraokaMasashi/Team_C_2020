@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MasterVolume : MonoBehaviour
+public class SeVolume : MonoBehaviour
 {
     Slider slider;
     SoundManager sm;
@@ -12,14 +12,11 @@ public class MasterVolume : MonoBehaviour
     {
         slider = GetComponent<Slider>();
         sm = SoundManager.Instance;
-        slider.value = sm.MasterVolume;
-
-        //Masterを初期選択
-        slider.Select();
+        slider.value = sm.SeVolume;
     }
 
     public void OnValueChanged()
     {
-        sm.MasterVolume = slider.value;
+        sm.SeVolume = slider.value;
     }
 }

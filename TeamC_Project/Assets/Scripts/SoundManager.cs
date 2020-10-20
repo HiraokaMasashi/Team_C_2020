@@ -154,13 +154,13 @@ public class SoundManager : MonoBehaviour
         PlayBgm(GetBgmIndex(name));
     }
 
-    public void PlayBgmByClip(AudioClip clip)
-    {
-        bgmAudioSource.clip = clip;
-        bgmAudioSource.loop = true;
-        bgmAudioSource.volume = BgmVolume * MasterVolume;
-        bgmAudioSource.Play();
-    }
+    //public void PlayBgmByClip(AudioClip clip)
+    //{
+    //    bgmAudioSource.clip = clip;
+    //    bgmAudioSource.loop = true;
+    //    bgmAudioSource.volume = BgmVolume * MasterVolume;
+    //    bgmAudioSource.Play();
+    //}
 
     public void StopBgm()
     {
@@ -181,13 +181,13 @@ public class SoundManager : MonoBehaviour
         PlaySe(GetSeIndex(name));
     }
 
-    public void PlaySeByClip(AudioClip clip)
-    {
-        seAudioSource.clip = clip;
-        seAudioSource.loop = false;
-        seAudioSource.volume = SeVolume * MasterVolume;
-        seAudioSource.Play();
-    }
+    //public void PlaySeByClip(AudioClip clip)
+    //{
+    //    seAudioSource.clip = clip;
+    //    seAudioSource.loop = false;
+    //    seAudioSource.volume = SeVolume * MasterVolume;
+    //    seAudioSource.Play();
+    //}
 
     public void StopSe()
     {
