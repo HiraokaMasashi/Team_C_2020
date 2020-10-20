@@ -10,6 +10,8 @@ public class SetUpScrew : MonoBehaviour
     private float recoveryTime = 6.0f;
     private float stanElapsedTime;
 
+    private float distance;
+
     public bool IsStan
     {
         get;
@@ -27,6 +29,7 @@ public class SetUpScrew : MonoBehaviour
     {
         hitTimer = 0.0f;
         stanElapsedTime = 0.0f;
+        distance = 0.0f;
     }
 
     // Update is called once per frame
@@ -54,12 +57,12 @@ public class SetUpScrew : MonoBehaviour
     }
 
     /// <summary>
-    /// スタン中の敵の並べ替え
+    /// スタン中の敵の並べ替え(移動)
     /// </summary>
     public void StanMove(Vector3 basePosition)
     {
-        float x = transform.position.x;
-        Vector3 position = basePosition + new Vector3(x, 0.0f, 0.0f);
+        Vector3 position = new Vector3(0, transform.position.y, transform.position.z)
+            + new Vector3(basePosition.x, 0, 0);
         transform.position = position;
     }
 
@@ -69,9 +72,10 @@ public class SetUpScrew : MonoBehaviour
     /// <param name="distance"></param>
     public void HitScrew(float distance)
     {
-        Debug.Log(distance.ToString("f2"));
+        Debug.Log("距離:"+distance.ToString("f2"));
         IsStan = true;
         IsHitScrew = true;
+        this.distance = distance;
     }
 
     /// <summary>
