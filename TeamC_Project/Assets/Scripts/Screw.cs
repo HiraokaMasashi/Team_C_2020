@@ -125,6 +125,8 @@ public class Screw : MonoBehaviour
     private void EnemyStanMove()
     {
         List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetEnemies();
+
+        if (enemies == null) return;
         foreach (var e in enemies)
         {
             e.GetComponent<SetUpScrew>().StanMove(transform.position);
