@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3471573869152313289}
   - component: {fileID: 4486419651312017731}
   - component: {fileID: 2703532635655288780}
+  - component: {fileID: 6709115362242080342}
   m_Layer: 0
   m_Name: ScrewParticle
   m_TagString: Untagged
@@ -4781,3 +4782,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.093587, y: 13.328022, z: 3}
   m_Center: {x: -0.1240105, y: 6.164011, z: 0}
+--- !u!54 &6709115362242080342
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893896703693483624}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
