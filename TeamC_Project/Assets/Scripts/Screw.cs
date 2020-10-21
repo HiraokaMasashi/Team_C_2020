@@ -31,8 +31,9 @@ public class Screw : MonoBehaviour
 
     private GameObject screw;//スクリュー
 
-    [SerializeField]
-    private float rotationSpeed = 1.0f;
+    [SerializeField, Tooltip("回転速度倍率")]
+    private float magnificationSpeed = 3.0f;
+    private float rotationSpeed = 180.0f;
 
     private float screwRotation = -180.0f;
     private float normalRotation = 0.0f;
@@ -43,6 +44,7 @@ public class Screw : MonoBehaviour
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         particlaManager = GetComponent<ParticlaManager>();
         currentMode = Mode.NORMAL;
+        rotationSpeed *= magnificationSpeed;
     }
 
     void Update()
