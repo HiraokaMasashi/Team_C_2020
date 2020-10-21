@@ -45,7 +45,7 @@ public class Screw : MonoBehaviour
         currentMode = Mode.NORMAL;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         switch (currentMode)
         {
