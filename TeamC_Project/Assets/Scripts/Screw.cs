@@ -5,10 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(ParticlaManager))]
 public class Screw : MonoBehaviour
 {
-    enum Mode
+    //プレイヤーの状態
+    public enum Mode
     {
         NORMAL,
         SCREW,
+        ROTATION_SCREW,
+        ROTATION_NORMAL,
     }
     private Mode currentMode;
 
@@ -28,50 +31,58 @@ public class Screw : MonoBehaviour
 
     private GameObject screw;//スクリュー
 
-    //[SerializeField]
-    //private float rotateSpeed = 1.0f;
-    //private float step;
+    [SerializeField]
+    private float rotationSpeed = 1.0f;
 
-    //private bool isRotationBack;
+    private float screwRotation = -180.0f;
+    private float normalRotation = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         particlaManager = GetComponent<ParticlaManager>();
-        //isRotationBack = false;
         currentMode = Mode.NORMAL;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //if (inputManager.GetR_ButtonDown())
-        //{
-        //    currentMode = Mode.SCREW;
-        //    //コルーチンで回転
-        //    StartCoroutine(RotationUseScrew());
-        //}
-
-        //if (currentMode == Mode.SCREW)
-        //{
-        IsUseScrew = inputManager.GetR_Button();
-
-        if (IsUseScrew)
+        switch (currentMode)
         {
-            //if (isRotationBack)
-            //{
-            GenerateScrew();
-            screw.transform.position = transform.position;
-            EnemyStanMove();
-            //}
+            case Mode.NORMAL:
+                //Rボタンを入力したら回転開始
+                if (inputManager.GetR_ButtonDown())
+                {
+                    currentMode = Mode.ROTATION_SCREW;
+                }
+                break;
+
+            case Mode.SCREW:
+                //Rボタンを押している間、スクリューを生成
+                IsUseScrew = inputManager.GetR_Button();
+
+                if (IsUseScrew)
+                {
+                    GenerateScrew();
+                    screw.transform.position = transform.position;
+                    EnemyStanMove();
+                }
+                else
+                {
+                    StopScrew();
+                }
+                break;
+
+            case Mode.ROTATION_NORMAL:
+                //元の回転に戻す
+                RotationDefault();
+                break;
+
+            case Mode.ROTATION_SCREW:
+                //スクリューを出すための回転
+                RotationUseScrew();
+                break;
         }
-        else
-        {
-            StopScrew();
-            //StartCoroutine(RotationDefault());
-        }
-        //}
     }
 
     /// <summary>
@@ -79,6 +90,7 @@ public class Screw : MonoBehaviour
     /// </summary>
     private void GenerateScrew()
     {
+        //パーティクルが存在しないときに1度だけ
         if (existScrew) return;
 
         //スクリューパーティクルの生成
@@ -94,15 +106,19 @@ public class Screw : MonoBehaviour
     /// </summary>
     private void StopScrew()
     {
-        if (!existScrew) return;
-
-        //パーティクルの生成を止める
-        particlaManager.StopParticle(screw);
-        //あたり判定をはずす
-        screw.GetComponent<BoxCollider>().enabled = false;
-        existScrew = false;
-        EnemyStartRecovery();
-        screw.transform.parent = null;
+        //パーティクルが生成されたときだけ
+        if (screw != null)
+        {
+            //パーティクルの生成を止める
+            particlaManager.StopParticle(screw);
+            //あたり判定をはずす
+            screw.GetComponent<BoxCollider>().enabled = false;
+            existScrew = false;
+            EnemyStartRecovery();
+            screw.transform.parent = null;
+        }
+        //元に戻る回転状態
+        currentMode = Mode.ROTATION_NORMAL;
     }
 
     /// <summary>
@@ -133,50 +149,46 @@ public class Screw : MonoBehaviour
         }
     }
 
-    //private void RotationUseScrew()
-    //{
-    //    step = rotateSpeed * Time.deltaTime;
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 180), step);
-    //    if (transform.rotation.eulerAngles.z <= 190)
-    //    {
-    //        isRotationBack = true;
-    //    }
-    //}
+    /// <summary>
+    /// スクリューを使用するための回転
+    /// </summary>
+    private void RotationUseScrew()
+    {
+        //z軸に180度回転させる
+        float step = rotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, screwRotation), step);
+        Vector3 euler = transform.rotation.eulerAngles;
 
-    //private void RotationNoUseScrew()
-    //{
-    //    step = rotateSpeed * Time.deltaTime;
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), step);
-    //    if (transform.rotation.eulerAngles.z <= 10)
-    //    {
-    //        isRotationBack = false;
-    //        currentMode = Mode.NORMAL;
-    //    }
-    //}
+        if (euler.z >= screwRotation * -1)
+        {
+            transform.rotation = Quaternion.Euler(euler.x, euler.y, screwRotation * -1);
+            currentMode = Mode.SCREW;
+        }
+    }
 
-    //private IEnumerator RotationUseScrew()
-    //{
-    //    float rate = 0;
+    /// <summary>
+    /// 通常状態に戻すための回転
+    /// </summary>
+    private void RotationDefault()
+    {
+        //z軸に180度回転させる
+        float step = rotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, normalRotation), step);
+        Vector3 euler = transform.rotation.eulerAngles;
 
-    //    while (true)
-    //    {
-    //        rate += Time.deltaTime / 10;
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 180), rate);
+        if (euler.z <= normalRotation)
+        {
+            transform.rotation = Quaternion.Euler(euler.x, euler.y, normalRotation);
+            currentMode = Mode.NORMAL;
+        }
+    }
 
-    //        yield return null;
-    //    }
-    //}
-
-    //private IEnumerator RotationDefault()
-    //{
-    //    float rate = 0;
-
-    //    while (true)
-    //    {
-    //        rate += Time.deltaTime / 10;
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), rate);
-
-    //        yield return null;
-    //    }
-    //}
+    /// <summary>
+    /// 現在の状態を取得
+    /// </summary>
+    /// <returns></returns>
+    public Mode GetMode()
+    {
+        return currentMode;
+    }
 }
