@@ -84,6 +84,9 @@ public class Screw : MonoBehaviour
                 //スクリューを出すための回転
                 RotationUseScrew();
                 break;
+
+            default:
+                break;
         }
     }
 
