@@ -25,7 +25,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 4.0f;
 
-    private bool isRapidFire = false;//連射中か
+    public bool IsRapidFire
+    {
+        get;
+        private set;
+    } = false;//連射中か
 
     // Start is called before the first frame update
     void Start()
@@ -52,19 +56,12 @@ public class Player : MonoBehaviour
         //通常状態以外には撃てない
         if (screw.GetMode() != Screw.Mode.NORMAL) return;
 
+        Vector3 shotPosition = transform.position + Vector3.up;
         if (inputManager.GetA_ButtonDown())
         {
-            if (isRapidFire)
-            {
-                isRapidFire = false;
-                elapsedTime = 0.0f;
-                return;
-            }
-
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            Vector3 shotPosition = transform.position + Vector3.up;
             bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, 200.0f, 3.0f);
             chargeBullet.ResetCharge();
         }
@@ -75,9 +72,17 @@ public class Player : MonoBehaviour
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, transform.position, Vector3.up, 200.0f, 3.0f);
+            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, shotPosition, Vector3.up, 200.0f, 3.0f);
             chargeBullet.ResetCharge();
-            isRapidFire = true;
+            IsRapidFire = true;
+        }
+
+        if (inputManager.GetA_ButtonUp())
+        {
+            if (!IsRapidFire) return;
+
+            IsRapidFire = false;
+            elapsedTime = 0.0f;
         }
     }
 

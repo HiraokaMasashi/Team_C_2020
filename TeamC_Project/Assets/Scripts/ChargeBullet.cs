@@ -31,6 +31,8 @@ public class ChargeBullet : MonoBehaviour
     [SerializeField]
     private Slider chargeSlider;
 
+    private Player player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,7 @@ public class ChargeBullet : MonoBehaviour
         chargeSlider.maxValue = stageChargeMaxCount[0];
         chargeSlider.transform.GetChild(0).GetComponent<Image>().color = Color.white;
         currentMode = ChargeMode.STAGE_1;
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -53,6 +56,9 @@ public class ChargeBullet : MonoBehaviour
     /// </summary>
     private void Charge()
     {
+        //連射しているなら、チャージしない
+        if (player.IsRapidFire) return;
+
         //左スティックを倒している角度を取得
         float x = inputManager.GetL_Stick_Horizontal();
         float y = inputManager.GetL_Stick_Vertical();
