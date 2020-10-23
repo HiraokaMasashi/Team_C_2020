@@ -64,7 +64,8 @@ public class Player : MonoBehaviour
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            bulletController.GenerateBullet(chargeBullet.GetChargeMode(), transform.position, Vector3.up, 200.0f, 3.0f);
+            Vector3 shotPosition = transform.position + Vector3.up;
+            bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, 200.0f, 3.0f);
             chargeBullet.ResetCharge();
         }
 

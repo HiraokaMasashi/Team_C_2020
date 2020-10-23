@@ -25,8 +25,11 @@ public class BulletCollision : MonoBehaviour
             other.transform.GetComponent<Health>().Damage(Attack);
             if (other.transform.GetComponent<Health>().IsDead)
             {
-                screwCollision = GameObject.Find("ScrewParticle(Clone)").GetComponent<ScrewCollision>();
-                screwCollision.RemoveEnemy(other.gameObject);
+                if (GameObject.Find("ScrewParticle(Clone)") != null)
+                {
+                    screwCollision = GameObject.Find("ScrewParticle(Clone)").GetComponent<ScrewCollision>();
+                    screwCollision.RemoveEnemy(other.gameObject);
+                }
             }
             if (!IsPenetrate) Destroy(gameObject);
         }
