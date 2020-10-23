@@ -32,6 +32,11 @@ public class ScrewCollision : MonoBehaviour
         enemies.RemoveAt(index);
     }
 
+    public void RemoveEnemy(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+    }
+
     /// <summary>
     /// スクリューにヒットしている敵を返す
     /// </summary>

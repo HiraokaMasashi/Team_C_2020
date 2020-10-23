@@ -112,21 +112,11 @@ public class ChargeBullet : MonoBehaviour
 
             case ChargeMode.STAGE_3:
                 if (chargeCount < stageChargeMaxCount[2]) return;
-                chargeCount = 0;
-                chargeSlider.value = 0;
-                chargeSlider.maxValue = stageChargeMaxCount[3];
-                chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[2];
-                chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[3];
                 Debug.Log("3段階目チャージ");
                 currentMode = ChargeMode.STAGE_4;
                 break;
 
             case ChargeMode.STAGE_4:
-                if (chargeCount >= stageChargeMaxCount[3])
-                {
-                    chargeCount = stageChargeMaxCount[3];
-                    Debug.Log("4段階目チャージ");
-                }
                 break;
 
             default:
