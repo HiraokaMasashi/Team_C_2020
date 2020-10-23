@@ -38,6 +38,14 @@ public class Screw : MonoBehaviour
     private float screwRotation = -180.0f;
     private float normalRotation = 0.0f;
 
+    private BoxCollider boxCollider;
+
+    private float minCenterY = 1.0f;
+    private float minSizeY = 2.0f;
+
+    private float maxCenterY = 6.0f;
+    private float maxSizeY = 12.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +74,7 @@ public class Screw : MonoBehaviour
                 if (IsUseScrew)
                 {
                     GenerateScrew();
+                    ChangeBoxSize();
                     screw.transform.position = transform.position;
                     EnemyStanMove();
                 }
@@ -101,9 +110,49 @@ public class Screw : MonoBehaviour
         //スクリューパーティクルの生成
         screw = particlaManager.GenerateParticleInChildren();
         //あたり判定を付ける
-        screw.GetComponent<BoxCollider>().enabled = true;
+        boxCollider = screw.GetComponent<BoxCollider>();
+        boxCollider.enabled = true;
         particlaManager.StartParticle(screw);
         existScrew = true;
+    }
+
+    /// <summary>
+    /// スクリュー使用時にあたり判定のサイズを調整する
+    /// </summary>
+    private void ChangeBoxSize()
+    {
+        if (boxCollider == null) return;
+
+        float speed = 2.0f; 
+
+        float addSize = 0.0f;
+        addSize += Time.deltaTime;
+
+        Vector3 center = boxCollider.center;
+        center.y += addSize * speed;
+        if (center.y >= maxCenterY) center.y = maxCenterY;
+        boxCollider.center = center;
+
+        Vector3 size = boxCollider.size;
+        size.y += addSize * 2.0f * speed;
+        if (size.y >= maxSizeY) size.y = maxSizeY;
+        boxCollider.size = size;
+    }
+
+    /// <summary>
+    /// 調整したあたり判定を元に戻す
+    /// </summary>
+    private void ResetBoxSize()
+    {
+        if (boxCollider == null) return;
+
+        Vector3 center = boxCollider.center;
+        center.y = minCenterY;
+        boxCollider.center = center;
+
+        Vector3 size = boxCollider.size;
+        size.y = minSizeY;
+        boxCollider.size = size;
     }
 
     /// <summary>
@@ -117,7 +166,9 @@ public class Screw : MonoBehaviour
             //パーティクルの生成を止める
             particlaManager.StopParticle(screw);
             //あたり判定をはずす
-            screw.GetComponent<BoxCollider>().enabled = false;
+            boxCollider.enabled = false;
+            ResetBoxSize();
+            boxCollider = null;
             existScrew = false;
             EnemyStartRecovery();
             screw.transform.parent = null;
