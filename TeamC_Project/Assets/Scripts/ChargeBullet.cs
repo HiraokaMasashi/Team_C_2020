@@ -101,7 +101,6 @@ public class ChargeBullet : MonoBehaviour
                 chargeSlider.maxValue = stageChargeMaxCount[1];
                 chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[0];
                 chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[1];
-                Debug.Log("1段階目チャージ");
                 currentMode = ChargeMode.STAGE_2;
                 break;
 
@@ -112,13 +111,11 @@ public class ChargeBullet : MonoBehaviour
                 chargeSlider.maxValue = stageChargeMaxCount[2];
                 chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[1];
                 chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[2];
-                Debug.Log("2段階目チャージ");
                 currentMode = ChargeMode.STAGE_3;
                 break;
 
             case ChargeMode.STAGE_3:
                 if (chargeCount < stageChargeMaxCount[2]) return;
-                Debug.Log("3段階目チャージ");
                 currentMode = ChargeMode.STAGE_4;
                 break;
 
