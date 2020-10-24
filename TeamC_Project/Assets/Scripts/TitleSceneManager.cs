@@ -53,6 +53,15 @@ public class TitleSceneManager : MonoBehaviour
             //ムービー終了後にボタンを押すと次のシーンへ
             if (PressAnyButton())
                 sceneManager.ChangeNextScene("Select");
+
+            if (GameExit())
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+                UnityEngine.Application.Quit();
+#endif
+            }
         }
     }
 
@@ -76,9 +85,16 @@ public class TitleSceneManager : MonoBehaviour
     {
         if (Input.GetA_ButtonDown() || Input.GetB_ButtonDown()
         || Input.GetX_ButtonDown() || Input.GetY_ButtonDown()
-        || Input.GetMenu_ButtonDown() || Input.GetView_ButtonDown())
+        || Input.GetMenu_ButtonDown())
             return true;
         else
             return false;
+    }
+
+    private bool GameExit()
+    {
+        if (Input.GetView_ButtonDown())
+            return true;
+        else return false;
     }
 }
