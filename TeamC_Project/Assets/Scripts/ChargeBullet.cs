@@ -33,10 +33,13 @@ public class ChargeBullet : MonoBehaviour
 
     private Player player;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         previousAngle = 0.0f;
         chargeCount = 0;
         chargeSlider.maxValue = stageChargeMaxCount[0];

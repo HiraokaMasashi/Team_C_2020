@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 4.0f;
 
+    private GameManager gameManager;
+
     public bool IsRapidFire
     {
         get;
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         screw = GetComponent<Screw>();
         chargeBullet = GetComponent<ChargeBullet>();
         bulletController = GetComponent<BulletController>();
@@ -45,6 +48,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.IsGameStart) return;
+
         Move();
         ShotBullet();
     }

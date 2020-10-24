@@ -49,10 +49,13 @@ public class Screw : MonoBehaviour
     private float maxCenterY = 6.0f;
     private float maxSizeY = 12.0f;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         particlaManager = GetComponent<ParticlaManager>();
         currentMode = Mode.NORMAL;
         rotationSpeed *= magnificationSpeed;
@@ -60,6 +63,8 @@ public class Screw : MonoBehaviour
 
     void Update()
     {
+        if (!gameManager.IsGameStart) return;
+
         switch (currentMode)
         {
             case Mode.NORMAL:

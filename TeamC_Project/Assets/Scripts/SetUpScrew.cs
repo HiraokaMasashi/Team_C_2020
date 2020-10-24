@@ -68,7 +68,7 @@ public class SetUpScrew : MonoBehaviour
         Vector3 position = new Vector3(transform.position.x, basePosition.y + distanceY, transform.position.z);
         Vector3 destination = new Vector3(basePosition.x + adjustPositionX, basePosition.y + distanceY, transform.position.z);
         float distance = Vector3.Distance(position, destination);
-        float currentLocation = (Time.deltaTime * speed) / distance;
+        float currentLocation = (Time.deltaTime * speed * 2.0f) / distance;
 
         transform.position = Vector3.Lerp(position, destination, currentLocation);
     }
