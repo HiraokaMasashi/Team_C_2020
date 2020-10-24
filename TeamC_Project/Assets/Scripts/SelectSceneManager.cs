@@ -33,11 +33,13 @@ public class SelectSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (sceneManager.IsFadeIn || sceneManager.IsFadeOut) return;
+
         timer++;
         float v = -Input.GetL_Stick_Vertical();
-        if(timer >= interval && v != 0)
+        if (timer >= interval && v != 0)
         {
-            selectNumber += (int)(1 * (v/Mathf.Abs(v)));
+            selectNumber += (int)(1 * (v / Mathf.Abs(v)));
             selectNumber = (0 < selectNumber) ? selectNumber : 0;
             selectNumber = (length > selectNumber) ? selectNumber : length;
             timer = 0;
@@ -47,10 +49,21 @@ public class SelectSceneManager : MonoBehaviour
 
         //Aかメニューボタンで選択中のシーンへ
         if (Input.GetA_ButtonDown() || Input.GetMenu_ButtonDown())
-            sceneManager.ChangeNextScene(sceneNames[selectNumber]);
+        {
+            if (selectNumber == length)
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+                UnityEngine.Application.Quit();
+#endif
+            }
+            else
+                sceneManager.ChangeNextScene(sceneNames[selectNumber]);
+        }
 
         //Bボタンでタイトルへ
-        if(Input.GetB_ButtonDown())
+        if (Input.GetB_ButtonDown())
             sceneManager.ChangeNextScene("Title");
 
         ActiveButton(selectNumber);

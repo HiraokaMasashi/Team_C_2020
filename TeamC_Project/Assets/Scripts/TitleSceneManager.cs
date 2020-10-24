@@ -22,14 +22,11 @@ public class TitleSceneManager : MonoBehaviour
         moveEnd = false;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if (sceneManager.IsFadeIn || sceneManager.IsFadeOut) return;
+
         //ムービー再生
         if (!moveEnd)
         {
