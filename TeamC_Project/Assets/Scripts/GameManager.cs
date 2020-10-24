@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private FadeScene fadeScene;//フェードスクリプト
 
+    [SerializeField]
+    private float changeSceneTime = 2.0f;
+
     public enum ResultMode
     {
         NONE,
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameStart) return;
 
-        if(!fadeScene.IsFadeIn)
+        if (!fadeScene.IsFadeIn)
         {
             IsGameStart = true;
         }
@@ -59,23 +62,29 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void ChangeResultScene()
     {
-        if (playerHealth.IsDead)
+        if (!isEnd)
         {
-            result = ResultMode.GAMEOVER;
-            isEnd = true;
-        }
-
-        if (bossHealth != null)
-        {
-            if (bossHealth.IsDead)
+            if (playerHealth.IsDead)
             {
-                result = ResultMode.GAMECLEAR;
+                result = ResultMode.GAMEOVER;
                 isEnd = true;
+            }
+
+            if (bossHealth != null)
+            {
+                if (bossHealth.IsDead)
+                {
+                    result = ResultMode.GAMECLEAR;
+                    isEnd = true;
+                }
             }
         }
 
         if (isEnd)
         {
+            changeSceneTime -= Time.deltaTime;
+            if (changeSceneTime > 0.0f) return;
+
             fadeScene.ChangeNextScene("Result");
         }
     }

@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ParticlaManager))]
 public class Health : MonoBehaviour
 {
     [SerializeField]
     private int hp = 1;
+
+    private ParticlaManager particlaManager;
+
     /// <summary>
     /// 体力
     /// </summary>
@@ -23,11 +27,22 @@ public class Health : MonoBehaviour
         get { return hp <= 0; }
     }
 
+    private void Start()
+    {
+        particlaManager = GetComponent<ParticlaManager>();
+    }
+
     private void Update()
     {
         if (IsDead)
         {
             Debug.Log("死亡");
+            GameObject particle = particlaManager.GenerateParticle();
+            if (particle != null)
+            {
+                particle.transform.position = transform.position;
+                particlaManager.OncePlayParticle(particle);
+            }
             Destroy(gameObject);
         }
     }

@@ -116,7 +116,7 @@ public class Screw : MonoBehaviour
         if (isExistScrew) return;
 
         //スクリューパーティクルの生成
-        screw = particlaManager.GenerateParticleInChildren();
+        screw = particlaManager.GenerateParticleInChildren(1);
         //あたり判定を付ける
         boxCollider = screw.GetComponent<BoxCollider>();
         boxCollider.enabled = true;

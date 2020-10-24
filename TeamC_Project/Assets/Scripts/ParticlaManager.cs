@@ -61,6 +61,8 @@ public class ParticlaManager : MonoBehaviour
     /// <returns></returns>
     public GameObject GenerateParticle(int num = 0)
     {
+        if (particles.Length == 0) return null;
+
         GameObject particle = particles[num].gameObject;
         GameObject obj = Instantiate(particle, Vector3.zero, Quaternion.identity);
 

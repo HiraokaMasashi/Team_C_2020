@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles:
+  - {fileID: 29722816459199433, guid: e1757a8108ffcb8419d4990387182203, type: 3}
   - {fileID: 3471573869152313289, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
 --- !u!114 &2732371690843407097
 MonoBehaviour:
