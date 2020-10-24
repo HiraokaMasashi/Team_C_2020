@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private Health playerHealth;//プレイヤーの体力スクリプト
+    [SerializeField]
     private Health bossHealth;//ボスの体力スクリプト
 
     [SerializeField]
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerHealth.IsDead)
         {
-            result = ResultMode.GAMECLEAR;
+            result = ResultMode.GAMEOVER;
             isEnd = true;
         }
 
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             if (bossHealth.IsDead)
             {
-                result = ResultMode.GAMEOVER;
+                result = ResultMode.GAMECLEAR;
                 isEnd = true;
             }
         }

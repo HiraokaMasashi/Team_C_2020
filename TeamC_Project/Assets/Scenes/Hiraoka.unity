@@ -632,6 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16e36f6e850214eb2c9d2c330ce309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossHealth: {fileID: 466093948}
   fadeScene: {fileID: 554860464}
 --- !u!4 &896034385
 Transform:
