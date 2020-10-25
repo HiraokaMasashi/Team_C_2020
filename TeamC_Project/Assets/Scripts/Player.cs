@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject bulletPrefab;
+    //[SerializeField]
+    //private GameObject bulletPrefab;
 
     private InputManager inputManager;
 
@@ -110,5 +110,14 @@ public class Player : MonoBehaviour
             nextPosition.z);
         //現在位置にnextPositionを＋
         transform.position = nextPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Contains("Cube"))
+        {
+            GetComponent<Health>().HitDeath();
+            other.GetComponent<Health>().HitDeath();
+        }
     }
 }

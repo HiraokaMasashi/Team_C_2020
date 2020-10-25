@@ -34,17 +34,31 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if (IsDead)
+        DeathEffect();
+    }
+
+    /// <summary>
+    /// 死亡エフェクト
+    /// </summary>
+    private void DeathEffect()
+    {
+        if (!IsDead) return;
+
+        GameObject particle = particlaManager.GenerateParticle();
+        if (particle != null)
         {
-            Debug.Log("死亡");
-            GameObject particle = particlaManager.GenerateParticle();
-            if (particle != null)
-            {
-                particle.transform.position = transform.position;
-                particlaManager.OncePlayParticle(particle);
-            }
-            Destroy(gameObject);
+            particle.transform.position = transform.position;
+            particlaManager.OncePlayParticle(particle);
         }
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 衝突時に呼ぶ死亡処理
+    /// </summary>
+    public void HitDeath()
+    {
+        hp = 0;
     }
 
     /// <summary>

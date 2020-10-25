@@ -64,28 +64,38 @@ public class GameManager : MonoBehaviour
     {
         if (!isEnd)
         {
-            if (playerHealth.IsDead)
-            {
-                result = ResultMode.GAMEOVER;
-                isEnd = true;
-            }
-
-            if (bossHealth != null)
-            {
-                if (bossHealth.IsDead)
-                {
-                    result = ResultMode.GAMECLEAR;
-                    isEnd = true;
-                }
-            }
+            SetResultGameOver();
+            SetResultGameClear();
         }
-
-        if (isEnd)
+        else
         {
             changeSceneTime -= Time.deltaTime;
             if (changeSceneTime > 0.0f) return;
 
             fadeScene.ChangeNextScene("Result");
+        }
+    }
+
+    private void SetResultGameOver()
+    {
+        if (result != ResultMode.NONE) return;
+
+        if (playerHealth.IsDead)
+        {
+            result = ResultMode.GAMEOVER;
+            isEnd = true;
+        }
+    }
+
+    private void SetResultGameClear()
+    {
+        if (bossHealth == null) return;
+        if (result != ResultMode.NONE) return;
+
+        if (bossHealth.IsDead)
+        {
+            result = ResultMode.GAMECLEAR;
+            isEnd = true;
         }
     }
 
