@@ -825,7 +825,7 @@ MonoBehaviour:
   sceneManager: {fileID: 2061709770}
   sceneNames:
   - Main1
-  - Ushirogata
+  - SoundTest
 --- !u!4 &1447216965
 Transform:
   m_ObjectHideFlags: 0

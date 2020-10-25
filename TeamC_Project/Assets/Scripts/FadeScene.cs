@@ -14,6 +14,8 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
 
     private string nextSceneName;//次のシーンの名前
 
+    private SoundManager soundManager;
+
     public bool IsFadeIn
     {
         get;
@@ -33,6 +35,10 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
         IsFadeIn = true;
         fadeColor = fadeImage.color;
         fadeColor.a = 1.0f;
+        if (GameObject.Find("SoundManager") != null)
+        {
+            soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        }
     }
 
     void FixedUpdate()
@@ -67,8 +73,16 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
         {
             fadeColor.a = 1.0f;
             IsFadeOut = false;
+            SoundStop();
             SceneManager.LoadScene(nextSceneName);
         }
+    }
+
+    private void SoundStop()
+    {
+        if (soundManager == null) return;
+
+        soundManager.StopBgm();
     }
 
     public void ChangeNextScene(string SceneName)
