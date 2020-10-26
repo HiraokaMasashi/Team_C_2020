@@ -11,6 +11,8 @@ public class EnemyManager : MonoBehaviour
     private float interval;
     //経過時間
     private float time = 0f;
+    //敵の生成パターン
+    public Transform[] instancePattern;
 
     // Start is called before the first frame update
     void Start()
@@ -35,4 +37,16 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    //敵をパターンごとに生成する
+    public void Instance(int number)
+    {
+        int length = instancePattern[number].transform.childCount;
+        for(int i = 0; i < length; i++)
+        {
+            //enemyをインスタンス化する(生成する)
+            GameObject enemy = Instantiate(enemyPrefab);
+            //生成した敵の座標を決定する
+            enemy.transform.position = instancePattern[number].GetChild(i).position;
+        }
+    }
 }

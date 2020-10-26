@@ -158,7 +158,8 @@ MonoBehaviour:
   minPosition: {x: -14, y: -3, z: 0}
   maxPosition: {x: 14, y: 10, z: 0}
   shotInterval: 1
-  moveSpeed: 4
+  playerMoveSpeed: 10
+  bulletMoveSpeed: 1000
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0
