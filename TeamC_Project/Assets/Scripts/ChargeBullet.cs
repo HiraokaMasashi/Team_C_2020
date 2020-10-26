@@ -59,6 +59,8 @@ public class ChargeBullet : MonoBehaviour
     /// </summary>
     private void Charge()
     {
+        if (Time.timeScale == 0) return;
+
         //連射しているなら、チャージしない
         if (player.IsRapidFire) return;
 

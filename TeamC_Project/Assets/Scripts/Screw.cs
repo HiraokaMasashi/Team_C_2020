@@ -83,7 +83,7 @@ public class Screw : MonoBehaviour
                 {
                     GenerateScrew();
                     ChangeBoxSize();
-                    screw.transform.position = transform.position;
+                    screw.transform.position = transform.position + Vector3.up;
                     EnemyStanMove();
                 }
                 else
