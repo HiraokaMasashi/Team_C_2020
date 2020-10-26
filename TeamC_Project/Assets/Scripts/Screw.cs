@@ -224,7 +224,7 @@ public class Screw : MonoBehaviour
     {
         //z軸に180度回転させる
         float step = rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, screwRotation), step);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(-30, 0, screwRotation), step);
         Vector3 euler = transform.rotation.eulerAngles;
 
         if (euler.z >= screwRotation * -1)
@@ -241,7 +241,7 @@ public class Screw : MonoBehaviour
     {
         //z軸に180度回転させる
         float step = rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, normalRotation), step);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(-30, 0, normalRotation), step);
         Vector3 euler = transform.rotation.eulerAngles;
 
         if (euler.z <= normalRotation)
