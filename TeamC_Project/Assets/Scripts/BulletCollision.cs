@@ -20,7 +20,7 @@ public class BulletCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.name.Contains("Cube"))
+        if (other.transform.tag == "Enemy")
         {
             other.transform.GetComponent<Health>().Damage(Attack);
             if (other.transform.GetComponent<Health>().IsDead)

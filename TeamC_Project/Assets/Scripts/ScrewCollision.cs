@@ -15,10 +15,8 @@ public class ScrewCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //敵等の状態変化処理
-
         //本来はタグで行う
-        if (other.gameObject.name.Contains("Cube"))
+        if (other.gameObject.tag == "Enemy")
         {
             //ヒットした敵との距離を計算
             float distance = Mathf.Abs(Vector3.Distance(player.transform.position, other.transform.position));
