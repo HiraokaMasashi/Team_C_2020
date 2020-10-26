@@ -23,7 +23,9 @@ public class Player : MonoBehaviour
     private float elapsedTime;
 
     [SerializeField]
-    private float moveSpeed = 4.0f;
+    private float playerMoveSpeed = 4.0f;
+    [SerializeField]
+    private float bulletMoveSpeed = 200.0f;
 
     private GameManager gameManager;
 
@@ -67,7 +69,7 @@ public class Player : MonoBehaviour
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, 200.0f, 3.0f);
+            bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
             chargeBullet.ResetCharge();
         }
 
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, shotPosition, Vector3.up, 200.0f, 3.0f);
+            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
             chargeBullet.ResetCharge();
             IsRapidFire = true;
         }
@@ -102,7 +104,7 @@ public class Player : MonoBehaviour
         if (screw.GetMode() == Screw.Mode.SCREW) y = 0;
 
         //移動制御＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊今回追加
-        Vector3 nextPosition = transform.position + new Vector3(x, y, 0) * Time.deltaTime * moveSpeed;
+        Vector3 nextPosition = transform.position + new Vector3(x, y, 0) * Time.deltaTime * playerMoveSpeed;
         //移動できる範囲をMathf.Clampで範囲指定して制御
         nextPosition = new Vector3(
             Mathf.Clamp(nextPosition.x, minPosition.x, maxPosition.x),
