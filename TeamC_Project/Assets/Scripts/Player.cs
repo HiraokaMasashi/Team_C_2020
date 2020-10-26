@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("Cube"))
+        if (other.gameObject.tag == "Enemy")
         {
             GetComponent<Health>().HitDeath();
             other.GetComponent<Health>().HitDeath();
