@@ -18,6 +18,12 @@ public class ScrewCollision : MonoBehaviour
         //本来はタグで行う
         if (other.gameObject.tag == "Enemy")
         {
+            //既にヒットしていたものなら、return
+            foreach (var e in enemies)
+            {
+                if (other.gameObject == e) return;
+            }
+
             //ヒットした敵との距離を計算
             float distance = Mathf.Abs(Vector3.Distance(player.transform.position, other.transform.position));
             GameObject enemy = other.gameObject;
