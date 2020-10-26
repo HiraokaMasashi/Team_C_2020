@@ -5,10 +5,12 @@ using UnityEngine;
 public class ScrewCollision : MonoBehaviour
 {
     private List<GameObject> enemies;//スクリューにヒットしている敵
+    private GameObject player;//プレイヤー
 
     private void Start()
     {
         enemies = new List<GameObject>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,7 +21,7 @@ public class ScrewCollision : MonoBehaviour
         if (other.gameObject.name.Contains("Cube"))
         {
             //ヒットした敵との距離を計算
-            float distance = Mathf.Abs(Vector3.Distance(transform.position, other.transform.position));
+            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, other.transform.position));
             GameObject enemy = other.gameObject;
             enemy.GetComponent<SetUpScrew>().HitScrew(distance);
             //スクリューにヒットしている敵をリストに格納

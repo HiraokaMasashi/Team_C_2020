@@ -183,6 +183,7 @@ public class Screw : MonoBehaviour
             isExistScrew = false;
             EnemyStartRecovery();
             screw.transform.parent = null;
+            screw = null;
         }
         //元に戻る回転状態
         currentMode = Mode.ROTATION_NORMAL;
