@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1566428894788733207, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 1566428895339433386, guid: d3fd2a46c6719a045ad73573d77be5e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,6 +197,34 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566428895427951929, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566428895427951929, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Resume to press
+
+        StartButton or EscKey
+
+
+        QuitGame to
+        press
+
+        Back(Viue)Button or Sift+Esc'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566428895427951930, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566428895427951930, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -135
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3fd2a46c6719a045ad73573d77be5e1, type: 3}

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    [SerializeField,Header("メニューパネル")]
+    [SerializeField, Header("メニューパネル")]
     GameObject panel;
     //[SerializeField,Header("初期選択ボタン")]
     //Button initSelect;
@@ -20,8 +20,24 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
-        //escキーかコントローラーメニューボタン
-        if (Input.GetKeyDown(KeyCode.Escape)||Input.GetKeyDown(KeyCode.JoystickButton7))
+        //ポーズ中のみの動作
+        if (isPause)
+        {
+            //Escキー+左右どちらかのshift
+            if ((Input.GetKeyDown(KeyCode.Escape)) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            {
+                GameQuit();
+            }
+
+            //Viue(startの反対側にあるボタン　backって書いてあったりもする)ボタン
+            if (Input.GetKeyDown(KeyCode.JoystickButton6))
+            {
+                GameQuit();
+            }
+        }
+
+        //Escキーかコントローラーメニューボタン
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             PauseSwich();
         }
@@ -37,22 +53,22 @@ public class Pause : MonoBehaviour
     /// </summary>
     void PauseSwich()
     {
-            isPause = !isPause;
+        isPause = !isPause;
 
-            if (isPause)
-            {
-                PauseOn();
-            }
-            else
-            {
-                Resume();
-            }
+        if (isPause)
+        {
+            PauseOn();
+        }
+        else
+        {
+            Resume();
+        }
     }
 
     /// <summary>
     /// ポーズする
     /// </summary>
-    public void PauseOn()
+    void PauseOn()
     {
         Time.timeScale = 0;
         panel.SetActive(true);
@@ -62,10 +78,22 @@ public class Pause : MonoBehaviour
     /// <summary>
     /// 再開する
     /// </summary>
-    public void Resume()
+    void Resume()
     {
         Time.timeScale = 1;
         panel.SetActive(false);
         Debug.Log("Resume");
+    }
+
+    /// <summary>
+    /// ゲーム終了
+    /// </summary>
+    void GameQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+      UnityEngine.Application.Quit();
+#endif
     }
 }
