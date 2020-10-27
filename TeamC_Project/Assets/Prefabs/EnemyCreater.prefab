@@ -47,3 +47,7 @@ MonoBehaviour:
     type: 3}
   instancePattern:
   - {fileID: 5971348742836089427, guid: e9b359292ee8f34428e824b87d2163b1, type: 3}
+  - {fileID: 9191375001433835155, guid: 35e06a8b0e4cc9440961e49b21a3d3c2, type: 3}
+  - {fileID: 6125105270634316458, guid: ab2c355ced0e4b74d8387fb5b2d426f9, type: 3}
+  maxWave: 0
+  isEnd: 0
