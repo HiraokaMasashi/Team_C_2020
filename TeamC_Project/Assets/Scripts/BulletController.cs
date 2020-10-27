@@ -23,7 +23,6 @@ public class BulletController : MonoBehaviour
 		GameObject obj;
 		if (chargeStage == ChargeBullet.ChargeMode.STAGE_1 || chargeStage == ChargeBullet.ChargeMode.STAGE_2)
 		{
-
 			obj = bulletPrefabs[0];
 			shotSe = shotSes[0];
 		}
@@ -42,7 +41,6 @@ public class BulletController : MonoBehaviour
 		bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * speed);
 		if (chargeStage == ChargeBullet.ChargeMode.STAGE_3 || chargeStage == ChargeBullet.ChargeMode.STAGE_4)
 			bullet.GetComponent<BulletCollision>().IsPenetrate = true;
-
 		Destroy(bullet, destroyTime);
 
 		//2段階目のときだけ、3wayにする
@@ -55,7 +53,9 @@ public class BulletController : MonoBehaviour
 			bullet3.GetComponent<Rigidbody>().AddForce((direction + Vector3.left).normalized * speed);
 			Destroy(bullet3, destroyTime);
 		}
-		soundManager.PlaySeByName(shotSe);
 
+		if (shotSe == "") return;
+		soundManager.PlaySeByName(shotSe);
+		shotSe = "";
 	}
 }

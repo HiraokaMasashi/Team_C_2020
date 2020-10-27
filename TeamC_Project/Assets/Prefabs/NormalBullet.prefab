@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a5f4bbd4400714aaff30203a7e4b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyZone: {x: 17, y: 15.5, z: 0}

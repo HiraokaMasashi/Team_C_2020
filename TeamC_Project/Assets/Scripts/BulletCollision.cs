@@ -5,6 +5,8 @@ using UnityEngine;
 public class BulletCollision : MonoBehaviour
 {
     private ScrewCollision screwCollision;
+    [SerializeField]
+    private Vector3 destroyZone;
 
     public int Attack
     {
@@ -17,6 +19,23 @@ public class BulletCollision : MonoBehaviour
         get;
         set;
     } = false;
+
+    private void FixedUpdate()
+    {
+        if (GetIsDestroy())
+            Destroy(gameObject);
+    }
+
+    private bool GetIsDestroy()
+    {
+        bool isDestroy = false;
+
+        if (transform.position.x <= -destroyZone.x || transform.position.x >= destroyZone.x
+            || transform.position.y >= destroyZone.y)
+            isDestroy = true;
+
+        return isDestroy;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

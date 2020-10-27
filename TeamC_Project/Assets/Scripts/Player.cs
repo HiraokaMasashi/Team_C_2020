@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         chargeBullet = GetComponent<ChargeBullet>();
         bulletController = GetComponent<BulletController>();
 
-        elapsedTime = 0.0f;
+        elapsedTime = shotInterval;
     }
 
     // Update is called once per frame
