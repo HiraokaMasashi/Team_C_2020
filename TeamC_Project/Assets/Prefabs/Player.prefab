@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
+  deadSe: dead
+  damegeSe: damege
 --- !u!114 &2732371690843407098
 MonoBehaviour:
   m_ObjectHideFlags: 0

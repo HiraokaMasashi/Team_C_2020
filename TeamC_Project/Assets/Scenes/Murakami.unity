@@ -538,6 +538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  deadSe: 
+  damegeSe: 
 --- !u!114 &1084394539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,6 +1867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  deadSe: 
+  damegeSe: 
 --- !u!114 &1815153673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,6 +2075,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  deadSe: 
+  damegeSe: 
 --- !u!114 &1972924917
 MonoBehaviour:
   m_ObjectHideFlags: 0
