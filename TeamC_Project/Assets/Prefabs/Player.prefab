@@ -95,9 +95,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.505569
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.26275754, z: -0.0000000024647404}
 --- !u!33 &2732371690843407093
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -298,6 +298,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PrpppelerObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168706199816848971, guid: 4a082d0552b377e4ab99db9d16fbd614,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168706199994219996, guid: 4a082d0552b377e4ab99db9d16fbd614,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7168706199994219997, guid: 4a082d0552b377e4ab99db9d16fbd614,
         type: 3}

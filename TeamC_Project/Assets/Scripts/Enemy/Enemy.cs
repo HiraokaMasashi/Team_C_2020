@@ -6,11 +6,15 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed;
-
     [SerializeField]
     private Vector3 destroyZone;
 
     private SetUpScrew setupScrew;
+
+    private BulletController bulletController;
+    private float shotInterval;
+    private float elapsedTime;
+    private GameObject player;
 
     enum MoveMode
     {
@@ -24,6 +28,10 @@ public class Enemy : MonoBehaviour
     {
         setupScrew = GetComponent<SetUpScrew>();
         currentMode = MoveMode.NORMAL;
+
+        bulletController = GetComponent<BulletController>();
+        shotInterval = Random.Range(3, 6);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -45,11 +53,14 @@ public class Enemy : MonoBehaviour
                 break;
 
             case MoveMode.INTERSEPTION:
+                InterseptionMove();
                 break;
 
             default:
                 break;
         }
+
+        ShotBullet();
 
         if (transform.position.y <= destroyZone.y)
         {
@@ -67,5 +78,20 @@ public class Enemy : MonoBehaviour
     private void InterseptionMove()
     {
 
+    }
+
+    private void ShotBullet()
+    {
+        if (player == null) return;
+
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime >= shotInterval)
+        {
+            Vector3 position = transform.position + Vector3.down;
+            Vector3 direction = player.transform.position - transform.position;
+            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, position, direction, 300.0f, 3.0f, "Enemy");
+            elapsedTime = 0;
+        }
     }
 }

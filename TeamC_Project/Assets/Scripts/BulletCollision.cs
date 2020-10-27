@@ -31,7 +31,7 @@ public class BulletCollision : MonoBehaviour
         bool isDestroy = false;
 
         if (transform.position.x <= -destroyZone.x || transform.position.x >= destroyZone.x
-            || transform.position.y >= destroyZone.y)
+            || transform.position.y >= destroyZone.y || transform.position.y <= -5.0f)
             isDestroy = true;
 
         return isDestroy;
@@ -39,18 +39,17 @@ public class BulletCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Enemy")
+        if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")
+            || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {
             other.transform.GetComponent<Health>().Damage(Attack);
-            if (other.transform.GetComponent<Health>().IsDead)
-            {
-                if (GameObject.Find("ScrewParticle(Clone)") != null)
-                {
-                    screwCollision = GameObject.Find("ScrewParticle(Clone)").GetComponent<ScrewCollision>();
-                    screwCollision.RemoveEnemy(other.gameObject);
-                }
-            }
             if (!IsPenetrate) Destroy(gameObject);
+        }
+
+        if (other.transform.tag == "EnemyBullet" && transform.tag == "PlayerBullet")
+        {
+            if (!IsPenetrate) Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

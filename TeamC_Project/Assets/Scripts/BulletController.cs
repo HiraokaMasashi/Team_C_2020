@@ -17,7 +17,8 @@ public class BulletController : MonoBehaviour
 	}
 
 
-	public void GenerateBullet(ChargeBullet.ChargeMode chargeStage, Vector3 position, Vector3 direction, float speed, float destroyTime)
+	public void GenerateBullet(ChargeBullet.ChargeMode chargeStage, Vector3 position, Vector3 direction, 
+		float speed, float destroyTime, string tagName = "Player")
 	{
 		//チャージ段階に応じて弾を変える
 		GameObject obj;
@@ -38,6 +39,7 @@ public class BulletController : MonoBehaviour
 		}
 
 		GameObject bullet = Instantiate(obj, position, Quaternion.identity);
+		bullet.tag = tagName + "Bullet";
 		bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * speed);
 		if (chargeStage == ChargeBullet.ChargeMode.STAGE_3 || chargeStage == ChargeBullet.ChargeMode.STAGE_4)
 			bullet.GetComponent<BulletCollision>().IsPenetrate = true;
@@ -48,9 +50,11 @@ public class BulletController : MonoBehaviour
 		{
 			GameObject bullet2 = Instantiate(obj, position, Quaternion.identity);
 			bullet2.GetComponent<Rigidbody>().AddForce((direction + Vector3.right).normalized * speed);
+			bullet2.tag = tagName + "Bullet";
 			Destroy(bullet2, destroyTime);
 			GameObject bullet3 = Instantiate(obj, position, Quaternion.identity);
 			bullet3.GetComponent<Rigidbody>().AddForce((direction + Vector3.left).normalized * speed);
+			bullet3.tag = tagName + "Bullet";
 			Destroy(bullet3, destroyTime);
 		}
 

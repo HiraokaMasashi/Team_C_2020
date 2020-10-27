@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5499945507236566682}
   - component: {fileID: 5499945507236566681}
   - component: {fileID: 5499945507236566680}
+  - component: {fileID: 8511520359533621700}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -171,3 +172,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8511520359533621700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499945507236566687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefabs:
+  - {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666, type: 3}
+  shotSes:
+  - shot1
