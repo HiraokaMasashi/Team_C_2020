@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Vector3 destroyZone;
 
+    private SetUpScrew setupScrew;
+
     enum MoveMode
     {
         NORMAL,
@@ -20,12 +22,15 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        setupScrew = GetComponent<SetUpScrew>();
         currentMode = MoveMode.NORMAL;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (setupScrew.IsStan) return;
+
         //// 自分自身のtransformを取得
         //Transform myTransform = this.transform;
 
