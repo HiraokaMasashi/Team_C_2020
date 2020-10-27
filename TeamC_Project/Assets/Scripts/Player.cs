@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
 
     private void ShotBullet()
     {
+        if (Time.timeScale == 0) return;
+
         elapsedTime += Time.deltaTime;
 
         //通常状態以外には撃てない
