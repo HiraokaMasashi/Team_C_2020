@@ -55,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 5
   deadSe: dead
-  damegeSe: damege
+  damageSe: damage
 --- !u!114 &2732371690843407098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +197,10 @@ MonoBehaviour:
   - {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666, type: 3}
   - {fileID: 8904220051015584014, guid: 3282c692525b9a440b6cd0cf6c9a3f5b, type: 3}
   - {fileID: 4410538272253555621, guid: 9ee4944639762704bb8629cc4c3e0b63, type: 3}
+  shotSes:
+  - shot1
+  - shot2
+  - shot3
 --- !u!54 &1998912523
 Rigidbody:
   m_ObjectHideFlags: 0

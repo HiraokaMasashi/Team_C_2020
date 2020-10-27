@@ -9,17 +9,16 @@ public class Health : MonoBehaviour
     private int hp = 1;
 
     private ParticlaManager particlaManager;
-	private SoundManager soundManager;
-	[SerializeField]
-	private string deadSe;
-	[SerializeField]
-	private string damegeSe;
+    private SoundManager soundManager;
+    [SerializeField]
+    private string deadSe;
+    [SerializeField]
+    private string damageSe;
 
-
-	/// <summary>
-	/// 体力
-	/// </summary>
-	public int Hp
+    /// <summary>
+    /// 体力
+    /// </summary>
+    public int Hp
     {
         get { return hp; }
     }
@@ -36,8 +35,8 @@ public class Health : MonoBehaviour
     private void Start()
     {
         particlaManager = GetComponent<ParticlaManager>();
-		soundManager = SoundManager.Instance;
-	}
+        soundManager = SoundManager.Instance;
+    }
 
     private void Update()
     {
@@ -57,8 +56,8 @@ public class Health : MonoBehaviour
             particle.transform.position = transform.position;
             particlaManager.OncePlayParticle(particle);
         }
-		soundManager.PlaySeByName(deadSe);
-		Destroy(gameObject);
+        soundManager.PlaySeByName(deadSe);
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -76,7 +75,8 @@ public class Health : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
-		soundManager.PlaySeByName(damegeSe);
-		if (hp <= 0) hp = 0;
+        if (transform.tag == "Player")
+            soundManager.PlaySeByName(damageSe);
+        if (hp <= 0) hp = 0;
     }
 }
