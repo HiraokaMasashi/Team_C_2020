@@ -95,9 +95,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.505569
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: -0.26275754, z: -0.0000000024647404}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &2732371690843407093
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39f5335544e2a34fbee29c80e755e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPosition: {x: -16, y: -3, z: 0}
-  maxPosition: {x: 16, y: 10, z: 0}
+  minPosition: {x: -25, y: -9, z: 0}
+  maxPosition: {x: 25, y: 19, z: 0}
   shotInterval: 1
   playerMoveSpeed: 10
   bulletMoveSpeed: 1000
@@ -174,12 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c712c295430e44b8c2d26fe9928b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageChargeMaxCount: 050000000a0000000a000000
+  stageChargeMaxCount: 180000002000000030000000
   stageSliderColor:
-  - {r: 1, g: 0.89133024, b: 0, a: 1}
-  - {r: 0.40009844, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.18552971, b: 1, a: 1}
-  chargeAngle: 90
+  - {r: 0.50482273, g: 1, b: 0, a: 1}
+  - {r: 0.93450105, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.30874836, b: 0, a: 1}
+  chargeAngle: 45
   chargeSlider: {fileID: 0}
 --- !u!114 &2732371690843407089
 MonoBehaviour:
@@ -298,16 +298,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PrpppelerObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 7168706199816848971, guid: 4a082d0552b377e4ab99db9d16fbd614,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7168706199994219996, guid: 4a082d0552b377e4ab99db9d16fbd614,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7168706199994219997, guid: 4a082d0552b377e4ab99db9d16fbd614,
         type: 3}
