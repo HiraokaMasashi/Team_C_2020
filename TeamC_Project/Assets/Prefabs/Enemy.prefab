@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoveryTime: 3
-  speed: 4
+  speed: 10
 --- !u!114 &5499945507236566683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  destroyZone: {x: 0, y: -6, z: 0}
+  destroyZone: {x: 0, y: -11, z: 0}
 --- !u!54 &5499945507236566680
 Rigidbody:
   m_ObjectHideFlags: 0

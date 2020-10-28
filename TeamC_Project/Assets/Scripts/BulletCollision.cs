@@ -7,6 +7,8 @@ public class BulletCollision : MonoBehaviour
     private ScrewCollision screwCollision;
     [SerializeField]
     private Vector3 destroyZone;
+    [SerializeField]
+    private float destroyZoneMinY = -11.0f;
 
     public int Attack
     {
@@ -31,7 +33,7 @@ public class BulletCollision : MonoBehaviour
         bool isDestroy = false;
 
         if (transform.position.x <= -destroyZone.x || transform.position.x >= destroyZone.x
-            || transform.position.y >= destroyZone.y || transform.position.y <= -5.0f)
+            || transform.position.y >= destroyZone.y || transform.position.y <= destroyZoneMinY)
             isDestroy = true;
 
         return isDestroy;
