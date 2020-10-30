@@ -74,7 +74,14 @@ public class Health : MonoBehaviour
     {
         if (hpText == null) return;
 
-        hpText.text = hp + "/" + maxHp;
+        hpText.text = "HP: " + hp + " / " + maxHp;
+
+        if (hp <= maxHp * (1.0f / 3.0f))
+            hpText.color = Color.red;
+        else if (hp <= maxHp * (2.0f / 3.0f))
+            hpText.color = Color.yellow;
+        else
+            hpText.color = Color.green;
     }
 
     /// <summary>
