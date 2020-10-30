@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BulletCollision : MonoBehaviour
 {
-    private ScrewCollision screwCollision;
     [SerializeField]
     private Vector3 destroyZone;
     [SerializeField]
     private float destroyZoneMinY = -11.0f;
+
+    private ScoreManager scoreManager;
 
     public int Attack
     {
@@ -21,6 +22,11 @@ public class BulletCollision : MonoBehaviour
         get;
         set;
     } = false;
+
+    private void Start()
+    {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
 
     private void FixedUpdate()
     {
@@ -44,7 +50,11 @@ public class BulletCollision : MonoBehaviour
         if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {
-            other.transform.GetComponent<Health>().Damage(Attack);
+            Health health = other.transform.GetComponent<Health>();
+            Score score = other.transform.GetComponent<Score>();
+
+            health.Damage(Attack);
+            if (health.IsDead) scoreManager.AddScore(score.GetScore());
             if (!IsPenetrate) Destroy(gameObject);
         }
 

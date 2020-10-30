@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5499945507236566681}
   - component: {fileID: 5499945507236566680}
   - component: {fileID: 8511520359533621700}
+  - component: {fileID: -3232467258619050621}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
 --- !u!114 &5499945507236566682
@@ -188,3 +190,16 @@ MonoBehaviour:
   - {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666, type: 3}
   shotSes:
   - shot1
+--- !u!114 &-3232467258619050621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499945507236566687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cea3bd7f4d5b34d91c72dc505baa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 100
