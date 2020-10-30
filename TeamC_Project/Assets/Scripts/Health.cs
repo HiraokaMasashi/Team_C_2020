@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(ParticlaManager))]
 public class Health : MonoBehaviour
 {
     [SerializeField]
     private int hp = 1;
+    private int maxHp;
+    [SerializeField]
+    private Text hpText;
 
     private ParticlaManager particlaManager;
     private SoundManager soundManager;
@@ -34,6 +38,8 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
+        maxHp = hp;
+
         particlaManager = GetComponent<ParticlaManager>();
         soundManager = SoundManager.Instance;
     }
@@ -41,6 +47,7 @@ public class Health : MonoBehaviour
     private void Update()
     {
         DeathEffect();
+        DisplayHp();
     }
 
     /// <summary>
@@ -58,6 +65,16 @@ public class Health : MonoBehaviour
         }
         soundManager.PlaySeByName(deadSe);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 体力の表示
+    /// </summary>
+    private void DisplayHp()
+    {
+        if (hpText == null) return;
+
+        hpText.text = hp + "/" + maxHp;
     }
 
     /// <summary>
