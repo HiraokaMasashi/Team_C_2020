@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Text;
 
 [System.Serializable]
 public class ScoreRanking
@@ -24,9 +25,9 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
 #if UNITY_EDITOR
-        filePath = Application.dataPath + "/ranking_data.json";
+        filePath = Application.dataPath + "/ranking_data.dat";
 #elif UNITY_STANDALONE
-        filePath = Application.persistentDataPath + "/ranking_data.json";
+        filePath = Application.persistentDataPath + "/ranking_data.dat";
 #endif
 
         if (File.Exists(filePath))
@@ -60,6 +61,9 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Score: " + totalScore;
     }
 
+    /// <summary>
+    /// ハイスコアの表示
+    /// </summary>
     private void DisplayHiScore()
     {
         if (hiScoreText == null) return;
@@ -101,13 +105,13 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void SaveScore()
     {
-        StreamWriter writer;
         string jsonstr = JsonUtility.ToJson(ranking);
+        //保存データを暗号化する
+        byte[] data = Encoding.UTF8.GetBytes(jsonstr);
+        data = Cryptor.Encrypt(data);
 
-        writer = new StreamWriter(filePath);
-        writer.Write(jsonstr);
-        writer.Flush();
-        writer.Close();
+        FileStream fileStream = File.Create(filePath);
+        fileStream.Write(data, 0, data.Length);
     }
 
     /// <summary>
@@ -115,11 +119,15 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void LoadScore()
     {
-        StreamReader reader;
-        reader = new StreamReader(filePath);
-        string data = reader.ReadToEnd();
-        reader.Close();
+        byte[] data = null;
 
-        ranking = JsonUtility.FromJson<ScoreRanking>(data);
+        FileStream fileStream = File.OpenRead(filePath);
+        data = new byte[fileStream.Length];
+        fileStream.Read(data, 0, data.Length);
+
+        //読み込むデータを複合化する
+        data = Cryptor.Decrypt(data);
+        string jsonstr = Encoding.UTF8.GetString(data);
+        ranking = JsonUtility.FromJson<ScoreRanking>(jsonstr);
     }
 }
