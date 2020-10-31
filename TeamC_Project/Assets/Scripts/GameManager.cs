@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float changeSceneTime = 2.0f;
 
+    private ScoreManager scoreManager;
+
     public enum ResultMode
     {
         NONE,
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         isEnd = false;
         result = ResultMode.NONE;
+
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -84,6 +88,8 @@ public class GameManager : MonoBehaviour
         {
             result = ResultMode.GAMEOVER;
             isEnd = true;
+            scoreManager.UpdateScore();
+            scoreManager.SaveScore();
         }
     }
 
@@ -96,6 +102,8 @@ public class GameManager : MonoBehaviour
         {
             result = ResultMode.GAMECLEAR;
             isEnd = true;
+            scoreManager.UpdateScore();
+            scoreManager.SaveScore();
         }
     }
 
