@@ -14,6 +14,7 @@ public class ScoreRanking
 public class ScoreManager : MonoBehaviour
 {
     private static int totalScore;//合計スコア
+    private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
     string filePath;
 
@@ -34,7 +35,7 @@ public class ScoreManager : MonoBehaviour
             LoadScore();
         else
         {
-            ranking.bestScore = 0;
+            InitScoreRanking();
             SaveScore();
         }
     }
@@ -43,6 +44,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         totalScore = 0;
+        hiScore = ranking.bestScore;
     }
 
     private void Update()
@@ -68,8 +70,8 @@ public class ScoreManager : MonoBehaviour
     {
         if (hiScoreText == null) return;
 
-        UpdateScore();
-        hiScoreText.text = "HIScore: " + ranking.bestScore;
+        UpdateHiScore();
+        hiScoreText.text = "HIScore: " + hiScore;
     }
 
     /// <summary>
@@ -93,11 +95,26 @@ public class ScoreManager : MonoBehaviour
     /// <summary>
     /// ベストスコアの更新
     /// </summary>
-    public void UpdateScore()
+    public void UpdateHiScore()
+    {
+        if (totalScore <= hiScore) return;
+
+        hiScore = totalScore;
+    }
+
+    /// <summary>
+    /// スコアランキングの更新
+    /// </summary>
+    public void UpdateScoreRanking()
     {
         if (totalScore <= ranking.bestScore) return;
 
         ranking.bestScore = totalScore;
+    }
+
+    private void InitScoreRanking()
+    {
+        ranking.bestScore = 0;
     }
 
     /// <summary>

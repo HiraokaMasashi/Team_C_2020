@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         {
             result = ResultMode.GAMEOVER;
             isEnd = true;
-            scoreManager.UpdateScore();
+            scoreManager.UpdateScoreRanking();
             scoreManager.SaveScore();
         }
     }
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         {
             result = ResultMode.GAMECLEAR;
             isEnd = true;
-            scoreManager.UpdateScore();
+            scoreManager.UpdateScoreRanking();
             scoreManager.SaveScore();
         }
     }
