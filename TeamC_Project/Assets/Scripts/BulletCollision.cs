@@ -25,7 +25,7 @@ public class BulletCollision : MonoBehaviour
 
     private void Start()
     {
-        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        scoreManager = ScoreManager.Instance;
     }
 
     private void FixedUpdate()

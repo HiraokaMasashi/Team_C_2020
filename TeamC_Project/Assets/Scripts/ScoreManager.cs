@@ -8,23 +8,24 @@ using System.Text;
 [System.Serializable]
 public class ScoreRanking
 {
-    public int bestScore;
+    public int[] bestScores;
+    public int rank;
 }
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 {
-    private static int totalScore;//合計スコア
+    private int totalScore;//合計スコア
     private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
     string filePath;
 
-    [SerializeField]
     private Text scoreText;//表示テキスト
-    [SerializeField]
     private Text hiScoreText;//表示テキスト
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
 #if UNITY_EDITOR
         filePath = Application.dataPath + "/ranking_data.dat";
 #elif UNITY_STANDALONE
@@ -43,14 +44,26 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        totalScore = 0;
-        hiScore = ranking.bestScore;
+        if (GameObject.Find("ScoreText") != null)
+            scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        if (GameObject.Find("HiScoreText") != null)
+            hiScoreText = GameObject.Find("HiScoreText").GetComponent<Text>();
     }
 
     private void Update()
     {
         DisplayScore();
         DisplayHiScore();
+    }
+
+    /// <summary>
+    /// スコアの初期化
+    /// </summary>
+    public void InitScore()
+    {
+        totalScore = 0;
+        hiScore = ranking.bestScores[0];
+        ranking.rank = -1;
     }
 
     /// <summary>
@@ -78,7 +91,7 @@ public class ScoreManager : MonoBehaviour
     /// 合計スコアの取得
     /// </summary>
     /// <returns></returns>
-    public static int GetTotalScore()
+    public int GetTotalScore()
     {
         return totalScore;
     }
@@ -107,14 +120,29 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void UpdateScoreRanking()
     {
-        if (totalScore <= ranking.bestScore) return;
+        int score = totalScore;
 
-        ranking.bestScore = totalScore;
+        for (int i = 0; i < ranking.bestScores.Length; i++)
+        {
+            if (score <= ranking.bestScores[i]) continue;
+
+            if (ranking.rank == -1) ranking.rank = i;
+            int s = ranking.bestScores[i];
+            ranking.bestScores[i] = score;
+            score = s;
+        }
+
+        SaveScore();
     }
 
     private void InitScoreRanking()
     {
-        ranking.bestScore = 0;
+        ranking.bestScores = new int[5];
+
+        for (int i = 0; i < ranking.bestScores.Length; i++)
+        {
+            ranking.bestScores[i] = 1000 - (i * 100);
+        }
     }
 
     /// <summary>
@@ -146,5 +174,23 @@ public class ScoreManager : MonoBehaviour
         data = Cryptor.Decrypt(data);
         string jsonstr = Encoding.UTF8.GetString(data);
         ranking = JsonUtility.FromJson<ScoreRanking>(jsonstr);
+    }
+
+    /// <summary>
+    /// ランキングデータの取得
+    /// </summary>
+    /// <returns></returns>
+    public int[] GetScoreRanking()
+    {
+        return ranking.bestScores;
+    }
+
+    /// <summary>
+    /// ランクの取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetRank()
+    {
+        return ranking.rank;
     }
 }

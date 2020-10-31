@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
         isEnd = false;
         result = ResultMode.NONE;
 
-        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        scoreManager = ScoreManager.Instance;
+        scoreManager.InitScore();
     }
 
     // Update is called once per frame
@@ -89,7 +90,6 @@ public class GameManager : MonoBehaviour
             result = ResultMode.GAMEOVER;
             isEnd = true;
             scoreManager.UpdateScoreRanking();
-            scoreManager.SaveScore();
         }
     }
 
@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
             result = ResultMode.GAMECLEAR;
             isEnd = true;
             scoreManager.UpdateScoreRanking();
-            scoreManager.SaveScore();
         }
     }
 
