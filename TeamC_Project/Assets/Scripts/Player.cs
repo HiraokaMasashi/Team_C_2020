@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //[SerializeField]
-    //private GameObject bulletPrefab;
-
     private InputManager inputManager;
 
     [SerializeField]
-    private Vector3 minPosition;
+    private Vector3 minPosition;//最小移動範囲
     [SerializeField]
-    private Vector3 maxPosition;
+    private Vector3 maxPosition;//最大移動範囲
 
-    private Screw screw;
+    private Screw screw;//スクリュー
     private ChargeBullet chargeBullet;
     private BulletController bulletController;
 
     [SerializeField]
-    private float shotInterval = 2.0f;
-    private float elapsedTime;
+    private float shotInterval = 2.0f;//弾の発射可能時間の間隔
+    private float elapsedTime;//経過時間
 
     [SerializeField]
-    private float playerMoveSpeed = 4.0f;
+    private float playerMoveSpeed = 4.0f;//移動速度
     [SerializeField]
-    private float bulletMoveSpeed = 200.0f;
+    private float bulletMoveSpeed = 200.0f;//弾の移動速度
 
     private GameManager gameManager;
 
@@ -44,6 +41,7 @@ public class Player : MonoBehaviour
         chargeBullet = GetComponent<ChargeBullet>();
         bulletController = GetComponent<BulletController>();
 
+        //最初は撃てる状態にする
         elapsedTime = shotInterval;
     }
 
@@ -56,6 +54,9 @@ public class Player : MonoBehaviour
         ShotBullet();
     }
 
+    /// <summary>
+    /// 弾の発射処理
+    /// </summary>
     private void ShotBullet()
     {
         if (Time.timeScale == 0) return;
@@ -65,24 +66,22 @@ public class Player : MonoBehaviour
         //通常状態以外には撃てない
         if (screw.GetMode() != Screw.Mode.NORMAL) return;
 
-        Vector3 shotPosition = transform.position + Vector3.up;
         if (inputManager.GetA_ButtonDown())
         {
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
-            chargeBullet.ResetCharge();
+            InstanceBullet();
         }
 
         if (inputManager.GetA_Button())
         {
+            //ボタン長押し時は、経過時間を早める
             elapsedTime += Time.deltaTime;
             if (elapsedTime < shotInterval) return;
 
             elapsedTime = 0.0f;
-            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
-            chargeBullet.ResetCharge();
+            InstanceBullet();
             IsRapidFire = true;
         }
 
@@ -95,7 +94,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    //移動の処理
+    /// <summary>
+    /// 弾生成時の処理
+    /// </summary>
+    private void InstanceBullet()
+    {
+        //生成位置
+        Vector3 shotPosition = transform.position + Vector3.up;
+
+        bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
+        chargeBullet.ResetCharge();
+    }
+
+    /// <summary>
+    /// 移動の処理
+    /// </summary>
     private void Move()
     {
         //横軸の値を返す
@@ -118,6 +131,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //エネミーと衝突した場合は、お互いを死亡させる
         if (other.gameObject.tag == "Enemy")
         {
             GetComponent<Health>().HitDeath();

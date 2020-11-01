@@ -8,12 +8,10 @@ public class BulletController : MonoBehaviour
 	private SoundManager soundManager;
 	[SerializeField]
 	private string[] shotSes;
-	private string shotSe;
 
 	private void Start()
 	{
 		soundManager = SoundManager.Instance;
-		shotSe = "";
 	}
 
 
@@ -22,6 +20,7 @@ public class BulletController : MonoBehaviour
 	{
 		//チャージ段階に応じて弾を変える
 		GameObject obj;
+		string shotSe = "";
 		if (chargeStage == ChargeBullet.ChargeMode.STAGE_1 || chargeStage == ChargeBullet.ChargeMode.STAGE_2)
 		{
 			obj = bulletPrefabs[0];
@@ -60,6 +59,5 @@ public class BulletController : MonoBehaviour
 
 		if (shotSe == "") return;
 		soundManager.PlaySeByName(shotSe);
-		shotSe = "";
 	}
 }
