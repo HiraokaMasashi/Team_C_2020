@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class SetUpScrew : MonoBehaviour
 {
-    public enum StanLevel
-    {
-        LEVEL1,
-        LEVEL2,
-        LEVEL3,
-    }
-    private StanLevel stanLevel;
-
-    private float hitTimer;
-    [SerializeField]
-    private float[] hitTimerLevel;
-
     [SerializeField]
     private float recoveryTime = 6.0f;
     private float stanElapsedTime;
@@ -25,6 +13,9 @@ public class SetUpScrew : MonoBehaviour
 
     [SerializeField]
     private float speed = 1.0f;
+
+    [SerializeField]
+    private float maxDistance = 12.0f;
 
     public bool IsStan
     {
@@ -41,8 +32,6 @@ public class SetUpScrew : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stanLevel = StanLevel.LEVEL1;
-        hitTimer = 0.0f;
         stanElapsedTime = 0.0f;
         distanceY = 0.0f;
         adjustPositionX = 0.0f;
@@ -54,7 +43,6 @@ public class SetUpScrew : MonoBehaviour
         if (Time.timeScale == 0) return;
 
         Recovery();
-        StanLevelUp();
     }
 
     /// <summary>
@@ -78,39 +66,60 @@ public class SetUpScrew : MonoBehaviour
     /// </summary>
     public void StanMove(Vector3 basePosition)
     {
-        Vector3 position = new Vector3(transform.position.x, basePosition.y + distanceY, transform.position.z);
-        Vector3 destination = new Vector3(basePosition.x + adjustPositionX, basePosition.y + distanceY, transform.position.z);
-        float distance = Vector3.Distance(position, destination);
-        float currentLocation = (Time.deltaTime * speed * 2.0f) / distance;
+        Vector3 position = transform.position;
+        Vector3 destination = Vector3.zero;
+        SetDestination(basePosition, ref destination);
 
+        float distance = Vector3.Distance(position, destination);
+        CheckDistance(basePosition, position, ref distance, ref destination);
+
+        //目的地に向かう
+        float currentLocation = (Time.deltaTime * speed) / distance;
         transform.position = Vector3.Lerp(position, destination, currentLocation);
+    }
+
+    /// <summary>
+    /// 目的地の設定
+    /// </summary>
+    /// <param name="basePosition"></param>
+    /// <param name="destination"></param>
+    private void SetDestination(Vector3 basePosition, ref Vector3 destination)
+    {
+        destination = basePosition + new Vector3(adjustPositionX, distanceY, 0.0f);
+    }
+
+    /// <summary>
+    /// 目的地までの距離を測る
+    /// </summary>
+    /// <param name="basePosition"></param>
+    /// <param name="distance"></param>
+    /// <param name="destination"></param>
+    private void CheckDistance(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
+    {
+        if (distance <= 0.1f)
+        {
+            if (distanceY <= maxDistance * (1.0f / 3.0f))
+                adjustPositionX = Random.Range(-1.0f, 1.0f);
+            else if (distanceY <= maxDistance * (2.0f / 3.0f))
+                adjustPositionX = Random.Range(-2.0f, 2.0f);
+            else
+                adjustPositionX = Random.Range(-3.0f, 3.0f);
+            SetDestination(basePosition, ref destination);
+        }
+
+        distance = Vector3.Distance(position, destination);
     }
 
     /// <summary>
     /// スクリューとの衝突時の処理
     /// </summary>
     /// <param name="distance"></param>
-    public void HitScrew(float distance, float boxSizeY)
+    public void HitScrew(float distance)
     {
         IsStan = true;
         IsHitScrew = true;
         distanceY = distance;
-        AddTimer(boxSizeY);
         adjustPositionX = Random.Range(-1.0f, 1.0f);
-    }
-
-    /// <summary>
-    /// 距離によるボーナス加算
-    /// </summary>
-    /// <param name="boxSizeY"></param>
-    private void AddTimer(float boxSizeY)
-    {
-        //最大範囲の1/3の距離なら、2秒加算
-        if (distanceY <= boxSizeY * (1.0f/3.0f))
-            hitTimer = 2.0f;
-        //2/3の距離なら、1秒加算
-        else if (distanceY <= boxSizeY * (2.0f / 3.0f))
-            hitTimer = 1.0f;
     }
 
     /// <summary>
@@ -119,31 +128,5 @@ public class SetUpScrew : MonoBehaviour
     public void LeaveScrew()
     {
         IsHitScrew = false;
-        hitTimer = 0.0f;
-    }
-
-    /// <summary>
-    /// スタンレベルの設定
-    /// </summary>
-    private void StanLevelUp()
-    {
-        if (!IsHitScrew) return;
-        if (stanLevel == StanLevel.LEVEL3) return;
-
-        hitTimer += Time.deltaTime;
-
-        if (hitTimer >= hitTimerLevel[2])
-            stanLevel = StanLevel.LEVEL3;
-        else if (hitTimer >= hitTimerLevel[1])
-            stanLevel = StanLevel.LEVEL2;
-        else
-            stanLevel = StanLevel.LEVEL1;
-
-        Debug.Log(transform.name + ":" + stanLevel);
-    }
-
-    public StanLevel GetStanLevel()
-    {
-        return stanLevel;
     }
 }

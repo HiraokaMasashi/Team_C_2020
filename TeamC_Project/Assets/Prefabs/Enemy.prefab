@@ -115,7 +115,6 @@ MonoBehaviour:
   hitTimerLevel:
   - 2
   - 5
-  - 7
   recoveryTime: 3
   speed: 10
 --- !u!114 &5499945507236566683

@@ -42,14 +42,16 @@ public class Screw : MonoBehaviour
     private float normalRotation = 0.0f;
 
     private BoxCollider boxCollider;
+    private ScrewCollision screwCollision;
 
-    private float minCenterY = 1.0f;
-    private float minSizeY = 2.0f;
-
-    private float maxCenterY = 6.0f;
-    private float maxSizeY = 12.0f;
+    private float minCenterY = 1.0f;//コライダーのY軸の最小センター
+    private float minSizeY = 2.0f;//コライダーのY軸の最小サイズ
+    private float maxCenterY = 6.0f;//コライダーのY軸の最大センター
+    private float maxSizeY = 12.0f;//コライダーのY軸の最大サイズ
 
     private GameManager gameManager;
+
+    private Health health;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,7 @@ public class Screw : MonoBehaviour
         particlaManager = GetComponent<ParticlaManager>();
         currentMode = Mode.NORMAL;
         rotationSpeed *= magnificationSpeed;
+        health = GetComponent<Health>();
     }
 
     void Update()
@@ -106,6 +109,10 @@ public class Screw : MonoBehaviour
             default:
                 break;
         }
+
+        //死亡時にパーティクルを生成していれば切り離す
+        if (health.IsDead)
+            StopScrew();
     }
 
     /// <summary>
@@ -118,6 +125,7 @@ public class Screw : MonoBehaviour
 
         //スクリューパーティクルの生成
         screw = particlaManager.GenerateParticleInChildren(1);
+        screwCollision = screw.GetComponent<ScrewCollision>();
         //あたり判定を付ける
         boxCollider = screw.GetComponent<BoxCollider>();
         boxCollider.enabled = true;
@@ -136,7 +144,7 @@ public class Screw : MonoBehaviour
         float addSize = 0.0f;
         addSize += Time.deltaTime;
 
-        float speed = 2.0f; 
+        float speed = 2.0f;
         Vector3 center = boxCollider.center;
         center.y += addSize * speed;
         //最大値を超えていたら範囲内に収める
@@ -183,11 +191,14 @@ public class Screw : MonoBehaviour
             ResetBoxSize();
             isExistScrew = false;
             EnemyStartRecovery();
+            screwCollision = null;
             screw.transform.parent = null;
             screw = null;
         }
-        //元に戻る回転状態
-        currentMode = Mode.ROTATION_NORMAL;
+
+        if (currentMode == Mode.SCREW)
+            //元に戻る回転状態
+            currentMode = Mode.ROTATION_NORMAL;
     }
 
     /// <summary>
@@ -195,11 +206,11 @@ public class Screw : MonoBehaviour
     /// </summary>
     private void EnemyStartRecovery()
     {
-        List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetEnemies();
+        List<GameObject> enemies = screwCollision.GetEnemies();
         for (int i = 0; i < enemies.Count; i++)
         {
             enemies[i].GetComponent<SetUpScrew>().LeaveScrew();
-            screw.GetComponent<ScrewCollision>().RemoveEnemy(i);
+            screwCollision.RemoveEnemy(i);
             i--;
         }
     }
@@ -209,7 +220,7 @@ public class Screw : MonoBehaviour
     /// </summary>
     private void EnemyStanMove()
     {
-        List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetEnemies();
+        List<GameObject> enemies = screwCollision.GetEnemies();
 
         if (enemies == null) return;
         foreach (var e in enemies)
