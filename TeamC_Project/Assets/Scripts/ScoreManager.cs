@@ -155,8 +155,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         byte[] data = Encoding.UTF8.GetBytes(jsonstr);
         data = Cryptor.Encrypt(data);
 
-        FileStream fileStream = File.Create(filePath);
-        fileStream.Write(data, 0, data.Length);
+        using (FileStream fileStream = File.Create(filePath))
+        {
+            fileStream.Write(data, 0, data.Length);
+        }
     }
 
     /// <summary>
@@ -165,10 +167,11 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     public void LoadScore()
     {
         byte[] data = null;
-
-        FileStream fileStream = File.OpenRead(filePath);
-        data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
+        using (FileStream fileStream = File.OpenRead(filePath))
+        {
+            data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+        }
 
         //読み込むデータを複合化する
         data = Cryptor.Decrypt(data);

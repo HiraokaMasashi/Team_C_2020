@@ -51,10 +51,13 @@ public class BulletCollision : MonoBehaviour
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {
             Health health = other.transform.GetComponent<Health>();
-            Score score = other.transform.GetComponent<Score>();
 
             health.Damage(Attack);
-            if (health.IsDead) scoreManager.AddScore(score.GetScore());
+            if (health.IsDead && other.transform.tag == "Enemy")
+            {
+                Score score = other.transform.GetComponent<Score>();
+                scoreManager.AddScore(score.GetScore());
+            }
             if (!IsPenetrate) Destroy(gameObject);
         }
 
