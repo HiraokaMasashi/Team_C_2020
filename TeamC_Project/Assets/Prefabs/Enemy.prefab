@@ -112,6 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5208d5cbf576bc9438b7d40cfe7bdef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitTimerLevel:
+  - 2
+  - 5
+  - 7
   recoveryTime: 3
   speed: 10
 --- !u!114 &5499945507236566683

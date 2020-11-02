@@ -63,6 +63,7 @@ public class Screw : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
         if (!gameManager.IsGameStart) return;
 
         switch (currentMode)

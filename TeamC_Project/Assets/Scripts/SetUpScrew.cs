@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class SetUpScrew : MonoBehaviour
 {
+    public enum StanLevel
+    {
+        LEVEL1,
+        LEVEL2,
+        LEVEL3,
+    }
+    private StanLevel stanLevel;
+
     private float hitTimer;
+    [SerializeField]
+    private float[] hitTimerLevel;
 
     [SerializeField]
     private float recoveryTime = 6.0f;
@@ -31,6 +41,7 @@ public class SetUpScrew : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stanLevel = StanLevel.LEVEL1;
         hitTimer = 0.0f;
         stanElapsedTime = 0.0f;
         distanceY = 0.0f;
@@ -40,7 +51,10 @@ public class SetUpScrew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0) return;
+
         Recovery();
+        StanLevelUp();
     }
 
     /// <summary>
@@ -54,7 +68,6 @@ public class SetUpScrew : MonoBehaviour
         stanElapsedTime += Time.deltaTime;
         if (stanElapsedTime >= recoveryTime)
         {
-            Debug.Log("スタン回復");
             IsStan = false;
             stanElapsedTime = 0.0f;
         }
@@ -77,12 +90,27 @@ public class SetUpScrew : MonoBehaviour
     /// スクリューとの衝突時の処理
     /// </summary>
     /// <param name="distance"></param>
-    public void HitScrew(float distance)
+    public void HitScrew(float distance, float boxSizeY)
     {
         IsStan = true;
         IsHitScrew = true;
         distanceY = distance;
+        AddTimer(boxSizeY);
         adjustPositionX = Random.Range(-1.0f, 1.0f);
+    }
+
+    /// <summary>
+    /// 距離によるボーナス加算
+    /// </summary>
+    /// <param name="boxSizeY"></param>
+    private void AddTimer(float boxSizeY)
+    {
+        //最大範囲の1/3の距離なら、2秒加算
+        if (distanceY <= boxSizeY * (1.0f/3.0f))
+            hitTimer = 2.0f;
+        //2/3の距離なら、1秒加算
+        else if (distanceY <= boxSizeY * (2.0f / 3.0f))
+            hitTimer = 1.0f;
     }
 
     /// <summary>
@@ -91,5 +119,31 @@ public class SetUpScrew : MonoBehaviour
     public void LeaveScrew()
     {
         IsHitScrew = false;
+        hitTimer = 0.0f;
+    }
+
+    /// <summary>
+    /// スタンレベルの設定
+    /// </summary>
+    private void StanLevelUp()
+    {
+        if (!IsHitScrew) return;
+        if (stanLevel == StanLevel.LEVEL3) return;
+
+        hitTimer += Time.deltaTime;
+
+        if (hitTimer >= hitTimerLevel[2])
+            stanLevel = StanLevel.LEVEL3;
+        else if (hitTimer >= hitTimerLevel[1])
+            stanLevel = StanLevel.LEVEL2;
+        else
+            stanLevel = StanLevel.LEVEL1;
+
+        Debug.Log(transform.name + ":" + stanLevel);
+    }
+
+    public StanLevel GetStanLevel()
+    {
+        return stanLevel;
     }
 }
