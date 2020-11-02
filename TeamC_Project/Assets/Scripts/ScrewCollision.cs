@@ -32,7 +32,7 @@ public class ScrewCollision : MonoBehaviour
             //ヒットした敵との距離を計算
             float distance = Mathf.Abs(Vector3.Distance(player.transform.position, other.transform.position));
             GameObject enemy = other.gameObject;
-            enemy.GetComponent<SetUpScrew>().HitScrew(distance);
+            enemy.GetComponent<SetUpScrew>().HitScrew(distance, player.transform.position.x);
             //スクリューにヒットしている敵をリストに格納
             enemies.Add(enemy);
         }

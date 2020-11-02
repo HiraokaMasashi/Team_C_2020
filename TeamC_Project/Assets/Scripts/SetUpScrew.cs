@@ -17,6 +17,14 @@ public class SetUpScrew : MonoBehaviour
     [SerializeField]
     private float maxDistance = 12.0f;
 
+    enum MoveDirection
+    {
+        NONE,
+        RIGHT,
+        LEFT,
+    }
+    private MoveDirection currentDirection;
+
     public bool IsStan
     {
         get;
@@ -35,6 +43,7 @@ public class SetUpScrew : MonoBehaviour
         stanElapsedTime = 0.0f;
         distanceY = 0.0f;
         adjustPositionX = 0.0f;
+        currentDirection = MoveDirection.NONE;
     }
 
     // Update is called once per frame
@@ -98,12 +107,12 @@ public class SetUpScrew : MonoBehaviour
     {
         if (distance <= 0.1f)
         {
-            if (distanceY <= maxDistance * (1.0f / 3.0f))
-                adjustPositionX = Random.Range(-1.0f, 1.0f);
-            else if (distanceY <= maxDistance * (2.0f / 3.0f))
-                adjustPositionX = Random.Range(-2.0f, 2.0f);
-            else
-                adjustPositionX = Random.Range(-3.0f, 3.0f);
+            if (currentDirection == MoveDirection.RIGHT)
+                currentDirection = MoveDirection.LEFT;
+            else if (currentDirection == MoveDirection.LEFT)
+                currentDirection = MoveDirection.RIGHT;
+
+            SetAdjustPositionX();
             SetDestination(basePosition, ref destination);
         }
 
@@ -114,12 +123,44 @@ public class SetUpScrew : MonoBehaviour
     /// スクリューとの衝突時の処理
     /// </summary>
     /// <param name="distance"></param>
-    public void HitScrew(float distance)
+    public void HitScrew(float distance, float basePostionX)
     {
         IsStan = true;
         IsHitScrew = true;
         distanceY = distance;
-        adjustPositionX = Random.Range(-1.0f, 1.0f);
+        if (transform.position.x <= basePostionX)
+            currentDirection = MoveDirection.RIGHT;
+        else
+            currentDirection = MoveDirection.LEFT;
+        SetAdjustPositionX();
+    }
+
+    /// <summary>
+    /// 横移動の範囲の設定
+    /// </summary>
+    private void SetAdjustPositionX()
+    {
+        if (distanceY <= maxDistance * (1.0f / 3.0f))
+        {
+            if (currentDirection == MoveDirection.LEFT)
+                adjustPositionX = 1.0f;
+            else if (currentDirection == MoveDirection.RIGHT)
+                adjustPositionX = -1.0f;
+        }
+        else if (distanceY <= maxDistance * (2.0f / 3.0f))
+        {
+            if (currentDirection == MoveDirection.LEFT)
+                adjustPositionX = 2.0f;
+            else if (currentDirection == MoveDirection.RIGHT)
+                adjustPositionX = -2.0f;
+        }
+        else
+        {
+            if (currentDirection == MoveDirection.LEFT)
+                adjustPositionX = 3.0f;
+            else if (currentDirection == MoveDirection.RIGHT)
+                adjustPositionX = -3.0f;
+        }
     }
 
     /// <summary>
