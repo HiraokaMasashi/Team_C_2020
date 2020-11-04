@@ -7,7 +7,6 @@ public class ScrewCollision : MonoBehaviour
     private List<GameObject> enemies;//スクリューにヒットしている敵
     private GameObject player;//プレイヤー
 
-    private BoxCollider boxCollider;
     [SerializeField]
     private int maxWait = 4;//一列で並べられる上限
 
@@ -15,8 +14,6 @@ public class ScrewCollision : MonoBehaviour
     {
         enemies = new List<GameObject>();
         player = GameObject.FindGameObjectWithTag("Player");
-
-        boxCollider = GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider other)

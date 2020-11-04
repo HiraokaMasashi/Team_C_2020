@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
+  hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
 --- !u!114 &2732371690843407098
@@ -157,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39f5335544e2a34fbee29c80e755e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPosition: {x: -25, y: -9, z: 0}
-  maxPosition: {x: 25, y: 19, z: 0}
+  minPosition: {x: -22, y: -6, z: 0}
+  maxPosition: {x: 22, y: 15, z: 0}
   shotInterval: 1
   playerMoveSpeed: 10
   bulletMoveSpeed: 1000

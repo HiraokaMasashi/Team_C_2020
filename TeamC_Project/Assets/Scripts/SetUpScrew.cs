@@ -17,6 +17,9 @@ public class SetUpScrew : MonoBehaviour
     [SerializeField]
     private float maxDistance = 12.0f;
 
+    private Vector3 destination = Vector3.zero;
+    private float distance = 0;
+
     enum MoveDirection
     {
         NONE,
@@ -77,10 +80,7 @@ public class SetUpScrew : MonoBehaviour
     public void StanMove(Vector3 basePosition)
     {
         Vector3 position = transform.position;
-        Vector3 destination = new Vector3();
-        SetDestination(basePosition, ref destination);
-
-        float distance = Vector3.Distance(position, destination);
+        SetDestination(basePosition, position, ref distance, ref destination);
         CheckDistance(basePosition, position, ref distance, ref destination);
 
         //目的地に向かう
@@ -93,9 +93,10 @@ public class SetUpScrew : MonoBehaviour
     /// </summary>
     /// <param name="basePosition"></param>
     /// <param name="destination"></param>
-    private void SetDestination(Vector3 basePosition, ref Vector3 destination)
+    private void SetDestination(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
     {
         destination = basePosition + new Vector3(adjustPositionX, distanceY, 0.0f);
+        distance = Vector3.Distance(position, destination);
     }
 
     /// <summary>
@@ -115,10 +116,8 @@ public class SetUpScrew : MonoBehaviour
                 currentDirection = MoveDirection.RIGHT;
 
             SetAdjustPositionX();
-            SetDestination(basePosition, ref destination);
+            SetDestination(basePosition, position, ref distance, ref destination);
         }
-
-        distance = Vector3.Distance(position, destination);
     }
 
     /// <summary>

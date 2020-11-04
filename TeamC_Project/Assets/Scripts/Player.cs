@@ -113,20 +113,18 @@ public class Player : MonoBehaviour
     {
         //横軸の値を返す
         float x = inputManager.GetL_Stick_Horizontal();
-
         //縦軸の値を返す
         float y = inputManager.GetL_Stick_Vertical();
         if (screw.GetMode() == Screw.Mode.SCREW) y = 0;
 
-        //移動制御＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊今回追加
-        Vector3 nextPosition = transform.position + new Vector3(x, y, 0) * Time.deltaTime * playerMoveSpeed;
+        Vector3 position = transform.position + new Vector3(x, y, 0) * Time.deltaTime * playerMoveSpeed;
         //移動できる範囲をMathf.Clampで範囲指定して制御
-        nextPosition = new Vector3(
-            Mathf.Clamp(nextPosition.x, minPosition.x, maxPosition.x),
-            Mathf.Clamp(nextPosition.y, minPosition.y, maxPosition.y),
-            nextPosition.z);
-        //現在位置にnextPositionを＋
-        transform.position = nextPosition;
+        position = new Vector3(
+            Mathf.Clamp(position.x, minPosition.x, maxPosition.x),
+            Mathf.Clamp(position.y, minPosition.y, maxPosition.y),
+            position.z);
+
+        transform.position = position;
     }
 
     private void OnTriggerEnter(Collider other)
