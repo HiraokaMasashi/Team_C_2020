@@ -5,82 +5,49 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed;
+    protected float moveSpeed = 1.0f;
     [SerializeField]
-    private Vector3 destroyZone;
+    protected Vector3 destroyZone = new Vector3(0.0f, -11.0f, 0.0f);
 
-    private SetUpScrew setupScrew;
+    protected SetUpScrew setupScrew;
 
-    private BulletController bulletController;
-    private float shotInterval;
-    private float elapsedTime;
-    private GameObject player;
-
-    enum MoveMode
-    {
-        NORMAL,
-        INTERSEPTION,
-    }
-    private MoveMode currentMode;
+    protected BulletController bulletController;
+    protected float shotInterval;
+    [SerializeField]
+    private float minInterval = 1.0f;
+    [SerializeField]
+    private float maxInterval = 5.0f;
+    protected float elapsedTime;
+    protected GameObject player;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         setupScrew = GetComponent<SetUpScrew>();
-        currentMode = MoveMode.NORMAL;
 
         bulletController = GetComponent<BulletController>();
-        shotInterval = Random.Range(3, 6);
+        shotInterval = Random.Range(minInterval, maxInterval);
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (setupScrew.IsStan) return;
 
-        //// 自分自身のtransformを取得
-        //Transform myTransform = this.transform;
-
-        ////Translate関数を使用
-        ////Translate(float x,float y,float z,Space relativeTo = Space.Self)
-        //myTransform.Translate(0, moveSpeed, 0, Space.World);
-
-        switch (currentMode)
-        {
-            case MoveMode.NORMAL:
-                NormalMove();
-                break;
-
-            case MoveMode.INTERSEPTION:
-                InterseptionMove();
-                break;
-
-            default:
-                break;
-        }
-
+        Move();
         ShotBullet();
-
-        if (transform.position.y <= destroyZone.y)
-        {
-            Destroy(gameObject);
-        }
+        Death();
     }
 
-    private void NormalMove()
+    protected virtual void Move()
     {
         Vector3 position = transform.position;
         position += Vector3.down * moveSpeed * Time.deltaTime;
         transform.position = position;
     }
 
-    private void InterseptionMove()
-    {
-
-    }
-
-    private void ShotBullet()
+    protected virtual void ShotBullet()
     {
         if (player == null) return;
 
@@ -92,6 +59,14 @@ public class Enemy : MonoBehaviour
             Vector3 direction = player.transform.position - transform.position;
             bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, position, direction, 300.0f, 3.0f, "Enemy");
             elapsedTime = 0;
+        }
+    }
+
+    protected void Death()
+    {
+        if (transform.position.y <= destroyZone.y)
+        {
+            Destroy(gameObject);
         }
     }
 }
