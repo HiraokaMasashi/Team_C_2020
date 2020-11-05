@@ -17,8 +17,8 @@ public class SetUpScrew : MonoBehaviour
     [SerializeField]
     private float maxDistance = 12.0f;
 
-    private Vector3 destination = Vector3.zero;
-    private float distance = 0;
+    private Vector3 destination;
+    private float distance;
 
     enum MoveDirection
     {
