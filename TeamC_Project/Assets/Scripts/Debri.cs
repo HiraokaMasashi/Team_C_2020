@@ -75,7 +75,7 @@ public class Debri : SetUpScrew
         {
             if (!IsHitScrew) return;
 
-            other.GetComponent<Health>().HitDeath();
+            other.GetComponent<Health>().Damage(1);
             PlayDestroyParticle();
         }
     }
