@@ -12,9 +12,12 @@ public class Pause : MonoBehaviour
 
     private bool isPause;
 
+    InputManager inputManager;
+
     void Start()
     {
         panel.SetActive(false);
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         //initSelect.Select();
     }
 
@@ -30,14 +33,14 @@ public class Pause : MonoBehaviour
             }
 
             //Viue(startの反対側にあるボタン　backって書いてあったりもする)ボタン
-            if (Input.GetKeyDown(KeyCode.JoystickButton6))
+            if (inputManager.GetView_ButtonDown())
             {
                 GameQuit();
             }
         }
 
         //Escキーかコントローラーメニューボタン
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        if (Input.GetKeyDown(KeyCode.Escape) || inputManager.GetMenu_ButtonDown())
         {
             PauseSwich();
         }

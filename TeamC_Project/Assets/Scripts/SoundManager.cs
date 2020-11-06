@@ -20,6 +20,8 @@ public class SoundManager : MonoBehaviour
     AudioSource bgmAudioSource;
     AudioSource seAudioSource;
 
+    VolumeManager volumeManager;
+
     public float MasterVolume
     {
         set
@@ -109,6 +111,20 @@ public class SoundManager : MonoBehaviour
         {
             seIndex.Add(se[i].name, i);
         }
+
+        //音量
+        volumeManager = VolumeManager.Instance;
+        //ロードされていれば適用
+        if (volumeManager.isLoadfile)
+        {
+            MasterVolume = volumeManager.GetMastarVolume();
+            BgmVolume = volumeManager.GetBgmVolume();
+            SeVolume = volumeManager.GetSeVolume();
+        }
+    }
+
+    void Start()
+    {
     }
 
     public int GetBgmIndex(string name)
