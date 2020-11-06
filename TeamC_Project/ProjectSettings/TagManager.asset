@@ -8,6 +8,7 @@ TagManager:
   - PlayerBullet
   - EnemyBullet
   - Screw
+  - Debri
   layers:
   - Default
   - TransparentFX

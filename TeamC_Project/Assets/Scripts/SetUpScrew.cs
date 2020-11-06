@@ -8,40 +8,40 @@ public class SetUpScrew : MonoBehaviour
     private float recoveryTime = 6.0f;
     private float stanElapsedTime;
 
-    private float distanceY;
-    private float adjustPositionX;
+    protected float distanceY;
+    protected float adjustPositionX;
 
     [SerializeField]
-    private float speed = 1.0f;
+    protected float speed = 1.0f;
 
     [SerializeField]
-    private float maxDistance = 12.0f;
+    protected float maxDistance = 12.0f;
 
-    private Vector3 destination;
-    private float distance;
+    protected Vector3 destination;
+    protected float distance;
 
-    enum MoveDirection
+    protected enum MoveDirection
     {
         NONE,
         RIGHT,
         LEFT,
     }
-    private MoveDirection currentDirection;
+    protected MoveDirection currentDirection;
 
     public bool IsStan
     {
         get;
-        private set;
+        protected set;
     } = false;
 
     public bool IsHitScrew
     {
         get;
-        private set;
+        protected set;
     } = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         stanElapsedTime = 0.0f;
         distanceY = 0.0f;
@@ -50,7 +50,7 @@ public class SetUpScrew : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Time.timeScale == 0) return;
 
@@ -77,7 +77,7 @@ public class SetUpScrew : MonoBehaviour
     /// スタン中の敵の並べ替え(移動)
     /// </summary>
     /// <param name="basePosition"></param>
-    public void StanMove(Vector3 basePosition)
+    public virtual void StanMove(Vector3 basePosition)
     {
         Vector3 position = transform.position;
         SetDestination(basePosition, position, ref distance, ref destination);
@@ -93,7 +93,7 @@ public class SetUpScrew : MonoBehaviour
     /// </summary>
     /// <param name="basePosition"></param>
     /// <param name="destination"></param>
-    private void SetDestination(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
+    protected void SetDestination(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
     {
         destination = basePosition + new Vector3(adjustPositionX, distanceY, 0.0f);
         distance = Vector3.Distance(position, destination);
@@ -106,7 +106,7 @@ public class SetUpScrew : MonoBehaviour
     /// <param name="position"></param>
     /// <param name="distance"></param>
     /// <param name="destination"></param>
-    private void CheckDistance(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
+    protected void CheckDistance(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
     {
         if (distance <= 0.1f)
         {
@@ -115,8 +115,8 @@ public class SetUpScrew : MonoBehaviour
             else if (currentDirection == MoveDirection.LEFT)
                 currentDirection = MoveDirection.RIGHT;
 
-            SetAdjustPositionX();
             SetDestination(basePosition, position, ref distance, ref destination);
+            SetAdjustPositionX();
         }
     }
 
@@ -125,7 +125,7 @@ public class SetUpScrew : MonoBehaviour
     /// </summary>
     /// <param name="distance"></param>
     /// <param name="basePositionX"></param>
-    public void HitScrew(float distance, float basePositionX)
+    public virtual void HitScrew(float distance, float basePositionX)
     {
         IsStan = true;
         IsHitScrew = true;
@@ -140,7 +140,7 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// 横移動の範囲の設定
     /// </summary>
-    private void SetAdjustPositionX()
+    protected void SetAdjustPositionX()
     {
         if (distanceY <= maxDistance * (1.0f / 3.0f))
         {
@@ -168,7 +168,7 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// スクリューとの衝突終了時の処理
     /// </summary>
-    public void LeaveScrew()
+    public virtual void LeaveScrew()
     {
         IsHitScrew = false;
     }

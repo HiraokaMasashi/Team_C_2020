@@ -1199,7 +1199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHealth: {fileID: 0}
-  enemyManager: {fileID: 1351278107}
   fadeScene: {fileID: 178468182}
   changeSceneTime: 2
 --- !u!4 &1255817845
@@ -1378,18 +1377,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -487.5}
   m_SizeDelta: {x: -1600, y: -1025}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1351278107 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
-    type: 3}
-  m_PrefabInstance: {fileID: 1689993524}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8caea25b162bc941b69d3fb66f23449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1631521798
 PrefabInstance:
   m_ObjectHideFlags: 0
