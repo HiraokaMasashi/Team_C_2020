@@ -77,7 +77,7 @@ public class SetUpScrew : MonoBehaviour
     /// スタン中の敵の並べ替え(移動)
     /// </summary>
     /// <param name="basePosition"></param>
-    public void StanMove(Vector3 basePosition)
+    public virtual void StanMove(Vector3 basePosition)
     {
         Vector3 position = transform.position;
         SetDestination(basePosition, position, ref distance, ref destination);
@@ -93,7 +93,7 @@ public class SetUpScrew : MonoBehaviour
     /// </summary>
     /// <param name="basePosition"></param>
     /// <param name="destination"></param>
-    private void SetDestination(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
+    protected void SetDestination(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
     {
         destination = basePosition + new Vector3(adjustPositionX, distanceY, 0.0f);
         distance = Vector3.Distance(position, destination);
@@ -106,7 +106,7 @@ public class SetUpScrew : MonoBehaviour
     /// <param name="position"></param>
     /// <param name="distance"></param>
     /// <param name="destination"></param>
-    private void CheckDistance(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
+    protected void CheckDistance(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
     {
         if (distance <= 0.1f)
         {
@@ -115,8 +115,8 @@ public class SetUpScrew : MonoBehaviour
             else if (currentDirection == MoveDirection.LEFT)
                 currentDirection = MoveDirection.RIGHT;
 
-            SetAdjustPositionX();
             SetDestination(basePosition, position, ref distance, ref destination);
+            SetAdjustPositionX();
         }
     }
 
@@ -168,7 +168,7 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// スクリューとの衝突終了時の処理
     /// </summary>
-    public void LeaveScrew()
+    public virtual void LeaveScrew()
     {
         IsHitScrew = false;
     }

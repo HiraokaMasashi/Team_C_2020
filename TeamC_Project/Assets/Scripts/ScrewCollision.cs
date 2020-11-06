@@ -80,10 +80,10 @@ public class ScrewCollision : MonoBehaviour
     /// <summary>
     /// リストからの削除(object指定)
     /// </summary>
-    /// <param name="enemy"></param>
-    public void RemoveDebri(GameObject enemy)
+    /// <param name="debri"></param>
+    public void RemoveDebri(GameObject debri)
     {
-        debris.Remove(enemy);
+        debris.Remove(debri);
     }
 
     /// <summary>
