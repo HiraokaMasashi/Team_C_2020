@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     //敵のPrefab
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject[] enemyPrefabs;
     //敵の生成パターン
     [SerializeField]
     private Transform[] instancePattern;
@@ -68,7 +68,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < length; i++)
         {
             //enemyをインスタンス化する(生成する)
-            GameObject enemy = Instantiate(enemyPrefab);
+            GameObject enemy = Instantiate(enemyPrefabs[number]);
             enemies[i] = enemy;
             //生成した敵の座標を決定する
             enemies[i].transform.position = instancePattern[number].GetChild(i).position;
