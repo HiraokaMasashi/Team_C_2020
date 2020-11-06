@@ -8,40 +8,40 @@ public class SetUpScrew : MonoBehaviour
     private float recoveryTime = 6.0f;
     private float stanElapsedTime;
 
-    private float distanceY;
-    private float adjustPositionX;
+    protected float distanceY;
+    protected float adjustPositionX;
 
     [SerializeField]
-    private float speed = 1.0f;
+    protected float speed = 1.0f;
 
     [SerializeField]
-    private float maxDistance = 12.0f;
+    protected float maxDistance = 12.0f;
 
-    private Vector3 destination;
-    private float distance;
+    protected Vector3 destination;
+    protected float distance;
 
-    enum MoveDirection
+    protected enum MoveDirection
     {
         NONE,
         RIGHT,
         LEFT,
     }
-    private MoveDirection currentDirection;
+    protected MoveDirection currentDirection;
 
     public bool IsStan
     {
         get;
-        private set;
+        protected set;
     } = false;
 
     public bool IsHitScrew
     {
         get;
-        private set;
+        protected set;
     } = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         stanElapsedTime = 0.0f;
         distanceY = 0.0f;
@@ -50,7 +50,7 @@ public class SetUpScrew : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Time.timeScale == 0) return;
 
@@ -125,7 +125,7 @@ public class SetUpScrew : MonoBehaviour
     /// </summary>
     /// <param name="distance"></param>
     /// <param name="basePositionX"></param>
-    public void HitScrew(float distance, float basePositionX)
+    public virtual void HitScrew(float distance, float basePositionX)
     {
         IsStan = true;
         IsHitScrew = true;
@@ -140,7 +140,7 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// 横移動の範囲の設定
     /// </summary>
-    private void SetAdjustPositionX()
+    protected void SetAdjustPositionX()
     {
         if (distanceY <= maxDistance * (1.0f / 3.0f))
         {

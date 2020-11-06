@@ -89,6 +89,7 @@ public class Screw : MonoBehaviour
                     ChangeBoxSize();
                     screw.transform.position = transform.position + Vector3.up;
                     EnemyStanMove();
+                    DebriMove();
                 }
                 else
                 {
@@ -191,6 +192,7 @@ public class Screw : MonoBehaviour
             ResetBoxSize();
             isExistScrew = false;
             EnemyStartRecovery();
+            RemoveDebri();
             screwCollision = null;
             screw.transform.parent = null;
             screw = null;
@@ -215,6 +217,17 @@ public class Screw : MonoBehaviour
         }
     }
 
+    private void RemoveDebri()
+    {
+        List<GameObject> debris = screwCollision.GetDebris();
+        for(int i = 0; i<debris.Count; i++)
+        {
+            debris[i].GetComponent<SetUpScrew>().LeaveScrew();
+            screwCollision.RemoveDebri(i);
+            i--;
+        }
+    }
+
     /// <summary>
     /// 敵のスタン中の移動
     /// </summary>
@@ -226,6 +239,20 @@ public class Screw : MonoBehaviour
         foreach (var e in enemies)
         {
             e.GetComponent<SetUpScrew>().StanMove(transform.position);
+        }
+    }
+
+    /// <summary>
+    /// 残骸のスタン中の移動
+    /// </summary>
+    private void DebriMove()
+    {
+        List<GameObject> debris = screwCollision.GetDebris();
+
+        if (debris == null) return;
+        foreach (var d in debris)
+        {
+            d.GetComponent<SetUpScrew>().StanMove(transform.position);
         }
     }
 
