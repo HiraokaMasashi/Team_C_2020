@@ -220,7 +220,7 @@ public class Screw : MonoBehaviour
     private void RemoveDebri()
     {
         List<GameObject> debris = screwCollision.GetDebris();
-        for(int i = 0; i<debris.Count; i++)
+        for (int i = 0; i < debris.Count; i++)
         {
             debris[i].GetComponent<SetUpScrew>().LeaveScrew();
             screwCollision.RemoveDebri(i);
@@ -236,9 +236,9 @@ public class Screw : MonoBehaviour
         List<GameObject> enemies = screwCollision.GetEnemies();
 
         if (enemies == null) return;
-        foreach (var e in enemies)
+        for (int i = enemies.Count - 1; i >= 0; i--)
         {
-            e.GetComponent<SetUpScrew>().StanMove(transform.position);
+            enemies[i].GetComponent<SetUpScrew>().StanMove(transform.position);
         }
     }
 
@@ -250,9 +250,9 @@ public class Screw : MonoBehaviour
         List<GameObject> debris = screwCollision.GetDebris();
 
         if (debris == null) return;
-        foreach (var d in debris)
+        for (int i = debris.Count - 1; i >= 0; i--)
         {
-            d.GetComponent<SetUpScrew>().StanMove(transform.position);
+            debris[i].GetComponent<SetUpScrew>().StanMove(transform.position);
         }
     }
 
