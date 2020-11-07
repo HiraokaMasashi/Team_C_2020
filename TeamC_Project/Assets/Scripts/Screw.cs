@@ -209,22 +209,20 @@ public class Screw : MonoBehaviour
     private void EnemyStartRecovery()
     {
         List<GameObject> enemies = screwCollision.GetEnemies();
-        for (int i = 0; i < enemies.Count; i++)
+        for (int i = enemies.Count - 1; i >= 0; i--)
         {
             enemies[i].GetComponent<SetUpScrew>().LeaveScrew();
             screwCollision.RemoveEnemy(i);
-            i--;
         }
     }
 
     private void RemoveDebri()
     {
         List<GameObject> debris = screwCollision.GetDebris();
-        for (int i = 0; i < debris.Count; i++)
+        for (int i = debris.Count -1; i >= 0; i--)
         {
             debris[i].GetComponent<SetUpScrew>().LeaveScrew();
             screwCollision.RemoveDebri(i);
-            i--;
         }
     }
 
