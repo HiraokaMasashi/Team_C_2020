@@ -54,14 +54,10 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
         }
         else
         {
+            InitVolume();
             SaveVolume();
             isLoadfile = false;
         }
-    }
-
-    void Start()
-    {
-        
     }
 
     /// <summary>
@@ -74,8 +70,10 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
         byte[] data = Encoding.UTF8.GetBytes(jsonstr);
         data = Cryptor.Encrypt(data);
 
-        FileStream fileStream = File.Create(filePath);
-        fileStream.Write(data, 0, data.Length);
+        using (FileStream fileStream = File.Create(filePath))
+        {
+            fileStream.Write(data, 0, data.Length);
+        }
     }
 
     /// <summary>
@@ -84,14 +82,22 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     public void LoadVolume()
     {
         byte[] data = null;
-
-        FileStream fileStream = File.OpenRead(filePath);
-        data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
+        using (FileStream fileStream = File.OpenRead(filePath))
+        {
+            data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+        }
 
         //読み込むデータを複合化する
         data = Cryptor.Decrypt(data);
         string jsonstr = Encoding.UTF8.GetString(data);
         volume = JsonUtility.FromJson<Volume>(jsonstr);
+    }
+
+    private void InitVolume()
+    {
+        volume.Master = 0.8f;
+        volume.BGM = 1.0f;
+        volume.SE = 1.0f;
     }
 }
