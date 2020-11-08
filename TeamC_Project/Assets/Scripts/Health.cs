@@ -19,6 +19,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     private string damageSe;
 
+    [SerializeField]
+    private GameObject debriPrefab;
+
     /// <summary>
     /// 体力
     /// </summary>
@@ -90,6 +93,9 @@ public class Health : MonoBehaviour
     public void HitDeath()
     {
         hp = 0;
+
+        if (debriPrefab == null) return;
+        Instantiate(debriPrefab, transform.position, Quaternion.identity);
     }
 
     /// <summary>
@@ -101,6 +107,12 @@ public class Health : MonoBehaviour
         hp -= damage;
         if (transform.tag == "Player")
             soundManager.PlaySeByName(damageSe);
-        if (hp <= 0) hp = 0;
+        if (hp <= 0)
+        {
+            hp = 0;
+
+            if (debriPrefab == null) return;
+            Instantiate(debriPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

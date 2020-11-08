@@ -131,6 +131,7 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
+  debriPrefab: {fileID: 0}
 --- !u!114 &6595290001749366960
 MonoBehaviour:
   m_ObjectHideFlags: 0
