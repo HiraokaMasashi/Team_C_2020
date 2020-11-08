@@ -18,24 +18,7 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     Volume volume = new Volume();
     string filePath;
 
-    [HideInInspector]
     public bool isLoadfile;
-
-    public float MastarVolume
-    {
-        set { volume.Master = value; }
-        get { return volume.Master; }
-    }
-    public float BgmVolume
-    {
-        set { volume.BGM = value; }
-        get { return volume.BGM; }
-    }
-    public float SeVolume
-    {
-        set { volume.SE = value; }
-        get { return volume.SE; }
-    }
 
     protected override void Awake()
     {
@@ -93,5 +76,20 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
         data = Cryptor.Decrypt(data);
         string jsonstr = Encoding.UTF8.GetString(data);
         volume = JsonUtility.FromJson<Volume>(jsonstr);
+    }
+
+    public float GetMastarVolume()
+    {
+        return volume.Master;
+    }
+
+    public float GetBgmVolume()
+    {
+        return volume.BGM;
+    }
+
+    public float GetSeVolume()
+    {
+        return volume.SE;
     }
 }

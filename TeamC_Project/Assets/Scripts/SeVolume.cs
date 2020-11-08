@@ -6,24 +6,17 @@ using UnityEngine.UI;
 public class SeVolume : MonoBehaviour
 {
     Slider slider;
-    SoundManager soundManager;
-    VolumeManager volumeManager;
-
-    void Awake()
-    {
-        volumeManager = VolumeManager.Instance;
-    }
+    SoundManager sm;
 
     void Start()
     {
         slider = GetComponent<Slider>();
-        soundManager = SoundManager.Instance;
-        slider.value = soundManager.SeVolume;
+        sm = SoundManager.Instance;
+        slider.value = sm.SeVolume;
     }
 
     public void OnValueChanged()
     {
-        soundManager.SeVolume = slider.value;
-        volumeManager.SeVolume = slider.value;
+        sm.SeVolume = slider.value;
     }
 }

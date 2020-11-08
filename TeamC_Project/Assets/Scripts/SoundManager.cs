@@ -117,9 +117,9 @@ public class SoundManager : MonoBehaviour
         //ロードされていれば適用
         if (volumeManager.isLoadfile)
         {
-            MasterVolume = volumeManager.MastarVolume;
-            BgmVolume = volumeManager.BgmVolume;
-            SeVolume = volumeManager.SeVolume;
+            MasterVolume = volumeManager.GetMastarVolume();
+            BgmVolume = volumeManager.GetBgmVolume();
+            SeVolume = volumeManager.GetSeVolume();
         }
     }
 
