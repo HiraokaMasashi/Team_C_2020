@@ -12,37 +12,37 @@ public class ChargeBullet : MonoBehaviour
         STAGE_2,
         STAGE_3,
         STAGE_4,
+        STAGE_5,
+        STAGE_6,
     }
     private ChargeMode currentMode;//現在のチャージ状態
 
-    [SerializeField]
-    private int[] stageChargeMaxCount;//段階ごとのチャージ量
+    //[SerializeField]
+    //private int[] stageChargeMaxCount;//段階ごとのチャージ量
     [SerializeField]
     private Color[] stageSliderColor;//段階ごとのゲージ色
 
-    private InputManager inputManager;
+    //private InputManager inputManager;
 
-    [SerializeField]
-    private float chargeAngle = 30.0f;//チャージに必要な角度
-    private float previousAngle;//前の角度
+    //[SerializeField]
+    //private float chargeAngle = 30.0f;//チャージに必要な角度
+    //private float previousAngle;//前の角度
 
-    private int chargeCount;//チャージ量
+    private float chargeCount;//チャージ量
 
     [SerializeField]
     private Slider chargeSlider;
-
     private Player player;
-
     private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        //inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        previousAngle = 0.0f;
-        chargeCount = 0;
-        chargeSlider.maxValue = stageChargeMaxCount[0];
+        //previousAngle = 0.0f;
+        //chargeCount = 0;
+        //chargeSlider.maxValue = stageChargeMaxCount[0];
         chargeSlider.transform.GetChild(0).GetComponent<Image>().color = Color.white;
         currentMode = ChargeMode.STAGE_1;
         player = GetComponent<Player>();
@@ -61,33 +61,33 @@ public class ChargeBullet : MonoBehaviour
     /// </summary>
     private void Charge()
     {
-        if (Time.timeScale == 0) return;
+        chargeSlider.value += Time.deltaTime;
 
-        //連射しているなら、チャージしない
-        if (player.IsRapidFire) return;
+        ////連射しているなら、チャージしない
+        //if (player.IsRapidFire) return;
 
-        //左スティックを倒している角度を取得
-        float x = inputManager.GetL_Stick_Horizontal();
-        float y = inputManager.GetL_Stick_Vertical();
+        ////左スティックを倒している角度を取得
+        //float x = inputManager.GetL_Stick_Horizontal();
+        //float y = inputManager.GetL_Stick_Vertical();
 
-        Vector2 v = new Vector2(x, y);
-        Vector2 dt = v - Vector2.zero;
+        //Vector2 v = new Vector2(x, y);
+        //Vector2 dt = v - Vector2.zero;
 
-        float rad = Mathf.Atan2(dt.x, dt.y);
-        float degree = rad * Mathf.Rad2Deg;
+        //float rad = Mathf.Atan2(dt.x, dt.y);
+        //float degree = rad * Mathf.Rad2Deg;
 
-        //360度方向に変換
-        if (degree < 0)
-        {
-            degree += 360;
-        }
+        ////360度方向に変換
+        //if (degree < 0)
+        //{
+        //    degree += 360;
+        //}
 
-        //前の角度と現在の角度が一定以上離れていたらカウントアップ
-        if (Mathf.Abs(degree - previousAngle) >= chargeAngle)
-        {
-            ChangeSliderValue();
-            previousAngle = degree;
-        }
+        ////前の角度と現在の角度が一定以上離れていたらカウントアップ
+        //if (Mathf.Abs(degree - previousAngle) >= chargeAngle)
+        //{
+        ChangeSliderValue();
+        //    previousAngle = degree;
+        //}
     }
 
     /// <summary>
@@ -96,37 +96,51 @@ public class ChargeBullet : MonoBehaviour
     /// <param name="count">代入する値</param>
     private void ChangeSliderValue()
     {
-        chargeCount++;
-        chargeSlider.value = chargeCount;
-
         switch (currentMode)
         {
             case ChargeMode.STAGE_1:
-                if (chargeCount < stageChargeMaxCount[0]) return;
-                chargeCount = 0;
+                if (chargeSlider.value < 2) return;
+                //chargeCount = 0;
                 chargeSlider.value = 0;
-                chargeSlider.maxValue = stageChargeMaxCount[1];
+                //chargeSlider.maxValue = stageChargeMaxCount[1];
                 chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[0];
                 chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[1];
                 currentMode = ChargeMode.STAGE_2;
                 break;
 
             case ChargeMode.STAGE_2:
-                if (chargeCount < stageChargeMaxCount[1]) return;
-                chargeCount = 0;
+                if (chargeSlider.value < 2) return;
+                //chargeCount = 0;
                 chargeSlider.value = 0;
-                chargeSlider.maxValue = stageChargeMaxCount[2];
+                //chargeSlider.maxValue = stageChargeMaxCount[2];
                 chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[1];
                 chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[2];
                 currentMode = ChargeMode.STAGE_3;
                 break;
 
             case ChargeMode.STAGE_3:
-                if (chargeCount < stageChargeMaxCount[2]) return;
+                if (chargeSlider.value < 2) return;
+                //chargeCount = 0;
+                chargeSlider.value = 0;
+                //chargeSlider.maxValue = stageChargeMaxCount[2];
+                chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[2];
+                chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[3];
                 currentMode = ChargeMode.STAGE_4;
                 break;
 
             case ChargeMode.STAGE_4:
+                if (chargeSlider.value < 2) return;
+                //chargeCount = 0;
+                chargeSlider.value = 0;
+                //chargeSlider.maxValue = stageChargeMaxCount[2];
+                chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[3];
+                chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[4];
+                currentMode = ChargeMode.STAGE_5;
+                break;
+
+            case ChargeMode.STAGE_5:
+                if (chargeSlider.value < 2) return;
+                currentMode = ChargeMode.STAGE_6;
                 break;
 
             default:
@@ -134,23 +148,47 @@ public class ChargeBullet : MonoBehaviour
         }
     }
 
-    public void ResetCharge()
+    public void DecreaseCharge()
     {
         chargeCount = 0;
-        currentMode = ChargeMode.STAGE_1;
-        previousAngle = 0.0f;
-        chargeSlider.value = 0;
-        chargeSlider.maxValue = stageChargeMaxCount[0];
-        chargeSlider.transform.GetChild(0).GetComponent<Image>().color = Color.white;
-        chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[0];
+        currentMode--;
+        //currentMode = ChargeMode.STAGE_1;
+        //previousAngle = 0.0f;
+        //chargeSlider.value = 0;
+        chargeSlider.maxValue = 2;
+        Color sliderBackColor, sliderColor;
+
+        if(currentMode== ChargeMode.STAGE_1)
+        {
+            sliderBackColor = Color.white;
+            sliderColor = stageSliderColor[0];
+        }
+        else
+        {
+            sliderBackColor = stageSliderColor[(int)currentMode -1];
+            sliderColor = stageSliderColor[(int)currentMode];
+        }
+
+        chargeSlider.transform.GetChild(0).GetComponent<Image>().color = sliderBackColor;
+        chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = sliderColor;
     }
 
-    /// <summary>
-    /// 現在のチャージ段階を返す
-    /// </summary>
-    /// <returns></returns>
-    public ChargeMode GetChargeMode()
+    public bool GetCanShot()
     {
-        return currentMode;
+        bool canShot = false;
+
+        if (currentMode != ChargeMode.STAGE_1)
+            canShot = true;
+
+        return canShot;
     }
+
+    ///// <summary>
+    ///// 現在のチャージ段階を返す
+    ///// </summary>
+    ///// <returns></returns>
+    //public ChargeMode GetChargeMode()
+    //{
+    //    return currentMode;
+    //}
 }

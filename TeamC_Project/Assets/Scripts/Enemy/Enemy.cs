@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         {
             Vector3 position = transform.position + Vector3.down;
             Vector3 direction = player.transform.position - transform.position;
-            bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, position, direction, 300.0f, 3.0f, "Enemy");
+            bulletController.GenerateBullet(position, direction, 300.0f, 3.0f, "Enemy");
             elapsedTime = 0;
         }
     }

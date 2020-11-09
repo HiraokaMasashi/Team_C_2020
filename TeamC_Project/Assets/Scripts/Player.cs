@@ -105,37 +105,37 @@ public class Player : MonoBehaviour
     /// </summary>
     private void ShotBullet()
     {
-        shotBulletElapsedTime += Time.deltaTime;
+        //shotBulletElapsedTime += Time.deltaTime;
 
         //通常状態以外には撃てない
         if (currentMode != Mode.NORMAL) return;
 
         if (inputManager.GetA_ButtonDown())
         {
-            if (shotBulletElapsedTime < shotBulletInterval) return;
+            //if (shotBulletElapsedTime < shotBulletInterval) return;
 
-            shotBulletElapsedTime = 0.0f;
+            //shotBulletElapsedTime = 0.0f;
             InstanceBullet();
         }
 
-        if (inputManager.GetA_Button())
-        {
-            //ボタン長押し時は、経過時間を早める
-            shotBulletElapsedTime += Time.deltaTime;
-            if (shotBulletElapsedTime < shotBulletInterval) return;
+        //if (inputManager.GetA_Button())
+        //{
+        //    ////ボタン長押し時は、経過時間を早める
+        //    //shotBulletElapsedTime += Time.deltaTime;
+        //    //if (shotBulletElapsedTime < shotBulletInterval) return;
 
-            shotBulletElapsedTime = 0.0f;
-            InstanceBullet();
-            IsRapidFire = true;
-        }
+        //    //shotBulletElapsedTime = 0.0f;
+        //    InstanceBullet();
+        //    //IsRapidFire = true;
+        //}
 
-        if (inputManager.GetA_ButtonUp())
-        {
-            if (!IsRapidFire) return;
+        //if (inputManager.GetA_ButtonUp())
+        //{
+        //    if (!IsRapidFire) return;
 
-            IsRapidFire = false;
-            shotBulletElapsedTime = 0.0f;
-        }
+        //    IsRapidFire = false;
+        //    shotBulletElapsedTime = 0.0f;
+        //}
     }
 
     /// <summary>
@@ -143,11 +143,14 @@ public class Player : MonoBehaviour
     /// </summary>
     private void InstanceBullet()
     {
+        if (!chargeBullet.GetCanShot()) return;
+
         //生成位置
         Vector3 shotPosition = transform.position + Vector3.up;
 
-        bulletController.GenerateBullet(chargeBullet.GetChargeMode(), shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
-        chargeBullet.ResetCharge();
+        bulletController.GenerateBullet(shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
+        chargeBullet.DecreaseCharge();
+        //chargeBullet.ResetCharge();
     }
 
     /// <summary>

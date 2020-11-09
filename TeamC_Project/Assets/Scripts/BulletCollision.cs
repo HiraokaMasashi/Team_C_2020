@@ -47,6 +47,12 @@ public class BulletCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(transform.tag=="PlayerBullet" && other.transform.tag == "Screw")
+        {
+            IsPenetrate = true;
+            GetComponent<Renderer>().material.color = Color.red;
+        }
+
         if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {

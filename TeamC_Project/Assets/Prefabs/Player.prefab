@@ -212,12 +212,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c712c295430e44b8c2d26fe9928b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageChargeMaxCount: 180000002000000030000000
   stageSliderColor:
   - {r: 0.50482273, g: 1, b: 0, a: 1}
   - {r: 0.93450105, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.30874836, b: 0, a: 1}
-  chargeAngle: 45
+  - {r: 1, g: 0.53611743, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.28782463, a: 1}
+  - {r: 1, g: 0, b: 0.61351156, a: 1}
+  - {r: 0.56523514, g: 0, b: 1, a: 1}
   chargeSlider: {fileID: 0}
 --- !u!114 &2732371690843407089
 MonoBehaviour:
@@ -231,14 +232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefabs:
-  - {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666, type: 3}
-  - {fileID: 8904220051015584014, guid: 3282c692525b9a440b6cd0cf6c9a3f5b, type: 3}
-  - {fileID: 4410538272253555621, guid: 9ee4944639762704bb8629cc4c3e0b63, type: 3}
-  shotSes:
-  - shot1
-  - shot2
-  - shot3
+  bulletPrefab: {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666,
+    type: 3}
+  shotSe: shot1
 --- !u!54 &1998912523
 Rigidbody:
   m_ObjectHideFlags: 0
