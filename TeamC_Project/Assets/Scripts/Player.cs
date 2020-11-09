@@ -261,7 +261,7 @@ public class Player : MonoBehaviour
 
         destroyShotScrewTime += Time.deltaTime;
 
-        if (destroyShotScrewTime < 3.0f) return;
+        if (destroyShotScrewTime < 5.0f) return;
 
         shotScrewObject.GetComponent<BoxCollider>().enabled = false;
         shotScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.NONE);
