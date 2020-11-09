@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4093353519856419141}
-  - component: {fileID: 3931860751022519686}
   - component: {fileID: 3471573869152313289}
   - component: {fileID: 4486419651312017731}
-  - component: {fileID: 2703532635655288780}
-  - component: {fileID: 6709115362242080342}
+  - component: {fileID: 5060952909225489719}
+  - component: {fileID: -1291246275058140614}
+  - component: {fileID: 7329952959991381326}
   m_Layer: 0
   m_Name: ScrewParticle
   m_TagString: Screw
@@ -35,18 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3931860751022519686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7893896703693483624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af764ebdc004544f97b521e8d4be639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &3471573869152313289
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4769,7 +4757,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!65 &2703532635655288780
+--- !u!65 &5060952909225489719
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4778,23 +4766,33 @@ BoxCollider:
   m_GameObject: {fileID: 7893896703693483624}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 2, z: 3}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!54 &6709115362242080342
-Rigidbody:
+--- !u!114 &-1291246275058140614
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7893896703693483624}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af764ebdc004544f97b521e8d4be639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxWait: 5
+--- !u!114 &7329952959991381326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893896703693483624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fde78f91788d4498bf37fdb5edeb37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3

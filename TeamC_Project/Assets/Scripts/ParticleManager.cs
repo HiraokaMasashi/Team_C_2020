@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticlaManager : MonoBehaviour
+public class ParticleManager : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem[] particles;//パーティクルの配列

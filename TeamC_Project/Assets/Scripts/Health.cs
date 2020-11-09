@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ParticlaManager))]
+[RequireComponent(typeof(ParticleManager))]
 public class Health : MonoBehaviour
 {
     [SerializeField]
@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Text hpText;
 
-    private ParticlaManager particlaManager;
+    private ParticleManager particleManager;
     private SoundManager soundManager;
     [SerializeField]
     private string deadSe;
@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
     {
         maxHp = hp;
 
-        particlaManager = GetComponent<ParticlaManager>();
+        particleManager = GetComponent<ParticleManager>();
         soundManager = SoundManager.Instance;
     }
 
@@ -60,11 +60,11 @@ public class Health : MonoBehaviour
     {
         if (!IsDead) return;
 
-        GameObject particle = particlaManager.GenerateParticle();
+        GameObject particle = particleManager.GenerateParticle();
         if (particle != null)
         {
             particle.transform.position = transform.position;
-            particlaManager.OncePlayParticle(particle);
+            particleManager.OncePlayParticle(particle);
         }
         soundManager.PlaySeByName(deadSe);
         Destroy(gameObject);

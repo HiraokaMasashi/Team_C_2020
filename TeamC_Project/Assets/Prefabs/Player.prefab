@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &479286963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479286968}
+  - component: {fileID: 479286967}
+  m_Layer: 0
+  m_Name: Screw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479286968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479286963}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2732371690843407099}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &479286967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479286963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ed41a450195984294306f62e1ba198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles:
+  - {fileID: 3471573869152313289, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
+  - {fileID: 3471573869152313289, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
 --- !u!1 &2732371690843407096
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +57,6 @@ GameObject:
   - component: {fileID: 2732371690843407099}
   - component: {fileID: 2732371690843407090}
   - component: {fileID: 2732371690843407098}
-  - component: {fileID: 2732371690843407097}
   - component: {fileID: 2732371690843407094}
   - component: {fileID: 2732371690843407093}
   - component: {fileID: 2732371690843407092}
@@ -38,6 +83,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7063608076759213721}
+  - {fileID: 479286968}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,6 +103,7 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
+  debriPrefab: {fileID: 0}
 --- !u!114 &2732371690843407098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,20 +118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles:
   - {fileID: 29722816459199433, guid: e1757a8108ffcb8419d4990387182203, type: 3}
-  - {fileID: 3471573869152313289, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
---- !u!114 &2732371690843407097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2732371690843407096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82fde78f91788d4498bf37fdb5edeb37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnificationSpeed: 3
 --- !u!136 &2732371690843407094
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -96,9 +129,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.4444342
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.18285322, z: -0.0000000045318855}
 --- !u!33 &2732371690843407093
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -160,9 +193,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPosition: {x: -22, y: -6, z: 0}
   maxPosition: {x: 22, y: 15, z: 0}
-  shotInterval: 1
+  shotBulletInterval: 2
   playerMoveSpeed: 10
   bulletMoveSpeed: 1000
+  screw: {fileID: 479286963}
+  shotScrewInterval: 3
+  magnificationSpeed: 3
+  rotationInterval: 1
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0

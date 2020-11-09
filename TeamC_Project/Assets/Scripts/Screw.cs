@@ -2,143 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ParticlaManager))]
 public class Screw : MonoBehaviour
 {
-    //プレイヤーの状態
-    public enum Mode
-    {
-        NORMAL,
-        SCREW,
-        ROTATION_SCREW,
-        ROTATION_NORMAL,
-    }
-    private Mode currentMode;
-
-    /// <summary>
-    /// スクリューを使用中か
-    /// </summary>
-    public bool IsUseScrew
-    {
-        get;
-        private set;
-    } = false;
-
-    private bool isExistScrew = false;//スクリューが存在しているか
-
-    private InputManager inputManager;
-    private ParticlaManager particlaManager;
-
-    private GameObject screw;//スクリュー
-
-    [SerializeField, Tooltip("回転速度倍率")]
-    private float magnificationSpeed = 3.0f;
-    //回転速度
-    private float rotationSpeed = 180.0f;
-
-    //スクリュー使用時の角度
-    private float screwRotation = -180.0f;
-    //通常時の角度
-    private float normalRotation = 0.0f;
-
     private BoxCollider boxCollider;
-    private ScrewCollision screwCollision;
 
-    private float minCenterY = 1.0f;//コライダーのY軸の最小センター
-    private float minSizeY = 2.0f;//コライダーのY軸の最小サイズ
     private float maxCenterY = 6.0f;//コライダーのY軸の最大センター
     private float maxSizeY = 12.0f;//コライダーのY軸の最大サイズ
 
-    private GameManager gameManager;
+    public enum ScrewType
+    {
+        SHOT,
+        INHALE,
+        NONE,
+    }
+    private ScrewType screwType;
 
-    private Health health;
+    [SerializeField]
+    private float moveSpeed = 1.0f;
+
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        particlaManager = GetComponent<ParticlaManager>();
-        currentMode = Mode.NORMAL;
-        rotationSpeed *= magnificationSpeed;
-        health = GetComponent<Health>();
+        boxCollider = GetComponent<BoxCollider>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        if (Time.timeScale == 0) return;
-        if (!gameManager.IsGameStart) return;
-
-        switch (currentMode)
-        {
-            case Mode.NORMAL:
-                //Rボタンを入力したら回転開始
-                if (inputManager.GetR_ButtonDown())
-                {
-                    currentMode = Mode.ROTATION_SCREW;
-                }
-                break;
-
-            case Mode.SCREW:
-                //Rボタンを押している間、スクリューを生成
-                IsUseScrew = inputManager.GetR_Button();
-
-                if (IsUseScrew)
-                {
-                    GenerateScrew();
-                    ChangeBoxSize();
-                    screw.transform.position = transform.position + Vector3.up;
-                    DebriMove();
-                    EnemyStanMove();
-                }
-                else
-                {
-                    StopScrew();
-                }
-                break;
-
-            case Mode.ROTATION_NORMAL:
-                //元の回転に戻す
-                RotationDefault();
-                break;
-
-            case Mode.ROTATION_SCREW:
-                //スクリューを出すための回転
-                RotationUseScrew();
-                break;
-
-            default:
-                break;
-        }
-
-        //死亡時にパーティクルを生成していれば切り離す
-        if (health.IsDead)
-            StopScrew();
+        Move();
+        ChangeBoxSize();
+        EnemyStanMove();
     }
 
-    /// <summary>
-    /// スクリューの生成
-    /// </summary>
-    private void GenerateScrew()
+    private void Move()
     {
-        //パーティクルが存在しないときに1度だけ
-        if (isExistScrew) return;
+        if (screwType != ScrewType.SHOT) return;
 
-        //スクリューパーティクルの生成
-        screw = particlaManager.GenerateParticleInChildren(1);
-        screwCollision = screw.GetComponent<ScrewCollision>();
-        //あたり判定を付ける
-        boxCollider = screw.GetComponent<BoxCollider>();
-        boxCollider.enabled = true;
-        particlaManager.StartParticle(screw);
-        isExistScrew = true;
+        Vector3 position = transform.position;
+        position += Vector3.up * (moveSpeed / 2.0f) * Time.deltaTime;
+        transform.position = position;
     }
+
 
     /// <summary>
     /// スクリュー使用時にあたり判定のサイズを調整する
     /// </summary>
     private void ChangeBoxSize()
     {
+        if (screwType != ScrewType.INHALE) return;
         if (boxCollider == null) return;
 
         //あたり判定の調整サイズ
@@ -159,141 +72,31 @@ public class Screw : MonoBehaviour
         boxCollider.size = size;
     }
 
-    /// <summary>
-    /// 調整したあたり判定を元に戻す
-    /// </summary>
-    private void ResetBoxSize()
-    {
-        if (boxCollider == null) return;
-
-        Vector3 center = boxCollider.center;
-        center.y = minCenterY;
-        boxCollider.center = center;
-
-        Vector3 size = boxCollider.size;
-        size.y = minSizeY;
-        boxCollider.size = size;
-
-        boxCollider = null;
-    }
-
-    /// <summary>
-    /// スクリューの停止
-    /// </summary>
-    private void StopScrew()
-    {
-        //パーティクルが生成されたときだけ
-        if (screw != null)
-        {
-            //パーティクルの生成を止める
-            particlaManager.StopParticle(screw);
-            //あたり判定をはずす
-            boxCollider.enabled = false;
-            ResetBoxSize();
-            isExistScrew = false;
-            EnemyStartRecovery();
-            RemoveDebri();
-            screwCollision = null;
-            screw.transform.parent = null;
-            screw = null;
-        }
-
-        if (currentMode == Mode.SCREW)
-            //元に戻る回転状態
-            currentMode = Mode.ROTATION_NORMAL;
-    }
-
-    /// <summary>
-    /// 敵のスタン回復処理を実行
-    /// </summary>
-    private void EnemyStartRecovery()
-    {
-        List<GameObject> enemies = screwCollision.GetEnemies();
-        for (int i = enemies.Count - 1; i >= 0; i--)
-        {
-            enemies[i].GetComponent<SetUpScrew>().LeaveScrew();
-            screwCollision.RemoveEnemy(i);
-        }
-    }
-
-    private void RemoveDebri()
-    {
-        List<GameObject> debris = screwCollision.GetDebris();
-        for (int i = debris.Count -1; i >= 0; i--)
-        {
-            debris[i].GetComponent<SetUpScrew>().LeaveScrew();
-            screwCollision.RemoveDebri(i);
-        }
-    }
-
-    /// <summary>
-    /// 敵のスタン中の移動
-    /// </summary>
     private void EnemyStanMove()
     {
-        List<GameObject> enemies = screwCollision.GetEnemies();
+        if (player == null) return;
 
+        Vector3 basePosition;
+        if (screwType == ScrewType.INHALE)
+            basePosition = player.transform.position;
+        else
+            basePosition = transform.position;
+
+        List<GameObject> enemies = GetComponent<ScrewCollision>().GetEnemies();
         if (enemies == null) return;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
-            enemies[i].GetComponent<SetUpScrew>().StanMove(transform.position);
+            enemies[i].GetComponent<SetUpScrew>().StanMove(basePosition);
         }
     }
 
-    /// <summary>
-    /// 残骸のスタン中の移動
-    /// </summary>
-    private void DebriMove()
+    public void SetScrewType(ScrewType type)
     {
-        List<GameObject> debris = screwCollision.GetDebris();
-
-        if (debris == null) return;
-        for (int i = debris.Count - 1; i >= 0; i--)
-        {
-            debris[i].GetComponent<SetUpScrew>().StanMove(transform.position);
-        }
+        screwType = type;
     }
 
-    /// <summary>
-    /// スクリューを使用するための回転
-    /// </summary>
-    private void RotationUseScrew()
+    public ScrewType GetScrewType()
     {
-        //z軸に180度回転させる
-        float step = rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(-30, 0, screwRotation), step);
-        Vector3 euler = transform.rotation.eulerAngles;
-
-        if (euler.z >= screwRotation * -1)
-        {
-            transform.rotation = Quaternion.Euler(euler.x, euler.y, screwRotation * -1);
-            currentMode = Mode.SCREW;
-        }
-    }
-
-    /// <summary>
-    /// 通常状態に戻すための回転
-    /// </summary>
-    private void RotationDefault()
-    {
-        //z軸に180度回転させる
-        float step = rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(-30, 0, normalRotation), step);
-        Vector3 euler = transform.rotation.eulerAngles;
-
-        if (euler.z <= normalRotation)
-        {
-            transform.rotation = Quaternion.Euler(euler.x, euler.y, normalRotation);
-            currentMode = Mode.NORMAL;
-        }
-    }
-
-    /// <summary>
-    /// 現在の状態を取得
-    /// </summary>
-    /// <returns></returns>
-    public Mode GetMode()
-    {
-        return currentMode;
+        return screwType;
     }
 }

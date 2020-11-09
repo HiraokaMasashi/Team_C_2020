@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ParticlaManager))]
+[RequireComponent(typeof(ParticleManager))]
 public class Debri : SetUpScrew
 {
     private ScoreManager scoreManager;
-    private ParticlaManager particlaManager;
+    private ParticleManager particleManager;
 
     private ScrewCollision screwCollision;
 
@@ -18,7 +18,7 @@ public class Debri : SetUpScrew
         currentDirection = MoveDirection.NONE;
 
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        particlaManager = GetComponent<ParticlaManager>();
+        particleManager = GetComponent<ParticleManager>();
     }
 
     public override void StanMove(Vector3 basePosition)
@@ -35,7 +35,7 @@ public class Debri : SetUpScrew
 
     public override void HitScrew(float distance, float basePositionX)
     {
-        IsHitScrew = true;
+        NotRecovery = true;
         distanceY = distance;
         if (transform.position.x <= basePositionX)
             currentDirection = MoveDirection.RIGHT;
@@ -47,15 +47,15 @@ public class Debri : SetUpScrew
     private void PlayDestroyParticle(GameObject enemy = null)
     {
         screwCollision = GameObject.FindGameObjectWithTag("Screw").GetComponent<ScrewCollision>();
-        screwCollision.RemoveDebri(gameObject);
+        //screwCollision.RemoveDebri(gameObject);
         if (enemy != null)
             screwCollision.RemoveEnemy(enemy);
 
-        GameObject particle = particlaManager.GenerateParticle();
+        GameObject particle = particleManager.GenerateParticle();
         if (particle != null)
         {
             particle.transform.position = transform.position;
-            particlaManager.OncePlayParticle(particle);
+            particleManager.OncePlayParticle(particle);
         }
         Destroy(gameObject);
     }
@@ -64,7 +64,7 @@ public class Debri : SetUpScrew
     {
         if (other.transform.tag == "Enemy")
         {
-            if (!IsHitScrew) return;
+            if (!NotRecovery) return;
 
             other.GetComponent<Health>().HitDeath();
             scoreManager.AddScore(other.GetComponent<Score>().GetScore());
@@ -73,7 +73,7 @@ public class Debri : SetUpScrew
 
         if (other.transform.tag == "Player")
         {
-            if (!IsHitScrew) return;
+            if (!NotRecovery) return;
 
             other.GetComponent<Health>().Damage(1);
             PlayDestroyParticle();

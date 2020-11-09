@@ -5,7 +5,7 @@ using UnityEngine;
 public class SetUpScrew : MonoBehaviour
 {
     [SerializeField]
-    private float recoveryTime = 6.0f;
+    private float recoveryTime = 5.0f;
     private float stanElapsedTime;
 
     protected float distanceY;
@@ -20,11 +20,15 @@ public class SetUpScrew : MonoBehaviour
     protected Vector3 destination;
     protected float distance;
 
+    [SerializeField]
+    private float destroyZoneY = 22.0f;
+
     protected enum MoveDirection
     {
         NONE,
         RIGHT,
         LEFT,
+        UP,
     }
     protected MoveDirection currentDirection;
 
@@ -34,10 +38,10 @@ public class SetUpScrew : MonoBehaviour
         protected set;
     } = false;
 
-    public bool IsHitScrew
+    public bool NotRecovery
     {
         get;
-        protected set;
+        set;
     } = false;
 
     // Start is called before the first frame update
@@ -54,7 +58,20 @@ public class SetUpScrew : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        Recovery();
+        if (currentDirection == MoveDirection.UP)
+            MoveUp();
+        else 
+            Recovery();
+    }
+
+    private void MoveUp()
+    {
+        Vector3 position = transform.position;
+        position += Vector3.up * (speed / 2.0f) * Time.deltaTime;
+        transform.position = position;
+
+        if (transform.position.y >= destroyZoneY)
+            Destroy(gameObject);
     }
 
     /// <summary>
@@ -63,13 +80,12 @@ public class SetUpScrew : MonoBehaviour
     private void Recovery()
     {
         if (!IsStan) return;
-        if (IsHitScrew) return;
+        if (NotRecovery) return;
 
         stanElapsedTime += Time.deltaTime;
         if (stanElapsedTime >= recoveryTime)
         {
-            IsStan = false;
-            stanElapsedTime = 0.0f;
+            currentDirection = MoveDirection.UP;
         }
     }
 
@@ -128,7 +144,7 @@ public class SetUpScrew : MonoBehaviour
     public virtual void HitScrew(float distance, float basePositionX)
     {
         IsStan = true;
-        IsHitScrew = true;
+        NotRecovery = true;
         distanceY = distance;
         if (transform.position.x <= basePositionX)
             currentDirection = MoveDirection.RIGHT;
@@ -163,13 +179,5 @@ public class SetUpScrew : MonoBehaviour
             else if (currentDirection == MoveDirection.RIGHT)
                 adjustPositionX = -3.0f;
         }
-    }
-
-    /// <summary>
-    /// スクリューとの衝突終了時の処理
-    /// </summary>
-    public virtual void LeaveScrew()
-    {
-        IsHitScrew = false;
     }
 }

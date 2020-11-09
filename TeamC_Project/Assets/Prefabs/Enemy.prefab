@@ -112,9 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5208d5cbf576bc9438b7d40cfe7bdef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoveryTime: 3
+  recoveryTime: 5
   speed: 10
   maxDistance: 12
+  destroyZoneY: 22
 --- !u!114 &5499945507236566683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +132,7 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
+  debriPrefab: {fileID: 0}
 --- !u!114 &5499945507236566682
 MonoBehaviour:
   m_ObjectHideFlags: 0
