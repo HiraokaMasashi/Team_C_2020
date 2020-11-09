@@ -51,8 +51,19 @@ public class BulletCollision : MonoBehaviour
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {
             Health health = other.transform.GetComponent<Health>();
-
             health.Damage(Attack);
+
+            GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
+            for (int i = screws.Length - 1; i >= 0; i--)
+            {
+                int length = screws[i].GetComponent<ScrewCollision>().GetEnemies().Count;
+                for (int j = length - 1; j >= 0; j--)
+                {
+                    if (health.IsDead)
+                        screws[i].GetComponent<ScrewCollision>().RemoveEnemy(j);
+                }
+            }
+
             if (health.IsDead && other.transform.tag == "Enemy")
             {
                 Score score = other.transform.GetComponent<Score>();
