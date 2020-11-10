@@ -20,7 +20,7 @@ public class Shield : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "PlyaerBullet")
+        if (other.transform.tag == "PlayerBullet")
         {
             Destroy(other.gameObject);
         }

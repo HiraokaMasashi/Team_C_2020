@@ -28,7 +28,7 @@ public class ChargeBullet : MonoBehaviour
     //private float chargeAngle = 30.0f;//チャージに必要な角度
     //private float previousAngle;//前の角度
 
-    private float chargeCount;//チャージ量
+    //private float chargeCount;//チャージ量
 
     [SerializeField]
     private Slider chargeSlider;
@@ -42,8 +42,9 @@ public class ChargeBullet : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //previousAngle = 0.0f;
         //chargeCount = 0;
-        //chargeSlider.maxValue = stageChargeMaxCount[0];
+        chargeSlider.maxValue = 2;
         chargeSlider.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+        chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[0];
         currentMode = ChargeMode.STAGE_1;
         player = GetComponent<Player>();
     }
@@ -140,7 +141,13 @@ public class ChargeBullet : MonoBehaviour
 
             case ChargeMode.STAGE_5:
                 if (chargeSlider.value < 2) return;
+                chargeSlider.value = 0;
+                chargeSlider.transform.GetChild(0).GetComponent<Image>().color = stageSliderColor[4];
+                chargeSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = stageSliderColor[5];
                 currentMode = ChargeMode.STAGE_6;
+                break;
+
+            case ChargeMode.STAGE_6:
                 break;
 
             default:
@@ -150,7 +157,7 @@ public class ChargeBullet : MonoBehaviour
 
     public void DecreaseCharge()
     {
-        chargeCount = 0;
+        //chargeCount = 0;
         currentMode--;
         //currentMode = ChargeMode.STAGE_1;
         //previousAngle = 0.0f;
@@ -158,7 +165,7 @@ public class ChargeBullet : MonoBehaviour
         chargeSlider.maxValue = 2;
         Color sliderBackColor, sliderColor;
 
-        if(currentMode== ChargeMode.STAGE_1)
+        if(currentMode == ChargeMode.STAGE_1)
         {
             sliderBackColor = Color.white;
             sliderColor = stageSliderColor[0];

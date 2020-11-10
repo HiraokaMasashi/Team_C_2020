@@ -43,20 +43,20 @@ public class BulletController : MonoBehaviour
 		//	bullet.GetComponent<BulletCollision>().IsPenetrate = true;
 		Destroy(bullet, destroyTime);
 
-		//2段階目のときだけ、3wayにする
-		//if (chargeStage == ChargeBullet.ChargeMode.STAGE_2)
-		//{
-		//	GameObject bullet2 = Instantiate(obj, position, Quaternion.identity);
-		//	bullet2.GetComponent<Rigidbody>().AddForce((direction + Vector3.right).normalized * speed);
-		//	bullet2.tag = tagName + "Bullet";
-		//	Destroy(bullet2, destroyTime);
-		//	GameObject bullet3 = Instantiate(obj, position, Quaternion.identity);
-		//	bullet3.GetComponent<Rigidbody>().AddForce((direction + Vector3.left).normalized * speed);
-		//	bullet3.tag = tagName + "Bullet";
-		//	Destroy(bullet3, destroyTime);
-		//}
+        //2段階目のときだけ、3wayにする
+        //if (chargeStage == ChargeBullet.ChargeMode.STAGE_2)
+        //{
+        //	GameObject bullet2 = Instantiate(obj, position, Quaternion.identity);
+        //	bullet2.GetComponent<Rigidbody>().AddForce((direction + Vector3.right).normalized * speed);
+        //	bullet2.tag = tagName + "Bullet";
+        //	Destroy(bullet2, destroyTime);
+        //	GameObject bullet3 = Instantiate(obj, position, Quaternion.identity);
+        //	bullet3.GetComponent<Rigidbody>().AddForce((direction + Vector3.left).normalized * speed);
+        //	bullet3.tag = tagName + "Bullet";
+        //	Destroy(bullet3, destroyTime);
+        //}
 
-		//if (shotSe == "") return;
-		soundManager.PlaySeByName(shotSe);
+        if (shotSe == "") return;
+        soundManager.PlaySeByName(shotSe);
 	}
 }
