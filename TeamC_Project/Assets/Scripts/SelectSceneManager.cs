@@ -7,13 +7,13 @@ public class SelectSceneManager : MonoBehaviour
 {
     [SerializeField]
     private Image[] scenes;
-    [SerializeField]
+
     private int selectNumber;
     private int length;
     [SerializeField]
     private float interval; //カーソル移動のインターバルフレーム
     private float timer;
-    private float eTimer;
+    //private float eTimer;
 
     [SerializeField]
     private InputManager Input;
@@ -72,12 +72,12 @@ public class SelectSceneManager : MonoBehaviour
     //選択中のボタンの演出を書く
     private void ActiveButton(int number)
     {
-        eTimer++;
+        //eTimer++;
         foreach (var s in scenes)
             s.color = Color.white;
-        if (eTimer % 10 == 0)
-            scenes[number].color = Color.white;
-        else
+        //if (eTimer % 10 == 0)
+        //    scenes[number].color = Color.white;
+        //else
             scenes[number].color = Color.yellow;
     }
 }
