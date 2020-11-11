@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         bulletController = GetComponent<BulletController>();
 
         //最初は撃てる状態にする
-        shotBulletElapsedTime = shotBulletInterval;
+        shotBulletElapsedTime = 0.0f;
         shotScrewElapsedTime = shotScrewInterval;
         isExistScrew = false;
         isUseScrew = false;
@@ -118,24 +118,24 @@ public class Player : MonoBehaviour
             InstanceBullet();
         }
 
-        //if (inputManager.GetA_Button())
-        //{
-        //    ////ボタン長押し時は、経過時間を早める
-        //    //shotBulletElapsedTime += Time.deltaTime;
-        //    //if (shotBulletElapsedTime < shotBulletInterval) return;
+        if (inputManager.GetA_Button())
+        {
+            //ボタン長押し時は、経過時間を早める
+            shotBulletElapsedTime += Time.deltaTime;
+            if (shotBulletElapsedTime < shotBulletInterval) return;
 
-        //    //shotBulletElapsedTime = 0.0f;
-        //    InstanceBullet();
-        //    //IsRapidFire = true;
-        //}
+            shotBulletElapsedTime = 0.0f;
+            InstanceBullet();
+            //IsRapidFire = true;
+        }
 
-        //if (inputManager.GetA_ButtonUp())
-        //{
-        //    if (!IsRapidFire) return;
+        if (inputManager.GetA_ButtonUp())
+        {
+            //if (!IsRapidFire) return;
 
-        //    IsRapidFire = false;
-        //    shotBulletElapsedTime = 0.0f;
-        //}
+            //IsRapidFire = false;
+            shotBulletElapsedTime = 0.0f;
+        }
     }
 
     /// <summary>

@@ -66,7 +66,10 @@ public class Health : MonoBehaviour
             particle.transform.position = transform.position;
             particleManager.OncePlayParticle(particle);
         }
-        soundManager.PlaySeByName(deadSe);
+
+        if (deadSe != null)
+            soundManager.PlaySeByName(deadSe);
+
         Destroy(gameObject);
     }
 
@@ -94,8 +97,8 @@ public class Health : MonoBehaviour
     {
         hp = 0;
 
-        if (debriPrefab == null) return;
-        Instantiate(debriPrefab, transform.position, Quaternion.identity);
+        if (debriPrefab != null)
+            Instantiate(debriPrefab, transform.position, Quaternion.identity);
     }
 
     /// <summary>
@@ -105,14 +108,14 @@ public class Health : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
-        if (transform.tag == "Player")
+        if (damageSe != null)
             soundManager.PlaySeByName(damageSe);
         if (hp <= 0)
         {
             hp = 0;
 
-            if (debriPrefab == null) return;
-            Instantiate(debriPrefab, transform.position, Quaternion.identity);
+            if (debriPrefab != null)
+                Instantiate(debriPrefab, transform.position, Quaternion.identity);
         }
     }
 }

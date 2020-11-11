@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPosition: {x: -22, y: -6, z: 0}
   maxPosition: {x: 22, y: 15, z: 0}
-  shotBulletInterval: 2
+  shotBulletInterval: 1
   playerMoveSpeed: 10
   bulletMoveSpeed: 1000
   screw: {fileID: 479286963}

@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageInterval: 1
+  moveSpeed: 1
 --- !u!54 &2774917448157826392
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -446,10 +447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac6d274f3d21fb4895e7d831c4d173b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldScrews:
-  - {fileID: 2774917449650792815}
-  - {fileID: 2774917449999174136}
-  - {fileID: 2774917448157826466}
+  destination: {x: 0, y: -15, z: 0}
+  moveSpeed: 1
 --- !u!54 &2774917449514509896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -607,6 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageInterval: 1
+  moveSpeed: 1
 --- !u!54 &2774917449650792805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -764,6 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageInterval: 1
+  moveSpeed: 1
 --- !u!54 &2774917449999174142
 Rigidbody:
   m_ObjectHideFlags: 0

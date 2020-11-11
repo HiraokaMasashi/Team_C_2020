@@ -10,6 +10,7 @@ public class ShieldBoss : MonoBehaviour
         SUMMON,
     }
     private BehaviourPattern pattern;
+    private bool isTurnRight;
 
     private BulletController bulletController;
 
@@ -52,6 +53,7 @@ public class ShieldBoss : MonoBehaviour
         gameManager.SetBossEnemy(gameObject);
 
         pattern = BehaviourPattern.SHOT;
+        isTurnRight = true;
         shotCount = 0;
         isSummon = false;
     }
@@ -70,10 +72,11 @@ public class ShieldBoss : MonoBehaviour
         switch (pattern)
         {
             case BehaviourPattern.SHOT:
-                if(shotCount>=2)
+                if (shotCount >= 2)
                 {
                     pattern = BehaviourPattern.SUMMON;
                     shotCount = 0;
+                    isTurnRight = !isTurnRight;
                 }
                 break;
 
@@ -117,7 +120,10 @@ public class ShieldBoss : MonoBehaviour
                     rad += 360 / shotBarrageRows;
                     Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0.0f);
                     bulletController.GenerateBullet(transform.position, dir, bulletSpeed, destryoTime, "Enemy");
-                    rad += 5;
+                    if (isTurnRight)
+                        rad += 5;
+                    else
+                        rad -= 5;
                 }
                 yield return new WaitForSeconds(0.1f);
             }
@@ -136,7 +142,7 @@ public class ShieldBoss : MonoBehaviour
 
         if (summonElapsedTime < summonInterval) return;
 
-        for(int i =0; i<summonCount; i++)
+        for (int i = 0; i < summonCount; i++)
         {
             float x = -20 + (10 * i);
             Vector3 position = new Vector3(x, 22.0f, 0.0f);

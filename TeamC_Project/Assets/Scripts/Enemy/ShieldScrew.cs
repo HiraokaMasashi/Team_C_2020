@@ -11,45 +11,61 @@ public class ShieldScrew : MonoBehaviour
     private float damageInterval = 1.0f;
     private float elapsedTime;
 
+    [SerializeField]
+    private float moveSpeed = 1.0f;
+
     private void Start()
     {
         health = GetComponent<Health>();
         elapsedTime = 0.0f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        ComeOff();   
-    }
-
-    private void ComeOff()
-    {
-        if (health.IsDead)
-            Destroy(gameObject);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Screw")
         {
-            health.Damage(1);
+            int damage = 10;
+            StartCoroutine(DamageComeOff(damage));
+            health.Damage(damage);
         }
 
-        if(other.transform.tag == "Drill")
+        if (other.transform.tag == "Drill")
         {
-            health.Damage(10);
+            int damage = 10;
+            StartCoroutine(DamageComeOff(damage));
+            health.Damage(damage);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.transform.tag == "Screw")
+        if (other.transform.tag == "Screw")
         {
             elapsedTime += Time.deltaTime;
             if (elapsedTime < damageInterval) return;
             elapsedTime = 0.0f;
-            health.Damage(1);
+
+            int damage = 10;
+            StartCoroutine(DamageComeOff(damage));
+            health.Damage(damage);
         }
+    }
+
+    private IEnumerator DamageComeOff(int damage)
+    {
+        Vector3 destination = transform.position - new Vector3(0, 0.1f * damage, 0);
+
+        while (Vector3.Distance(transform.position, destination) > 0.01f)
+        {
+            Vector3 position = Vector3.Lerp(transform.position, destination, Time.deltaTime * moveSpeed);
+            transform.position = position;
+            yield return null;
+        }
+
+        if (health.IsDead)
+        {
+            Destroy(gameObject);
+        }
+        yield break;
     }
 }
