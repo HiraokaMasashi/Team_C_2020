@@ -39,9 +39,14 @@ public class BulletController : MonoBehaviour
 		GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
 		bullet.tag = tagName + "Bullet";
 		bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * speed);
+		GameObject particle = bullet.GetComponent<ParticleManager>().GenerateParticleInChildren();
+		particle.transform.position = bullet.transform.position;
+		particle.transform.rotation = Quaternion.LookRotation(direction, Vector3.back);
+		bullet.GetComponent<ParticleManager>().StartParticle(particle);
 		//if (chargeStage == ChargeBullet.ChargeMode.STAGE_3 || chargeStage == ChargeBullet.ChargeMode.STAGE_4)
 		//	bullet.GetComponent<BulletCollision>().IsPenetrate = true;
 		Destroy(bullet, destroyTime);
+		bullet.GetComponent<ParticleManager>().DestroyParticle(particle, destroyTime);
 
         //2段階目のときだけ、3wayにする
         //if (chargeStage == ChargeBullet.ChargeMode.STAGE_2)

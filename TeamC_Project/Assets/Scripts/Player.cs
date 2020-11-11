@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     private bool isUseScrew;
     [SerializeField]
     private float shotScrewInterval = 2.0f;
+    [SerializeField]
+    private float shotScrewDestroyTime = 2.0f;
     private float shotScrewElapsedTime;
     private float destroyShotScrewTime;
 
@@ -239,8 +241,11 @@ public class Player : MonoBehaviour
         if (shotScrewElapsedTime < shotScrewInterval) return;
 
         if (shotScrewObject != null)
+        {
             EnemyRecoveryStart(shotScrewObject);
-            
+            screw.GetComponent<ParticleManager>().StopParticle(shotScrewObject);
+        }   
+
         shotScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(1);
         shotScrewObject.transform.position = transform.position;
         shotScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.SHOT);
@@ -264,7 +269,7 @@ public class Player : MonoBehaviour
 
         destroyShotScrewTime += Time.deltaTime;
 
-        if (destroyShotScrewTime < 5.0f) return;
+        if (destroyShotScrewTime < shotScrewDestroyTime) return;
 
         shotScrewObject.GetComponent<BoxCollider>().enabled = false;
         shotScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.NONE);

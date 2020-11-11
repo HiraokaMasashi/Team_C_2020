@@ -10,6 +10,7 @@ public class BulletCollision : MonoBehaviour
     private float destroyZoneMinY = -11.0f;
 
     private ScoreManager scoreManager;
+    private ParticleManager particleManager;
 
     public int Attack
     {
@@ -26,12 +27,23 @@ public class BulletCollision : MonoBehaviour
     private void Start()
     {
         scoreManager = ScoreManager.Instance;
+        particleManager = GetComponent<ParticleManager>();
     }
 
     private void FixedUpdate()
     {
         if (GetIsDestroy())
-            Destroy(gameObject);
+        {
+            Disconnect();
+        }
+    }
+
+    public void Disconnect()
+    {
+        GameObject particle = transform.GetChild(0).gameObject;
+        particleManager.StopParticle(particle);
+        particle.transform.parent = null;
+        Destroy(gameObject);
     }
 
     private bool GetIsDestroy()
@@ -78,13 +90,12 @@ public class BulletCollision : MonoBehaviour
                 Score score = other.transform.GetComponent<Score>();
                 scoreManager.AddScore(score.GetScore());
             }
-            if (!IsPenetrate) Destroy(gameObject);
+            if (!IsPenetrate) Disconnect();
         }
 
-        if (other.transform.tag == "EnemyBullet" && transform.tag == "PlayerBullet")
+        if (other.transform.tag.Contains("Bullet") && !IsPenetrate)
         {
-            if (!IsPenetrate) Destroy(gameObject);
-            Destroy(other.gameObject);
+            Disconnect();
         }
     }
 }
