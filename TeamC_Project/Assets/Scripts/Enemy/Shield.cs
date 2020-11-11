@@ -42,7 +42,7 @@ public class Shield : MonoBehaviour
         {
             Vector3 position = Vector3.Lerp(transform.position, destination, Time.deltaTime * moveSpeed);
             transform.position = position;
-            transform.Rotate(new Vector3(-5, 0, 0));
+            transform.Rotate(new Vector3(-360, 0, 0) * Time.deltaTime);
             yield return null;
         }
 

@@ -59,14 +59,17 @@ public class BulletCollision : MonoBehaviour
             Health health = other.transform.GetComponent<Health>();
             health.Damage(Attack);
 
-            GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
-            for (int i = screws.Length - 1; i >= 0; i--)
+            if (other.transform.tag == "Enemy")
             {
-                int length = screws[i].GetComponent<ScrewCollision>().GetEnemies().Count;
-                for (int j = length - 1; j >= 0; j--)
+                GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
+                for (int i = screws.Length - 1; i >= 0; i--)
                 {
-                    if (health.IsDead)
-                        screws[i].GetComponent<ScrewCollision>().RemoveEnemy(j);
+                    int length = screws[i].GetComponent<ScrewCollision>().GetEnemies().Count;
+                    for (int j = length - 1; j >= 0; j--)
+                    {
+                        if (health.IsDead)
+                            screws[i].GetComponent<ScrewCollision>().RemoveEnemy(j);
+                    }
                 }
             }
 

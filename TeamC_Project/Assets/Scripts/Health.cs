@@ -67,7 +67,7 @@ public class Health : MonoBehaviour
             particleManager.OncePlayParticle(particle);
         }
 
-        if (deadSe != null)
+        if (deadSe != "")
             soundManager.PlaySeByName(deadSe);
 
         Destroy(gameObject);
@@ -108,7 +108,7 @@ public class Health : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
-        if (damageSe != null)
+        if (damageSe != "")
             soundManager.PlaySeByName(damageSe);
         if (hp <= 0)
         {
