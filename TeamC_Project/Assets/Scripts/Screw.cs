@@ -6,8 +6,8 @@ public class Screw : MonoBehaviour
 {
     private BoxCollider boxCollider;
 
-    private float maxCenterY = 6.0f;//コライダーのY軸の最大センター
-    private float maxSizeY = 12.0f;//コライダーのY軸の最大サイズ
+    //private float maxCenterY = 6.0f;//コライダーのY軸の最大センター
+    //private float maxSizeY = 12.0f;//コライダーのY軸の最大サイズ
 
     public enum ScrewType
     {
@@ -32,7 +32,7 @@ public class Screw : MonoBehaviour
     void Update()
     {
         Move();
-        ChangeBoxSize();
+        //ChangeBoxSize();
         EnemyStanMove();
     }
 
@@ -46,31 +46,31 @@ public class Screw : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// スクリュー使用時にあたり判定のサイズを調整する
-    /// </summary>
-    private void ChangeBoxSize()
-    {
-        if (screwType != ScrewType.INHALE) return;
-        if (boxCollider == null) return;
+    ///// <summary>
+    ///// スクリュー使用時にあたり判定のサイズを調整する
+    ///// </summary>
+    //private void ChangeBoxSize()
+    //{
+    //    if (screwType != ScrewType.INHALE) return;
+    //    if (boxCollider == null) return;
 
-        //あたり判定の調整サイズ
-        float addSize = 0.0f;
-        addSize += Time.deltaTime;
+    //    //あたり判定の調整サイズ
+    //    float addSize = 0.0f;
+    //    addSize += Time.deltaTime;
 
-        float speed = 2.0f;
-        Vector3 center = boxCollider.center;
-        center.y += addSize * speed;
-        //最大値を超えていたら範囲内に収める
-        if (center.y >= maxCenterY) center.y = maxCenterY;
-        boxCollider.center = center;
+    //    float speed = 2.0f;
+    //    Vector3 center = boxCollider.center;
+    //    center.y += addSize * speed;
+    //    //最大値を超えていたら範囲内に収める
+    //    if (center.y >= maxCenterY) center.y = maxCenterY;
+    //    boxCollider.center = center;
 
-        Vector3 size = boxCollider.size;
-        size.y += addSize * 2.0f * speed;
-        //最大値を超えていたら範囲内に収める
-        if (size.y >= maxSizeY) size.y = maxSizeY;
-        boxCollider.size = size;
-    }
+    //    Vector3 size = boxCollider.size;
+    //    size.y += addSize * 2.0f * speed;
+    //    //最大値を超えていたら範囲内に収める
+    //    if (size.y >= maxSizeY) size.y = maxSizeY;
+    //    boxCollider.size = size;
+    //}
 
     private void EnemyStanMove()
     {

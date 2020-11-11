@@ -4779,8 +4779,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 2, z: 3}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 8, y: 6, z: 6}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!114 &6927782862833025047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4819,7 +4819,7 @@ GameObject:
   - component: {fileID: 6927782863092955760}
   m_Layer: 0
   m_Name: ScrewParticle (1)
-  m_TagString: Screw
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9573,7 +9573,7 @@ GameObject:
   - component: {fileID: 6927782864715478264}
   m_Layer: 0
   m_Name: ScrewParticle (2)
-  m_TagString: Screw
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

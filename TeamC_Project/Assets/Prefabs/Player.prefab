@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles:
-  - {fileID: 3471573869152313289, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
-  - {fileID: 3471573869152313289, guid: 624db8ce97f4fd1489bf907560d457fb, type: 3}
+  - {fileID: 7737328508818533317, guid: 5d4b1f48b584a1c4d8245aac3d272fd2, type: 3}
+  - {fileID: 6927782862833025044, guid: 31277a001b207e04dab0b5cbdda580a6, type: 3}
 --- !u!1 &2732371690843407096
 GameObject:
   m_ObjectHideFlags: 0

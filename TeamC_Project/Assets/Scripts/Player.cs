@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
                     if (isUseScrew)
                     {
                         GenerateScrew();
-                        inhaleScrewObject.transform.position = transform.position + Vector3.up;
+                        inhaleScrewObject.transform.position = transform.position + Vector3.up * 10.0f;
                     }
                     else
                         StopScrew();
@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
         if (isExistScrew) return;
 
         //スクリューパーティクルの生成
-        inhaleScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(1);
+        inhaleScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(0);
         inhaleScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.INHALE);
         screw.GetComponent<ParticleManager>().StartParticle(inhaleScrewObject);
         isExistScrew = true;
