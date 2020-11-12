@@ -18,22 +18,37 @@ public class EnemyManager : MonoBehaviour
     private int maxWave;
     //現在のWave
     private int wave;
+
+    [SerializeField]
+    private GameObject bossPrefab;
+    [SerializeField]
+    private Transform bossPattern;
+    private GameObject boss;
+
+    private GameManager gameManager;
+
     //Waveエンドフラグ
     public bool IsEnd
     {
         get;
         private set;
-    }
+    } = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wave = 0;
         StartCoroutine(Instance(wave));
     }
 
     // Update is called once per frame
     void Update()
+    {
+        NextWave();
+    }
+
+    private void NextWave()
     {
         if (waveEnemeis != null)
         {
@@ -54,9 +69,17 @@ public class EnemyManager : MonoBehaviour
                     StartCoroutine(Instance(wave));
                 //Waveの最後ならエンドフラグをtrueに
                 if (wave == maxWave)
-                    IsEnd = true;
+                    InstanceBoss();
             }
         }
+    }
+
+    private void InstanceBoss()
+    {
+        if (boss != null) return;
+        if (bossPrefab == null) return;
+
+        boss = Instantiate(bossPrefab, bossPattern.GetChild(0).position, Quaternion.identity);
     }
 
     //敵をパターンごとに生成する
@@ -64,7 +87,7 @@ public class EnemyManager : MonoBehaviour
     {
         int length = instancePattern[number].transform.childCount;
         GameObject[] enemies = new GameObject[length];
-        Debug.Log(length);
+        //Debug.Log(length);
         for (int i = 0; i < length; i++)
         {
             //enemyをインスタンス化する(生成する)
@@ -80,16 +103,17 @@ public class EnemyManager : MonoBehaviour
     //生成した敵を上からフレームインさせる
     private IEnumerator FrameIn(GameObject[] enemies)
     {
-        int time = 20;
-        while (time > 0)
+        float elapsedTime = 0;
+        while (elapsedTime > 2.0f)
         {
-            yield return null;
             foreach (var e in enemies)
             {
                 if (e != null)
-                    e.transform.position -= Vector3.up * 0.5f;
+                    e.transform.position -= Vector3.up * 0.5f * Time.deltaTime;
             }
-            time--;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+            //time--;
         }
     }
 

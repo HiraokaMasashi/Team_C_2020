@@ -10,10 +10,13 @@ public class SnipeEnemy : Enemy
     [SerializeField]
     private float maxStopPositionY = 12.0f;
 
+    private bool isShotPrepareation;
+
     protected override void Start()
     {
         base.Start();
         stopPositionY = Random.Range(minStopPositionY, maxStopPositionY);
+        isShotPrepareation = false;
     }
 
     // Update is called once per frame
@@ -28,7 +31,11 @@ public class SnipeEnemy : Enemy
     protected override void Move()
     {
         //一定の位置まで進むと止まる
-        if (transform.position.y <= stopPositionY) return;
+        if (transform.position.y <= stopPositionY)
+        {
+            isShotPrepareation = true;
+            return;
+        }
 
         Vector3 position = transform.position;
         position += Vector3.down * moveSpeed * Time.deltaTime;
@@ -37,6 +44,8 @@ public class SnipeEnemy : Enemy
 
     protected override void ShotBullet()
     {
+        if (!isShotPrepareation) return;
+
         base.ShotBullet();
     }
 }

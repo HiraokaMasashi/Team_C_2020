@@ -17,6 +17,12 @@ public class ShieldBoss : MonoBehaviour
     private GameManager gameManager;
 
     [SerializeField]
+    private Vector3 destination = new Vector3(0, 20, 0);
+    [SerializeField]
+    private float moveSpeed = 2.0f;
+    private bool isFrameIn = false;
+
+    [SerializeField]
     private float bulletSpeed = 500.0f;
     [SerializeField]
     private int shotBulletCount = 20;
@@ -56,11 +62,15 @@ public class ShieldBoss : MonoBehaviour
         isTurnRight = true;
         shotCount = 0;
         isSummon = false;
+
+        StartCoroutine(FrameIn());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isFrameIn) return;
+
         ChangePattern();
 
         Shot();
@@ -121,9 +131,9 @@ public class ShieldBoss : MonoBehaviour
                     Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0.0f);
                     bulletController.GenerateBullet(transform.position, dir, bulletSpeed, destryoTime, "Enemy");
                     if (isTurnRight)
-                        rad += 5;
+                        rad += 30;
                     else
-                        rad -= 5;
+                        rad -= 30;
                 }
                 yield return new WaitForSeconds(0.1f);
             }
@@ -151,5 +161,18 @@ public class ShieldBoss : MonoBehaviour
         }
         summonElapsedTime = 0.0f;
         isSummon = true;
+    }
+
+    private IEnumerator FrameIn()
+    {
+        while (Vector3.Distance(transform.position, destination) > 0.1f)
+        {
+            Vector3 position = Vector3.Lerp(transform.position, destination, Time.deltaTime * moveSpeed);
+            transform.position = position;
+            yield return null;
+        }
+
+        isFrameIn = true;
+        yield break;
     }
 }

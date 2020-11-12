@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private Health playerHealth;//プレイヤーの体力スクリプト
-    [SerializeField]
     private Health bossHealth;//ボスの体力スクリプト
 
     [SerializeField]
@@ -29,13 +28,17 @@ public class GameManager : MonoBehaviour
         get;
         private set;
     } = false;//ゲームが開始しているか
-    private bool isEnd;//ゲームが終わっているか
+
+    public bool IsEnd
+    {
+        get;
+        private set;
+    } = false;//ゲームが終わっているか
 
     // Start is called before the first frame update
     void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
-        isEnd = false;
         result = ResultMode.NONE;
 
         scoreManager = ScoreManager.Instance;
@@ -67,7 +70,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void ChangeResultScene()
     {
-        if (!isEnd)
+        if (!IsEnd)
         {
             SetResultGameOver();
             SetResultGameClear();
@@ -88,7 +91,7 @@ public class GameManager : MonoBehaviour
         if (playerHealth.IsDead)
         {
             result = ResultMode.GAMEOVER;
-            isEnd = true;
+            IsEnd = true;
             scoreManager.UpdateScoreRanking();
         }
     }
@@ -101,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (bossHealth.IsDead)
         {
             result = ResultMode.GAMECLEAR;
-            isEnd = true;
+            IsEnd = true;
             scoreManager.UpdateScoreRanking();
         }
     }

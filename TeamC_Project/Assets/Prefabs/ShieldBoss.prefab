@@ -269,6 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6646805fdc10548971b9509b4edb5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destination: {x: 0, y: 13, z: 0}
+  moveSpeed: 2
   bulletSpeed: 300
   shotBulletCount: 30
   shotInterval: 5

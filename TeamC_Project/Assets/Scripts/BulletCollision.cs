@@ -40,6 +40,8 @@ public class BulletCollision : MonoBehaviour
 
     public void Disconnect()
     {
+        if (transform.childCount == 0) return;
+
         GameObject particle = transform.GetChild(0).gameObject;
         particleManager.StopParticle(particle);
         particle.transform.parent = null;
@@ -93,7 +95,8 @@ public class BulletCollision : MonoBehaviour
             if (!IsPenetrate) Disconnect();
         }
 
-        if (other.transform.tag.Contains("Bullet") && !IsPenetrate)
+        if ((other.transform.tag == "PlayerBullet" && transform.tag == "EnemyBullet")
+            || (other.transform.tag == "EnemyBullet" && transform.tag == "PlayerBullet" && !IsPenetrate))
         {
             Disconnect();
         }
