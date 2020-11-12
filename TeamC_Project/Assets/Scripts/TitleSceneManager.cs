@@ -18,7 +18,7 @@ public class TitleSceneManager : MonoBehaviour
     void Awake()
     {
         pressLogo.gameObject.SetActive(false);
-        titleLogo.transform.position += Vector3.up * 760;
+        titleLogo.transform.position += Vector3.up * 775;
         moveEnd = false;
     }
 
