@@ -43,3 +43,15 @@ The following packages were added:
   com.unity.textmeshpro@2.0.1
   com.unity.timeline@1.2.15
   com.unity.ugui@1.0.0
+
+=== Thu Nov 12 08:54:18 2020
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.2d.sprite@1.0.0
+  com.unity.2d.tilemap@1.0.0
+  com.unity.progrids@3.0.3-preview.4
+The following packages were updated:
+  com.unity.postprocessing from version 2.0.3-preview to 2.3.0
