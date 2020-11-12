@@ -2,68 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldBoss : MonoBehaviour
+public class ShieldBoss : Boss
 {
-    enum BehaviourPattern
-    {
-        SHOT,
-        SUMMON,
-    }
-    private BehaviourPattern pattern;
     private bool isTurnRight;
 
-    private BulletController bulletController;
-
-    private GameManager gameManager;
-
-    [SerializeField]
-    private Vector3 destination = new Vector3(0, 20, 0);
-    [SerializeField]
-    private float moveSpeed = 2.0f;
-    private bool isFrameIn = false;
-
-    [SerializeField]
-    private float bulletSpeed = 500.0f;
     [SerializeField]
     private int shotBulletCount = 20;
     [SerializeField]
-    private float shotInterval = 5.0f;
-    private float shotElapsedTime;
-    [SerializeField]
     private int shotBarrageRows = 4;
-
-    [SerializeField]
-    private float destryoTime = 5.0f;
-    private bool isShot;
 
     private int shotCount;
 
     [SerializeField]
-    private GameObject summonObject;
-    private bool isSummon;
-    [SerializeField]
     private int summonCount = 5;
-    [SerializeField]
-    private float summonInterval = 5.0f;
-    private float summonElapsedTime;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        bulletController = GetComponent<BulletController>();
-        shotElapsedTime = 0.0f;
-        summonElapsedTime = 0.0f;
-        isShot = false;
-
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.SetBossEnemy(gameObject);
-
-        pattern = BehaviourPattern.SHOT;
         isTurnRight = true;
         shotCount = 0;
-        isSummon = false;
 
-        StartCoroutine(FrameIn());
+        base.Start();
     }
 
     // Update is called once per frame
@@ -156,23 +115,9 @@ public class ShieldBoss : MonoBehaviour
         {
             float x = -20 + (10 * i);
             Vector3 position = new Vector3(x, 22.0f, 0.0f);
-
             Instantiate(summonObject, position, Quaternion.identity);
         }
         summonElapsedTime = 0.0f;
         isSummon = true;
-    }
-
-    private IEnumerator FrameIn()
-    {
-        while (Vector3.Distance(transform.position, destination) > 0.1f)
-        {
-            Vector3 position = Vector3.Lerp(transform.position, destination, Time.deltaTime * moveSpeed);
-            transform.position = position;
-            yield return null;
-        }
-
-        isFrameIn = true;
-        yield break;
     }
 }
