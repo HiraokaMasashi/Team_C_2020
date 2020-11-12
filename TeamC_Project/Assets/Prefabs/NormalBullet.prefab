@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a5f4bbd4400714aaff30203a7e4b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyZone: {x: 25, y: 20, z: 0}
+  destroyZone: {x: 19, y: 21, z: 0}
   destroyZoneMinY: -11
 --- !u!114 &2006428655136594442
 MonoBehaviour:
