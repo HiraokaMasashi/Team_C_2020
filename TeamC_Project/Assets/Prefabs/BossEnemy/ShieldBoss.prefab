@@ -272,14 +272,14 @@ MonoBehaviour:
   destination: {x: 0, y: 13, z: 0}
   moveSpeed: 2
   bulletSpeed: 300
-  shotBulletCount: 30
   shotInterval: 5
-  shotBarrageRows: 4
   destryoTime: 5
   summonObject: {fileID: 7492139034897630035, guid: 1861da97ea8bec243a90b84a8c0e4044,
     type: 3}
-  summonCount: 5
   summonInterval: 5
+  shotBulletCount: 30
+  shotBarrageRows: 4
+  summonCount: 5
 --- !u!114 &2774917448382121736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,7 +432,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2774917449514509906}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

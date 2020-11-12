@@ -4,37 +4,51 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    //ボスに必要なパターンの列挙
     protected enum BehaviourPattern
     {
         SHOT,
         SUMMON,
         SHOT_DRILL,
     }
+    //現在のパターン
     protected BehaviourPattern pattern;
 
     protected BulletController bulletController;
     private GameManager gameManager;
 
+    //フレームイン時の目的地
     [SerializeField]
     private Vector3 destination = new Vector3(0, 20, 0);
+    //フレームインのスピード
     [SerializeField]
     protected float moveSpeed = 2.0f;
+    //フレームインしたか
     protected bool isFrameIn = false;
 
+    //弾の速度
     [SerializeField]
     protected float bulletSpeed = 500.0f;
+    //弾の発射間隔
     [SerializeField]
     protected float shotInterval = 5.0f;
+    //弾を撃つまでの経過時間
     protected float shotElapsedTime;
+    //弾の破棄する時間
     [SerializeField]
     protected float destryoTime = 5.0f;
+    //弾を撃ったか
     protected bool isShot;
 
+    //雑魚敵生成オブジェクト
     [SerializeField]
     protected GameObject summonObject;
+    //生成したか
     protected bool isSummon;
+    //生成までの間隔
     [SerializeField]
     protected float summonInterval = 5.0f;
+    //生成までの経過時間
     protected float summonElapsedTime;
 
     // Start is called before the first frame update

@@ -243,6 +243,26 @@ PrefabInstance:
       propertyPath: shotScrewDestroyTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
+        type: 3}
+      propertyPath: minPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
+        type: 3}
+      propertyPath: minPosition.x
+      value: -14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
+        type: 3}
+      propertyPath: maxPosition.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
+        type: 3}
+      propertyPath: maxPosition.y
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407090, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
       propertyPath: hpText
@@ -686,8 +706,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -487.5}
-  m_SizeDelta: {x: -1600, y: -1025}
+  m_AnchoredPosition: {x: 1.2999878, y: -458.8}
+  m_SizeDelta: {x: -990.7159, y: -970.8164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &613549692
 GameObject:
@@ -723,8 +743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -705.1, y: -487.5}
-  m_SizeDelta: {x: -1410.135, y: -975}
+  m_AnchoredPosition: {x: 523.2, y: -487.5}
+  m_SizeDelta: {x: -1046.3911, y: -975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &613549694
 MonoBehaviour:
@@ -747,10 +767,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 0
     m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1209,8 +1229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 750, y: 420}
-  m_SizeDelta: {x: -1500, y: -1000}
+  m_AnchoredPosition: {x: 450, y: 437.5}
+  m_SizeDelta: {x: -900, y: -975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1260599664
 MonoBehaviour:
@@ -1233,10 +1253,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 4
     m_MaxSize: 60
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -1287,8 +1307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 750, y: 500}
-  m_SizeDelta: {x: -1500, y: -1000}
+  m_AnchoredPosition: {x: 450, y: 487.5}
+  m_SizeDelta: {x: -900, y: -975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1301731508
 MonoBehaviour:
@@ -1311,10 +1331,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 0
     m_MaxSize: 60
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -1615,6 +1635,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3fd2a46c6719a045ad73573d77be5e1, type: 3}
+--- !u!1001 &2376619730272909916
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2774917448382121746, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e560706c6f707f458d360acc5d1c6eb, type: 3}
 --- !u!1001 &3730908733090548246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1626,6 +1715,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DrillBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730908732933718888, guid: 656617165bacf6f4d85df111150cc7a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3730908732933718932, guid: 656617165bacf6f4d85df111150cc7a5,
         type: 3}
