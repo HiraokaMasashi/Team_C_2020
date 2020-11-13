@@ -64,6 +64,7 @@ public class Health : MonoBehaviour
         if (particle != null)
         {
             particle.transform.position = transform.position;
+            particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             particleManager.OncePlayParticle(particle);
         }
 

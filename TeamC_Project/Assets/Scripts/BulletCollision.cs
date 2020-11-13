@@ -72,6 +72,10 @@ public class BulletCollision : MonoBehaviour
         {
             Health health = other.transform.GetComponent<Health>();
             health.Damage(Attack);
+            GameObject particle = particleManager.GenerateParticle(1);
+            particle.transform.position = other.transform.position;
+            particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+            particleManager.OncePlayParticle(particle);
 
             if (other.transform.tag == "Enemy")
             {
