@@ -24,7 +24,7 @@ public class ShieldScrew : MonoBehaviour
     {
         if (other.transform.tag == "Screw")
         {
-            int damage = 10;
+            int damage = 1;
             StartCoroutine(DamageComeOff(damage));
             health.Damage(damage);
         }
@@ -45,7 +45,7 @@ public class ShieldScrew : MonoBehaviour
             if (elapsedTime < damageInterval) return;
             elapsedTime = 0.0f;
 
-            int damage = 10;
+            int damage = 1;
             StartCoroutine(DamageComeOff(damage));
             health.Damage(damage);
         }
