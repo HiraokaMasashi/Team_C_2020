@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles:
-  - {fileID: 29722816459199433, guid: e1757a8108ffcb8419d4990387182203, type: 3}
+  - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
 --- !u!54 &7492139034897630036
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,10 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefabs:
-  - {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666, type: 3}
-  shotSes:
-  - shot1
+  bulletPrefab: {fileID: 0}
+  shotSe: 
 --- !u!114 &8685525766803312719
 MonoBehaviour:
   m_ObjectHideFlags: 0

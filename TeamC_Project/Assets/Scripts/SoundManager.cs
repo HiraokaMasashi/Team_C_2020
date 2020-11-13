@@ -86,7 +86,7 @@ public class SoundManager : MonoBehaviour
 
     #endregion Singleton
 
-    public void Awake()
+    private void Awake()
     {
         if (this != Instance)
         {
@@ -115,7 +115,7 @@ public class SoundManager : MonoBehaviour
         //音量
         volumeManager = VolumeManager.Instance;
         //ロードされていれば適用
-        if (volumeManager.isLoadfile)
+        if (volumeManager.IsLoadfile)
         {
             MasterVolume = volumeManager.MastarVolume;
             BgmVolume = volumeManager.BgmVolume;
