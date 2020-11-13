@@ -26,7 +26,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         base.Awake();
 
-        filePath = Application.dataPath + "/ranking_data.dat";
+        filePath = Application.persistentDataPath + "/ranking_data.dat";
 
         if (File.Exists(filePath))
             LoadScore();

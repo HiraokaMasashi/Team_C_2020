@@ -44,7 +44,7 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     {
         base.Awake();
 
-        filePath = Application.dataPath + "/volume_data.dat";
+        filePath = Application.persistentDataPath + "/volume_data.dat";
 
         if (File.Exists(filePath))
         {
