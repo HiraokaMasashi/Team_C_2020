@@ -84,7 +84,7 @@ public class DrillBoss : Boss
         {
             Vector3 position = instanceTransforms[i].position;
             Vector3 dir = player.transform.position - position;
-            bulletController.GenerateBullet(position, dir, bulletSpeed, destryoTime, "Enemy");
+            bulletController.GenerateBullet(position, dir, bulletSpeed, destroyTime, "Enemy");
         }
         shotElapsedTime = 0.0f;
     }

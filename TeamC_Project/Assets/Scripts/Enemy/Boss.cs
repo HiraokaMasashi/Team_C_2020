@@ -10,6 +10,7 @@ public class Boss : MonoBehaviour
         SHOT,
         SUMMON,
         SHOT_DRILL,
+        SHOT_BOMB,
     }
     //現在のパターン
     protected BehaviourPattern pattern;
@@ -36,7 +37,7 @@ public class Boss : MonoBehaviour
     protected float shotElapsedTime;
     //弾の破棄する時間
     [SerializeField]
-    protected float destryoTime = 5.0f;
+    protected float destroyTime = 5.0f;
     //弾を撃ったか
     protected bool isShot;
 

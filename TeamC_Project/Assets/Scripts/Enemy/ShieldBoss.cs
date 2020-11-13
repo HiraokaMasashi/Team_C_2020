@@ -88,7 +88,7 @@ public class ShieldBoss : Boss
                 {
                     rad += 360 / shotBarrageRows;
                     Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0.0f);
-                    bulletController.GenerateBullet(transform.position, dir, bulletSpeed, destryoTime, "Enemy");
+                    bulletController.GenerateBullet(transform.position, dir, bulletSpeed, destroyTime, "Enemy");
                     if (isTurnRight)
                         rad += 30;
                     else

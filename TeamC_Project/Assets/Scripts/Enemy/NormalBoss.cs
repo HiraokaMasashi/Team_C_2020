@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class NormalBoss : Boss
 {
-
     [SerializeField]
     private float minInterval = 10.0f;
     [SerializeField]
@@ -12,10 +11,6 @@ public class Boss : MonoBehaviour
 
     private float num=2;
 
-    protected BulletController bulletController;
-
-    [SerializeField]
-    protected float shotInterval;
     [SerializeField]
     protected float roopInterval;
 
@@ -28,11 +23,12 @@ public class Boss : MonoBehaviour
     int countbullet=0;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        bulletController = GetComponent<BulletController>();
         shotInterval = Random.Range(minInterval, maxInterval);
         player = GameObject.FindGameObjectWithTag("Player");
+
+        base.Start();
     }
 
     // Update is called once per frame
@@ -56,7 +52,7 @@ public class Boss : MonoBehaviour
             {
                 Vector3 position = transform.position + Vector3.down;
                 Vector3 direction = (player.transform.position - transform.position)/4;
-                bulletController.GenerateBullet(ChargeBullet.ChargeMode.STAGE_1, position, direction, 300.0f, 3.0f, "Enemy");
+                bulletController.GenerateBullet(position, direction, 300.0f, 3.0f, "Enemy");
 
                //Sleep();
                 countbullet += 1;
