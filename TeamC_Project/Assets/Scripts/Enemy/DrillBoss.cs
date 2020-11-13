@@ -39,12 +39,14 @@ public class DrillBoss : Boss
     private int endBehaviourPattern;
 
     private bool endAttack;
+    private bool endMove;
     [SerializeField]
     private float attackSpeed = 1.0f;
     private Vector3 startPosition;
     [SerializeField]
     private float attackInterval = 3.0f;
     private float attackElapsedTime;
+    private Vector3 attackPosition;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -56,7 +58,10 @@ public class DrillBoss : Boss
         endShotCount = 0;
         endBehaviourPattern = 0;
         endAttack = false;
+        endMove = false;
         attackElapsedTime = 0.0f;
+        attackPosition = Vector3.zero;
+        drill = transform.GetChild(2).gameObject;
 
         base.Start();
     }
@@ -71,6 +76,8 @@ public class DrillBoss : Boss
         Shot();
         SummonEnemy();
         RespawnDrill();
+        DrillAttackStart();
+        DrillAttackEnd();
     }
 
     /// <summary>
@@ -98,10 +105,13 @@ public class DrillBoss : Boss
                 break;
 
             case BehaviourPattern.DRILL_ATTACK:
-                if (endAttack)
+                if (endMove)
                 {
                     pattern = BehaviourPattern.SHOT;
                     endAttack = false;
+                    endMove = false;
+                    attackElapsedTime = 0.0f;
+                    attackPosition = Vector3.zero;
                 }
                 break;
 
@@ -116,7 +126,7 @@ public class DrillBoss : Boss
     private void SummonNextPattern()
     {
         //ドリル攻撃をするまでに一連の行動を行った回数が2回未満なら
-        if (endBehaviourPattern < 2)
+        if (endBehaviourPattern < 0)
         {
             //ランダムで次の行動を選ぶ
             int random = Random.Range(0, 3);
@@ -129,12 +139,14 @@ public class DrillBoss : Boss
             {
                 pattern = BehaviourPattern.DRILL_ATTACK;
                 endBehaviourPattern = 0;
+                startPosition = transform.position;
             }
         }
         else
         {
             pattern = BehaviourPattern.DRILL_ATTACK;
             endBehaviourPattern = 0;
+            startPosition = transform.position;
         }
         isSummon = false;
     }
@@ -179,9 +191,11 @@ public class DrillBoss : Boss
     /// <summary>
     /// ドリル攻撃開始処理
     /// </summary>
-    private void DrillAttack()
+    private void DrillAttackStart()
     {
         if (pattern != BehaviourPattern.DRILL_ATTACK) return;
+
+        if (endAttack) return;
 
         //ドリルがなかった場合
         if (drill == null)
@@ -190,9 +204,34 @@ public class DrillBoss : Boss
             return;
         }
 
-        startPosition = transform.position;
-        Vector3 attackPosition = player.transform.position + Vector3.up * 3;
+        attackElapsedTime += Time.deltaTime;
+        if (attackElapsedTime < attackInterval) return;
 
+        if (attackPosition == Vector3.zero)
+            attackPosition = player.transform.position + Vector3.up * 3;
+
+        Vector3 position = (attackPosition - transform.position).normalized;
+        transform.position += position * Time.deltaTime * attackSpeed;
+        if (Vector3.Distance(transform.position, attackPosition) <= 0.1f)
+        {
+            transform.position = attackPosition;
+            endAttack = true;
+        }
+    }
+
+    private void DrillAttackEnd()
+    {
+        if (pattern != BehaviourPattern.DRILL_ATTACK) return;
+
+        if (!endAttack) return;
+
+        Vector3 position = (startPosition - transform.position).normalized;
+        transform.position += position * Time.deltaTime * attackSpeed;
+        if (Vector3.Distance(transform.position, startPosition) <= 0.1f)
+        {
+            transform.position = startPosition;
+            endMove = true;
+        }
     }
 
     /// <summary>
