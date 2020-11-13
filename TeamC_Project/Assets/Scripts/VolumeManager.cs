@@ -18,8 +18,11 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     Volume volume = new Volume();
     string filePath;
 
-    [HideInInspector]
-    public bool isLoadfile;
+    public bool IsLoadfile 
+    {
+        get;
+        private set;
+    } = false;
 
     public float MastarVolume
     {
@@ -41,22 +44,18 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     {
         base.Awake();
 
-#if UNITY_EDITOR
         filePath = Application.dataPath + "/volume_data.dat";
-#elif UNITY_STANDALONE
-        filePath = Application.persistentDataPath + "/volume_data.dat";
-#endif
 
         if (File.Exists(filePath))
         {
             LoadVolume();
-            isLoadfile = true;
+            IsLoadfile = true;
         }
         else
         {
             InitVolume();
             SaveVolume();
-            isLoadfile = false;
+            IsLoadfile = false;
         }
     }
 

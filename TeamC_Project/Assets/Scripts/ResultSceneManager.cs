@@ -33,6 +33,7 @@ public class ResultSceneManager : MonoBehaviour
         {
             resultText.text = "Game Over..";
         }
+
         scoreManager = ScoreManager.Instance;
         scores = scoreManager.GetScoreRanking();
         rank = scoreManager.GetRank();
