@@ -14,7 +14,7 @@ public class Option : MonoBehaviour
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        volumeManager = GameObject.Find("SoundManager").GetComponent<VolumeManager>();
+        volumeManager = VolumeManager.Instance;
     }
 
     // Update is called once per frame

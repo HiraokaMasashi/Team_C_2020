@@ -17,7 +17,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private int totalScore;//合計スコア
     private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
-    string filePath;
+    string path;
+    string fileName = "ranking_data.dat";
 
     private Text scoreText;//表示テキスト
     private Text hiScoreText;//表示テキスト
@@ -26,9 +27,9 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         base.Awake();
 
-        filePath = Application.persistentDataPath + "/ranking_data.dat";
+        path = Application.persistentDataPath + "/"  + fileName;
 
-        if (File.Exists(filePath))
+        if (File.Exists(path))
             LoadScore();
         else
         {
@@ -151,7 +152,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         byte[] data = Encoding.UTF8.GetBytes(jsonstr);
         data = Cryptor.Encrypt(data);
 
-        using (FileStream fileStream = File.Create(filePath))
+        using (FileStream fileStream = File.Create(path))
         {
             fileStream.Write(data, 0, data.Length);
         }
@@ -163,7 +164,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     public void LoadScore()
     {
         byte[] data = null;
-        using (FileStream fileStream = File.OpenRead(filePath))
+        using (FileStream fileStream = File.OpenRead(path))
         {
             data = new byte[fileStream.Length];
             fileStream.Read(data, 0, data.Length);

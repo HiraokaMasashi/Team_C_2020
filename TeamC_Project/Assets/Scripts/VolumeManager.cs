@@ -16,7 +16,8 @@ public class Volume
 public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
 {
     Volume volume = new Volume();
-    string filePath;
+    string path;
+    string fileName = "volume_data.dat";
 
     public bool IsLoadfile 
     {
@@ -44,9 +45,9 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     {
         base.Awake();
 
-        filePath = Application.persistentDataPath + "/volume_data.dat";
+        path = Application.persistentDataPath + "/" + fileName;
 
-        if (File.Exists(filePath))
+        if (File.Exists(path))
         {
             LoadVolume();
             IsLoadfile = true;
@@ -69,7 +70,7 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
         byte[] data = Encoding.UTF8.GetBytes(jsonstr);
         data = Cryptor.Encrypt(data);
 
-        using (FileStream fileStream = File.Create(filePath))
+        using (FileStream fileStream = File.Create(path))
         {
             fileStream.Write(data, 0, data.Length);
         }
@@ -81,7 +82,7 @@ public class VolumeManager : SingletonMonoBehaviour<VolumeManager>
     public void LoadVolume()
     {
         byte[] data = null;
-        using (FileStream fileStream = File.OpenRead(filePath))
+        using (FileStream fileStream = File.OpenRead(path))
         {
             data = new byte[fileStream.Length];
             fileStream.Read(data, 0, data.Length);
