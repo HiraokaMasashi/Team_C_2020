@@ -273,7 +273,7 @@ MonoBehaviour:
   moveSpeed: 2
   bulletSpeed: 300
   shotInterval: 5
-  destryoTime: 5
+  destroyTime: 5
   summonObject: {fileID: 7492139034897630035, guid: 1861da97ea8bec243a90b84a8c0e4044,
     type: 3}
   summonInterval: 5
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 5
   hpText: {fileID: 0}
-  deadSe: 
+  deadSe: dead
   damageSe: 
   debriPrefab: {fileID: 0}
 --- !u!114 &2774917448382121739
