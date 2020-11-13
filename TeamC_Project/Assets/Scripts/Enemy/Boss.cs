@@ -9,7 +9,7 @@ public class Boss : MonoBehaviour
     {
         SHOT,
         SUMMON,
-        SHOT_DRILL,
+        DRILL_ATTACK,
         SHOT_BOMB,
     }
     //現在のパターン

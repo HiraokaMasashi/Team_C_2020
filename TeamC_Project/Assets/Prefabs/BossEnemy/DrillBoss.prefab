@@ -228,18 +228,20 @@ MonoBehaviour:
   moveSpeed: 2
   bulletSpeed: 500
   shotInterval: 5
-  destryoTime: 5
+  destroyTime: 5
   summonObject: {fileID: 7492139034897630035, guid: 1861da97ea8bec243a90b84a8c0e4044,
     type: 3}
   summonInterval: 5
   instanceTransforms:
   - {fileID: 3730908734030504727}
   - {fileID: 3730908733320819928}
-  shotDrillPower: 300
-  normalRespawnTime: 2
   destroyRespawnTime: 5
   drillPrefab: {fileID: 1676340053367237865, guid: 9041def8199c40f4d844471a9ed2b7cd,
     type: 3}
+  rapidShot: 3
+  shotCount: 3
+  attackSpeed: 1
+  attackInterval: 3
 --- !u!114 &3730908732933718931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 180
   hpText: {fileID: 0}
-  deadSe: 
+  deadSe: dead
   damageSe: 
   debriPrefab: {fileID: 0}
 --- !u!114 &3730908732933718942

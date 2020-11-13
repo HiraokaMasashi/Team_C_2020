@@ -9,18 +9,42 @@ public class DrillBoss : Boss
 
     private GameObject player;
 
-    [SerializeField]
-    private float shotDrillPower = 300.0f;
-    [SerializeField]
-    private float normalRespawnTime = 2.0f;
+    //[SerializeField]
+    //private float shotDrillPower = 300.0f;
+    //[SerializeField]
+    //private float normalRespawnTime = 2.0f;
+    //ドリルのリスポーン時間
     [SerializeField]
     private float destroyRespawnTime = 5.0f;
     private float respawnTime;
+    //リスポーンの経過時間
     private float respawnElapsedTime;
+    //リスポーン中か
     private bool nowRespawn;
+    //ドリルのプレハブ
     [SerializeField]
     private GameObject drillPrefab;
+    //ドリル
     private GameObject drill;
+
+    //連射数
+    [SerializeField]
+    private int rapidShot = 3;
+    //発射数
+    [SerializeField]
+    private int shotCount = 3;
+    //プレイヤー方向に撃つか
+    private bool isForPlayer;
+    private int endShotCount;
+    private int endBehaviourPattern;
+
+    private bool endAttack;
+    [SerializeField]
+    private float attackSpeed = 1.0f;
+    private Vector3 startPosition;
+    [SerializeField]
+    private float attackInterval = 3.0f;
+    private float attackElapsedTime;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -28,6 +52,11 @@ public class DrillBoss : Boss
         player = GameObject.FindGameObjectWithTag("Player");
         respawnElapsedTime = 0.0f;
         nowRespawn = false;
+        isForPlayer = false;
+        endShotCount = 0;
+        endBehaviourPattern = 0;
+        endAttack = false;
+        attackElapsedTime = 0.0f;
 
         base.Start();
     }
@@ -44,23 +73,35 @@ public class DrillBoss : Boss
         RespawnDrill();
     }
 
+    /// <summary>
+    /// 行動パターン切り替え処理
+    /// </summary>
     private void ChangePattern()
     {
         switch (pattern)
         {
             case BehaviourPattern.SHOT:
-                if (isShot)
+                if (endShotCount >= 2)
                 {
                     pattern = BehaviourPattern.SUMMON;
                     isShot = false;
+                    isForPlayer = false;
+                    endShotCount = 0;
                 }
                 break;
 
             case BehaviourPattern.SUMMON:
                 if (isSummon)
                 {
+                    SummonNextPattern();
+                }
+                break;
+
+            case BehaviourPattern.DRILL_ATTACK:
+                if (endAttack)
+                {
                     pattern = BehaviourPattern.SHOT;
-                    isSummon = false;
+                    endAttack = false;
                 }
                 break;
 
@@ -69,10 +110,41 @@ public class DrillBoss : Boss
         }
     }
 
+    /// <summary>
+    /// ドリル攻撃までの行動選択処理
+    /// </summary>
+    private void SummonNextPattern()
+    {
+        //ドリル攻撃をするまでに一連の行動を行った回数が2回未満なら
+        if (endBehaviourPattern < 2)
+        {
+            //ランダムで次の行動を選ぶ
+            int random = Random.Range(0, 3);
+            if (random != 0)
+            {
+                pattern = BehaviourPattern.SHOT;
+                endBehaviourPattern++;
+            }
+            else
+            {
+                pattern = BehaviourPattern.DRILL_ATTACK;
+                endBehaviourPattern = 0;
+            }
+        }
+        else
+        {
+            pattern = BehaviourPattern.DRILL_ATTACK;
+            endBehaviourPattern = 0;
+        }
+        isSummon = false;
+    }
+
+    /// <summary>
+    /// 弾発射開始処理
+    /// </summary>
     private void Shot()
     {
         if (pattern != BehaviourPattern.SHOT) return;
-
         if (isShot) return;
 
         shotElapsedTime += Time.deltaTime;
@@ -80,15 +152,13 @@ public class DrillBoss : Boss
         if (shotElapsedTime < shotInterval) return;
 
         isShot = true;
-        for (int i = 0; i < instanceTransforms.Length; i++)
-        {
-            Vector3 position = instanceTransforms[i].position;
-            Vector3 dir = player.transform.position - position;
-            bulletController.GenerateBullet(position, dir, bulletSpeed, destroyTime, "Enemy");
-        }
-        shotElapsedTime = 0.0f;
+        if (endShotCount >= 1) isForPlayer = true;
+        StartCoroutine(RapidShot());
     }
 
+    /// <summary>
+    /// 雑魚敵生成処理
+    /// </summary>
     private void SummonEnemy()
     {
         if (pattern != BehaviourPattern.SUMMON) return;
@@ -106,14 +176,39 @@ public class DrillBoss : Boss
         isSummon = true;
     }
 
-    public void SetRespawn(bool isDestroy = false)
+    /// <summary>
+    /// ドリル攻撃開始処理
+    /// </summary>
+    private void DrillAttack()
     {
-        if (isDestroy) respawnTime = destroyRespawnTime;
-        else respawnTime = normalRespawnTime;
+        if (pattern != BehaviourPattern.DRILL_ATTACK) return;
+
+        //ドリルがなかった場合
+        if (drill == null)
+        {
+            endAttack = true;
+            return;
+        }
+
+        startPosition = transform.position;
+        Vector3 attackPosition = player.transform.position + Vector3.up * 3;
+
+    }
+
+    /// <summary>
+    /// リスポーン設定
+    /// </summary>
+    public void SetRespawn()
+    {
+        respawnTime = destroyRespawnTime;
+        //else respawnTime = normalRespawnTime;
 
         nowRespawn = true;
     }
 
+    /// <summary>
+    /// ドリルリスポーン処理
+    /// </summary>
     private void RespawnDrill()
     {
         if (drillPrefab == null) return;
@@ -128,9 +223,13 @@ public class DrillBoss : Boss
         StartCoroutine(InstanceDrill());
     }
 
+    /// <summary>
+    /// ドリル生成処理
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator InstanceDrill()
     {
-        Vector3 destination = transform.position + new Vector3(0, -1.2f, 0);
+        Vector3 destination = transform.position + new Vector3(0, -3.0f, 0);
         while (Vector3.Distance(drill.transform.position, destination) > 0.1f)
         {
             Vector3 position = Vector3.Lerp(drill.transform.position, destination, Time.deltaTime * moveSpeed);
@@ -139,5 +238,45 @@ public class DrillBoss : Boss
         }
 
         yield break;
+    }
+
+    /// <summary>
+    /// 連射処理
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator RapidShot()
+    {
+        while (isShot)
+        {
+            for (int i = 0; i < shotCount; i++)
+            {
+                Vector3 dir;
+                int rad = 90;
+                for (int j = 0; j < rapidShot; j++)
+                {
+                    for (int k = 0; k < instanceTransforms.Length; k++)
+                    {
+                        Vector3 position = instanceTransforms[k].position;
+                        float speed = bulletSpeed;
+                        if (isForPlayer) dir = player.transform.position - position;
+                        else
+                        {
+                            rad += 180 / shotCount;
+                            dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0);
+                            speed *= 0.75f;
+                            rad += 15;
+                        }
+
+                        bulletController.GenerateBullet(position, dir, speed, destroyTime, "Enemy");
+                    }
+                }
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            isShot = false;
+            endShotCount++;
+            shotElapsedTime = 0.0f;
+            yield break;
+        }
     }
 }

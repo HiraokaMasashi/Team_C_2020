@@ -240,16 +240,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
-      propertyPath: shotScrewDestroyTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: minPosition.y
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
       propertyPath: minPosition.x
       value: -14
       objectReference: {fileID: 0}
@@ -260,8 +250,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
+      propertyPath: minPosition.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
+        type: 3}
       propertyPath: maxPosition.y
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407090, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
@@ -1117,7 +1112,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb5eb642eb27c8240b8cc2cb6ce25568, type: 3}
@@ -1646,6 +1641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShieldBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774917448382121746, guid: 5e560706c6f707f458d360acc5d1c6eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774917448382121751, guid: 5e560706c6f707f458d360acc5d1c6eb,
         type: 3}
