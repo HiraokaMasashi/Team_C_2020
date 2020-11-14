@@ -7,12 +7,6 @@ public class BgmVolume : MonoBehaviour
 {
     Slider slider;
     SoundManager soundManager;
-    VolumeManager volemeManager;
-
-    void Awake()
-    {
-        volemeManager = VolumeManager.Instance;
-    }
 
     void Start()
     {
@@ -24,6 +18,5 @@ public class BgmVolume : MonoBehaviour
     public void OnValueChanged()
     {
         soundManager.BgmVolume = slider.value;
-        volemeManager.BgmVolume = slider.value;
     }
 }

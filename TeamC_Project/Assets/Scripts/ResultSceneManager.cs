@@ -11,6 +11,8 @@ public class ResultSceneManager : MonoBehaviour
     private Text resultText;
     [SerializeField]
     private Text[] scoreTexts;
+    [SerializeField]
+    private Text hiScoreText;
 
     private InputManager inputManager;
     [SerializeField]
@@ -62,5 +64,9 @@ public class ResultSceneManager : MonoBehaviour
             if (rank == i)
                 scoreTexts[i].color = Color.red;
         }
+
+        //ビルドだとテキストの表示がおかしくなるため
+        hiScoreText.text = "1位 " + scores[0];
+        if (rank == 0) hiScoreText.color = Color.red;
     }
 }

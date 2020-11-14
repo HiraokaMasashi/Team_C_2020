@@ -7,12 +7,6 @@ public class MasterVolume : MonoBehaviour
 {
     Slider slider;
     SoundManager soundManager;
-    VolumeManager volumeManager;
-
-    void Awake()
-    {
-        volumeManager = VolumeManager.Instance;
-    }
 
     void Start()
     {
@@ -27,6 +21,5 @@ public class MasterVolume : MonoBehaviour
     public void OnValueChanged()
     {
         soundManager.MasterVolume = slider.value;
-        volumeManager.MastarVolume = slider.value;
     }
 }

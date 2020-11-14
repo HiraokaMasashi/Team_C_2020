@@ -18,7 +18,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
     string path;
-    string fileName = "ranking_data.dat";
+    string fileName = "ranking_data.json";
 
     private Text scoreText;//表示テキスト
     private Text hiScoreText;//表示テキスト
@@ -147,15 +147,12 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     /// </summary>
     public void SaveScore()
     {
-        string jsonstr = JsonUtility.ToJson(ranking);
-        //保存データを暗号化する
-        byte[] data = Encoding.UTF8.GetBytes(jsonstr);
-        data = Cryptor.Encrypt(data);
+        string json = JsonUtility.ToJson(ranking);
 
-        using (FileStream fileStream = File.Create(path))
-        {
-            fileStream.Write(data, 0, data.Length);
-        }
+        StreamWriter streamWriter = new StreamWriter(path);
+        streamWriter.Write(json);
+        streamWriter.Flush();
+        streamWriter.Close();
     }
 
     /// <summary>
@@ -163,17 +160,12 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     /// </summary>
     public void LoadScore()
     {
-        byte[] data = null;
-        using (FileStream fileStream = File.OpenRead(path))
-        {
-            data = new byte[fileStream.Length];
-            fileStream.Read(data, 0, data.Length);
-        }
+        StreamReader streamReader;
+        streamReader = new StreamReader(path);
+        string data = streamReader.ReadToEnd();
+        streamReader.Close();
 
-        //読み込むデータを複合化する
-        data = Cryptor.Decrypt(data);
-        string jsonstr = Encoding.UTF8.GetString(data);
-        ranking = JsonUtility.FromJson<ScoreRanking>(jsonstr);
+        ranking = JsonUtility.FromJson<ScoreRanking>(data);
     }
 
     /// <summary>

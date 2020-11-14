@@ -240,7 +240,7 @@ MonoBehaviour:
     type: 3}
   rapidShot: 3
   shotCount: 3
-  attackSpeed: 5
+  attackSpeed: 1
   attackInterval: 3
 --- !u!114 &3730908732933718931
 MonoBehaviour:

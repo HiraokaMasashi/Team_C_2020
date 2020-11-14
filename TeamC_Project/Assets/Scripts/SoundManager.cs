@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+
+[System.Serializable]
+public class Volume
+{
+    public float Master;
+    public float BGM;
+    public float SE;
+}
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField, Range(0, 1), Tooltip("デフォルトマスタ音量")]
-    float volume = 1;
-    [SerializeField, Range(0, 1), Tooltip("デフォルトBGM音量")]
-    float bgmVolume = 1;
-    [SerializeField, Range(0, 1), Tooltip("デフォルトSE音量")]
-    float seVolume = 1;
-
     AudioClip[] bgm;
     AudioClip[] se;
 
@@ -20,19 +22,21 @@ public class SoundManager : MonoBehaviour
     AudioSource bgmAudioSource;
     AudioSource seAudioSource;
 
-    VolumeManager volumeManager;
+    Volume volume = new Volume();
+    string path;
+    string fileName = "volume_data.json";
 
     public float MasterVolume
     {
         set
         {
-            volume = Mathf.Clamp01(value);
-            bgmAudioSource.volume = bgmVolume * volume;
-            seAudioSource.volume = seVolume * volume;
+            volume.Master = value;
+            bgmAudioSource.volume = volume.BGM * volume.Master;
+            seAudioSource.volume = volume.SE * volume.Master;
         }
         get
         {
-            return volume;
+            return volume.Master;
         }
     }
 
@@ -40,12 +44,12 @@ public class SoundManager : MonoBehaviour
     {
         set
         {
-            bgmVolume = Mathf.Clamp01(value);
-            bgmAudioSource.volume = bgmVolume * volume;
+            volume.BGM = value;
+            bgmAudioSource.volume = volume.BGM * volume.Master;
         }
         get
         {
-            return bgmVolume;
+            return volume.BGM;
         }
     }
 
@@ -53,12 +57,12 @@ public class SoundManager : MonoBehaviour
     {
         set
         {
-            seVolume = Mathf.Clamp01(value);
-            seAudioSource.volume = seVolume * volume;
+            volume.SE = value;
+            seAudioSource.volume = volume.SE * volume.Master;
         }
         get
         {
-            return seVolume;
+            return volume.SE;
         }
     }
 
@@ -112,14 +116,14 @@ public class SoundManager : MonoBehaviour
             seIndex.Add(se[i].name, i);
         }
 
-        //音量
-        volumeManager = VolumeManager.Instance;
-        //ロードされていれば適用
-        if (volumeManager.IsLoadfile)
+        path = Application.persistentDataPath + "/" + fileName;
+
+        if (File.Exists(path))
+            LoadVolume();
+        else
         {
-            MasterVolume = volumeManager.MastarVolume;
-            BgmVolume = volumeManager.BgmVolume;
-            SeVolume = volumeManager.SeVolume;
+            InitVolume();
+            SaveVolume();
         }
     }
 
@@ -209,5 +213,38 @@ public class SoundManager : MonoBehaviour
     {
         seAudioSource.Stop();
         seAudioSource.clip = null;
+    }
+
+    /// <summary>
+    /// データの保存
+    /// </summary>
+    public void SaveVolume()
+    {
+        string json = JsonUtility.ToJson(volume);
+
+        StreamWriter streamWriter = new StreamWriter(path);
+        streamWriter.Write(json);
+        streamWriter.Flush();
+        streamWriter.Close();
+    }
+
+    /// <summary>
+    /// データの読込
+    /// </summary>
+    public void LoadVolume()
+    {
+        StreamReader streamReader;
+        streamReader = new StreamReader(path);
+        string data = streamReader.ReadToEnd();
+        streamReader.Close();
+
+        volume = JsonUtility.FromJson<Volume>(data);
+    }
+
+    private void InitVolume()
+    {
+        volume.Master = 0.8f;
+        volume.BGM = 1.0f;
+        volume.SE = 1.0f;
     }
 }

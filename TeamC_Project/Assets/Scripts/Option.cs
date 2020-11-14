@@ -8,13 +8,13 @@ public class Option : MonoBehaviour
     private FadeScene fadeScene;
     private InputManager inputManager;
 
-    private VolumeManager volumeManager;
+    private SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        volumeManager = VolumeManager.Instance;
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Option : MonoBehaviour
     {
         if (ExitOption())
         {
-            volumeManager.SaveVolume();
+            soundManager.SaveVolume();
             fadeScene.ChangeNextScene("Select");
         }
     }

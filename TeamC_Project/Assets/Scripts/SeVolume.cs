@@ -7,12 +7,6 @@ public class SeVolume : MonoBehaviour
 {
     Slider slider;
     SoundManager soundManager;
-    VolumeManager volumeManager;
-
-    void Awake()
-    {
-        volumeManager = VolumeManager.Instance;
-    }
 
     void Start()
     {
@@ -24,6 +18,5 @@ public class SeVolume : MonoBehaviour
     public void OnValueChanged()
     {
         soundManager.SeVolume = slider.value;
-        volumeManager.SeVolume = slider.value;
     }
 }
