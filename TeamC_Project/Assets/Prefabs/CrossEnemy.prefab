@@ -207,7 +207,7 @@ MonoBehaviour:
   destroyZone: {x: 0, y: -11, z: 0}
   minInterval: 1
   maxInterval: 5
-  minLeftDestinationRange: {x: -18, y: -1, z: 0}
-  maxLeftDestinationRange: {x: -21, y: -5, z: 0}
-  minRightDestinationRange: {x: 18, y: -1, z: 0}
-  maxRightDestinationRange: {x: 21, y: -5, z: 0}
+  minLeftDestinationRange: {x: -14, y: -1, z: 0}
+  maxLeftDestinationRange: {x: -17, y: -5, z: 0}
+  minRightDestinationRange: {x: 14, y: -1, z: 0}
+  maxRightDestinationRange: {x: -17, y: -5, z: 0}
