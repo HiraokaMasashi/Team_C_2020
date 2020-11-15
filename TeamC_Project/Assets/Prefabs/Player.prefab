@@ -191,8 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39f5335544e2a34fbee29c80e755e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPosition: {x: -14, y: -5, z: 0}
-  maxPosition: {x: 14, y: 14, z: 0}
+  minPosition: {x: -17, y: -6, z: 0}
+  maxPosition: {x: 17, y: 16, z: 0}
   shotBulletInterval: 1
   playerMoveSpeed: 10
   bulletMoveSpeed: 1000

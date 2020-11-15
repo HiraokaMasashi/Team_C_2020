@@ -7,6 +7,8 @@ public class ShieldScrew : MonoBehaviour
 {
     private Health health;
 
+    private Boss boss;
+
     [SerializeField]
     private float damageInterval = 1.0f;
     private float elapsedTime;
@@ -18,10 +20,13 @@ public class ShieldScrew : MonoBehaviour
     {
         health = GetComponent<Health>();
         elapsedTime = 0.0f;
+        boss = transform.root.GetComponent<Boss>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!boss.GetFrameIn()) return;
+
         if (other.transform.tag == "Screw")
         {
             int damage = 1;

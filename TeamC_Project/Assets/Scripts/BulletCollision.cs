@@ -70,10 +70,12 @@ public class BulletCollision : MonoBehaviour
         if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {
+            if (other.transform.name.Contains("Shield") && other.transform.childCount != 0) return;
+
             Health health = other.transform.GetComponent<Health>();
             health.Damage(Attack);
             GameObject particle = particleManager.GenerateParticle(1);
-            particle.transform.position = other.transform.position;
+            particle.transform.position = other.ClosestPointOnBounds(transform.position);
             particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             particleManager.OncePlayParticle(particle);
 

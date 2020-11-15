@@ -23,6 +23,9 @@ public class SetUpScrew : MonoBehaviour
     [SerializeField]
     private float destroyZoneY = 22.0f;
 
+    [SerializeField]
+    private Vector3 clampPosition;
+
     protected enum MoveDirection
     {
         NONE,
@@ -112,6 +115,7 @@ public class SetUpScrew : MonoBehaviour
     protected void SetDestination(Vector3 basePosition, Vector3 position, ref float distance, ref Vector3 destination)
     {
         destination = basePosition + new Vector3(adjustPositionX, distanceY, 0.0f);
+        destination.x = Mathf.Clamp(destination.x, -clampPosition.x, clampPosition.x);
         distance = Vector3.Distance(position, destination);
     }
 

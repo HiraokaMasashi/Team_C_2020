@@ -24,6 +24,7 @@ public class Shield : MonoBehaviour
             if (isDown) return;
 
             isDown = true;
+            transform.parent = null;
             StartCoroutine(MoveDown());
         }
     }

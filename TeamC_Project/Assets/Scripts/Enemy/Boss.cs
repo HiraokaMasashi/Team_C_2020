@@ -81,4 +81,9 @@ public class Boss : MonoBehaviour
         isFrameIn = true;
         yield break;
     }
+
+    public bool GetFrameIn()
+    {
+        return isFrameIn;
+    }
 }
