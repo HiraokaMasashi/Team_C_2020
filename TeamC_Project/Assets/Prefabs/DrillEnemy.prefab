@@ -114,9 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoveryTime: 5
-  speed: 1
+  speed: 10
   maxDistance: 12
   destroyZoneY: 22
+  clampPosition: {x: 18, y: 0, z: 0}
 --- !u!114 &2669841131913891090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1
   hpText: {fileID: 0}
-  deadSe: 
-  damageSe: 
+  deadSe: dead
+  damageSe: damage
   debriPrefab: {fileID: 0}
 --- !u!114 &2669841131913891091
 MonoBehaviour:
@@ -146,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ed41a450195984294306f62e1ba198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: []
+  particles:
+  - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
 --- !u!54 &2669841131913891089
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -221,7 +223,7 @@ GameObject:
   - component: {fileID: 8338770875842385539}
   m_Layer: 0
   m_Name: EnemyDrill
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
