@@ -317,11 +317,11 @@ public class Player : MonoBehaviour
     {
         if (screw == null) return;
 
-        List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetEnemies();
+        List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetObjects();
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
             enemies[i].GetComponent<SetUpScrew>().NotRecovery = false;
-            screw.GetComponent<ScrewCollision>().RemoveEnemy(i);
+            screw.GetComponent<ScrewCollision>().RemoveObject(i);
         }
     }
 

@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1566428894590290187}
-  isPause: 0
+  fadeScene: {fileID: 0}
 --- !u!1 &1566428895427951931
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +376,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Resume to press
+  m_Text: 'Press StartButton to Resume
 
-    StartButton or EscKey'
+    Press A Button to Select'

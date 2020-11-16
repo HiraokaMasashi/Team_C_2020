@@ -12,7 +12,7 @@ public class SetUpScrew : MonoBehaviour
     protected float adjustPositionX;
 
     [SerializeField]
-    protected float speed = 1.0f;
+    protected float speed = 10.0f;
 
     [SerializeField]
     protected float maxDistance = 12.0f;

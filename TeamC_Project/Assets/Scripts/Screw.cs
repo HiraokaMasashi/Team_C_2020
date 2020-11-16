@@ -82,7 +82,7 @@ public class Screw : MonoBehaviour
         else
             basePosition = transform.position;
 
-        List<GameObject> enemies = GetComponent<ScrewCollision>().GetEnemies();
+        List<GameObject> enemies = GetComponent<ScrewCollision>().GetObjects();
         if (enemies == null) return;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
