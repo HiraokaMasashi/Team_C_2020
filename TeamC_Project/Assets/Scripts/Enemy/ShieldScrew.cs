@@ -58,7 +58,7 @@ public class ShieldScrew : MonoBehaviour
 
     private IEnumerator DamageComeOff(int damage)
     {
-        Vector3 destination = transform.position - new Vector3(0, 0.1f * damage, 0);
+        Vector3 destination = transform.position - new Vector3(0, 0.05f * damage, 0);
 
         while (Vector3.Distance(transform.position, destination) > 0.01f)
         {
