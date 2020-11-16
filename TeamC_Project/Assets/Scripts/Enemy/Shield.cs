@@ -33,7 +33,7 @@ public class Shield : MonoBehaviour
     {
         if (other.transform.tag == "PlayerBullet")
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<BulletCollision>().Disconnect();
         }
     }
 

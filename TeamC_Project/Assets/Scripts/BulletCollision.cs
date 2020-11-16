@@ -42,7 +42,15 @@ public class BulletCollision : MonoBehaviour
     {
         if (transform.childCount == 0) return;
 
-        GameObject particle = transform.GetChild(0).gameObject;
+        GameObject particle = null;
+        foreach (Transform child in transform)
+        {
+            if (child.name.Contains("Trail"))
+            {
+                particle = child.gameObject;
+                break;
+            }
+        }
         particleManager.StopParticle(particle);
         particle.transform.parent = null;
         Destroy(gameObject);
@@ -61,7 +69,7 @@ public class BulletCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(transform.tag=="PlayerBullet" && other.transform.tag == "Screw")
+        if (transform.tag == "PlayerBullet" && other.transform.tag == "Screw")
         {
             IsPenetrate = true;
             GetComponent<Renderer>().material.color = Color.red;

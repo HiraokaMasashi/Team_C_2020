@@ -90,6 +90,10 @@ GameObject:
   - component: {fileID: 473919844062677974}
   - component: {fileID: 473919844062677969}
   - component: {fileID: 473919844062677968}
+  - component: {fileID: -3870510870572185241}
+  - component: {fileID: 6559572219891885479}
+  - component: {fileID: 6745985573324638296}
+  - component: {fileID: 552629068309234846}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -160,6 +164,65 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &-3870510870572185241
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473919844062677970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &6559572219891885479
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473919844062677970}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6745985573324638296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473919844062677970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a5f4bbd4400714aaff30203a7e4b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyZone: {x: 19, y: 21, z: 0}
+  destroyZoneMinY: -11
+--- !u!114 &552629068309234846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473919844062677970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ed41a450195984294306f62e1ba198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles:
+  - {fileID: 3878558994848460545, guid: 750372a4b0be8514ea4f944e00d687b8, type: 3}
+  - {fileID: 7545205789895186576, guid: 82032c9e6ea2c45488f067cd14866195, type: 3}
 --- !u!1 &3655283795811486936
 GameObject:
   m_ObjectHideFlags: 0
