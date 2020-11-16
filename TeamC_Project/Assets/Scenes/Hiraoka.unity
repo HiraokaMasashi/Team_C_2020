@@ -575,6 +575,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss3
       objectReference: {fileID: 0}
+    - target: {fileID: 7985128295584331834, guid: eff649ed5c68f1b4dad2ed000939d01c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7985128295584687130, guid: eff649ed5c68f1b4dad2ed000939d01c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1163,7 +1168,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bossPrefab
       value: 
-      objectReference: {fileID: 2774917448382121746, guid: 5e560706c6f707f458d360acc5d1c6eb,
+      objectReference: {fileID: 7985128295584331834, guid: eff649ed5c68f1b4dad2ed000939d01c,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -1179,7 +1184,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb5eb642eb27c8240b8cc2cb6ce25568, type: 3}
