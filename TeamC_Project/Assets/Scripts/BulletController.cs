@@ -64,4 +64,20 @@ public class BulletController : MonoBehaviour
         if (shotSe == "") return;
         soundManager.PlaySeByName(shotSe);
 	}
+
+	public GameObject GenerateBomb(GameObject bombPrefab, Vector3 position, Vector3 direction,float destroyTime, string shotSe = "")
+    {
+		GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
+		GameObject particle = bomb.GetComponent<ParticleManager>().GenerateParticleInChildren();
+		particle.transform.position = bomb.transform.position;
+		particle.transform.rotation = Quaternion.LookRotation(direction, Vector3.back);
+		bomb.GetComponent<ParticleManager>().StartParticle(particle);
+		Destroy(bomb, destroyTime);
+		bomb.GetComponent<ParticleManager>().DestroyParticle(particle, destroyTime);
+
+		if (shotSe != "")
+		soundManager.PlaySeByName(shotSe);
+
+		return bomb;
+	}
 }

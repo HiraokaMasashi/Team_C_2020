@@ -10,6 +10,8 @@ TagManager:
   - Screw
   - Debri
   - Drill
+  - Bomb
+  - Blast
   layers:
   - Default
   - TransparentFX

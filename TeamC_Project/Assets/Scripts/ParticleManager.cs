@@ -13,6 +13,7 @@ public class ParticleManager : MonoBehaviour
     /// <param name="particle"></param>
     public void OncePlayParticle(GameObject particle)
     {
+        if (particle == null) return;
         if (particle.GetComponent<ParticleSystem>() == null) return;
 
         ParticleSystem p = particle.GetComponent<ParticleSystem>();
@@ -26,6 +27,7 @@ public class ParticleManager : MonoBehaviour
     /// <param name="particle"></param>
     public void StartParticle(GameObject particle)
     {
+        if (particle == null) return;
         if (particle.GetComponent<ParticleSystem>() == null) return;
 
         ParticleSystem p = particle.GetComponent<ParticleSystem>();
@@ -38,6 +40,7 @@ public class ParticleManager : MonoBehaviour
     /// <param name="particle"></param>
     public void StopParticle(GameObject particle)
     {
+        if (particle == null) return;
         if (particle.GetComponent<ParticleSystem>() == null) return;
 
         ParticleSystem p = particle.GetComponent<ParticleSystem>();
@@ -47,6 +50,7 @@ public class ParticleManager : MonoBehaviour
 
     public void DestroyParticle(GameObject particle, float destroyTime = 0.0f)
     {
+        if (particle == null) return;
         if (particle.GetComponent<ParticleSystem>() == null) return;
 
         ParticleSystem p = particle.GetComponent<ParticleSystem>();

@@ -13,6 +13,8 @@ public class Pause : MonoBehaviour
     private bool isPause;
 
     InputManager inputManager;
+    [SerializeField]
+    private FadeScene fadeScene;
 
     void Start()
     {
@@ -37,10 +39,16 @@ public class Pause : MonoBehaviour
             {
                 GameQuit();
             }
+
+            if (inputManager.GetA_ButtonDown())
+            {
+                fadeScene.ChangeNextScene("Select");
+                Resume();
+            }
         }
 
-        //Escキーかコントローラーメニューボタン
-        if (Input.GetKeyDown(KeyCode.Escape) || inputManager.GetMenu_ButtonDown())
+        //コントローラーメニューボタン
+        if (inputManager.GetMenu_ButtonDown())
         {
             PauseSwich();
         }

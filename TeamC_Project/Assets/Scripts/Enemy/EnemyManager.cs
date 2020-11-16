@@ -25,8 +25,6 @@ public class EnemyManager : MonoBehaviour
     private Transform bossPattern;
     private GameObject boss;
 
-    private GameManager gameManager;
-
     //Waveエンドフラグ
     public bool IsEnd
     {
@@ -37,7 +35,6 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wave = 0;
         StartCoroutine(Instance(wave));
     }

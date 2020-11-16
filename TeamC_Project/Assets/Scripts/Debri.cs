@@ -49,7 +49,7 @@ public class Debri : SetUpScrew
         screwCollision = GameObject.FindGameObjectWithTag("Screw").GetComponent<ScrewCollision>();
         //screwCollision.RemoveDebri(gameObject);
         if (enemy != null)
-            screwCollision.RemoveEnemy(enemy);
+            screwCollision.RemoveObject(enemy);
 
         GameObject particle = particleManager.GenerateParticle();
         if (particle != null)

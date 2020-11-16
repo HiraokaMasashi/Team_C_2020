@@ -51,6 +51,8 @@ public class BulletCollision : MonoBehaviour
                 break;
             }
         }
+        if (particle == null) return;
+
         particleManager.StopParticle(particle);
         particle.transform.parent = null;
         Destroy(gameObject);
@@ -92,11 +94,11 @@ public class BulletCollision : MonoBehaviour
                 GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
                 for (int i = screws.Length - 1; i >= 0; i--)
                 {
-                    int length = screws[i].GetComponent<ScrewCollision>().GetEnemies().Count;
+                    int length = screws[i].GetComponent<ScrewCollision>().GetObjects().Count;
                     for (int j = length - 1; j >= 0; j--)
                     {
                         if (health.IsDead)
-                            screws[i].GetComponent<ScrewCollision>().RemoveEnemy(j);
+                            screws[i].GetComponent<ScrewCollision>().RemoveObject(j);
                     }
                 }
             }
