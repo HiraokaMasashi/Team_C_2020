@@ -197,8 +197,8 @@ public class DrillBoss : Boss
     private void DrillAttackStart()
     {
         if (pattern != BehaviourPattern.DRILL_ATTACK) return;
-
         if (endAttack) return;
+        if (player == null) return;
 
         //ドリルがなかった場合
         if (drill == null)
@@ -298,6 +298,12 @@ public class DrillBoss : Boss
                 {
                     for (int k = 0; k < instanceTransforms.Length; k++)
                     {
+                        if (player == null)
+                        {
+                            isShot = false;
+                            yield break;
+                        }
+
                         Vector3 position = instanceTransforms[k].position;
                         float speed = bulletSpeed;
                         if (isForPlayer) dir = player.transform.position - position;

@@ -14,12 +14,17 @@ public class Drill : MonoBehaviour
     private GameObject player;
     private Health health;
 
+    [SerializeField]
+    private float hitInterval = 1.0f;
+    private float hitElpsedTime;
+
     // Start is called before the first frame update
     void Start()
     {
         isShot = false;
         player = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<Health>();
+        hitElpsedTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -60,11 +65,25 @@ public class Drill : MonoBehaviour
     {
         if (other.transform.tag == "Enemy")
         {
-            if (!other.transform.name.Contains("Boss"))
+            if (!other.gameObject.name.Contains("Boss"))
                 other.GetComponent<Health>().HitDeath();
+            else
+                other.GetComponent<Health>().Damage(10);
 
             if (!isShot)
                 health.Damage(1);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name.Contains("Boss"))
+        {
+            hitElpsedTime += Time.deltaTime;
+            if (hitElpsedTime < hitInterval) return;
+
+            other.GetComponent<Health>().Damage(10);
+            hitElpsedTime = 0.0f;
         }
     }
 }

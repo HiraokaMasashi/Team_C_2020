@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     //ボスに必要なパターンの列挙
-    protected enum BehaviourPattern
+    public enum BehaviourPattern
     {
         SHOT,
         SUMMON,
@@ -85,5 +85,10 @@ public class Boss : MonoBehaviour
     public bool GetFrameIn()
     {
         return isFrameIn;
+    }
+
+    public BehaviourPattern GetCurrentPattern()
+    {
+        return pattern;
     }
 }

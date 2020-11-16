@@ -54,7 +54,10 @@ public class BossDrill : MonoBehaviour
 
         if(other.transform.tag == "Player")
         {
-            other.GetComponent<Health>().Damage(3);
+            if (transform.parent.GetComponent<Boss>().GetCurrentPattern() != Boss.BehaviourPattern.DRILL_ATTACK)
+                return;
+
+            other.GetComponent<Health>().Damage(1);
         }
     }
 }

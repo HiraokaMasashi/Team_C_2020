@@ -17,6 +17,8 @@ public class ScrewCollision : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            if (other.gameObject.name.Contains("Boss")) return;
+
             if (other.GetComponent<SetUpScrew>().IsStan) return;
 
             //既にヒットしていたものなら、return

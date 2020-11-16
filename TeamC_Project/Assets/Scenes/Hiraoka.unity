@@ -1110,7 +1110,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb5eb642eb27c8240b8cc2cb6ce25568, type: 3}
@@ -1787,12 +1787,17 @@ PrefabInstance:
     - target: {fileID: 3730908732933718888, guid: 656617165bacf6f4d85df111150cc7a5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3730908732933718930, guid: 656617165bacf6f4d85df111150cc7a5,
         type: 3}
       propertyPath: attackSpeed
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730908732933718930, guid: 656617165bacf6f4d85df111150cc7a5,
+        type: 3}
+      propertyPath: chnageBehaviourCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3730908732933718932, guid: 656617165bacf6f4d85df111150cc7a5,
         type: 3}
@@ -1854,5 +1859,22 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 48
       objectReference: {fileID: 0}
+    - target: {fileID: 3730908733864381233, guid: 656617165bacf6f4d85df111150cc7a5,
+        type: 3}
+      propertyPath: debriPrefab
+      value: 
+      objectReference: {fileID: 658348586179038979, guid: d84721c3f8078644287f4352d5f1453d,
+        type: 3}
+    - target: {fileID: 3730908733864381246, guid: 656617165bacf6f4d85df111150cc7a5,
+        type: 3}
+      propertyPath: particles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730908733864381246, guid: 656617165bacf6f4d85df111150cc7a5,
+        type: 3}
+      propertyPath: particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 656617165bacf6f4d85df111150cc7a5, type: 3}
