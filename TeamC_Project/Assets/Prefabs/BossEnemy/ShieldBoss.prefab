@@ -274,7 +274,7 @@ MonoBehaviour:
   bulletSpeed: 300
   shotInterval: 5
   destroyTime: 5
-  summonObject: {fileID: 7492139034897630035, guid: 1861da97ea8bec243a90b84a8c0e4044,
+  summonObject: {fileID: 2669841131913891094, guid: 2b9b42c83e6011747bd1d5dc7c982129,
     type: 3}
   summonInterval: 5
   shotBulletCount: 30
