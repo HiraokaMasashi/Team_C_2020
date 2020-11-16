@@ -13,10 +13,9 @@ public class ParticleManager : MonoBehaviour
     /// <param name="particle"></param>
     public void OncePlayParticle(GameObject particle)
     {
+        if (particle.GetComponent<ParticleSystem>() == null) return;
+
         ParticleSystem p = particle.GetComponent<ParticleSystem>();
-
-        if (p == null) return;
-
         p.Play();
         DestroyParticle(p.gameObject);
     }
@@ -27,9 +26,9 @@ public class ParticleManager : MonoBehaviour
     /// <param name="particle"></param>
     public void StartParticle(GameObject particle)
     {
-        ParticleSystem p = particle.GetComponent<ParticleSystem>();
-        if (p == null) return;
+        if (particle.GetComponent<ParticleSystem>() == null) return;
 
+        ParticleSystem p = particle.GetComponent<ParticleSystem>();
         p.Play();
     }
 
@@ -39,18 +38,18 @@ public class ParticleManager : MonoBehaviour
     /// <param name="particle"></param>
     public void StopParticle(GameObject particle)
     {
-        ParticleSystem p = particle.GetComponent<ParticleSystem>();
-        if (p == null) return;
+        if (particle.GetComponent<ParticleSystem>() == null) return;
 
+        ParticleSystem p = particle.GetComponent<ParticleSystem>();
         p.Stop();
         Destroy(particle, p.main.duration);
     }
 
     public void DestroyParticle(GameObject particle, float destroyTime = 0.0f)
     {
-        ParticleSystem p = particle.GetComponent<ParticleSystem>();
-        if (p == null) return;
+        if (particle.GetComponent<ParticleSystem>() == null) return;
 
+        ParticleSystem p = particle.GetComponent<ParticleSystem>();
         Destroy(particle, p.main.duration + destroyTime);
     }
 

@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
 
     //プレイヤーの状態
-    enum Mode
+    public enum Mode
     {
         NORMAL,
         SCREW,
@@ -70,11 +70,11 @@ public class Player : MonoBehaviour
     private GameObject drillPrefab;
     private GameObject drill;
 
-    public bool IsRapidFire
-    {
-        get;
-        private set;
-    } = false;//連射中か
+    //public bool IsRapidFire
+    //{
+    //    get;
+    //    private set;
+    //} = false;//連射中か
 
     public bool IsEquipmentDrill
     {
@@ -292,10 +292,9 @@ public class Player : MonoBehaviour
         rotationElapsedTime = 0.0f;
 
         if (drill != null)
-        {
             drill.GetComponent<BoxCollider>().enabled = false;
-            drill.transform.parent = transform;
-        }
+        else
+            IsEquipmentDrill = false;
     }
 
     private void DestroyShotScrew()
@@ -357,6 +356,12 @@ public class Player : MonoBehaviour
             inhaleScrewObject = null;
         }
 
+        if (drill != null)
+        {
+            drill.transform.parent = transform;
+            drill.GetComponent<BoxCollider>().enabled = false;
+        }
+
         if (currentMode == Mode.SCREW)
             //元に戻る回転状態
             currentMode = Mode.ROTATION_NORMAL;
@@ -413,7 +418,6 @@ public class Player : MonoBehaviour
         drill.GetComponent<Drill>().Shot();
         drill.transform.parent = null;
         drill = null;
-        IsEquipmentDrill = false;
     }
 
     public void EquipmentDrill()
@@ -430,5 +434,10 @@ public class Player : MonoBehaviour
             health.HitDeath();
             other.GetComponent<Health>().HitDeath();
         }
+    }
+
+    public Mode GetCurrentMode()
+    {
+        return currentMode;
     }
 }
