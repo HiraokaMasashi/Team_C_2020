@@ -1133,7 +1133,7 @@ MonoBehaviour:
   Input: {fileID: 1403194779}
   sceneManager: {fileID: 2061709770}
   sceneNames:
-  - Main1
+  - Stage1
   - Main1
   - Watanabe
   - Option
