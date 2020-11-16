@@ -17,7 +17,7 @@ public class BackGround : MonoBehaviour
         transform.position -= new Vector3(0, Time.deltaTime * speed);
         if (transform.position.y <= endScreenY)
         {
-            transform.position = new Vector2(0, startScreenY);
+            transform.position = new Vector3(0, startScreenY, 10);
         }
     }
 }
