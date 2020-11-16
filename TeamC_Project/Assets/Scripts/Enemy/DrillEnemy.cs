@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DrillEnemy : Enemy
 {
-    [SerializeField]
-    GameObject drill;
+    //[SerializeField]
+    //GameObject drill;
 
     protected override void Start()
     {
@@ -20,11 +20,11 @@ public class DrillEnemy : Enemy
         Death();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "PlayerBullet")
-        {
-            Instantiate(drill, transform.position, Quaternion.identity);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.transform.tag == "PlayerBullet")
+    //    {
+    //        Instantiate(drill, transform.position, Quaternion.identity);
+    //    }
+    //}
 }

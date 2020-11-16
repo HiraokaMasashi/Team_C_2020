@@ -48,6 +48,9 @@ public class DrillBoss : Boss
     private float attackElapsedTime;
     private Vector3 attackPosition;
 
+    [SerializeField]
+    private int chnageBehaviourCount = 2;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -126,7 +129,7 @@ public class DrillBoss : Boss
     private void SummonNextPattern()
     {
         //ドリル攻撃をするまでに一連の行動を行った回数が2回未満なら
-        if (endBehaviourPattern < 0)
+        if (endBehaviourPattern < chnageBehaviourCount)
         {
             //ランダムで次の行動を選ぶ
             int random = Random.Range(0, 3);

@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 6786455549019819574}
   - component: {fileID: 6786455549019819575}
   - component: {fileID: 6786455549019819528}
-  - component: {fileID: 6786455549019819529}
   - component: {fileID: 6786455549019819530}
+  - component: {fileID: -3716991041797932535}
+  - component: {fileID: 9160010878460494208}
+  - component: {fileID: 3102684404678402123}
   m_Layer: 0
   m_Name: Drill
   m_TagString: Drill
@@ -81,20 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &6786455549019819529
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6786455549019819531}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6786455549019819530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,5 +95,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2032e83ab0507514297903d60a9f6ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 15
   destroyZoneY: 22
+--- !u!65 &-3716991041797932535
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786455549019819531}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9160010878460494208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786455549019819531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ed41a450195984294306f62e1ba198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles: []
+--- !u!114 &3102684404678402123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786455549019819531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d25d0592b7520134499a67de34a023f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 5
+  hpText: {fileID: 0}
+  deadSe: 
+  damageSe: 
+  debriPrefab: {fileID: 0}

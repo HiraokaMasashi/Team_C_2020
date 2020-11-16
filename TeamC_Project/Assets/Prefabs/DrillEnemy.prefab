@@ -134,7 +134,8 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
-  debriPrefab: {fileID: 0}
+  debriPrefab: {fileID: 658348586179038979, guid: d84721c3f8078644287f4352d5f1453d,
+    type: 3}
 --- !u!114 &2669841131913891091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +209,6 @@ MonoBehaviour:
   destroyZone: {x: 0, y: -11, z: 0}
   minInterval: 1
   maxInterval: 5
-  drill: {fileID: 658348586179038979, guid: d84721c3f8078644287f4352d5f1453d, type: 3}
 --- !u!1 &8338770875842385597
 GameObject:
   m_ObjectHideFlags: 0

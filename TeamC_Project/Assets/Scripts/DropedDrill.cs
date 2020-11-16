@@ -34,6 +34,9 @@ public class DropedDrill : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
+            if (other.transform.GetComponent<Player>().IsEquipmentDrill) return;
+
+            other.transform.GetComponent<Player>().EquipmentDrill();
             Destroy(gameObject);
         }
     }

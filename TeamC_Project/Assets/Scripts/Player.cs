@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private GameObject shotScrewObject;
     private bool isExistScrew;//スクリューが存在しているか
 
-    private bool isUseScrew;
+    private bool isUse;
     [SerializeField]
     private float shotScrewInterval = 2.0f;
     [SerializeField]
@@ -66,11 +66,21 @@ public class Player : MonoBehaviour
     private float rotationInterval = 1.0f;
     private float rotationElapsedTime;
 
+    [SerializeField]
+    private GameObject drillPrefab;
+    private GameObject drill;
+
     public bool IsRapidFire
     {
         get;
         private set;
     } = false;//連射中か
+
+    public bool IsEquipmentDrill
+    {
+        get;
+        private set;
+    } = false;
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +95,7 @@ public class Player : MonoBehaviour
         shotBulletElapsedTime = 0.0f;
         shotScrewElapsedTime = shotScrewInterval;
         isExistScrew = false;
-        isUseScrew = false;
+        isUse = false;
         rotationSpeed *= magnificationSpeed;
         rotationElapsedTime = 0.0f;
     }
@@ -200,19 +210,38 @@ public class Player : MonoBehaviour
                 if (isStartScrew)
                 {
                     //Rボタンを押している間、スクリューを生成
-                    isUseScrew = inputManager.GetR_Button();
+                    isUse = inputManager.GetR_Button();
 
-                    if (isUseScrew)
+                    if (!IsEquipmentDrill)
                     {
-                        GenerateScrew();
-                        inhaleScrewObject.transform.position = transform.position + Vector3.up * 10.0f;
+
+                        if (isUse)
+                        {
+                            GenerateScrew();
+                            inhaleScrewObject.transform.position = transform.position + Vector3.up * 10.0f;
+                        }
+                        else
+                            StopScrew();
                     }
                     else
-                        StopScrew();
+                    {
+                        if (drill == null)
+                        {
+                            IsEquipmentDrill = false;
+                            StopScrew();
+                            currentMode = Mode.ROTATION_NORMAL;
+                        }
+
+                        if (isUse) UseDrill();
+                        else StopScrew();
+                    }
                 }
                 else if (isShotScrew)
                 {
-                    InstanceShotScrew();
+                    if (!IsEquipmentDrill)
+                        ShotScrew();
+                    else
+                        ShotDrill();
                     RotationInterval();
                 }
                 break;
@@ -236,7 +265,7 @@ public class Player : MonoBehaviour
             StopScrew();
     }
 
-    private void InstanceShotScrew()
+    private void ShotScrew()
     {
         if (shotScrewElapsedTime < shotScrewInterval) return;
 
@@ -244,7 +273,7 @@ public class Player : MonoBehaviour
         {
             EnemyRecoveryStart(shotScrewObject);
             screw.GetComponent<ParticleManager>().StopParticle(shotScrewObject);
-        }   
+        }
 
         shotScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(1);
         shotScrewObject.transform.position = transform.position;
@@ -261,6 +290,12 @@ public class Player : MonoBehaviour
 
         currentMode = Mode.ROTATION_NORMAL;
         rotationElapsedTime = 0.0f;
+
+        if (drill != null)
+        {
+            drill.GetComponent<BoxCollider>().enabled = false;
+            drill.transform.parent = transform;
+        }
     }
 
     private void DestroyShotScrew()
@@ -361,6 +396,30 @@ public class Player : MonoBehaviour
             isStartScrew = false;
             isShotScrew = false;
         }
+    }
+
+    private void UseDrill()
+    {
+        if (drill == null) return;
+
+        drill.transform.parent = null;
+        drill.GetComponent<BoxCollider>().enabled = true;
+    }
+
+    private void ShotDrill()
+    {
+        if (drill == null) return;
+
+        drill.GetComponent<Drill>().Shot();
+        drill.transform.parent = null;
+        drill = null;
+        IsEquipmentDrill = false;
+    }
+
+    public void EquipmentDrill()
+    {
+        drill = Instantiate(drillPrefab, transform.position + Vector3.down, Quaternion.identity, transform);
+        IsEquipmentDrill = true;
     }
 
     private void OnTriggerEnter(Collider other)

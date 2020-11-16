@@ -51,5 +51,10 @@ public class BossDrill : MonoBehaviour
             }
             other.GetComponent<BulletCollision>().Disconnect();
         }
+
+        if(other.transform.tag == "Player")
+        {
+            other.GetComponent<Health>().Damage(3);
+        }
     }
 }
