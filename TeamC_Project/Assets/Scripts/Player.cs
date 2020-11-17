@@ -429,7 +429,7 @@ public class Player : MonoBehaviour
 
     public void EquipmentDrill()
     {
-        drill = Instantiate(drillPrefab, transform.position + Vector3.down, Quaternion.identity, transform);
+        drill = Instantiate(drillPrefab, transform.position + Vector3.down * 1.5f, Quaternion.identity, transform);
         IsEquipmentDrill = true;
     }
 

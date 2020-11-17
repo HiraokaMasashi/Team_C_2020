@@ -195,13 +195,12 @@ MonoBehaviour:
   maxPosition: {x: 17, y: 16, z: 0}
   shotBulletInterval: 1
   playerMoveSpeed: 10
-  bulletMoveSpeed: 1000
   screw: {fileID: 479286963}
   shotScrewInterval: 3
   shotScrewDestroyTime: 3
   magnificationSpeed: 3
   rotationInterval: 1
-  drillPrefab: {fileID: 6786455549019819531, guid: 24dfbae00aea6814097367eb6f4fb37d,
+  drillPrefab: {fileID: 6111796149867733879, guid: be96b709edb94dc41ac93634e5ef4bc4,
     type: 3}
   ses:
   - screw1
