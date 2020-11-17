@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Option.unity
     guid: fcf63de9f99493f4c9b4776877a0e10e
   - enabled: 1
-    path: Assets/Scenes/Watanabe.unity
+    path: Assets/Scenes/Stage3.unity
     guid: cf4666044ae378f4398624ce7ddb4b41
   - enabled: 1
     path: Assets/Scenes/Stage1.unity

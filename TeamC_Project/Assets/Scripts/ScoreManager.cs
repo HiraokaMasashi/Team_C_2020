@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using System.Text;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class ScoreRanking
@@ -17,8 +17,9 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private int totalScore;//合計スコア
     private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
-    string path;
-    string fileName = "ranking_data.json";
+    static string path;
+    string stageName;
+    string fileName = "_ranking_data.json";
 
     private Text scoreText;//表示テキスト
     private Text hiScoreText;//表示テキスト
@@ -27,7 +28,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         base.Awake();
 
-        path = Application.persistentDataPath + "/"  + fileName;
+        SetFilePath();
 
         if (File.Exists(path))
             LoadScore();
@@ -184,5 +185,14 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     public int GetRank()
     {
         return ranking.rank;
+    }
+
+    public void SetFilePath()
+    {
+        if (SceneManager.GetActiveScene().name != "Result")
+        {
+            stageName = SceneManager.GetActiveScene().name;
+            path = Application.persistentDataPath + "/" + stageName + fileName;
+        }
     }
 }
