@@ -15,11 +15,19 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField]
     private FadeScene sceneManager;
 
+    private SoundManager soundManager;
+    [SerializeField]
+    private string bgm;
+    [SerializeField]
+    private string se;
+
     void Awake()
     {
         pressLogo.gameObject.SetActive(false);
         titleLogo.transform.position += Vector3.up * 775;
         moveEnd = false;
+        soundManager = SoundManager.Instance;
+        soundManager.PlayBgmByName(bgm);
     }
 
     // Update is called once per frame
@@ -49,7 +57,10 @@ public class TitleSceneManager : MonoBehaviour
 
             //ムービー終了後にボタンを押すと次のシーンへ
             if (PressAnyButton())
+            {
+                soundManager.PlaySeByName(se);
                 sceneManager.ChangeNextScene("Select");
+            }
 
             if (GameExit())
             {

@@ -265,6 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
+      propertyPath: bgms.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
       propertyPath: bossPattern
       value: 
       objectReference: {fileID: 4193683771115389222, guid: 573122ed6b47cdd43ba89cfa17fbc1ee,
@@ -410,6 +415,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9191375001433835155, guid: 35e06a8b0e4cc9440961e49b21a3d3c2,
         type: 3}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bgms.Array.data[0]
+      value: Play 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bgms.Array.data[1]
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: m_Name

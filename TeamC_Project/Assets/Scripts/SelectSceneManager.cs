@@ -23,11 +23,16 @@ public class SelectSceneManager : MonoBehaviour
     [SerializeField]
     private string[] sceneNames;
 
+    private SoundManager soundManager;
+    [SerializeField]
+    private string[] ses;
+
     // Start is called before the first frame update
     void Start()
     {
         length = scenes.Length - 1;
         selectNumber = 0;
+        soundManager = SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -43,6 +48,7 @@ public class SelectSceneManager : MonoBehaviour
             selectNumber = (0 < selectNumber) ? selectNumber : 0;
             selectNumber = (length > selectNumber) ? selectNumber : length;
             timer = 0;
+            soundManager.PlaySeByName(ses[0]);
         }
         if (v == 0)
             timer = interval;
@@ -50,6 +56,7 @@ public class SelectSceneManager : MonoBehaviour
         //Aかメニューボタンで選択中のシーンへ
         if (Input.GetA_ButtonDown() || Input.GetMenu_ButtonDown())
         {
+            soundManager.PlaySeByName(ses[1]);
             if (selectNumber == length)
             {
 #if UNITY_EDITOR
@@ -59,12 +66,17 @@ public class SelectSceneManager : MonoBehaviour
 #endif
             }
             else
+            {
                 sceneManager.ChangeNextScene(sceneNames[selectNumber]);
+            }
         }
 
         //Bボタンでタイトルへ
         if (Input.GetB_ButtonDown())
+        {
+            soundManager.PlaySeByName(ses[2]);
             sceneManager.ChangeNextScene("Title");
+        }
 
         ActiveButton(selectNumber);
     }

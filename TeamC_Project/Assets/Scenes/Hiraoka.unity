@@ -238,18 +238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: drillPrefab
-      value: 
-      objectReference: {fileID: 6786455549019819531, guid: 24dfbae00aea6814097367eb6f4fb37d,
-        type: 3}
-    - target: {fileID: 2732371690843407089, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 473919844062677970, guid: 9c2ef86c87f14b5479594bc4183eb550,
-        type: 3}
     - target: {fileID: 2732371690843407090, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
       propertyPath: hpText

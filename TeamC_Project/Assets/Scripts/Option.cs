@@ -9,12 +9,14 @@ public class Option : MonoBehaviour
     private InputManager inputManager;
 
     private SoundManager soundManager;
+    [SerializeField]
+    private string se;
 
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager =SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class Option : MonoBehaviour
         if (ExitOption())
         {
             soundManager.SaveVolume();
+            soundManager.PlaySeByName(se);
             fadeScene.ChangeNextScene("Select");
         }
     }

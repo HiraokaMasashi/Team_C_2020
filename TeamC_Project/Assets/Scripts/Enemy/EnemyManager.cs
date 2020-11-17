@@ -28,6 +28,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Vector3 bossRotate;
 
+    private SoundManager soundManager;
+    [SerializeField]
+    private string[] bgms;
+
     //Waveエンドフラグ
     public bool IsEnd
     {
@@ -39,6 +43,8 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         wave = 0;
+        soundManager = SoundManager.Instance;
+        soundManager.PlayBgmByName(bgms[0]);
         StartCoroutine(Instance(wave));
     }
 
@@ -69,7 +75,11 @@ public class EnemyManager : MonoBehaviour
                     StartCoroutine(Instance(wave));
                 //Waveの最後ならエンドフラグをtrueに
                 if (wave == maxWave)
+                {
+                    soundManager.StopBgm();
+                    soundManager.PlayBgmByName(bgms[1]);
                     InstanceBoss();
+                }
             }
         }
     }

@@ -18,7 +18,7 @@ public class SoundTest : MonoBehaviour
     void Awake()
     {
         sm = SoundManager.Instance;
-        sm.PlayBgmByName(bgmName);
+        //sm.PlayBgmByName(bgmName);
     }
 
     public void OnClick()

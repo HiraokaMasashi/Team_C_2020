@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private float bulletMoveSpeed = 200.0f;//弾の移動速度
 
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     //プレイヤーの状態
     public enum Mode
@@ -70,6 +71,9 @@ public class Player : MonoBehaviour
     private GameObject drillPrefab;
     private GameObject drill;
 
+    [SerializeField]
+    private string[] ses;
+
     //public bool IsRapidFire
     //{
     //    get;
@@ -98,6 +102,7 @@ public class Player : MonoBehaviour
         isUse = false;
         rotationSpeed *= magnificationSpeed;
         rotationElapsedTime = 0.0f;
+        soundManager = SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -279,6 +284,7 @@ public class Player : MonoBehaviour
         shotScrewObject.transform.position = transform.position;
         shotScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.SHOT);
         screw.GetComponent<ParticleManager>().StartParticle(shotScrewObject);
+        soundManager.PlaySeByName(ses[1]);
 
         shotScrewElapsedTime = 0.0f;
     }
@@ -311,6 +317,7 @@ public class Player : MonoBehaviour
         screw.GetComponent<ParticleManager>().StopParticle(shotScrewObject);
         shotScrewObject = null;
         destroyShotScrewTime = 0.0f;
+        soundManager.StopSe();
     }
 
     private void EnemyRecoveryStart(GameObject screw)
@@ -337,6 +344,7 @@ public class Player : MonoBehaviour
         inhaleScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(0);
         inhaleScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.INHALE);
         screw.GetComponent<ParticleManager>().StartParticle(inhaleScrewObject);
+        soundManager.PlaySeByName(ses[0]);
         isExistScrew = true;
     }
 
@@ -354,6 +362,7 @@ public class Player : MonoBehaviour
             inhaleScrewObject.GetComponent<BoxCollider>().enabled = false;
             isExistScrew = false;
             inhaleScrewObject = null;
+            soundManager.StopSe();
         }
 
         if (drill != null)

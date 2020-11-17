@@ -73,7 +73,8 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
         {
             fadeColor.a = 1.0f;
             IsFadeOut = false;
-            SoundStop();
+            if (nextSceneName != "Select" && nextSceneName != "Option")
+                SoundStop();
             SceneManager.LoadScene(nextSceneName);
         }
     }

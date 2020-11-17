@@ -40,6 +40,8 @@ public class NormalBoss : Boss
     private GameObject bombPrefab;
     [SerializeField]
     private float bombSpeed = 200.0f;
+    [SerializeField]
+    private string bombSe;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -123,7 +125,7 @@ public class NormalBoss : Boss
         {
             Vector3 position = shotTransforms[i].position;
             Vector3 direction = (player.transform.position - shotTransforms[i].position).normalized;
-            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSpeed));
+            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSpeed, bombSe));
         }
 
         shotElapsedTime = 0.0f;

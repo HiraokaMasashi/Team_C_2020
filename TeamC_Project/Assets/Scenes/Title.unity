@@ -813,6 +813,8 @@ MonoBehaviour:
   pressLogo: {fileID: 1087776882}
   Input: {fileID: 1266567267}
   sceneManager: {fileID: 1154318155}
+  bgm: Menu
+  se: enter1
 --- !u!4 &1346963729
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +896,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1001768381916654498, guid: 4968c4f00c55cdd438cb962884220273, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4968c4f00c55cdd438cb962884220273, type: 3}
 --- !u!1 &1810786265
 GameObject:

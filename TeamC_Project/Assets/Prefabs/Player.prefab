@@ -201,6 +201,11 @@ MonoBehaviour:
   shotScrewDestroyTime: 3
   magnificationSpeed: 3
   rotationInterval: 1
+  drillPrefab: {fileID: 6786455549019819531, guid: 24dfbae00aea6814097367eb6f4fb37d,
+    type: 3}
+  ses:
+  - screw1
+  - screwattack1
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666,
+  bulletPrefab: {fileID: 473919844062677970, guid: 9c2ef86c87f14b5479594bc4183eb550,
     type: 3}
   shotSe: shot1
 --- !u!54 &1998912523

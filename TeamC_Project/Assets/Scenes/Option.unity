@@ -1554,6 +1554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeScene: {fileID: 1321206853}
+  se: cansel1
 --- !u!4 &1874020793
 Transform:
   m_ObjectHideFlags: 0

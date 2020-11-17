@@ -20,6 +20,12 @@ public class ResultSceneManager : MonoBehaviour
     private int[] scores;
     private int rank;
 
+    private SoundManager soundManager;
+    [SerializeField]
+    private string bgm;
+    [SerializeField]
+    private string se;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +43,8 @@ public class ResultSceneManager : MonoBehaviour
         scoreManager = ScoreManager.Instance;
         scores = scoreManager.GetScoreRanking();
         rank = scoreManager.GetRank();
+        soundManager = SoundManager.Instance;
+        soundManager.PlayBgmByName(bgm);
     }
 
     // Update is called once per frame
@@ -50,6 +58,7 @@ public class ResultSceneManager : MonoBehaviour
     {
         if (inputManager.GetA_ButtonDown())
         {
+            soundManager.PlaySeByName(se);
             fadeScene.ChangeNextScene("Title");
         }
     }

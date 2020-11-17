@@ -409,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666,
     type: 3}
-  shotSe: 
+  shotSe: shot2
 --- !u!114 &5603479332625542553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +464,7 @@ MonoBehaviour:
   - {fileID: 8156129210025898844}
   - {fileID: 6790969210507692812}
   - {fileID: 6312690023822457525}
-  bombPrefab: {fileID: 4216414670096648170, guid: 1026ff9b890e56944be5cf9628e9a7ee,
+  bombPrefab: {fileID: 7582214874540601550, guid: 2800e4270d3eb15449467f52b7095b29,
     type: 3}
   bombSpeed: 5
+  bombSe: shot2
