@@ -57,21 +57,6 @@ public class Bomb : MonoBehaviour
 
     private void DisConnect()
     {
-        if (transform.childCount == 0) return;
-
-        GameObject particle = null;
-        foreach (Transform child in transform)
-        {
-            if (child.name.Contains("Trail"))
-            {
-                particle = child.gameObject;
-                break;
-            }
-        }
-        if (particle == null) return;
-
-        particleManager.StopParticle(particle);
-        particle.transform.parent = null;
         boss.RemoveBomb(gameObject);
         Destroy(gameObject);
     }
@@ -81,7 +66,7 @@ public class Bomb : MonoBehaviour
         if(other.gameObject.tag == "PlayerBullet")
         {
             other.gameObject.GetComponent<Bullet>().Disconnect();
-            GameObject particle = particleManager.GenerateParticle(2);
+            GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
             particleManager.OncePlayParticle(particle);
@@ -90,7 +75,7 @@ public class Bomb : MonoBehaviour
 
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Blast")
         {
-            GameObject particle = particleManager.GenerateParticle(2);
+            GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
             particleManager.OncePlayParticle(particle);

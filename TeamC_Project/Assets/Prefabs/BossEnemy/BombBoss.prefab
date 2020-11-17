@@ -464,7 +464,7 @@ MonoBehaviour:
   - {fileID: 8156129210025898844}
   - {fileID: 6790969210507692812}
   - {fileID: 6312690023822457525}
-  bombPrefab: {fileID: 7582214874540601550, guid: 2800e4270d3eb15449467f52b7095b29,
+  bombPrefab: {fileID: 9185736474104399769, guid: f9728854970b8064985ae16bcd8d847e,
     type: 3}
   bombSpeed: 5
   bombSe: shot2
