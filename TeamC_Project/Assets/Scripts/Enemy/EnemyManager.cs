@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
     //現在のWave
     private int wave;
 
+    [Space]
     [SerializeField]
     private GameObject bossPrefab;
     [SerializeField]

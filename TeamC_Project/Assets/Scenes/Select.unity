@@ -1134,7 +1134,7 @@ MonoBehaviour:
   sceneManager: {fileID: 2061709770}
   sceneNames:
   - Stage1
-  - Main1
+  - Stage2
   - Watanabe
   - Option
 --- !u!4 &1447216965
