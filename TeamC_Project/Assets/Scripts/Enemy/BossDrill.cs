@@ -49,7 +49,7 @@ public class BossDrill : MonoBehaviour
                 transform.parent.GetComponent<DrillBoss>().SetRespawn();
                 Destroy(gameObject);
             }
-            other.GetComponent<BulletCollision>().Disconnect();
+            other.GetComponent<Bullet>().Disconnect();
         }
 
         if(other.transform.tag == "Player")

@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyZone: {x: 19, y: 21, z: 0}
   destroyZoneMinY: -11
+  moveSpeed: 10
 --- !u!114 &2006428655136594442
 MonoBehaviour:
   m_ObjectHideFlags: 0

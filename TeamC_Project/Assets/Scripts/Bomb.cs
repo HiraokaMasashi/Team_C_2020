@@ -33,7 +33,6 @@ public class Bomb : MonoBehaviour
         if (setUpScrew.IsStan) return;
 
         Move();
-
         if (GetIsDestroy())
             DisConnect();
     }
@@ -44,6 +43,7 @@ public class Bomb : MonoBehaviour
         position += direction.normalized * Time.deltaTime * moveSpeed;
         transform.position = position;
     }
+
     private bool GetIsDestroy()
     {
         bool isDestroy = false;
@@ -80,7 +80,7 @@ public class Bomb : MonoBehaviour
     {
         if(other.gameObject.tag == "PlayerBullet")
         {
-            other.gameObject.GetComponent<BulletCollision>().Disconnect();
+            other.gameObject.GetComponent<Bullet>().Disconnect();
             GameObject particle = particleManager.GenerateParticle(2);
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);

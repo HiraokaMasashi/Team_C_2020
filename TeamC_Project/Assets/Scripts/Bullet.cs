@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletCollision : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField]
     private Vector3 destroyZone;
@@ -11,6 +11,10 @@ public class BulletCollision : MonoBehaviour
 
     private ScoreManager scoreManager;
     private ParticleManager particleManager;
+
+    private Vector3 direction;
+    [SerializeField]
+    private float moveSpeed = 1.0f;
 
     public int Attack
     {
@@ -32,10 +36,16 @@ public class BulletCollision : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Move();
         if (GetIsDestroy())
-        {
             Disconnect();
-        }
+    }
+
+    private void Move()
+    {
+        Vector3 position = transform.position;
+        position += direction.normalized * Time.deltaTime * moveSpeed;
+        transform.position = position;
     }
 
     public void Disconnect()
@@ -67,6 +77,11 @@ public class BulletCollision : MonoBehaviour
             isDestroy = true;
 
         return isDestroy;
+    }
+
+    public void SetDirection(Vector3 dir)
+    {
+        direction = dir;
     }
 
     private void OnTriggerEnter(Collider other)

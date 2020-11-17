@@ -38,7 +38,7 @@ public class BulletController : MonoBehaviour
 
 		GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
 		bullet.tag = tagName + "Bullet";
-		bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * speed);
+		bullet.GetComponent<Bullet>().SetDirection(direction);
 		GameObject particle = bullet.GetComponent<ParticleManager>().GenerateParticleInChildren();
 		particle.transform.position = bullet.transform.position;
 		particle.transform.rotation = Quaternion.LookRotation(direction, Vector3.back);
