@@ -241,6 +241,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 473919844062677970, guid: 9c2ef86c87f14b5479594bc4183eb550,
     type: 3}
   shotSe: shot1
+  isPlayParticle: 1
 --- !u!54 &1998912523
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -393,7 +393,7 @@ MonoBehaviour:
   hp: 80
   hpText: {fileID: 0}
   deadSe: dead
-  damageSe: 
+  damageSe: damage
   debriPrefab: {fileID: 0}
 --- !u!114 &4577994661093772295
 MonoBehaviour:
@@ -410,6 +410,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666,
     type: 3}
   shotSe: shot2
+  isPlayParticle: 1
 --- !u!114 &5603479332625542553
 MonoBehaviour:
   m_ObjectHideFlags: 0
