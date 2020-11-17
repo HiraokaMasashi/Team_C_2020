@@ -580,7 +580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 13, z: 0}
   moveSpeed: 2
-  bulletSpeed: 300
+  bulletSpeed: 10
   shotInterval: 5
   destroyTime: 5
   summonObject: {fileID: 2669841131913891094, guid: 2b9b42c83e6011747bd1d5dc7c982129,

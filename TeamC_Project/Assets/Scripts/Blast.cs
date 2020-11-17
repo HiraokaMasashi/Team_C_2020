@@ -19,6 +19,8 @@ public class Blast : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Health>().Damage(enemyDamage);
+            if (other.gameObject.GetComponent<Health>().IsDead)
+                ScoreManager.Instance.AddScore(other.gameObject.GetComponent<Score>().GetScore());
         }
     }
 

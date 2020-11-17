@@ -21,7 +21,7 @@ public class Bomb : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         particleManager = GetComponent<ParticleManager>();
-        boss = GameObject.Find("BombBoss").GetComponent<NormalBoss>();
+        boss = GameObject.Find("BombBoss(Clone)").GetComponent<NormalBoss>();
         setUpScrew = GetComponent<SetUpScrew>();
 
         direction = player.transform.position - transform.position;

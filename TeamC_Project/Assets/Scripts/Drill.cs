@@ -48,7 +48,7 @@ public class Drill : MonoBehaviour
     {
         if (!isShot)
         {
-            if (transform.parent == null)
+            if (transform.parent == null && player != null)
                 transform.position = player.transform.position + Vector3.up;
             return;
         }
