@@ -24,6 +24,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Transform bossPattern;
     private GameObject boss;
+    [SerializeField]
+    private Vector3 bossRotate;
 
     //Waveエンドフラグ
     public bool IsEnd
@@ -76,7 +78,7 @@ public class EnemyManager : MonoBehaviour
         if (boss != null) return;
         if (bossPrefab == null) return;
 
-        boss = Instantiate(bossPrefab, bossPattern.GetChild(0).position, Quaternion.identity);
+        boss = Instantiate(bossPrefab, bossPattern.GetChild(0).position, Quaternion.Euler(bossRotate));
     }
 
     //敵をパターンごとに生成する

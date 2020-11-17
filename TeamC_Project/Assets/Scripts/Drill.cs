@@ -18,6 +18,8 @@ public class Drill : MonoBehaviour
     private float hitInterval = 1.0f;
     private float hitElpsedTime;
 
+    private ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,8 @@ public class Drill : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<Health>();
         hitElpsedTime = 0.0f;
+
+        scoreManager = ScoreManager.Instance;
     }
 
     // Update is called once per frame
@@ -65,11 +69,23 @@ public class Drill : MonoBehaviour
     {
         if (other.transform.tag == "Enemy")
         {
-            if (!other.gameObject.name.Contains("Boss"))
-                other.GetComponent<Health>().HitDeath();
-            else
-                other.GetComponent<Health>().Damage(10);
+            Health otherHealth = other.GetComponent<Health>();
 
+            if (!other.gameObject.name.Contains("Boss"))
+            {
+                otherHealth.HitDeath();
+                Score score = other.transform.GetComponent<Score>();
+                scoreManager.AddScore(score.GetScore());
+            }
+            else
+            {
+                otherHealth.Damage(10);
+                if (otherHealth.IsDead)
+                {
+                    Score score = other.transform.GetComponent<Score>();
+                    scoreManager.AddScore(score.GetScore());
+                }
+            }
             if (!isShot)
                 health.Damage(1);
         }
