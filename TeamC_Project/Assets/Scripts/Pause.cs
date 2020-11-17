@@ -16,11 +16,14 @@ public class Pause : MonoBehaviour
     [SerializeField]
     private FadeScene fadeScene;
 
+    SoundManager soundManager;
+
     void Start()
     {
         panel.SetActive(false);
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         //initSelect.Select();
+        soundManager = SoundManager.Instance;
     }
 
     void Update()
@@ -83,6 +86,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 0;
         panel.SetActive(true);
+        soundManager.PlaySeByName("pose1");
         Debug.Log("Pause");
     }
 
