@@ -27,9 +27,6 @@ public class Boss : MonoBehaviour
     //フレームインしたか
     protected bool isFrameIn = false;
 
-    //弾の速度
-    [SerializeField]
-    protected float bulletSpeed = 500.0f;
     //弾の発射間隔
     [SerializeField]
     protected float shotInterval = 5.0f;

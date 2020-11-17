@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666,
+  bulletPrefab: {fileID: 5236733656101201018, guid: 407c4fff055baf04985ccdcbba434f16,
     type: 3}
   shotSe: shot2
   isPlayParticle: 1
@@ -454,7 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 16, z: 0}
   moveSpeed: 2
-  bulletSpeed: 10
   shotInterval: 3
   destroyTime: 5
   summonObject: {fileID: 0}

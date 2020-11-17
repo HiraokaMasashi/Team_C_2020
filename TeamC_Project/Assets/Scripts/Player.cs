@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float playerMoveSpeed = 4.0f;//移動速度
-    [SerializeField]
-    private float bulletMoveSpeed = 200.0f;//弾の移動速度
 
     private GameManager gameManager;
     private SoundManager soundManager;
@@ -165,7 +163,7 @@ public class Player : MonoBehaviour
         //生成位置
         Vector3 shotPosition = transform.position + Vector3.up;
 
-        bulletController.GenerateBullet(shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
+        bulletController.GenerateBullet(shotPosition, Vector3.up, 3.0f);
         chargeBullet.DecreaseCharge();
         //chargeBullet.ResetCharge();
     }

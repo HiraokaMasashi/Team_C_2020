@@ -305,17 +305,15 @@ public class DrillBoss : Boss
                         }
 
                         Vector3 position = instanceTransforms[k].position;
-                        float speed = bulletSpeed;
                         if (isForPlayer) dir = player.transform.position - position;
                         else
                         {
                             rad += 180 / shotCount;
                             dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0);
-                            speed *= 0.75f;
                             rad += 15;
                         }
 
-                        bulletController.GenerateBullet(position, dir, speed, destroyTime, "Enemy");
+                        bulletController.GenerateBullet(position, dir, destroyTime, "Enemy");
                     }
                 }
                 yield return new WaitForSeconds(0.2f);

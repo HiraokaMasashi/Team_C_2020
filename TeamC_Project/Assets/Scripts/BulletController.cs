@@ -18,8 +18,7 @@ public class BulletController : MonoBehaviour
     }
 
 
-    public void GenerateBullet(Vector3 position, Vector3 direction,
-        float speed, float destroyTime, string tagName = "Player")
+    public void GenerateBullet(Vector3 position, Vector3 direction, float destroyTime, string tagName = "Player")
     {
         //チャージ段階に応じて弾を変える
         //GameObject obj = bulletPrefab;
@@ -43,14 +42,11 @@ public class BulletController : MonoBehaviour
         bullet.tag = tagName + "Bullet";
         bullet.GetComponent<Bullet>().SetDirection(direction);
         bullet.transform.rotation = Quaternion.LookRotation(direction);
-        if (isPlayParticle)
-        {
-            GameObject particle = bullet.GetComponent<ParticleManager>().GenerateParticleInChildren();
-            particle.transform.position = bullet.transform.position;
-            particle.transform.rotation = Quaternion.LookRotation(direction, Vector3.back);
-            bullet.GetComponent<ParticleManager>().StartParticle(particle);
-            bullet.GetComponent<ParticleManager>().DestroyParticle(particle, destroyTime);
-        }
+        GameObject particle = bullet.GetComponent<ParticleManager>().GenerateParticleInChildren();
+        particle.transform.position = bullet.transform.position;
+        particle.transform.rotation = Quaternion.LookRotation(direction, Vector3.back);
+        bullet.GetComponent<ParticleManager>().StartParticle(particle);
+        bullet.GetComponent<ParticleManager>().DestroyParticle(particle, destroyTime);
         //if (chargeStage == ChargeBullet.ChargeMode.STAGE_3 || chargeStage == ChargeBullet.ChargeMode.STAGE_4)
         //	bullet.GetComponent<BulletCollision>().IsPenetrate = true;
         Destroy(bullet, destroyTime);

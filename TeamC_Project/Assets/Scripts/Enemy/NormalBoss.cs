@@ -169,7 +169,7 @@ public class NormalBoss : Boss
                     }
 
                     Vector3 position = shotTransforms[j].position;
-                    bulletController.GenerateBullet(position, dir, bulletSpeed, destroyTime, "Enemy");
+                    bulletController.GenerateBullet(position, dir, destroyTime, "Enemy");
                 }
                 yield return new WaitForSeconds(0.5f);
             }
