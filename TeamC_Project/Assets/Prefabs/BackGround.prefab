@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28c5f3621b75f94183cfa48c3965647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   startScreenY: 120
   endScreenY: -60
 --- !u!212 &1278450147
@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4764696847622951120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 30, z: 10}
+  m_LocalPosition: {x: 0, y: 50, z: 10}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1648366707874712305}
@@ -175,9 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28c5f3621b75f94183cfa48c3965647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  startScreenY: 120
-  endScreenY: -60
+  speed: 0.5
+  startScreenY: 184.4
+  endScreenY: -82.4
 --- !u!212 &2488971683673164935
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5026163783564124271}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 120, z: 10}
+  m_LocalPosition: {x: 0, y: 184.4, z: 10}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1648366707874712305}
@@ -272,9 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28c5f3621b75f94183cfa48c3965647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  startScreenY: 120
-  endScreenY: -60
+  speed: 0.5
+  startScreenY: 184.4
+  endScreenY: -82.4
 --- !u!212 &2047190092559146097
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28c5f3621b75f94183cfa48c3965647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   startScreenY: 120
   endScreenY: -60
 --- !u!212 &5616554086254341127
