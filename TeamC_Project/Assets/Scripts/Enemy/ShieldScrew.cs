@@ -39,6 +39,7 @@ public class ShieldScrew : MonoBehaviour
             int damage = 10;
             StartCoroutine(DamageComeOff(damage));
             health.Damage(damage);
+            if (other.GetComponent<Drill>().IsShot) Destroy(other.gameObject);
         }
     }
 

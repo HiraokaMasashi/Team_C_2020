@@ -10,7 +10,11 @@ public class Drill : MonoBehaviour
     [SerializeField]
     private float destroyZoneY;
 
-    private bool isShot;
+    public bool IsShot
+    {
+        get;
+        private set;
+    } = false;
     private GameObject player;
     private Health health;
 
@@ -23,7 +27,6 @@ public class Drill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isShot = false;
         player = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<Health>();
         hitElpsedTime = 0.0f;
@@ -46,7 +49,7 @@ public class Drill : MonoBehaviour
 
     private void Move()
     {
-        if (!isShot)
+        if (!IsShot)
         {
             if (transform.parent == null && player != null)
                 transform.position = player.transform.position + Vector3.up * 1.5f;
@@ -60,7 +63,8 @@ public class Drill : MonoBehaviour
 
     public void Shot()
     {
-        isShot = true;
+        IsShot = true;
+        transform.position = player.transform.position + Vector3.up * 1.5f;
         GetComponent<BoxCollider>().enabled = true;
         transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
     }
@@ -86,7 +90,7 @@ public class Drill : MonoBehaviour
                     scoreManager.AddScore(score.GetScore());
                 }
             }
-            if (!isShot)
+            if (!IsShot)
                 health.Damage(1);
         }
     }
