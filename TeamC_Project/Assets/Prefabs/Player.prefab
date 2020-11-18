@@ -205,6 +205,7 @@ MonoBehaviour:
   ses:
   - screw1
   - screwattack1
+  - drill
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +241,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 160549529051412272, guid: cf29c2571b84ec94980bcedf1645a5c3,
     type: 3}
   shotSe: shot1
-  isPlayParticle: 1
 --- !u!54 &1998912523
 Rigidbody:
   m_ObjectHideFlags: 0

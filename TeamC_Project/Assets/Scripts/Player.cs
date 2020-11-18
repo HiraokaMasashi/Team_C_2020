@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private string[] ses;
+    private bool isPlayDrillSE;
 
     //public bool IsRapidFire
     //{
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
         rotationSpeed *= magnificationSpeed;
         rotationElapsedTime = 0.0f;
         soundManager = SoundManager.Instance;
+        isPlayDrillSE = false;
     }
 
     // Update is called once per frame
@@ -252,6 +254,7 @@ public class Player : MonoBehaviour
             case Mode.ROTATION_NORMAL:
                 //元の回転に戻す
                 RotationDefault();
+                isPlayDrillSE = false;
                 break;
 
             case Mode.ROTATION_SCREW:
@@ -416,6 +419,10 @@ public class Player : MonoBehaviour
 
         drill.transform.parent = null;
         drill.GetComponent<BoxCollider>().enabled = true;
+
+        if (isPlayDrillSE) return;
+        soundManager.PlaySeByName(ses[2]);
+        isPlayDrillSE = true;
     }
 
     private void ShotDrill()
@@ -425,6 +432,7 @@ public class Player : MonoBehaviour
         drill.GetComponent<Drill>().Shot();
         drill.transform.parent = null;
         drill = null;
+        soundManager.PlaySeByName(ses[2]);
     }
 
     public void EquipmentDrill()
