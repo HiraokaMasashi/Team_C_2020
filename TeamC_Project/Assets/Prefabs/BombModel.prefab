@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles:
-  - {fileID: 3852418692826702211, guid: a93cc470908c6ae46abb02f11d6b2840, type: 3}
+  - {fileID: 5492864338482354611, guid: a93cc470908c6ae46abb02f11d6b2840, type: 3}
 --- !u!54 &9185736474104399771
 Rigidbody:
   m_ObjectHideFlags: 0
