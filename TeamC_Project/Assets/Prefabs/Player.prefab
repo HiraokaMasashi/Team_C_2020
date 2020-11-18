@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 473919844062677970, guid: 9c2ef86c87f14b5479594bc4183eb550,
+  bulletPrefab: {fileID: 160549529051412272, guid: cf29c2571b84ec94980bcedf1645a5c3,
     type: 3}
   shotSe: shot1
   isPlayParticle: 1

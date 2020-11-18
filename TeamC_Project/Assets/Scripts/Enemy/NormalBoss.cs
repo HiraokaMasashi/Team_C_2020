@@ -125,7 +125,7 @@ public class NormalBoss : Boss
         {
             Vector3 position = shotTransforms[i].position;
             Vector3 direction = (player.transform.position - shotTransforms[i].position).normalized;
-            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSpeed, bombSe));
+            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSe));
         }
 
         shotElapsedTime = 0.0f;

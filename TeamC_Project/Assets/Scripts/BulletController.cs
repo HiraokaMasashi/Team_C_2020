@@ -9,9 +9,6 @@ public class BulletController : MonoBehaviour
     [SerializeField]
     private string shotSe;
 
-    [SerializeField]
-    private bool isPlayParticle = true;
-
     private void Start()
     {
         soundManager = SoundManager.Instance;
@@ -45,6 +42,7 @@ public class BulletController : MonoBehaviour
         GameObject particle = bullet.GetComponent<ParticleManager>().GenerateParticleInChildren();
         particle.transform.position = bullet.transform.position;
         particle.transform.rotation = Quaternion.LookRotation(direction, Vector3.back);
+        particle.transform.localScale = Vector3.one;
         bullet.GetComponent<ParticleManager>().StartParticle(particle);
         bullet.GetComponent<ParticleManager>().DestroyParticle(particle, destroyTime);
         //if (chargeStage == ChargeBullet.ChargeMode.STAGE_3 || chargeStage == ChargeBullet.ChargeMode.STAGE_4)
@@ -68,11 +66,10 @@ public class BulletController : MonoBehaviour
         soundManager.PlaySeByName(shotSe);
     }
 
-    public GameObject GenerateBomb(GameObject bombPrefab, Vector3 position, Vector3 direction, float destroyTime, string shotSe = "")
+    public GameObject GenerateBomb(GameObject bombPrefab, Vector3 position, Vector3 direction, string shotSe = "")
     {
         GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
         bomb.transform.rotation = Quaternion.LookRotation(direction);
-        Destroy(bomb, destroyTime);
 
         if (shotSe != "")
             soundManager.PlaySeByName(shotSe);
