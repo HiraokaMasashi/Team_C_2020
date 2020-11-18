@@ -39,8 +39,6 @@ public class NormalBoss : Boss
     [SerializeField]
     private GameObject bombPrefab;
     [SerializeField]
-    private float bombSpeed = 200.0f;
-    [SerializeField]
     private string bombSe;
 
     // Start is called before the first frame update
