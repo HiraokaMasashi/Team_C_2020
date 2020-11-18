@@ -62,7 +62,7 @@ public class Drill : MonoBehaviour
     {
         isShot = true;
         GetComponent<BoxCollider>().enabled = true;
-        transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
     }
 
     private void OnTriggerEnter(Collider other)

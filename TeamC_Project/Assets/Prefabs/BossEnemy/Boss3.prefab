@@ -566,7 +566,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5236733656101201018, guid: 407c4fff055baf04985ccdcbba434f16,
     type: 3}
   shotSe: shot2
-  isPlayParticle: 0
 --- !u!114 &1184275788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,6 +585,7 @@ MonoBehaviour:
   summonObject: {fileID: 2669841131913891094, guid: 2b9b42c83e6011747bd1d5dc7c982129,
     type: 3}
   summonInterval: 5
+  alertSe: alert
   shotBulletCount: 30
   shotBarrageRows: 4
-  summonCount: 5
+  summonCount: 2

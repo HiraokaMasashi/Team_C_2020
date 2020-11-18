@@ -115,6 +115,7 @@ public class DrillBoss : Boss
                     endMove = false;
                     attackElapsedTime = 0.0f;
                     attackPosition = Vector3.zero;
+                    isPlayAlert = false;
                 }
                 break;
 
@@ -208,6 +209,11 @@ public class DrillBoss : Boss
         }
 
         attackElapsedTime += Time.deltaTime;
+        if(attackElapsedTime >= attackInterval - 1.0f && !isPlayAlert)
+        {
+            isPlayAlert = true;
+            SoundManager.Instance.PlaySeByName(alertSe);
+        }
         if (attackElapsedTime < attackInterval) return;
 
         if (attackPosition == Vector3.zero)

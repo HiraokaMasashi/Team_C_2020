@@ -81,6 +81,7 @@ public class NormalBoss : Boss
                 if (bombs.Count == 0 && endShot)
                 {
                     endShot = false;
+                    isPlayAlert = false;
                     pattern = BehaviourPattern.SHOT;
                 }
                 break;
@@ -119,6 +120,11 @@ public class NormalBoss : Boss
 
         shotElapsedTime += Time.deltaTime;
 
+        if(shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
+        {
+            isPlayAlert = true;
+            SoundManager.Instance.PlaySeByName(alertSe);
+        }
         if (shotElapsedTime < shotInterval) return;
 
         for (int i = 0; i < shotTransforms.Length; i++)

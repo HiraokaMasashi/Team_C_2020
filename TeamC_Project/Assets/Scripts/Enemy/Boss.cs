@@ -49,6 +49,10 @@ public class Boss : MonoBehaviour
     //生成までの経過時間
     protected float summonElapsedTime;
 
+    [SerializeField]
+    protected string alertSe = "alert";
+    protected bool isPlayAlert;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -62,6 +66,7 @@ public class Boss : MonoBehaviour
         gameManager.SetBossEnemy(gameObject);
 
         pattern = BehaviourPattern.SHOT;
+        isPlayAlert = false;
 
         StartCoroutine(FrameIn());
     }
