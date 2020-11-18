@@ -9,11 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1676340053367237866}
-  - component: {fileID: 1676340053367237867}
   - component: {fileID: 1676340053367237856}
   - component: {fileID: 1676340053367237871}
   - component: {fileID: 1676340053367237870}
   - component: {fileID: 1676340053367237857}
+  - component: {fileID: 4266395322212115040}
+  - component: {fileID: 5814117517639121341}
+  - component: {fileID: 6595989501666463731}
+  - component: {fileID: 1919082359434505540}
   m_Layer: 0
   m_Name: BossDrill
   m_TagString: Drill
@@ -28,28 +31,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676340053367237865}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.572, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children:
-  - {fileID: 3342779095685170188}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1676340053367237867
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676340053367237865}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 3.1087666
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!114 &1676340053367237856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ed41a450195984294306f62e1ba198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: []
+  particles:
+  - {fileID: 7545205789895186576, guid: 82032c9e6ea2c45488f067cd14866195, type: 3}
 --- !u!114 &1676340053367237871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,8 +67,8 @@ MonoBehaviour:
   hp: 5
   hpText: {fileID: 0}
   deadSe: dead
-  damageSe: 
-  debriPrefab: {fileID: 658348586179038979, guid: d84721c3f8078644287f4352d5f1453d,
+  damageSe: damage
+  debriPrefab: {fileID: 4981643153796924300, guid: 7b0e7bfeb4fcce245acfe2cae7c7b8fc,
     type: 3}
 --- !u!114 &1676340053367237870
 MonoBehaviour:
@@ -109,54 +98,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &3342779095685170193
-GameObject:
+--- !u!64 &4266395322212115040
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3342779095685170188}
-  - component: {fileID: 3342779095685170189}
-  - component: {fileID: 3342779095685170190}
-  - component: {fileID: 3342779095685170191}
-  m_Layer: 0
-  m_Name: DrillCone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3342779095685170188
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3342779095685170193}
-  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 1, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1676340053367237866}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
---- !u!33 &3342779095685170189
+  m_GameObject: {fileID: 1676340053367237865}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!33 &5814117517639121341
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3342779095685170193}
+  m_GameObject: {fileID: 1676340053367237865}
   m_Mesh: {fileID: 0}
---- !u!23 &3342779095685170190
+--- !u!23 &6595989501666463731
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3342779095685170193}
+  m_GameObject: {fileID: 1676340053367237865}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -189,13 +159,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3342779095685170191
+--- !u!114 &1919082359434505540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3342779095685170193}
+  m_GameObject: {fileID: 1676340053367237865}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}

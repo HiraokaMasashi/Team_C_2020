@@ -50,6 +50,8 @@ public class DrillBoss : Boss
 
     [SerializeField]
     private int chnageBehaviourCount = 2;
+    [SerializeField]
+    private Transform instanceTransform;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -209,7 +211,7 @@ public class DrillBoss : Boss
         }
 
         attackElapsedTime += Time.deltaTime;
-        if(attackElapsedTime >= attackInterval - 1.0f && !isPlayAlert)
+        if (attackElapsedTime >= attackInterval - 1.0f && !isPlayAlert)
         {
             isPlayAlert = true;
             SoundManager.Instance.PlaySeByName(alertSe);
@@ -267,7 +269,8 @@ public class DrillBoss : Boss
 
         respawnElapsedTime = 0.0f;
         nowRespawn = false;
-        drill = Instantiate(drillPrefab, transform.position, Quaternion.identity, transform);
+        Vector3 position = instanceTransform.position - new Vector3(1.25f, 0.25f, 0);
+        drill = Instantiate(drillPrefab, position, Quaternion.Euler(-180, -180, 0), transform);
         StartCoroutine(InstanceDrill());
     }
 
@@ -277,7 +280,7 @@ public class DrillBoss : Boss
     /// <returns></returns>
     private IEnumerator InstanceDrill()
     {
-        Vector3 destination = transform.position + new Vector3(0, -3.0f, 0);
+        Vector3 destination = instanceTransform.position - new Vector3(1.25f, 2.5f, 0);
         while (Vector3.Distance(drill.transform.position, destination) > 0.1f)
         {
             Vector3 position = Vector3.Lerp(drill.transform.position, destination, Time.deltaTime * moveSpeed);

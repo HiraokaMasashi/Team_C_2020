@@ -89,7 +89,7 @@ public class Bullet : MonoBehaviour
         if (transform.tag == "PlayerBullet" && other.transform.tag == "Screw")
         {
             IsPenetrate = true;
-            GetComponent<Renderer>().material.color = Color.red;
+            //GetComponent<Renderer>().material.color = Color.red;
         }
 
         if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")

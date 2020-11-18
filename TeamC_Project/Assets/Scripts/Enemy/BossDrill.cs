@@ -6,6 +6,7 @@ using UnityEngine;
 public class BossDrill : MonoBehaviour
 {
     private Health health;
+    private ParticleManager particleManager;
     //private Rigidbody rigid;
     //[SerializeField]
     //private float shotPower = 300.0f;
@@ -17,6 +18,7 @@ public class BossDrill : MonoBehaviour
     void Start()
     {
         health = GetComponent<Health>();
+        particleManager = GetComponent<ParticleManager>();
         //rigid = GetComponent<Rigidbody>();
     }
 
@@ -44,6 +46,9 @@ public class BossDrill : MonoBehaviour
         if (other.transform.tag == "PlayerBullet")
         {
             health.Damage(1);
+            GameObject particle = particleManager.GenerateParticle();
+            particle.transform.position = other.ClosestPointOnBounds(transform.position);
+            particleManager.OncePlayParticle(particle);
             if (health.IsDead)
             {
                 transform.parent.GetComponent<DrillBoss>().SetRespawn();
