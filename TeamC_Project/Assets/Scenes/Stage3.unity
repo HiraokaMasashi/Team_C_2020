@@ -1753,12 +1753,12 @@ PrefabInstance:
         type: 3}
       propertyPath: chargeSlider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 729958452}
     - target: {fileID: 4300938231169445523, guid: 051773ebc6d5b6f4bac143d402094281,
         type: 3}
       propertyPath: hpText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1036118329}
     - target: {fileID: 4300938231169445526, guid: 051773ebc6d5b6f4bac143d402094281,
         type: 3}
       propertyPath: m_LocalPosition.x

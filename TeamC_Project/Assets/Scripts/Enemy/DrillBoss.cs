@@ -263,6 +263,7 @@ public class DrillBoss : Boss
     {
         if (drillPrefab == null) return;
         if (!nowRespawn) return;
+        if (pattern == BehaviourPattern.DRILL_ATTACK) return;
 
         respawnElapsedTime += Time.deltaTime;
         if (respawnElapsedTime < respawnTime) return;
