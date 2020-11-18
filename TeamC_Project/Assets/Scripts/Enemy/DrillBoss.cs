@@ -280,7 +280,7 @@ public class DrillBoss : Boss
     /// <returns></returns>
     private IEnumerator InstanceDrill()
     {
-        Vector3 destination = instanceTransform.position - new Vector3(1.25f, 2.5f, 0);
+        Vector3 destination = instanceTransform.position - new Vector3(1.25f, 2.0f, 0);
         while (Vector3.Distance(drill.transform.position, destination) > 0.1f)
         {
             Vector3 position = Vector3.Lerp(drill.transform.position, destination, Time.deltaTime * moveSpeed);
