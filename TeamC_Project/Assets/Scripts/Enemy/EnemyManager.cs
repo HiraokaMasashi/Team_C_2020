@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private string[] bgms;
 
+    [SerializeField]
+    private Text waveText;
+
     //Waveエンドフラグ
     public bool IsEnd
     {
@@ -52,6 +56,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         NextWave();
+        DisPlayWave();
     }
 
     private void NextWave()
@@ -72,9 +77,12 @@ public class EnemyManager : MonoBehaviour
                 wave++;
                 //新しい敵を生成
                 if (wave < maxWave)
+                {
                     StartCoroutine(Instance(wave));
+                }
+
                 //Waveの最後ならエンドフラグをtrueに
-                if (wave == maxWave)
+                else if (wave == maxWave)
                 {
                     soundManager.StopBgm();
                     soundManager.PlayBgmByName(bgms[1]);
@@ -132,5 +140,15 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         InstancePatternEnemy(wave);
+    }
+
+    private void DisPlayWave()
+    {
+        if (waveText == null) return;
+
+        if (wave < maxWave)
+            waveText.text = "Wave: " + (wave + 1).ToString("D2") + " / " + maxWave.ToString("D2");
+        else
+            waveText.text = "BOSS";
     }
 }
