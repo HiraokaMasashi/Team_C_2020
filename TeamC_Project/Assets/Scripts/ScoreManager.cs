@@ -71,7 +71,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         if (scoreText == null) return;
 
-        scoreText.text = "Score: " + totalScore;
+        scoreText.text = "Score: " + totalScore.ToString("D5");
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         if (hiScoreText == null) return;
 
         UpdateHiScore();
-        hiScoreText.text = "HIScore: " + hiScore;
+        hiScoreText.text = "HIScore: " + hiScore.ToString("D5");
     }
 
     /// <summary>
