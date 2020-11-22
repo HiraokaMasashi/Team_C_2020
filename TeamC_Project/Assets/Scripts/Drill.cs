@@ -52,7 +52,7 @@ public class Drill : MonoBehaviour
         if (!IsShot)
         {
             if (transform.parent == null && player != null)
-                transform.position = player.transform.position + Vector3.up * 1.5f;
+                transform.position = player.transform.position - player.transform.up * 1.5f;
             return;
         }
 
