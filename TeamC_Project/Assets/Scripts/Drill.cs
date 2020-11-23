@@ -8,18 +8,30 @@ public class Drill : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 1.0f;
     [SerializeField]
-    private float destroyZoneY;
+    private float maxDestroyZoneY;
+    [SerializeField]
+    private float minDestroyZoneY;
 
     public bool IsShot
     {
         get;
         private set;
     } = false;
+
+    public bool IsThrowAway
+    {
+        get;
+        set;
+    } = false;
+
     private GameObject player;
     private Health health;
 
     [SerializeField]
-    private float hitInterval = 1.0f;
+    private float equipmentHitInterval = 0.3f;
+    [SerializeField]
+    private float shotHitInterval = 0.1f;
+    private float hitInterval;
     private float hitElpsedTime;
 
     private ScoreManager scoreManager;
@@ -29,6 +41,7 @@ public class Drill : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<Health>();
+        hitInterval = equipmentHitInterval;
         hitElpsedTime = 0.0f;
 
         scoreManager = ScoreManager.Instance;
@@ -43,22 +56,31 @@ public class Drill : MonoBehaviour
 
     private void DestroyDrill()
     {
-        if (transform.position.y >= destroyZoneY)
+        if (transform.position.y >= maxDestroyZoneY || transform.position.y <= minDestroyZoneY)
             Destroy(gameObject);
     }
 
     private void Move()
     {
+        if (IsThrowAway)
+        {
+            Vector3 position = transform.position;
+            position += Vector3.down * moveSpeed * Time.deltaTime;
+            transform.position = position;
+            return;
+        }
+
         if (!IsShot)
         {
             if (transform.parent == null && player != null)
                 transform.position = player.transform.position - player.transform.up * 1.5f;
-            return;
         }
-
-        Vector3 position = transform.position;
-        position += Vector3.up * moveSpeed * Time.deltaTime;
-        transform.position = position;
+        else
+        {
+            Vector3 position = transform.position;
+            position += Vector3.up * moveSpeed * Time.deltaTime;
+            transform.position = position;
+        }
     }
 
     public void Shot()
@@ -67,6 +89,7 @@ public class Drill : MonoBehaviour
         transform.position = player.transform.position + Vector3.up * 1.5f;
         GetComponent<BoxCollider>().enabled = true;
         transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
+        hitInterval = shotHitInterval;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,6 +127,7 @@ public class Drill : MonoBehaviour
 
             other.GetComponent<Health>().Damage(10);
             hitElpsedTime = 0.0f;
+            health.Damage(1);
         }
     }
 }

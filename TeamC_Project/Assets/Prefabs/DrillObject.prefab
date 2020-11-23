@@ -77,7 +77,8 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: 
   damageSe: 
-  debriPrefab: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  adjustPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &5769909516090994576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,8 +92,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  destroyZoneY: 22
-  hitInterval: 1
+  maxDestroyZoneY: 22
+  minDestroyZoneY: -10
+  equipmentHitInterval: 0.3
+  shotHitInterval: 0.1
 --- !u!1 &6947066177609213269
 GameObject:
   m_ObjectHideFlags: 0
