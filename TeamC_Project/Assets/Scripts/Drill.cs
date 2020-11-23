@@ -113,6 +113,7 @@ public class Drill : MonoBehaviour
                     scoreManager.AddScore(score.GetScore());
                 }
             }
+
             if (!IsShot)
                 health.Damage(1);
         }

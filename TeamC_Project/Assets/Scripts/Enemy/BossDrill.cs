@@ -43,6 +43,9 @@ public class BossDrill : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.transform.tag == "Drill")
+            Destroy(other.gameObject);
+
         if (other.transform.tag == "PlayerBullet")
         {
             health.Damage(1);
