@@ -370,6 +370,7 @@ public class Player : MonoBehaviour
         {
             drill.GetComponent<BoxCollider>().enabled = false;
             drill.GetComponent<Drill>().IsThrowAway = true;
+            drill.transform.parent = null;
             drill = null;
             IsEquipmentDrill = false;
         }
