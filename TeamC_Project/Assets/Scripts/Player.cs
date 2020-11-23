@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
         if (!gameManager.IsGameStart) return;
+        if (gameManager.IsPerformance) return;
 
         Move();
         ShotBullet();

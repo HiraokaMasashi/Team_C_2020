@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour
         private set;
     } = false;//ゲームが終わっているか
 
+    public bool IsPerformance
+    {
+        get;
+        set;
+    } = false;
+
     // Start is called before the first frame update
     void Start()
     {

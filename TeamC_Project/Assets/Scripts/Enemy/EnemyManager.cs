@@ -34,6 +34,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Text waveText;
 
+    private GameManager gameManager;
+    private GameObject player;
+    [SerializeField]
+    private Vector3 performancePosition;
+    [SerializeField]
+    private float performanceSpeed = 2.0f;
+
     //Waveエンドフラグ
     public bool IsEnd
     {
@@ -47,6 +54,10 @@ public class EnemyManager : MonoBehaviour
         wave = 0;
         soundManager = SoundManager.Instance;
         soundManager.PlayBgmByName(bgms[0]);
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
         StartCoroutine(InstanceEnemy(wave));
     }
 
@@ -55,6 +66,7 @@ public class EnemyManager : MonoBehaviour
     {
         NextWave();
         DisPlayWave();
+        PerformancePlayerPosition();
     }
 
     private void NextWave()
@@ -82,9 +94,10 @@ public class EnemyManager : MonoBehaviour
                 //Waveの最後ならエンドフラグをtrueに
                 else if (wave == maxWave)
                 {
+                    gameManager.IsPerformance = true;
                     soundManager.StopBgm();
                     soundManager.PlayBgmByName(bgms[1]);
-                    StartCoroutine(InstanceBossPerforme());
+                    //StartCoroutine(InstanceBossPerforme());
                 }
             }
         }
@@ -138,17 +151,32 @@ public class EnemyManager : MonoBehaviour
     {
         waveText.enabled = true;
         yield return new WaitForSeconds(3);
-        
+
         InstancePatternEnemy(wave);
         waveText.enabled = false;
+    }
+
+    private void PerformancePlayerPosition()
+    {
+        if (!gameManager.IsPerformance) return;
+
+        if (Vector3.Distance(player.transform.position, performancePosition) > 0.1)
+        {
+            Vector3 position = player.transform.position;
+            position = (performancePosition - position).normalized;
+            player.transform.position += position * Time.deltaTime * performanceSpeed;
+        }
+        else
+            StartCoroutine(InstanceBossPerforme());
     }
 
     private IEnumerator InstanceBossPerforme()
     {
         waveText.enabled = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3.0f);
 
         InstanceBoss();
+        gameManager.IsPerformance = false;
         waveText.enabled = false;
     }
 
