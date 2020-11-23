@@ -138,8 +138,11 @@ public class EnemyManager : MonoBehaviour
     //生成に少し間を置く
     private IEnumerator Instance(int wave)
     {
+        waveText.enabled = true;
         yield return new WaitForSeconds(3);
+        
         InstancePatternEnemy(wave);
+        waveText.enabled = false;
     }
 
     private void DisPlayWave()
