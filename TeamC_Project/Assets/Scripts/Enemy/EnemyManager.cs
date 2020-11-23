@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +47,7 @@ public class EnemyManager : MonoBehaviour
         wave = 0;
         soundManager = SoundManager.Instance;
         soundManager.PlayBgmByName(bgms[0]);
-        StartCoroutine(Instance(wave));
+        StartCoroutine(InstanceEnemy(wave));
     }
 
     // Update is called once per frame
@@ -78,7 +76,7 @@ public class EnemyManager : MonoBehaviour
                 //新しい敵を生成
                 if (wave < maxWave)
                 {
-                    StartCoroutine(Instance(wave));
+                    StartCoroutine(InstanceEnemy(wave));
                 }
 
                 //Waveの最後ならエンドフラグをtrueに
@@ -86,7 +84,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     soundManager.StopBgm();
                     soundManager.PlayBgmByName(bgms[1]);
-                    InstanceBoss();
+                    StartCoroutine(InstanceBossPerforme());
                 }
             }
         }
@@ -136,12 +134,21 @@ public class EnemyManager : MonoBehaviour
     }
 
     //生成に少し間を置く
-    private IEnumerator Instance(int wave)
+    private IEnumerator InstanceEnemy(int wave)
     {
         waveText.enabled = true;
         yield return new WaitForSeconds(3);
         
         InstancePatternEnemy(wave);
+        waveText.enabled = false;
+    }
+
+    private IEnumerator InstanceBossPerforme()
+    {
+        waveText.enabled = true;
+        yield return new WaitForSeconds(3);
+
+        InstanceBoss();
         waveText.enabled = false;
     }
 
@@ -152,6 +159,6 @@ public class EnemyManager : MonoBehaviour
         if (wave < maxWave)
             waveText.text = "Wave: " + (wave + 1).ToString("D2") + " / " + maxWave.ToString("D2");
         else
-            waveText.text = "BOSS";
+            waveText.text = "BOSS Battle";
     }
 }
