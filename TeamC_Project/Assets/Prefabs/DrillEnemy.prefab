@@ -120,8 +120,9 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
-  debriPrefab: {fileID: 4981643153796924300, guid: 7b0e7bfeb4fcce245acfe2cae7c7b8fc,
+  dropPrefab: {fileID: 4981643153796924300, guid: 7b0e7bfeb4fcce245acfe2cae7c7b8fc,
     type: 3}
+  adjustPosition: {x: 0, y: -1, z: 0}
 --- !u!114 &2669841131913891091
 MonoBehaviour:
   m_ObjectHideFlags: 0

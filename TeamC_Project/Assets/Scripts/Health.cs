@@ -20,7 +20,9 @@ public class Health : MonoBehaviour
     private string damageSe;
 
     [SerializeField]
-    private GameObject debriPrefab;
+    private GameObject dropPrefab;
+    [SerializeField, Tooltip("生成位置の調整")]
+    private Vector3 adjustPosition;
 
     /// <summary>
     /// 体力
@@ -98,8 +100,8 @@ public class Health : MonoBehaviour
     {
         hp = 0;
 
-        if (debriPrefab != null)
-            Instantiate(debriPrefab, transform.position, Quaternion.identity);
+        if (dropPrefab != null)
+            Instantiate(dropPrefab, transform.position + adjustPosition, Quaternion.identity);
     }
 
     /// <summary>
@@ -115,8 +117,8 @@ public class Health : MonoBehaviour
         {
             hp = 0;
 
-            if (debriPrefab != null)
-                Instantiate(debriPrefab, transform.position, Quaternion.identity);
+            if (dropPrefab != null)
+                Instantiate(dropPrefab, transform.position + adjustPosition, Quaternion.identity);
         }
     }
 }
