@@ -138,7 +138,12 @@ public class GameManager : MonoBehaviour
     private void DisplayBossHP()
     {
         if (bossHealth == null) return;
+        if (bossHPSlider.value >= bossHealth.Hp)
+        {
+            bossHPSlider.value = bossHealth.Hp;
+            return;
+        }
 
-        bossHPSlider.value = bossHealth.Hp;
+        bossHPSlider.value += 1;
     }
 }
