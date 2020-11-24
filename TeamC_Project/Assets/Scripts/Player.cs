@@ -110,7 +110,16 @@ public class Player : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
         if (!gameManager.IsGameStart) return;
-        if (gameManager.IsPerformance) return;
+        if (gameManager.IsPerformance)
+        {
+            //通常状態でなければ、通常状態に戻す
+            if(currentMode != Mode.NORMAL)
+            {
+                StopScrew();
+                RotationDefault();
+            }
+            return;
+        }
 
         Move();
         ShotBullet();
