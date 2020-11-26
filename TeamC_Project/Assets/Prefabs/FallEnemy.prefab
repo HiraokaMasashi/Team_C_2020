@@ -117,7 +117,7 @@ MonoBehaviour:
   speed: 10
   maxDistance: 12
   destroyZoneY: 22
-  clampPosition: {x: 18, y: 0, z: 0}
+  clampPosition: {x: 18, y: 20, z: 0}
 --- !u!114 &7492139034897630039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +134,8 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
-  debriPrefab: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  adjustPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7492139034897630038
 MonoBehaviour:
   m_ObjectHideFlags: 0

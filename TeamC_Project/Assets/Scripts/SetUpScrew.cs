@@ -19,12 +19,12 @@ public class SetUpScrew : MonoBehaviour
 
     protected Vector3 destination;
     protected float distance;
-
     [SerializeField]
     private float destroyZoneY = 22.0f;
-
     [SerializeField]
     private Vector3 clampPosition;
+
+    private float centerPositionX;
 
     protected enum MoveDirection
     {
@@ -94,6 +94,14 @@ public class SetUpScrew : MonoBehaviour
         {
             currentDirection = MoveDirection.UP;
         }
+
+        Vector3 destination = new Vector3(centerPositionX, transform.position.y, transform.position.z);
+        Vector3 position = transform.position;
+        if (Vector3.Distance(position, destination) <= 0.1f) return;
+
+        Vector3 direction = destination - position;
+        position += direction.normalized * speed * Time.deltaTime;
+        transform.position = position;
     }
 
     /// <summary>
@@ -120,6 +128,7 @@ public class SetUpScrew : MonoBehaviour
     {
         destination = basePosition + new Vector3(adjustPositionX, distanceY, 0.0f);
         destination.x = Mathf.Clamp(destination.x, -clampPosition.x, clampPosition.x);
+        if (destination.y >= clampPosition.y) destination.y = clampPosition.y;
         distance = Vector3.Distance(position, destination);
     }
 
@@ -187,5 +196,15 @@ public class SetUpScrew : MonoBehaviour
             else if (currentDirection == MoveDirection.RIGHT)
                 adjustPositionX = -3.0f;
         }
+    }
+
+    /// <summary>
+    /// スクリューから外れたときに呼ぶ処理
+    /// </summary>
+    public void ReleaseScrew(float positionX)
+    {
+        NotRecovery = false;
+        float x = Random.Range(-1.0f, 1.0f);
+        centerPositionX = positionX + x;
     }
 }

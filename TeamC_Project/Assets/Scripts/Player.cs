@@ -334,11 +334,14 @@ public class Player : MonoBehaviour
     private void EnemyRecoveryStart(GameObject screw)
     {
         if (screw == null) return;
+        float centerPositionX;
+        if (screw == shotScrewObject) centerPositionX = shotScrewObject.transform.position.x;
+        else centerPositionX = transform.position.x;
 
         List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetObjects();
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
-            enemies[i].GetComponent<SetUpScrew>().NotRecovery = false;
+            enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(centerPositionX);
             screw.GetComponent<ScrewCollision>().RemoveObject(i);
         }
     }

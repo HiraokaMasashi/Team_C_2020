@@ -117,7 +117,7 @@ MonoBehaviour:
   speed: 10
   maxDistance: 12
   destroyZoneY: 22
-  clampPosition: {x: 18, y: 0, z: 0}
+  clampPosition: {x: 18, y: 20, z: 0}
 --- !u!114 &4843197333187964139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +134,8 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
-  debriPrefab: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  adjustPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4843197333187964138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +181,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5236733656101201018, guid: 407c4fff055baf04985ccdcbba434f16,
     type: 3}
   shotSe: shot2
-  isPlayParticle: 1
 --- !u!114 &6649069225534078963
 MonoBehaviour:
   m_ObjectHideFlags: 0

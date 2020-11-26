@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Screw : MonoBehaviour
 {
-    private BoxCollider boxCollider;
-
-    //private float maxCenterY = 6.0f;//コライダーのY軸の最大センター
-    //private float maxSizeY = 12.0f;//コライダーのY軸の最大サイズ
-
     public enum ScrewType
     {
         SHOT,
@@ -19,18 +14,21 @@ public class Screw : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 1.0f;
-
     private GameObject player;
+
+    [SerializeField]
+    private float maxPositionY;
 
     // Start is called before the first frame update
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
+
         Move();
         //ChangeBoxSize();
         EnemyStanMove();
@@ -44,33 +42,6 @@ public class Screw : MonoBehaviour
         position += Vector3.up * (moveSpeed / 2.0f) * Time.deltaTime;
         transform.position = position;
     }
-
-
-    ///// <summary>
-    ///// スクリュー使用時にあたり判定のサイズを調整する
-    ///// </summary>
-    //private void ChangeBoxSize()
-    //{
-    //    if (screwType != ScrewType.INHALE) return;
-    //    if (boxCollider == null) return;
-
-    //    //あたり判定の調整サイズ
-    //    float addSize = 0.0f;
-    //    addSize += Time.deltaTime;
-
-    //    float speed = 2.0f;
-    //    Vector3 center = boxCollider.center;
-    //    center.y += addSize * speed;
-    //    //最大値を超えていたら範囲内に収める
-    //    if (center.y >= maxCenterY) center.y = maxCenterY;
-    //    boxCollider.center = center;
-
-    //    Vector3 size = boxCollider.size;
-    //    size.y += addSize * 2.0f * speed;
-    //    //最大値を超えていたら範囲内に収める
-    //    if (size.y >= maxSizeY) size.y = maxSizeY;
-    //    boxCollider.size = size;
-    //}
 
     private void EnemyStanMove()
     {

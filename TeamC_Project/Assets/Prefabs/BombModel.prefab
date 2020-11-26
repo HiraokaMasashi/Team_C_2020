@@ -52,7 +52,7 @@ MonoBehaviour:
   speed: 10
   maxDistance: 12
   destroyZoneY: 22
-  clampPosition: {x: 16, y: 0, z: 0}
+  clampPosition: {x: 16, y: 18, z: 0}
 --- !u!114 &9185736474104399765
 MonoBehaviour:
   m_ObjectHideFlags: 0
