@@ -196,9 +196,22 @@ public class SoundManager : MonoBehaviour
         seAudioSource.PlayOneShot(se[index], SeVolume * MasterVolume);
     }
 
+    public void PlaySe(int index,bool isLoop)
+    {
+        index = Mathf.Clamp(index, 0, se.Length);
+
+        seAudioSource.PlayOneShot(se[index], SeVolume * MasterVolume);
+        seAudioSource.loop = isLoop;
+    }
+
     public void PlaySeByName(string name)
     {
         PlaySe(GetSeIndex(name));
+    }
+
+    public void PlaySeByName(string name,bool isLoop)
+    {
+        PlaySe(GetSeIndex(name),isLoop);
     }
 
     //public void PlaySeByClip(AudioClip clip)
