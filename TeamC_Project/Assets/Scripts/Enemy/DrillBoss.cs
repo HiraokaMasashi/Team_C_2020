@@ -50,6 +50,8 @@ public class DrillBoss : Boss
 
     [SerializeField]
     private int chnageBehaviourCount = 2;
+    [SerializeField]
+    private Transform instanceTransform;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -115,6 +117,7 @@ public class DrillBoss : Boss
                     endMove = false;
                     attackElapsedTime = 0.0f;
                     attackPosition = Vector3.zero;
+                    isPlayAlert = false;
                 }
                 break;
 
@@ -208,6 +211,11 @@ public class DrillBoss : Boss
         }
 
         attackElapsedTime += Time.deltaTime;
+        if (attackElapsedTime >= attackInterval - 1.0f && !isPlayAlert)
+        {
+            isPlayAlert = true;
+            SoundManager.Instance.PlaySeByName(alertSe);
+        }
         if (attackElapsedTime < attackInterval) return;
 
         if (attackPosition == Vector3.zero)
@@ -255,13 +263,15 @@ public class DrillBoss : Boss
     {
         if (drillPrefab == null) return;
         if (!nowRespawn) return;
+        if (pattern == BehaviourPattern.DRILL_ATTACK) return;
 
         respawnElapsedTime += Time.deltaTime;
         if (respawnElapsedTime < respawnTime) return;
 
         respawnElapsedTime = 0.0f;
         nowRespawn = false;
-        drill = Instantiate(drillPrefab, transform.position, Quaternion.identity, transform);
+        Vector3 position = instanceTransform.position - new Vector3(1.25f, 0.25f, 0);
+        drill = Instantiate(drillPrefab, position, Quaternion.Euler(-180, -180, 0), transform);
         StartCoroutine(InstanceDrill());
     }
 
@@ -271,7 +281,7 @@ public class DrillBoss : Boss
     /// <returns></returns>
     private IEnumerator InstanceDrill()
     {
-        Vector3 destination = transform.position + new Vector3(0, -3.0f, 0);
+        Vector3 destination = instanceTransform.position - new Vector3(1.25f, 2.0f, 0);
         while (Vector3.Distance(drill.transform.position, destination) > 0.1f)
         {
             Vector3 position = Vector3.Lerp(drill.transform.position, destination, Time.deltaTime * moveSpeed);
@@ -305,17 +315,15 @@ public class DrillBoss : Boss
                         }
 
                         Vector3 position = instanceTransforms[k].position;
-                        float speed = bulletSpeed;
                         if (isForPlayer) dir = player.transform.position - position;
                         else
                         {
                             rad += 180 / shotCount;
                             dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0);
-                            speed *= 0.75f;
                             rad += 15;
                         }
 
-                        bulletController.GenerateBullet(position, dir, speed, destroyTime, "Enemy");
+                        bulletController.GenerateBullet(position, dir, destroyTime, "Enemy");
                     }
                 }
                 yield return new WaitForSeconds(0.2f);

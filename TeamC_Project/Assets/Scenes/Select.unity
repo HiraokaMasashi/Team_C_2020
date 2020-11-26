@@ -1135,7 +1135,7 @@ MonoBehaviour:
   sceneNames:
   - Stage1
   - Stage2
-  - Watanabe
+  - Stage3
   - Option
   ses:
   - choice1

@@ -67,13 +67,13 @@ public class ResultSceneManager : MonoBehaviour
     {
         for(int i = 0; i < scoreTexts.Length; i++)
         {
-            scoreTexts[i].text = (i + 1) + "位 " + scores[i];
+            scoreTexts[i].text = (i + 1) + "位 " + scores[i].ToString("D5");
             if (rank == i)
                 scoreTexts[i].color = Color.red;
         }
 
         //ビルドだとテキストの表示がおかしくなるため
-        hiScoreText.text = "1位 " + scores[0];
+        hiScoreText.text = "1位 " + scores[0].ToString("D5");
         if (rank == 0) hiScoreText.color = Color.red;
     }
 }

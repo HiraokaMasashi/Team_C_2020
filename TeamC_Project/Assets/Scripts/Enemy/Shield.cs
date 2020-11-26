@@ -35,6 +35,11 @@ public class Shield : MonoBehaviour
         {
             other.gameObject.GetComponent<Bullet>().Disconnect();
         }
+
+        if (other.transform.tag == "Drill")
+        {
+            if (other.GetComponent<Drill>().IsShot) Destroy(other.gameObject);
+        }
     }
 
     private IEnumerator MoveDown()

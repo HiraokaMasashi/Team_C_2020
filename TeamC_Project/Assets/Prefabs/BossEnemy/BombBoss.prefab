@@ -377,7 +377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ed41a450195984294306f62e1ba198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: []
+  particles:
+  - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
 --- !u!114 &6390714702566797506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +394,7 @@ MonoBehaviour:
   hp: 80
   hpText: {fileID: 0}
   deadSe: dead
-  damageSe: 
+  damageSe: damage
   debriPrefab: {fileID: 0}
 --- !u!114 &4577994661093772295
 MonoBehaviour:
@@ -407,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e72366a32fb430bb42b40cfec0eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 331278323109091402, guid: 43142b036fb3e604489d935b4f31f666,
+  bulletPrefab: {fileID: 5236733656101201018, guid: 407c4fff055baf04985ccdcbba434f16,
     type: 3}
   shotSe: shot2
 --- !u!114 &5603479332625542553
@@ -453,18 +454,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 16, z: 0}
   moveSpeed: 2
-  bulletSpeed: 10
   shotInterval: 3
   destroyTime: 5
   summonObject: {fileID: 0}
   summonInterval: 5
+  alertSe: alert
   shotTransforms:
   - {fileID: 6739727043073599924}
   - {fileID: 5889044012152874649}
   - {fileID: 8156129210025898844}
   - {fileID: 6790969210507692812}
   - {fileID: 6312690023822457525}
-  bombPrefab: {fileID: 7582214874540601550, guid: 2800e4270d3eb15449467f52b7095b29,
+  bombPrefab: {fileID: 9185736474104399769, guid: f9728854970b8064985ae16bcd8d847e,
     type: 3}
-  bombSpeed: 5
   bombSe: shot2

@@ -39,8 +39,6 @@ public class NormalBoss : Boss
     [SerializeField]
     private GameObject bombPrefab;
     [SerializeField]
-    private float bombSpeed = 200.0f;
-    [SerializeField]
     private string bombSe;
 
     // Start is called before the first frame update
@@ -81,6 +79,7 @@ public class NormalBoss : Boss
                 if (bombs.Count == 0 && endShot)
                 {
                     endShot = false;
+                    isPlayAlert = false;
                     pattern = BehaviourPattern.SHOT;
                 }
                 break;
@@ -119,13 +118,18 @@ public class NormalBoss : Boss
 
         shotElapsedTime += Time.deltaTime;
 
+        if(shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
+        {
+            isPlayAlert = true;
+            SoundManager.Instance.PlaySeByName(alertSe);
+        }
         if (shotElapsedTime < shotInterval) return;
 
         for (int i = 0; i < shotTransforms.Length; i++)
         {
             Vector3 position = shotTransforms[i].position;
             Vector3 direction = (player.transform.position - shotTransforms[i].position).normalized;
-            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSpeed, bombSe));
+            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSe));
         }
 
         shotElapsedTime = 0.0f;
@@ -169,7 +173,7 @@ public class NormalBoss : Boss
                     }
 
                     Vector3 position = shotTransforms[j].position;
-                    bulletController.GenerateBullet(position, dir, bulletSpeed, destroyTime, "Enemy");
+                    bulletController.GenerateBullet(position, dir, destroyTime, "Enemy");
                 }
                 yield return new WaitForSeconds(0.5f);
             }

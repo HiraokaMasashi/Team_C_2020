@@ -74,7 +74,11 @@ public class SetUpScrew : MonoBehaviour
         transform.position = position;
 
         if (transform.position.y >= destroyZoneY)
+        {
+            if (transform.tag == "Bomb")
+                GameObject.Find("BombBoss(Clone)").GetComponent<NormalBoss>().RemoveBomb(gameObject);
             Destroy(gameObject);
+        }
     }
 
     /// <summary>

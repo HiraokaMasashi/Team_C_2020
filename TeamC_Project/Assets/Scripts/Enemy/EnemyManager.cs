@@ -1,7 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -32,6 +31,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private string[] bgms;
 
+    [SerializeField]
+    private Text waveText;
+
+    private GameManager gameManager;
+    private GameObject player;
+    [SerializeField]
+    private Vector3 performancePosition;
+    [SerializeField]
+    private float performanceSpeed = 2.0f;
+
     //Waveエンドフラグ
     public bool IsEnd
     {
@@ -45,13 +54,19 @@ public class EnemyManager : MonoBehaviour
         wave = 0;
         soundManager = SoundManager.Instance;
         soundManager.PlayBgmByName(bgms[0]);
-        StartCoroutine(Instance(wave));
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        StartCoroutine(InstanceEnemy(wave));
     }
 
     // Update is called once per frame
     void Update()
     {
         NextWave();
+        DisPlayWave();
+        PerformancePlayerPosition();
     }
 
     private void NextWave()
@@ -72,13 +87,17 @@ public class EnemyManager : MonoBehaviour
                 wave++;
                 //新しい敵を生成
                 if (wave < maxWave)
-                    StartCoroutine(Instance(wave));
-                //Waveの最後ならエンドフラグをtrueに
-                if (wave == maxWave)
                 {
+                    StartCoroutine(InstanceEnemy(wave));
+                }
+
+                //Waveの最後ならエンドフラグをtrueに
+                else if (wave == maxWave)
+                {
+                    gameManager.IsPerformance = true;
                     soundManager.StopBgm();
                     soundManager.PlayBgmByName(bgms[1]);
-                    InstanceBoss();
+                    //StartCoroutine(InstanceBossPerforme());
                 }
             }
         }
@@ -128,9 +147,46 @@ public class EnemyManager : MonoBehaviour
     }
 
     //生成に少し間を置く
-    private IEnumerator Instance(int wave)
+    private IEnumerator InstanceEnemy(int wave)
     {
+        waveText.enabled = true;
         yield return new WaitForSeconds(3);
+
         InstancePatternEnemy(wave);
+        waveText.enabled = false;
+    }
+
+    private void PerformancePlayerPosition()
+    {
+        if (!gameManager.IsPerformance) return;
+
+        if (Vector3.Distance(player.transform.position, performancePosition) > 0.1)
+        {
+            Vector3 position = player.transform.position;
+            position = (performancePosition - position).normalized;
+            player.transform.position += position * Time.deltaTime * performanceSpeed;
+        }
+        else
+            StartCoroutine(InstanceBossPerforme());
+    }
+
+    private IEnumerator InstanceBossPerforme()
+    {
+        waveText.enabled = true;
+        yield return new WaitForSeconds(3.0f);
+
+        InstanceBoss();
+        gameManager.IsPerformance = false;
+        waveText.enabled = false;
+    }
+
+    private void DisPlayWave()
+    {
+        if (waveText == null) return;
+
+        if (wave < maxWave)
+            waveText.text = "Wave: " + (wave + 1).ToString("D2") + " / " + maxWave.ToString("D2");
+        else
+            waveText.text = "BOSS Battle";
     }
 }

@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private Health playerHealth;//プレイヤーの体力スクリプト
     private Health bossHealth;//ボスの体力スクリプト
+    [SerializeField]
+    private Slider bossHPSlider;
 
     [SerializeField]
     private FadeScene fadeScene;//フェードスクリプト
@@ -14,6 +17,7 @@ public class GameManager : MonoBehaviour
     private float changeSceneTime = 2.0f;
 
     private ScoreManager scoreManager;
+
 
     public enum ResultMode
     {
@@ -35,6 +39,12 @@ public class GameManager : MonoBehaviour
         private set;
     } = false;//ゲームが終わっているか
 
+    public bool IsPerformance
+    {
+        get;
+        set;
+    } = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +59,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameStart();
+        DisplayBossHP();
         ChangeResultScene();
     }
 
@@ -103,6 +114,7 @@ public class GameManager : MonoBehaviour
 
         if (bossHealth.IsDead)
         {
+            bossHPSlider.gameObject.SetActive(false);
             result = ResultMode.GAMECLEAR;
             IsEnd = true;
             scoreManager.UpdateScoreRanking();
@@ -125,5 +137,19 @@ public class GameManager : MonoBehaviour
     public void SetBossEnemy(GameObject bossEnemy)
     {
         bossHealth = bossEnemy.GetComponent<Health>();
+        bossHPSlider.gameObject.SetActive(true);
+        bossHPSlider.maxValue = bossHealth.Hp;
+    }
+
+    private void DisplayBossHP()
+    {
+        if (bossHealth == null) return;
+        if (bossHPSlider.value >= bossHealth.Hp)
+        {
+            bossHPSlider.value = bossHealth.Hp;
+            return;
+        }
+
+        bossHPSlider.value += 1;
     }
 }

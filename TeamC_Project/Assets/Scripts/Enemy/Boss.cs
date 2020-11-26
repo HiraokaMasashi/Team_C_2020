@@ -27,9 +27,6 @@ public class Boss : MonoBehaviour
     //フレームインしたか
     protected bool isFrameIn = false;
 
-    //弾の速度
-    [SerializeField]
-    protected float bulletSpeed = 500.0f;
     //弾の発射間隔
     [SerializeField]
     protected float shotInterval = 5.0f;
@@ -52,6 +49,10 @@ public class Boss : MonoBehaviour
     //生成までの経過時間
     protected float summonElapsedTime;
 
+    [SerializeField]
+    protected string alertSe = "alert";
+    protected bool isPlayAlert;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -65,6 +66,7 @@ public class Boss : MonoBehaviour
         gameManager.SetBossEnemy(gameObject);
 
         pattern = BehaviourPattern.SHOT;
+        isPlayAlert = false;
 
         StartCoroutine(FrameIn());
     }

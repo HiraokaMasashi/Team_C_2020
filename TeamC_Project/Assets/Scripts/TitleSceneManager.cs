@@ -27,6 +27,10 @@ public class TitleSceneManager : MonoBehaviour
         titleLogo.transform.position += Vector3.up * 775;
         moveEnd = false;
         soundManager = SoundManager.Instance;
+    }
+
+    private void Start()
+    {
         soundManager.PlayBgmByName(bgm);
     }
 

@@ -8,14 +8,30 @@ public class Drill : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 1.0f;
     [SerializeField]
-    private float destroyZoneY;
+    private float maxDestroyZoneY;
+    [SerializeField]
+    private float minDestroyZoneY;
 
-    private bool isShot;
+    public bool IsShot
+    {
+        get;
+        private set;
+    } = false;
+
+    public bool IsThrowAway
+    {
+        get;
+        set;
+    } = false;
+
     private GameObject player;
     private Health health;
 
     [SerializeField]
-    private float hitInterval = 1.0f;
+    private float equipmentHitInterval = 0.3f;
+    [SerializeField]
+    private float shotHitInterval = 0.1f;
+    private float hitInterval;
     private float hitElpsedTime;
 
     private ScoreManager scoreManager;
@@ -23,9 +39,9 @@ public class Drill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isShot = false;
         player = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<Health>();
+        hitInterval = equipmentHitInterval;
         hitElpsedTime = 0.0f;
 
         scoreManager = ScoreManager.Instance;
@@ -40,29 +56,40 @@ public class Drill : MonoBehaviour
 
     private void DestroyDrill()
     {
-        if (transform.position.y >= destroyZoneY)
+        if (transform.position.y >= maxDestroyZoneY || transform.position.y <= minDestroyZoneY)
             Destroy(gameObject);
     }
 
     private void Move()
     {
-        if (!isShot)
+        if (IsThrowAway)
         {
-            if (transform.parent == null && player != null)
-                transform.position = player.transform.position + Vector3.up;
+            Vector3 position = transform.position;
+            position += Vector3.down * moveSpeed * Time.deltaTime;
+            transform.position = position;
             return;
         }
 
-        Vector3 position = transform.position;
-        position += Vector3.up * moveSpeed * Time.deltaTime;
-        transform.position = position;
+        if (!IsShot)
+        {
+            if (transform.parent == null && player != null)
+                transform.position = player.transform.position - player.transform.up * 1.5f;
+        }
+        else
+        {
+            Vector3 position = transform.position;
+            position += Vector3.up * moveSpeed * Time.deltaTime;
+            transform.position = position;
+        }
     }
 
     public void Shot()
     {
-        isShot = true;
+        IsShot = true;
+        transform.position = player.transform.position + Vector3.up * 1.5f;
         GetComponent<BoxCollider>().enabled = true;
-        transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
+        hitInterval = shotHitInterval;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,7 +113,8 @@ public class Drill : MonoBehaviour
                     scoreManager.AddScore(score.GetScore());
                 }
             }
-            if (!isShot)
+
+            if (!IsShot)
                 health.Damage(1);
         }
     }
@@ -100,6 +128,7 @@ public class Drill : MonoBehaviour
 
             other.GetComponent<Health>().Damage(10);
             hitElpsedTime = 0.0f;
+            health.Damage(1);
         }
     }
 }

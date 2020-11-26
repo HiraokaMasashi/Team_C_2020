@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float playerMoveSpeed = 4.0f;//移動速度
-    [SerializeField]
-    private float bulletMoveSpeed = 200.0f;//弾の移動速度
 
     private GameManager gameManager;
     private SoundManager soundManager;
@@ -73,6 +71,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private string[] ses;
+    private bool isPlayDrillSE;
 
     //public bool IsRapidFire
     //{
@@ -103,6 +102,7 @@ public class Player : MonoBehaviour
         rotationSpeed *= magnificationSpeed;
         rotationElapsedTime = 0.0f;
         soundManager = SoundManager.Instance;
+        isPlayDrillSE = false;
     }
 
     // Update is called once per frame
@@ -110,6 +110,16 @@ public class Player : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
         if (!gameManager.IsGameStart) return;
+        if (gameManager.IsPerformance)
+        {
+            //通常状態でなければ、通常状態に戻す
+            if(currentMode != Mode.NORMAL)
+            {
+                StopScrew();
+                RotationDefault();
+            }
+            return;
+        }
 
         Move();
         ShotBullet();
@@ -165,7 +175,7 @@ public class Player : MonoBehaviour
         //生成位置
         Vector3 shotPosition = transform.position + Vector3.up;
 
-        bulletController.GenerateBullet(shotPosition, Vector3.up, bulletMoveSpeed, 3.0f);
+        bulletController.GenerateBullet(shotPosition, Vector3.up, 3.0f);
         chargeBullet.DecreaseCharge();
         //chargeBullet.ResetCharge();
     }
@@ -254,6 +264,7 @@ public class Player : MonoBehaviour
             case Mode.ROTATION_NORMAL:
                 //元の回転に戻す
                 RotationDefault();
+                isPlayDrillSE = false;
                 break;
 
             case Mode.ROTATION_SCREW:
@@ -367,8 +378,11 @@ public class Player : MonoBehaviour
 
         if (drill != null)
         {
-            drill.transform.parent = transform;
             drill.GetComponent<BoxCollider>().enabled = false;
+            drill.GetComponent<Drill>().IsThrowAway = true;
+            drill.transform.parent = null;
+            drill = null;
+            IsEquipmentDrill = false;
         }
 
         if (currentMode == Mode.SCREW)
@@ -418,6 +432,10 @@ public class Player : MonoBehaviour
 
         drill.transform.parent = null;
         drill.GetComponent<BoxCollider>().enabled = true;
+
+        if (isPlayDrillSE) return;
+        soundManager.PlaySeByName(ses[2]);
+        isPlayDrillSE = true;
     }
 
     private void ShotDrill()
@@ -427,11 +445,12 @@ public class Player : MonoBehaviour
         drill.GetComponent<Drill>().Shot();
         drill.transform.parent = null;
         drill = null;
+        soundManager.PlaySeByName(ses[2]);
     }
 
     public void EquipmentDrill()
     {
-        drill = Instantiate(drillPrefab, transform.position + Vector3.down, Quaternion.identity, transform);
+        drill = Instantiate(drillPrefab, transform.position - transform.up * 1.5f, Quaternion.identity, transform);
         IsEquipmentDrill = true;
     }
 

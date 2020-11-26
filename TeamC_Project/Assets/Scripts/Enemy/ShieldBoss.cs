@@ -70,6 +70,11 @@ public class ShieldBoss : Boss
 
         shotElapsedTime += Time.deltaTime;
 
+        if (shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
+        {
+            isPlayAlert = true;
+            SoundManager.Instance.PlaySeByName(alertSe);
+        }
         if (shotElapsedTime < shotInterval) return;
 
         isShot = true;
@@ -88,7 +93,7 @@ public class ShieldBoss : Boss
                 {
                     rad += 360 / shotBarrageRows;
                     Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0.0f);
-                    bulletController.GenerateBullet(transform.position, dir, bulletSpeed, destroyTime, "Enemy");
+                    bulletController.GenerateBullet(transform.position, dir, destroyTime, "Enemy");
                     if (isTurnRight)
                         rad += 30;
                     else
@@ -97,6 +102,7 @@ public class ShieldBoss : Boss
                 yield return new WaitForSeconds(0.1f);
             }
 
+            isPlayAlert = false;
             isShot = false;
             shotCount++;
             yield break;
@@ -113,9 +119,9 @@ public class ShieldBoss : Boss
 
         for (int i = 0; i < summonCount; i++)
         {
-            float x = -20 + (10 * i);
+            float x = -10 + (20 * i);
             Vector3 position = new Vector3(x, 22.0f, 0.0f);
-            Instantiate(summonObject, position, Quaternion.identity);
+            Instantiate(summonObject, position, Quaternion.Euler(new Vector3(40, 180, 0)));
         }
         summonElapsedTime = 0.0f;
         isSummon = true;

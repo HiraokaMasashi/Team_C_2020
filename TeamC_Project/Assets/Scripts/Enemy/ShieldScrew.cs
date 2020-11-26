@@ -10,7 +10,9 @@ public class ShieldScrew : MonoBehaviour
     private Boss boss;
 
     [SerializeField]
-    private float damageInterval = 1.0f;
+    private float screwDamageInterval = 1.0f;
+    [SerializeField]
+    private float drillDamageInterval = 0.1f;
     private float elapsedTime;
 
     [SerializeField]
@@ -36,9 +38,13 @@ public class ShieldScrew : MonoBehaviour
 
         if (other.transform.tag == "Drill")
         {
-            int damage = 10;
-            StartCoroutine(DamageComeOff(damage));
-            health.Damage(damage);
+            if (!other.GetComponent<Drill>().IsShot)
+            {
+                int damage = 10;
+                StartCoroutine(DamageComeOff(damage));
+                health.Damage(damage);
+            }
+            else Destroy(other.gameObject);
         }
     }
 
@@ -47,12 +53,26 @@ public class ShieldScrew : MonoBehaviour
         if (other.transform.tag == "Screw")
         {
             elapsedTime += Time.deltaTime;
-            if (elapsedTime < damageInterval) return;
+            if (elapsedTime < screwDamageInterval) return;
             elapsedTime = 0.0f;
 
             int damage = 1;
             StartCoroutine(DamageComeOff(damage));
             health.Damage(damage);
+        }
+
+        if (other.transform.tag == "Drill")
+        {
+            if (other.GetComponent<Drill>().IsShot) return;
+
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime < drillDamageInterval) return;
+            elapsedTime = 0.0f;
+
+            int damage = 10;
+            StartCoroutine(DamageComeOff(damage));
+            health.Damage(damage);
+            other.transform.GetComponent<Health>().Damage(1);
         }
     }
 
