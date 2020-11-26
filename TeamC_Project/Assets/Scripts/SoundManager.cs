@@ -26,6 +26,11 @@ public class SoundManager : MonoBehaviour
     string path;
     string fileName = "volume_data.json";
 
+    List<float> playingList = new List<float>();
+
+    [SerializeField, Range(1, 10),Header("SE同時再生数上限")]
+    int maxPlayingSeCount = 4;
+
     public float MasterVolume
     {
         set
@@ -131,11 +136,25 @@ public class SoundManager : MonoBehaviour
     {
     }
 
+    void Update()
+    {
+        //再生中のSEの再生時間を更新(カウントダウン)
+        for (int i = 0; i < playingList.Count; i++)
+        {
+            playingList[i] -= Time.deltaTime;
+            
+            //終わっていたらリストから削除
+            if (playingList[i] <= 0)
+            {
+                playingList.Remove(playingList[i]);
+            }
+        }
+    }
+
     public int GetBgmIndex(string name)
     {
         if (bgmIndex.ContainsKey(name))
         {
-            Debug.Log(name);
             return bgmIndex[name];
         }
         else
@@ -153,7 +172,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            //Debug.LogError("指定された名前のSEファイルが存在しません。");
+            Debug.LogError("指定された名前のSEファイルが存在しません。");
             return 0;
         }
     }
@@ -191,16 +210,20 @@ public class SoundManager : MonoBehaviour
     //SE再生
     public void PlaySe(int index)
     {
+        //再生中のSE数が上限数に達していたら鳴らさない
+        if (playingList.Count >= maxPlayingSeCount) return;
         index = Mathf.Clamp(index, 0, se.Length);
 
         seAudioSource.PlayOneShot(se[index], SeVolume * MasterVolume);
+
+        //再生したSEの再生時間の長さを取得し再生中リストに追加
+        float len = se[index].length;
+        playingList.Add(len);
     }
 
     public void PlaySe(int index,bool isLoop)
     {
-        index = Mathf.Clamp(index, 0, se.Length);
-
-        seAudioSource.PlayOneShot(se[index], SeVolume * MasterVolume);
+        PlaySe(index);
         seAudioSource.loop = isLoop;
     }
 
