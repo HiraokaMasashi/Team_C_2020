@@ -9,6 +9,8 @@ public class SoundTest : MonoBehaviour
     string bgmName;
     [SerializeField]
     string seName;
+    [SerializeField]
+    string loopSeName;
 
     [SerializeField]
     AudioClip bgmClip;
@@ -24,5 +26,10 @@ public class SoundTest : MonoBehaviour
     public void OnClick()
     {
         sm.PlaySeByName(seName);
+    }
+
+    public void OnClick2()
+    {
+        sm.PlaySeByName(loopSeName, true);
     }
 }

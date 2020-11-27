@@ -358,7 +358,7 @@ public class Player : MonoBehaviour
         inhaleScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(0);
         inhaleScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.INHALE);
         screw.GetComponent<ParticleManager>().StartParticle(inhaleScrewObject);
-        soundManager.PlaySeByName(ses[0]);
+        soundManager.PlaySeByName(ses[0],true);
         isExistScrew = true;
     }
 

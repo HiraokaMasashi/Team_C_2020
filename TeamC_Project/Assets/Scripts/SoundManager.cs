@@ -212,6 +212,7 @@ public class SoundManager : MonoBehaviour
     {
         //再生中のSE数が上限数に達していたら鳴らさない
         if (playingList.Count >= maxPlayingSeCount) return;
+
         index = Mathf.Clamp(index, 0, se.Length);
 
         seAudioSource.PlayOneShot(se[index], SeVolume * MasterVolume);
@@ -223,7 +224,19 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySe(int index,bool isLoop)
     {
-        PlaySe(index);
+        //再生中のSE数が上限数に達していたら鳴らさない
+        if (playingList.Count >= maxPlayingSeCount) return;
+
+        index = Mathf.Clamp(index, 0, se.Length);
+
+        seAudioSource.clip = se[index];
+        seAudioSource.volume = SeVolume * MasterVolume;
+        seAudioSource.Play();
+
+
+        //再生したSEの再生時間の長さを取得し再生中リストに追加
+        float len = se[index].length;
+        playingList.Add(len);
         seAudioSource.loop = isLoop;
     }
 
