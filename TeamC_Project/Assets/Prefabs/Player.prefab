@@ -301,6 +301,11 @@ MonoBehaviour:
   damageSe: damage
   dropPrefab: {fileID: 0}
   adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers: []
+  effectTime: 2
+  effectSpeed: 0.5
+  particleInstanceTime: 0.5
+  minScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2732371690843407098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,9 +405,9 @@ MonoBehaviour:
   drillPrefab: {fileID: 6111796149867733879, guid: be96b709edb94dc41ac93634e5ef4bc4,
     type: 3}
   ses:
-  - screw1
+  - screw5
   - screwattack1
-  - drill
+  - drill1
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0
