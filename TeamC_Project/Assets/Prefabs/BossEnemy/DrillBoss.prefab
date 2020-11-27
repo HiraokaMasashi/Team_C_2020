@@ -180,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles:
   - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
+  - {fileID: 6062054386788731765, guid: dff33eb216d23d040a1808a82892043a, type: 3}
 --- !u!114 &3730908732933718928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,11 @@ MonoBehaviour:
   damageSe: damage
   dropPrefab: {fileID: 0}
   adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers:
+  - {fileID: 3730908732933718934}
+  effectTime: 2
+  effectSpeed: 0.2
+  particleInstanceTime: 0.5
 --- !u!114 &3730908732933718942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +397,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 1676340053367237871, guid: 9041def8199c40f4d844471a9ed2b7cd,
+        type: 3}
+      propertyPath: meshRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676340053367237871, guid: 9041def8199c40f4d844471a9ed2b7cd,
+        type: 3}
+      propertyPath: meshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 9154971819094845485}
     - target: {fileID: 3342779095685170188, guid: 9041def8199c40f4d844471a9ed2b7cd,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -418,6 +434,12 @@ GameObject:
 --- !u!4 &3730908733864381236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1676340053367237866, guid: 9041def8199c40f4d844471a9ed2b7cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2631606161565362142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &9154971819094845485 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6595989501666463731, guid: 9041def8199c40f4d844471a9ed2b7cd,
     type: 3}
   m_PrefabInstance: {fileID: 2631606161565362142}
   m_PrefabAsset: {fileID: 0}

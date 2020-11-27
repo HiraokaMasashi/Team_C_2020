@@ -56,7 +56,7 @@ public class NormalBoss : Boss
     // Update is called once per frame
     void Update()
     {
-        if (!isFrameIn) return;
+        if (!isFrameIn || health.IsDead) return;
 
         ChangePattern();
         ShotBullet();

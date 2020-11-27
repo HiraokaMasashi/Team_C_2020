@@ -24,6 +24,19 @@ public class Health : MonoBehaviour
     [SerializeField, Tooltip("生成位置の調整")]
     private Vector3 adjustPosition;
 
+    private bool isDamageEffect;
+    [SerializeField]
+    private MeshRenderer[] meshRenderers;
+    [SerializeField]
+    private float effectTime = 2.0f;
+    private float effectElapsedTime;
+    [SerializeField]
+    private float effectSpeed = 0.5f;
+
+    private GameManager gameManager;
+    [SerializeField]
+    private float particleInstanceTime = 0.5f;
+
     /// <summary>
     /// 体力
     /// </summary>
@@ -47,10 +60,15 @@ public class Health : MonoBehaviour
 
         particleManager = GetComponent<ParticleManager>();
         soundManager = SoundManager.Instance;
+        isDamageEffect = false;
+        effectElapsedTime = 0;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
     {
+        DamageEffect();
         DeathEffect();
         DisplayHp();
     }
@@ -62,18 +80,28 @@ public class Health : MonoBehaviour
     {
         if (!IsDead) return;
 
-        GameObject particle = particleManager.GenerateParticle();
-        if (particle != null)
+        if (!transform.name.Contains("Boss"))
         {
-            particle.transform.position = transform.position;
-            particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
-            particleManager.OncePlayParticle(particle);
+            GameObject particle = particleManager.GenerateParticle();
+            if (particle != null)
+            {
+                particle.transform.position = transform.position;
+                particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+                particleManager.OncePlayParticle(particle);
+            }
+
+            if (deadSe != "")
+                soundManager.PlaySeByName(deadSe);
+            Destroy(gameObject);
         }
+        else
+        {
+            if (gameManager.IsPerformance) return;
 
-        if (deadSe != "")
-            soundManager.PlaySeByName(deadSe);
-
-        Destroy(gameObject);
+            gameManager.IsPerformance = true;
+            ExplosionInstance();
+            StartCoroutine(BossDeadEffect());
+        }
     }
 
     /// <summary>
@@ -120,5 +148,71 @@ public class Health : MonoBehaviour
             if (dropPrefab != null)
                 Instantiate(dropPrefab, transform.position + adjustPosition, Quaternion.identity);
         }
+        else
+            isDamageEffect = true;
+    }
+
+    private void DamageEffect()
+    {
+        if (!isDamageEffect || Time.timeScale == 0) return;
+
+        effectElapsedTime += Time.deltaTime;
+        if (effectElapsedTime >= effectTime)
+        {
+            foreach (var mesh in meshRenderers)
+            {
+                mesh.enabled = true;
+            }
+            isDamageEffect = false;
+            effectElapsedTime = 0.0f;
+            return;
+        }
+
+        foreach (var mesh in meshRenderers)
+        {
+            mesh.enabled = !mesh.enabled;
+        }
+    }
+
+    private void ExplosionInstance(float adjustPositionX = 0.0f, float adjustPositionY = 0.0f)
+    {
+        GameObject particle = particleManager.GenerateParticle(1);
+        particle.transform.position = transform.position + new Vector3(adjustPositionX, adjustPositionY, 0.5f);
+        float randomScale = Random.Range(0.5f, 1.0f);
+        particle.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        particle.transform.rotation = Quaternion.Euler(90, 0, 0);
+        particleManager.OncePlayParticle(particle);
+    }
+
+    private IEnumerator BossDeadEffect()
+    {
+        Vector3 scale = transform.localScale;
+        Vector3 minScale = scale / 5.0f;
+        float elapsedTime = 0;
+        while (true)
+        {
+            scale -= Vector3.one * Time.deltaTime * effectSpeed;
+            transform.localScale = scale;
+
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= particleInstanceTime)
+            {
+                float x = Random.Range(-0.5f, 0.5f);
+                float y = Random.Range(-0.5f, 0.5f);
+                ExplosionInstance(x, y);
+                elapsedTime = 0;
+            }
+
+            if (transform.localScale.x <= minScale.x || transform.localScale.y <= minScale.y || transform.localScale.z <= minScale.z)
+            {
+                gameManager.IsPerformance = false;
+                ExplosionInstance();
+                Destroy(gameObject);
+                yield break;
+            }
+
+            yield return null;
+        }
+
     }
 }

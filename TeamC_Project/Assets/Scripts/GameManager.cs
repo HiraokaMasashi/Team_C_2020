@@ -81,12 +81,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void ChangeResultScene()
     {
+        if (IsPerformance) return;
+
         if (!IsEnd)
         {
             SetResultGameOver();
             SetResultGameClear();
         }
-        else
+
+        if(IsEnd && !IsPerformance)
         {
             changeSceneTime -= Time.deltaTime;
             if (changeSceneTime > 0.0f) return;
@@ -116,6 +119,7 @@ public class GameManager : MonoBehaviour
         {
             bossHPSlider.gameObject.SetActive(false);
             result = ResultMode.GAMECLEAR;
+            //IsPerformance = true;
             IsEnd = true;
             scoreManager.UpdateScoreRanking();
         }

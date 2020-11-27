@@ -109,7 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe13622e747dbb4f9302ae6145c553f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageInterval: 1
+  screwDamageInterval: 1
+  drillDamageInterval: 0.1
   moveSpeed: 1
 --- !u!114 &1227512603
 MonoBehaviour:
@@ -127,7 +128,12 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: 
   damageSe: 
-  debriPrefab: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers: []
+  effectTime: 2
+  effectSpeed: 0.5
+  particleInstanceTime: 0.5
 --- !u!114 &1227512604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe13622e747dbb4f9302ae6145c553f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageInterval: 1
+  screwDamageInterval: 1
+  drillDamageInterval: 0.1
   moveSpeed: 1
 --- !u!114 &106078137
 MonoBehaviour:
@@ -268,7 +275,12 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: 
   damageSe: 
-  debriPrefab: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers: []
+  effectTime: 2
+  effectSpeed: 0.5
+  particleInstanceTime: 0.5
 --- !u!114 &106078138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +549,13 @@ MonoBehaviour:
   hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
-  debriPrefab: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers:
+  - {fileID: 7985128295582394106}
+  effectTime: 2
+  effectSpeed: 0.2
+  particleInstanceTime: 0.5
 --- !u!114 &1184275786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles:
   - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
+  - {fileID: 6062054386788731765, guid: dff33eb216d23d040a1808a82892043a, type: 3}
 --- !u!114 &1184275787
 MonoBehaviour:
   m_ObjectHideFlags: 0

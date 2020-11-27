@@ -53,6 +53,8 @@ public class Boss : MonoBehaviour
     protected string alertSe = "alert";
     protected bool isPlayAlert;
 
+    protected Health health;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -67,6 +69,8 @@ public class Boss : MonoBehaviour
 
         pattern = BehaviourPattern.SHOT;
         isPlayAlert = false;
+
+        health = GetComponent<Health>();
 
         StartCoroutine(FrameIn());
     }

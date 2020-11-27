@@ -64,6 +64,8 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.GetResult() != GameManager.ResultMode.NONE) return;
+
         NextWave();
         DisPlayWave();
         PerformancePlayerPosition();
