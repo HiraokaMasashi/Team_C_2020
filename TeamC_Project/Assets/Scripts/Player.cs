@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         if (gameManager.IsPerformance)
         {
             //通常状態でなければ、通常状態に戻す
-            if(currentMode != Mode.NORMAL)
+            if (currentMode != Mode.NORMAL)
             {
                 StopScrew();
                 RotationDefault();
@@ -333,16 +333,38 @@ public class Player : MonoBehaviour
 
     private void EnemyRecoveryStart(GameObject screw)
     {
+        //スクリューがなければ行わない
         if (screw == null) return;
-        float centerPositionX;
-        if (screw == shotScrewObject) centerPositionX = shotScrewObject.transform.position.x;
-        else centerPositionX = transform.position.x;
+        //スクリューを中心に整列させる
+        float alignmentPositionX, alignmentPositionY;
+        if (screw == shotScrewObject) alignmentPositionX = shotScrewObject.transform.position.x;
+        else alignmentPositionX = transform.position.x;
+        //スクリューの中心より低い位置を基準にする
+        alignmentPositionY = screw.transform.position.y - 2.0f;
 
         List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetObjects();
+        int count = 0;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
-            enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(centerPositionX);
+            SetUpScrew setUpScrew = enemies[i].GetComponent<SetUpScrew>();
+            //整列数が5体以上いたら、新しい列をつくる
+            if (count >= 5)
+            {
+                count = 0;
+                alignmentPositionX += 2.0f;
+                alignmentPositionY = screw.transform.position.y - 2.0f;
+            }
+
+            //制限範囲を超える場合は範囲に収める
+            if (alignmentPositionX >= setUpScrew.ClapmPosition.x)
+                alignmentPositionX = setUpScrew.ClapmPosition.x;
+            if (alignmentPositionY >= setUpScrew.ClapmPosition.y) 
+                alignmentPositionY = setUpScrew.ClapmPosition.y;
+
+            enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(alignmentPositionX, alignmentPositionY, screw);
             screw.GetComponent<ScrewCollision>().RemoveObject(i);
+            alignmentPositionY += 2.0f;
+            count++;
         }
     }
 

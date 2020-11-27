@@ -24,7 +24,14 @@ public class SetUpScrew : MonoBehaviour
     [SerializeField]
     private Vector3 clampPosition;
 
-    private float centerPositionX;
+    public Vector3 ClapmPosition
+    {
+        get { return clampPosition; }
+    }
+
+    private float alignmentPositionX;
+    private float alignmentPositionY;
+
 
     protected enum MoveDirection
     {
@@ -94,14 +101,6 @@ public class SetUpScrew : MonoBehaviour
         {
             currentDirection = MoveDirection.UP;
         }
-
-        Vector3 destination = new Vector3(centerPositionX, transform.position.y, transform.position.z);
-        Vector3 position = transform.position;
-        if (Vector3.Distance(position, destination) <= 0.1f) return;
-
-        Vector3 direction = destination - position;
-        position += direction.normalized * speed * Time.deltaTime;
-        transform.position = position;
     }
 
     /// <summary>
@@ -201,10 +200,26 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// スクリューから外れたときに呼ぶ処理
     /// </summary>
-    public void ReleaseScrew(float positionX)
+    public void ReleaseScrew(float positionX, float positionY, GameObject screw)
     {
         NotRecovery = false;
-        float x = Random.Range(-1.0f, 1.0f);
-        centerPositionX = positionX + x;
+        //float x = Random.Range(-1.0f, 1.0f);
+        alignmentPositionX = positionX;
+        alignmentPositionY = positionY;
+
+        StartCoroutine(Alignment());
+    }
+
+    private IEnumerator Alignment()
+    {
+        Vector3 destination = new Vector3(alignmentPositionX, alignmentPositionY, transform.position.z);
+        Vector3 position = transform.position;
+        while (Vector3.Distance(position, destination) > 0.1f)
+        {
+            Vector3 direction = destination - position;
+            position += direction.normalized * speed * Time.deltaTime;
+            transform.position = position;
+            yield return null;
+        }
     }
 }
