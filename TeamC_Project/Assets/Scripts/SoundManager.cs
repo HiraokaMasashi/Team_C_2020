@@ -28,8 +28,8 @@ public class SoundManager : MonoBehaviour
 
     List<float> playingList = new List<float>();
 
-    [SerializeField, Range(1, 10),Header("SE同時再生数上限")]
-    int maxPlayingSeCount = 4;
+    [SerializeField, Range(1, 30), Header("SE同時再生数上限")]
+    int maxPlayingSeCount = 10;
 
     public float MasterVolume
     {

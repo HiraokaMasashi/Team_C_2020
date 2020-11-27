@@ -428,6 +428,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 625715156826925727, guid: 4968c4f00c55cdd438cb962884220273,
+        type: 3}
+      propertyPath: maxPlayingSeCount
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1001768381916654498, guid: 4968c4f00c55cdd438cb962884220273, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4968c4f00c55cdd438cb962884220273, type: 3}
@@ -1919,6 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16e36f6e850214eb2c9d2c330ce309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossHPSlider: {fileID: 0}
   fadeScene: {fileID: 2126268845}
   changeSceneTime: 2
 --- !u!4 &1982425631
