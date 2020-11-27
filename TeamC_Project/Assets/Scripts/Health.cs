@@ -24,6 +24,13 @@ public class Health : MonoBehaviour
     [SerializeField, Tooltip("生成位置の調整")]
     private Vector3 adjustPosition;
 
+    private bool isDamageEffect;
+    [SerializeField]
+    private MeshRenderer[] meshRenderers;
+    [SerializeField]
+    private float effectTime = 2.0f;
+    private float effectElapsedTime;
+
     /// <summary>
     /// 体力
     /// </summary>
@@ -47,10 +54,13 @@ public class Health : MonoBehaviour
 
         particleManager = GetComponent<ParticleManager>();
         soundManager = SoundManager.Instance;
+        isDamageEffect = false;
+        effectElapsedTime = 0;
     }
 
     private void Update()
     {
+        DamageEffect();
         DeathEffect();
         DisplayHp();
     }
@@ -119,6 +129,30 @@ public class Health : MonoBehaviour
 
             if (dropPrefab != null)
                 Instantiate(dropPrefab, transform.position + adjustPosition, Quaternion.identity);
+        }
+        else
+            isDamageEffect = true;
+    }
+
+    private void DamageEffect()
+    {
+        if (!isDamageEffect || Time.timeScale == 0) return;
+
+        effectElapsedTime += Time.deltaTime;
+        if(effectElapsedTime >= effectTime)
+        {
+            foreach (var mesh in meshRenderers)
+            {
+                mesh.enabled = true;
+            }
+            isDamageEffect = false;
+            effectElapsedTime = 0.0f;
+            return;
+        }
+
+        foreach(var mesh in meshRenderers)
+        {
+            mesh.enabled = !mesh.enabled;
         }
     }
 }
