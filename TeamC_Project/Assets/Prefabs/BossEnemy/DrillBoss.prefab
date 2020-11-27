@@ -180,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles:
   - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
+  - {fileID: 6062054386788731765, guid: dff33eb216d23d040a1808a82892043a, type: 3}
 --- !u!114 &3730908732933718928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +202,8 @@ MonoBehaviour:
   meshRenderers:
   - {fileID: 3730908732933718934}
   effectTime: 2
+  effectSpeed: 0.2
+  particleInstanceTime: 0.5
 --- !u!114 &3730908732933718942
 MonoBehaviour:
   m_ObjectHideFlags: 0
