@@ -2096,16 +2096,16 @@ MonoBehaviour:
   seList:
   - choice1
   - enter1
-  - cancel1
+  - cansel1
   changeTime: 10
   summary: {fileID: 1491281785}
   summaries:
-  - "\u30B9\u30B3\u30A2\u3092\u8868\u793A"
-  - "\u30B9\u30B3\u30A2\u3092\u8868\u793A"
-  - "\u30B9\u30B3\u30A2\u3092\u8868\u793A"
+  - 
+  - 
+  - 
   - "\u97F3\u91CF\u306E\u8A2D\u5B9A\u3092\u3057\u307E\u3059\u3002"
-  - "\u30BF\u30A4\u30C8\u30EB\u753B\u9762\u306B\u623B\u308A\u307E\u3059\u3002\u3000\u3000(\u9577\u62BC\u3057)"
-  - "\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3057\u307E\u3059\u3002\u3000\u3000\u3000\u3000(\u9577\u62BC\u3057)"
+  - "\u30BF\u30A4\u30C8\u30EB\u753B\u9762\u306B\u623B\u308A\u307E\u3059\u3002\n(\u9577\u62BC\u3057)"
+  - "\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3057\u307E\u3059\u3002\n(\u9577\u62BC\u3057)"
   backSlider: {fileID: 428792949}
   endSlider: {fileID: 1976306455}
   backTime: 100
@@ -2186,14 +2186,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1491281786
 CanvasRenderer:
   m_ObjectHideFlags: 0

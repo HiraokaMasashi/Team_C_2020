@@ -36,7 +36,7 @@ public class SelectSceneManager : MonoBehaviour
     private int changeTime = 10; //点滅速度
     [SerializeField]
     private Text summary; //選択中のメニューの説明文
-    [SerializeField]
+    [SerializeField, TextArea]
     private string[] summaries; //選択中のメニューの説明文
 
     [SerializeField]
@@ -121,7 +121,7 @@ public class SelectSceneManager : MonoBehaviour
 #endif
             }
         }
-        else if(!Input.GetB_Button())
+        else if (!Input.GetB_Button())
         {
             backTimer = 0;
             endTimer = 0;
@@ -143,7 +143,7 @@ public class SelectSceneManager : MonoBehaviour
                 }
             }
         }
-        else if(!Input.GetA_Button() && selectNumber == 4)
+        else if (!Input.GetA_Button() && selectNumber == 4)
             backTimer = 0;
         backTimer = endTimer == 0 ? backTimer : 0;
         endTimer = backTimer == 0 ? endTimer : 0;
@@ -244,7 +244,29 @@ public class SelectSceneManager : MonoBehaviour
             colorTimer = 0;
         outlines[number].effectColor = colors[colorTimer / changeTime];
 
+        string text = "";
+        if (number <= 2)
+        {
+            scoreManager.LoadFile(sceneNames[number]);
+            scores = scoreManager.GetScoreRanking();
+
+            string space = "";
+
+            text = "1位　" + scores[0].ToString() + "\n" +
+                "2位　" + scores[1].ToString() + "\n" +
+                "3位　" + scores[2].ToString() + "\n" +
+                "4位　" + scores[3].ToString() + "\n" +
+                "5位　" + scores[4].ToString();
+
+            summary.fontSize = 60;
+        }
+        else
+        {
+            text = summaries[number];
+            summary.fontSize = 35;
+        }
+
         //テキストボックスにメニュー概要やスコアを表示
-        summary.text = summaries[number];
+        summary.text = text;
     }
 }

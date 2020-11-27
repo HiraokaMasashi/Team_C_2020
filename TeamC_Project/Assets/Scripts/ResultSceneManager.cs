@@ -10,6 +10,8 @@ public class ResultSceneManager : MonoBehaviour
     [SerializeField]
     private Text[] scoreTexts;
     [SerializeField]
+    private Text[] rankTexts;
+    [SerializeField]
     private Text hiScoreText;
 
     private InputManager inputManager;
@@ -65,15 +67,23 @@ public class ResultSceneManager : MonoBehaviour
 
     private void DisplayRanking()
     {
-        for(int i = 0; i < scoreTexts.Length; i++)
+
+        for (int i = 0; i < scoreTexts.Length; i++)
         {
-            scoreTexts[i].text = (i + 1) + "位 " + scores[i].ToString("D5");
+            scoreTexts[i].text = scores[i].ToString();
             if (rank == i)
+            {
                 scoreTexts[i].color = Color.red;
+                rankTexts[i].color = Color.red;
+            }
         }
 
         //ビルドだとテキストの表示がおかしくなるため
-        hiScoreText.text = "1位 " + scores[0].ToString("D5");
-        if (rank == 0) hiScoreText.color = Color.red;
+        hiScoreText.text = scores[0].ToString();
+        if (rank == 0)
+        {
+            hiScoreText.color = Color.red;
+            rankTexts[0].color = Color.red;
+        }
     }
 }

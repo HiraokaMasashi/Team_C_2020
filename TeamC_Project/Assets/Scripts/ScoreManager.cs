@@ -28,6 +28,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         base.Awake();
 
+        if (SceneManager.GetActiveScene().name == "Select") return;
+
         SetFilePath();
 
         if (File.Exists(path))
@@ -70,8 +72,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     private void DisplayScore()
     {
         if (scoreText == null) return;
-
-        scoreText.text = "Score: " + totalScore.ToString("D5");
+        scoreText.text = totalScore.ToString();
     }
 
     /// <summary>
@@ -82,7 +83,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         if (hiScoreText == null) return;
 
         UpdateHiScore();
-        hiScoreText.text = "HIScore: " + hiScore.ToString("D5");
+        hiScoreText.text =hiScore.ToString();
     }
 
     /// <summary>
@@ -193,6 +194,27 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         {
             stageName = SceneManager.GetActiveScene().name;
             path = Application.persistentDataPath + "/" + stageName + fileName;
+        }
+    }
+
+    private void SetFilePath(string stageName = "")
+    {
+        if (SceneManager.GetActiveScene().name == "Select")
+        {
+            path = Application.persistentDataPath + "/" + stageName + fileName;
+        }
+    }
+
+    public void LoadFile(string stageName = "")
+    {
+        SetFilePath(stageName);
+
+        if (File.Exists(path))
+            LoadScore();
+        else
+        {
+            InitScoreRanking();
+            SaveScore();
         }
     }
 }
