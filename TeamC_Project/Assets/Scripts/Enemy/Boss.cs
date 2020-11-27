@@ -97,4 +97,9 @@ public class Boss : MonoBehaviour
     {
         return pattern;
     }
+
+    public virtual void DestroyOtherObject()
+    {
+
+    }
 }

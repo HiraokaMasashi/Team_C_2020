@@ -4,23 +4,7 @@ using UnityEngine;
 
 public class NormalBoss : Boss
 {
-    //[SerializeField]
-    //private float minInterval = 10.0f;
-    //[SerializeField]
-    //private float maxInterval = 10.0f;
-
-    //private float num = 2;
-
-    //[SerializeField]
-    //private float roopInterval;
-
-    //[SerializeField]
-    //private float countIntervalTime;
-    //[SerializeField]
-    //private float roopIntervalTime;
     private GameObject player;
-    //[SerializeField]
-    //int countbullet = 0;
 
     [SerializeField]
     private Transform[] shotTransforms;
@@ -182,6 +166,14 @@ public class NormalBoss : Boss
             shotElapsedTime = 0.0f;
             endShot = true;
             yield break;
+        }
+    }
+
+    public override void DestroyOtherObject()
+    {
+        for (int i = bombs.Count - 1; i >= 0; i--)
+        {
+            Destroy(bombs[i]);
         }
     }
 }

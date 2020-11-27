@@ -99,6 +99,7 @@ public class Health : MonoBehaviour
             if (gameManager.IsPerformance) return;
 
             gameManager.IsPerformance = true;
+            GetComponent<Boss>().DestroyOtherObject();
             ExplosionInstance();
             StartCoroutine(BossDeadEffect());
         }
