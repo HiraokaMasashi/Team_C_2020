@@ -24,8 +24,6 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Transform bossPattern;
     private GameObject boss;
-    [SerializeField]
-    private Vector3 bossRotate;
 
     private SoundManager soundManager;
     [SerializeField]
@@ -110,7 +108,7 @@ public class EnemyManager : MonoBehaviour
         if (boss != null) return;
         if (bossPrefab == null) return;
 
-        boss = Instantiate(bossPrefab, bossPattern.GetChild(0).position, Quaternion.Euler(bossRotate));
+        boss = Instantiate(bossPrefab, bossPattern.GetChild(0).position, bossPrefab.transform.rotation);
     }
 
     //敵をパターンごとに生成する

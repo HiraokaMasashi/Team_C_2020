@@ -204,6 +204,7 @@ MonoBehaviour:
   effectTime: 2
   effectSpeed: 0.2
   particleInstanceTime: 0.5
+  minScale: {x: 2.5, y: 2.5, z: 2.5}
 --- !u!114 &3730908732933718942
 MonoBehaviour:
   m_ObjectHideFlags: 0

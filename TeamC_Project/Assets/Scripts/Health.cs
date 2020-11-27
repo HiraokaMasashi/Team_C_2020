@@ -37,6 +37,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     private float particleInstanceTime = 0.5f;
 
+    [SerializeField]
+    private Vector3 minScale = Vector3.one;
+
     /// <summary>
     /// 体力
     /// </summary>
@@ -188,12 +191,12 @@ public class Health : MonoBehaviour
     private IEnumerator BossDeadEffect()
     {
         Vector3 scale = transform.localScale;
-        Vector3 minScale = scale / 5.0f;
         float elapsedTime = 0;
         while (true)
         {
             scale -= Vector3.one * Time.deltaTime * effectSpeed;
             transform.localScale = scale;
+            transform.rotation *= Quaternion.Euler(5 * Time.deltaTime, 0, 10 * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
             if (elapsedTime >= particleInstanceTime)
