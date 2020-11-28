@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
 
     private ScoreManager scoreManager;
 
+    [SerializeField]
+    private Text hpText;
+    [SerializeField]
+    private BossHPGauge bossHPGauge;
 
     public enum ResultMode
     {
@@ -59,7 +63,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameStart();
-        DisplayBossHP();
+        DisplayPlayerHP();
+        bossHPGauge.DisplayGauge();
+        //DisplayBossHP();
         ChangeResultScene();
     }
 
@@ -89,7 +95,7 @@ public class GameManager : MonoBehaviour
             SetResultGameClear();
         }
 
-        if(IsEnd && !IsPerformance)
+        if (IsEnd && !IsPerformance)
         {
             changeSceneTime -= Time.deltaTime;
             if (changeSceneTime > 0.0f) return;
@@ -117,7 +123,7 @@ public class GameManager : MonoBehaviour
 
         if (bossHealth.IsDead)
         {
-            bossHPSlider.gameObject.SetActive(false);
+            bossHPGauge.gameObject.SetActive(false);
             result = ResultMode.GAMECLEAR;
             //IsPerformance = true;
             IsEnd = true;
@@ -141,8 +147,24 @@ public class GameManager : MonoBehaviour
     public void SetBossEnemy(GameObject bossEnemy)
     {
         bossHealth = bossEnemy.GetComponent<Health>();
-        bossHPSlider.gameObject.SetActive(true);
-        bossHPSlider.maxValue = bossHealth.Hp;
+        bossHPGauge.SetBossHealth(bossHealth);
+        bossHPGauge.gameObject.SetActive(true);
+        //bossHPSlider.gameObject.SetActive(true);
+        //bossHPSlider.maxValue = bossHealth.Hp;
+    }
+
+    private void DisplayPlayerHP()
+    {
+        if (hpText == null) return;
+
+        hpText.text = "HP: " + playerHealth.Hp + " / " + playerHealth.MaxHp;
+
+        if (playerHealth.Hp <= playerHealth.MaxHp * (1.0f / 3.0f))
+            hpText.color = Color.red;
+        else if (playerHealth.Hp <= playerHealth.MaxHp * (2.0f / 3.0f))
+            hpText.color = Color.yellow;
+        else
+            hpText.color = Color.green;
     }
 
     private void DisplayBossHP()

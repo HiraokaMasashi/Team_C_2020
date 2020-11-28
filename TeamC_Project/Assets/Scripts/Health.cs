@@ -8,9 +8,11 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private int hp = 1;
-    private int maxHp;
-    [SerializeField]
-    private Text hpText;
+    public int MaxHp
+    {
+        get;
+        private set;
+    }
 
     private ParticleManager particleManager;
     private SoundManager soundManager;
@@ -59,7 +61,7 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        maxHp = hp;
+        MaxHp = hp;
 
         particleManager = GetComponent<ParticleManager>();
         soundManager = SoundManager.Instance;
@@ -73,7 +75,6 @@ public class Health : MonoBehaviour
     {
         DamageEffect();
         DeathEffect();
-        DisplayHp();
     }
 
     /// <summary>
@@ -108,22 +109,6 @@ public class Health : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 体力の表示
-    /// </summary>
-    private void DisplayHp()
-    {
-        if (hpText == null) return;
-
-        hpText.text = "HP: " + hp + " / " + maxHp;
-
-        if (hp <= maxHp * (1.0f / 3.0f))
-            hpText.color = Color.red;
-        else if (hp <= maxHp * (2.0f / 3.0f))
-            hpText.color = Color.yellow;
-        else
-            hpText.color = Color.green;
-    }
 
     /// <summary>
     /// 衝突時に呼ぶ死亡処理

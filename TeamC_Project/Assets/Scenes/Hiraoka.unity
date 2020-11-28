@@ -567,6 +567,8 @@ MonoBehaviour:
   bossHPSlider: {fileID: 1185259607}
   fadeScene: {fileID: 1672643944}
   changeSceneTime: 2
+  hpText: {fileID: 613549694}
+  bossHPGauge: {fileID: 4213364956892540405}
 --- !u!4 &507480042
 Transform:
   m_ObjectHideFlags: 0
@@ -1331,6 +1333,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 581790775681515070, guid: aa15ba123e28cc0428a46427fb938165,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213364955775045025, guid: aa15ba123e28cc0428a46427fb938165,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213364955775045027, guid: aa15ba123e28cc0428a46427fb938165,
+        type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213364955801662557, guid: aa15ba123e28cc0428a46427fb938165,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213364955801662557, guid: aa15ba123e28cc0428a46427fb938165,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4213364956986791084, guid: aa15ba123e28cc0428a46427fb938165,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1448,3 +1475,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa15ba123e28cc0428a46427fb938165, type: 3}
+--- !u!114 &4213364956892540405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7397596417904537785, guid: aa15ba123e28cc0428a46427fb938165,
+    type: 3}
+  m_PrefabInstance: {fileID: 4213364956892540404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2c4cb6965738a4d9414a8f8640a108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
