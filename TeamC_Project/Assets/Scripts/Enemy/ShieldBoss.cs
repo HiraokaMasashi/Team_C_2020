@@ -28,7 +28,13 @@ public class ShieldBoss : Boss
     // Update is called once per frame
     void Update()
     {
-        if (!isFrameIn || health.IsDead) return;
+        if (!isFrameIn) return;
+
+        if (health.IsDead)
+        {
+            StopAllCoroutines();
+            return;
+        }
 
         ChangePattern();
 
@@ -125,22 +131,5 @@ public class ShieldBoss : Boss
         }
         summonElapsedTime = 0.0f;
         isSummon = true;
-    }
-
-    public override void DestroyOtherObject()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        List<GameObject> e = new List<GameObject>();
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if (enemies[i] == gameObject) continue;
-
-            e.Add(enemies[i]);
-        }
-
-        for (int i = e.Count - 1; i >= 0; i--)
-        {
-            Destroy(e[i]);
-        }
     }
 }

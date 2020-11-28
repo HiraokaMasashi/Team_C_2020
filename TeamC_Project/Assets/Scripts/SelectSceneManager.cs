@@ -48,6 +48,9 @@ public class SelectSceneManager : MonoBehaviour
     private ScoreManager scoreManager;
     private int[] scores;
 
+    [SerializeField]
+    private Text scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +74,7 @@ public class SelectSceneManager : MonoBehaviour
 
         scoreManager = ScoreManager.Instance;
         scores = scoreManager.GetScoreRanking();
+        scoreText.enabled = false;
     }
 
     // Update is called once per frame
@@ -244,29 +248,31 @@ public class SelectSceneManager : MonoBehaviour
             colorTimer = 0;
         outlines[number].effectColor = colors[colorTimer / changeTime];
 
-        string text = "";
+        //テキストボックスにメニュー概要やスコアを表示
         if (number <= 2)
         {
             scoreManager.LoadFile(sceneNames[number]);
             scores = scoreManager.GetScoreRanking();
 
-            string space = "";
-
-            text = "1位　" + scores[0].ToString() + "\n" +
-                "2位　" + scores[1].ToString() + "\n" +
-                "3位　" + scores[2].ToString() + "\n" +
-                "4位　" + scores[3].ToString() + "\n" +
-                "5位　" + scores[4].ToString();
-
+            summary.text =
+                "1位　\n" +
+                "2位　\n" +
+                "3位　\n" +
+                "4位　\n" +
+                "5位　";
             summary.fontSize = 60;
+            scoreText.enabled = true;
+            scoreText.text = scores[0].ToString() + "\n" +
+                scores[1].ToString() + "\n" +
+                scores[2].ToString() + "\n" +
+                scores[3].ToString() + "\n" +
+                scores[4].ToString();
         }
         else
         {
-            text = summaries[number];
+            summary.text = summaries[number];
             summary.fontSize = 35;
+            scoreText.enabled = false;
         }
-
-        //テキストボックスにメニュー概要やスコアを表示
-        summary.text = text;
     }
 }

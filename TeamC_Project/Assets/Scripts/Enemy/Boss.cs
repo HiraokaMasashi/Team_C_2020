@@ -100,6 +100,23 @@ public class Boss : MonoBehaviour
 
     public virtual void DestroyOtherObject()
     {
+        List<GameObject> others = new List<GameObject>();
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (var e in enemies)
+        {
+            if (e == gameObject) continue;
 
+            others.Add(e);
+        }
+        foreach (var b in bullets)
+        {
+            others.Add(b);
+        }
+
+        for (int i = others.Count - 1; i >= 0; i--)
+        {
+            Destroy(others[i]);
+        }
     }
 }

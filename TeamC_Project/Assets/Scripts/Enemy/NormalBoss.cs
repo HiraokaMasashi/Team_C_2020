@@ -40,7 +40,13 @@ public class NormalBoss : Boss
     // Update is called once per frame
     void Update()
     {
-        if (!isFrameIn || health.IsDead) return;
+        if (!isFrameIn) return;
+
+        if (health.IsDead)
+        {
+            StopAllCoroutines();
+            return;
+        }
 
         ChangePattern();
         ShotBullet();
@@ -171,6 +177,7 @@ public class NormalBoss : Boss
 
     public override void DestroyOtherObject()
     {
+        base.DestroyOtherObject();
         for (int i = bombs.Count - 1; i >= 0; i--)
         {
             Destroy(bombs[i]);
