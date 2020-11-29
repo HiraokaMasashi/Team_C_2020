@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9386792, g: 1, b: 0.9923349, a: 1}
+  m_Color: {r: 0.9372549, g: 1, b: 0.9544885, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 2075226250936151211}
   - component: {fileID: 6518943024535532084}
   m_Layer: 5
-  m_Name: Gage3
+  m_Name: Gauge3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.95
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4972443764383721742}
   m_Layer: 5
-  m_Name: HPGage
+  m_Name: HPGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 811844763543029666}
   - component: {fileID: 3184271877314039382}
   m_Layer: 5
-  m_Name: Gage5
+  m_Name: Gauge5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,7 +927,7 @@ GameObject:
   - component: {fileID: 5675489549085210037}
   - component: {fileID: 3454148538068172676}
   m_Layer: 5
-  m_Name: Gage2
+  m_Name: Gauge2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 1029862470204489886}
   - component: {fileID: 7373192372916804818}
   m_Layer: 5
-  m_Name: Gage4
+  m_Name: Gauge4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 335921176016014789}
   - component: {fileID: 3615463540169762956}
   m_Layer: 5
-  m_Name: Gage1
+  m_Name: Gauge1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.95
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

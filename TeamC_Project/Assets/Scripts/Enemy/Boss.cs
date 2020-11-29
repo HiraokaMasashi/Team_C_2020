@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour
     protected BehaviourPattern pattern;
 
     protected BulletController bulletController;
-    private GameManager gameManager;
+    protected GameManager gameManager;
 
     //フレームイン時の目的地
     [SerializeField]

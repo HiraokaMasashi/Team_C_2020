@@ -30,7 +30,7 @@ public class ShieldBoss : Boss
     {
         if (!isFrameIn) return;
 
-        if (health.IsDead)
+        if (health.IsDead || gameManager.IsEnd)
         {
             StopAllCoroutines();
             return;

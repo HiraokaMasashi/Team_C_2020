@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
     private ScoreManager scoreManager;
 
     [SerializeField]
-    private Text hpText;
+    private Slider[] playerHPGauges;
+    [SerializeField]
+    private Image[] playerHPImages;
+    //private Text hpText;
     [SerializeField]
     private BossHPGauge bossHPGauge;
 
@@ -155,16 +158,34 @@ public class GameManager : MonoBehaviour
 
     private void DisplayPlayerHP()
     {
-        if (hpText == null) return;
+        //if (hpText == null) return;
 
-        hpText.text = "HP: " + playerHealth.Hp + " / " + playerHealth.MaxHp;
+        //hpText.text = "HP: " + playerHealth.Hp + " / " + playerHealth.MaxHp;
 
-        if (playerHealth.Hp <= playerHealth.MaxHp * (1.0f / 3.0f))
-            hpText.color = Color.red;
-        else if (playerHealth.Hp <= playerHealth.MaxHp * (2.0f / 3.0f))
-            hpText.color = Color.yellow;
-        else
-            hpText.color = Color.green;
+        //if (playerHealth.Hp <= playerHealth.MaxHp * (1.0f / 3.0f))
+        //    hpText.color = Color.red;
+        //else if (playerHealth.Hp <= playerHealth.MaxHp * (2.0f / 3.0f))
+        //    hpText.color = Color.yellow;
+        //else
+        //    hpText.color = Color.green;
+
+        if (playerHPGauges.Length == 0) return;
+
+        for (int i = 0; i < playerHealth.MaxHp; i++)
+        {
+            if (i < playerHealth.Hp)
+                playerHPGauges[i].value = 1;
+            else
+                playerHPGauges[i].value = 0;
+
+            Color hpColor = Color.green;
+            if (playerHealth.Hp <= playerHealth.MaxHp * (1.0f / 3.0f))
+                hpColor = Color.red;
+            else if (playerHealth.Hp <= playerHealth.MaxHp * (2.0f / 3.0f))
+                hpColor = Color.yellow;
+
+            playerHPImages[i].color = hpColor;
+        }
     }
 
     private void DisplayBossHP()
