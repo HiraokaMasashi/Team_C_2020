@@ -73,7 +73,10 @@ public class Drill : MonoBehaviour
         if (!IsShot)
         {
             if (transform.parent == null && player != null)
-                transform.position = player.transform.position - player.transform.up * 1.5f;
+            {
+                transform.position = player.transform.position - player.transform.up * 2f;
+                transform.rotation = Quaternion.Euler(-30, 0, 180);
+            }
         }
         else
         {

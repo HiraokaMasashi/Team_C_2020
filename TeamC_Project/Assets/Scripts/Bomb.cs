@@ -63,9 +63,21 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "PlayerBullet")
+        if (other.gameObject.tag == "PlayerBullet")
         {
-            other.gameObject.GetComponent<Bullet>().Disconnect();
+            if (!other.gameObject.GetComponent<Bullet>().IsPenetrate)
+                other.gameObject.GetComponent<Bullet>().Disconnect();
+
+            GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
+            for (int i = screws.Length - 1; i >= 0; i--)
+            {
+                int length = screws[i].GetComponent<ScrewCollision>().GetObjects().Count;
+                for (int j = length - 1; j >= 0; j--)
+                {
+                    screws[i].GetComponent<ScrewCollision>().RemoveObject(j);
+                }
+            }
+
             GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
@@ -75,6 +87,16 @@ public class Bomb : MonoBehaviour
 
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Blast")
         {
+            GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
+            for (int i = screws.Length - 1; i >= 0; i--)
+            {
+                int length = screws[i].GetComponent<ScrewCollision>().GetObjects().Count;
+                for (int j = length - 1; j >= 0; j--)
+                {
+                    screws[i].GetComponent<ScrewCollision>().RemoveObject(j);
+                }
+            }
+
             GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);

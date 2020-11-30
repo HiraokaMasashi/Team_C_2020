@@ -53,6 +53,9 @@ public class DrillBoss : Boss
     [SerializeField]
     private Transform instanceTransform;
 
+    [SerializeField]
+    private Vector3 adjustPosition = new Vector3(1.25f, 0, 0);
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -276,7 +279,7 @@ public class DrillBoss : Boss
 
         respawnElapsedTime = 0.0f;
         nowRespawn = false;
-        Vector3 position = instanceTransform.position - new Vector3(1.25f, 0.25f, 0);
+        Vector3 position = instanceTransform.position - adjustPosition;
         drill = Instantiate(drillPrefab, position, Quaternion.Euler(-180, -180, 0), transform);
         StartCoroutine(InstanceDrill());
     }
@@ -287,7 +290,7 @@ public class DrillBoss : Boss
     /// <returns></returns>
     private IEnumerator InstanceDrill()
     {
-        Vector3 destination = instanceTransform.position - new Vector3(1.25f, 2.0f, 0);
+        Vector3 destination = instanceTransform.position - (adjustPosition + Vector3.up * 2);
         while (Vector3.Distance(drill.transform.position, destination) > 0.1f)
         {
             Vector3 position = Vector3.Lerp(drill.transform.position, destination, Time.deltaTime * moveSpeed);
@@ -340,5 +343,10 @@ public class DrillBoss : Boss
             shotElapsedTime = 0.0f;
             yield break;
         }
+    }
+
+    public void RemoveDrill()
+    {
+        drill = null;
     }
 }

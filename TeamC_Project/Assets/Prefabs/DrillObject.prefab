@@ -44,7 +44,7 @@ BoxCollider:
   m_GameObject: {fileID: 6111796149867733879}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 1.2, z: 5}
   m_Center: {x: 0, y: 0.4, z: 1.5}
@@ -74,11 +74,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
-  hpText: {fileID: 0}
   deadSe: 
   damageSe: 
   dropPrefab: {fileID: 0}
   adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers: []
+  effectTime: 2
+  effectSpeed: 0.5
+  particleInstanceTime: 0.5
+  minScale: {x: 1, y: 1, z: 1}
 --- !u!114 &5769909516090994576
 MonoBehaviour:
   m_ObjectHideFlags: 0

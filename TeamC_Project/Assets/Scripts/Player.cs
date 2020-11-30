@@ -398,7 +398,6 @@ public class Player : MonoBehaviour
             inhaleScrewObject.GetComponent<BoxCollider>().enabled = false;
             isExistScrew = false;
             inhaleScrewObject = null;
-            soundManager.StopSe();
         }
 
         if (drill != null)
@@ -409,6 +408,7 @@ public class Player : MonoBehaviour
             drill = null;
             IsEquipmentDrill = false;
         }
+        soundManager.StopSe();
 
         if (currentMode == Mode.SCREW)
             //元に戻る回転状態
@@ -459,7 +459,7 @@ public class Player : MonoBehaviour
         drill.GetComponent<BoxCollider>().enabled = true;
 
         if (isPlayDrillSE) return;
-        soundManager.PlaySeByName(ses[2]);
+        soundManager.PlaySeByName(ses[2], true);
         isPlayDrillSE = true;
     }
 

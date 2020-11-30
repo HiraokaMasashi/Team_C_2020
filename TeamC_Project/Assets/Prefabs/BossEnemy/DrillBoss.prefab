@@ -151,6 +151,7 @@ MonoBehaviour:
   attackInterval: 3
   chnageBehaviourCount: 2
   instanceTransform: {fileID: 2382001453842637989}
+  adjustPosition: {x: 1.25, y: 0, z: 0}
 --- !u!114 &3730908732933718931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 180
-  hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
   dropPrefab: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   effectTime: 2
   effectSpeed: 0.2
   particleInstanceTime: 0.5
-  minScale: {x: 2.5, y: 2.5, z: 2.5}
+  minScale: {x: 4, y: 4, z: 4}
 --- !u!114 &3730908732933718942
 MonoBehaviour:
   m_ObjectHideFlags: 0
