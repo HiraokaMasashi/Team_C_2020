@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     private static int stageNumber;
 
+    private GameObject player;
+    private Player playerS;
+
     public enum ResultMode
     {
         NONE,
@@ -65,6 +68,12 @@ public class GameManager : MonoBehaviour
 
         scoreManager = ScoreManager.Instance;
         scoreManager.InitScore();
+
+
+        //Playerが生成される処理ではなかったのでScene内のPlayerを使用
+        player = GameObject.Find("Player");
+        playerS = player.GetComponent<Player>();
+        player.transform.position = new Vector3(0, -14, 0);
     }
 
     // Update is called once per frame
@@ -83,11 +92,18 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         if (IsGameStart) return;
+            //Start地点まで移動する処理
+            player.transform.position += new Vector3(0, 7, 0)*Time.deltaTime;
 
-        if (!fadeScene.IsFadeIn)
+        //Start地点に到着したら
+        if (player.transform.position.y >= Vector3.zero.y)
         {
-            IsGameStart = true;
+            if (!fadeScene.IsFadeIn)
+            {
+                IsGameStart = true;
+            }
         }
+
     }
 
     /// <summary>
