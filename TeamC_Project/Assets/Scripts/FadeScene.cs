@@ -16,6 +16,8 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
 
     private SoundManager soundManager;
 
+    private static string beforeSceneName = "";
+
     public bool IsFadeIn
     {
         get;
@@ -94,5 +96,11 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
         IsFadeOut = true;
         fadeImage.enabled = true;
         nextSceneName = SceneName;
+        beforeSceneName = SceneManager.GetActiveScene().name;
+    }
+
+    public static string GetBeforeSceneName()
+    {
+        return beforeSceneName;
     }
 }

@@ -10,7 +10,6 @@ public class SelectSceneManager : MonoBehaviour
 
     private int vLayer, hLayer; //メニューの階層
     private int selectNumber; //現在選択中のメニューナンバー
-    private int length;
     [SerializeField]
     private float interval; //カーソル移動のインターバルフレーム
     private float vTimer, hTimer; //移動インターバル管理タイマー
@@ -25,6 +24,8 @@ public class SelectSceneManager : MonoBehaviour
     private string[] sceneNames; //移動先シーンの名前
 
     private SoundManager soundManager;
+    [SerializeField]
+    private string bgm;
     [SerializeField]
     private string[] seList;
     private int currentNum, beforeNum; //サウンド再生フラグ用
@@ -51,10 +52,10 @@ public class SelectSceneManager : MonoBehaviour
     [SerializeField]
     private Text scoreText;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        length = scenes.transform.childCount - 1;
         selectNumber = 0;
         soundManager = SoundManager.Instance;
 
@@ -75,6 +76,9 @@ public class SelectSceneManager : MonoBehaviour
         scoreManager = ScoreManager.Instance;
         scores = scoreManager.GetScoreRanking();
         scoreText.enabled = false;
+
+        if (FadeScene.GetBeforeSceneName() != "Title" && FadeScene.GetBeforeSceneName() != "Option")
+            soundManager.PlayBgmByName(bgm);
     }
 
     // Update is called once per frame
