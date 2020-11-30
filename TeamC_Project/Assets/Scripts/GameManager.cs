@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private BossHPGauge bossHPGauge;
 
-    private static int stageNumber;
-
     private GameObject player;
     private Player playerS;
 
@@ -63,8 +61,6 @@ public class GameManager : MonoBehaviour
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         result = ResultMode.NONE;
-        stageNumber = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(stageNumber);
 
         scoreManager = ScoreManager.Instance;
         scoreManager.InitScore();
@@ -220,9 +216,4 @@ public class GameManager : MonoBehaviour
 
     //    bossHPSlider.value += 1;
     //}
-
-    public static int GetStageNumber()
-    {
-        return stageNumber;
-    }
 }
