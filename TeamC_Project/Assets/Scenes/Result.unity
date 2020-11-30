@@ -2604,7 +2604,6 @@ MonoBehaviour:
   hiScoreText: {fileID: 436602092}
   fadeScene: {fileID: 1594733994}
   bgm: Result
-  se: enter1
   getScoreText: {fileID: 1211382148}
   seList:
   - choice1
@@ -2612,7 +2611,7 @@ MonoBehaviour:
   activeButtons:
   - {fileID: 476880412}
   - {fileID: 1815629757}
-  interval: 0
+  interval: 30
   changeTime: 10
 --- !u!4 &1814403768
 Transform:

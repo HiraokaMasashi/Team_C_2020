@@ -38,10 +38,10 @@ public class ResultSceneManager : MonoBehaviour
     private Transform[] activeButtons;
     private Transform activeButton;
     private GameObject[] buttonNames;
-    private int layer;
+    private int select;
     private int selectNumber; //現在選択中のメニューナンバー
     [SerializeField]
-    private float interval; //カーソル移動のインターバルフレーム
+    private float interval = 30; //カーソル移動のインターバルフレーム
     private float timer;
 
     private Outline[] outlines; //ボタンの縁
@@ -53,7 +53,6 @@ public class ResultSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(SceneManager.sceneCountInBuildSettings);
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
 
         if (GameManager.GetResult() == GameManager.ResultMode.GAMECLEAR)
@@ -92,6 +91,8 @@ public class ResultSceneManager : MonoBehaviour
         rank = scoreManager.GetRank();
         soundManager = SoundManager.Instance;
         soundManager.PlayBgmByName(bgm);
+
+        Debug.Log(buttonNames.Length);
     }
 
     // Update is called once per frame
@@ -158,14 +159,14 @@ public class ResultSceneManager : MonoBehaviour
         //縦横それぞれの入力を反映
         if (timer >= interval && hAbs > 0.3f)
         {
-            layer += (int)(1 * (h / hAbs)); //左スティックの入力を１か-1かで取る
+            select += (int)(1 * (h / hAbs)); //左スティックの入力を１か-1かで取る
             //オーバーフロー処理
-            layer = (0 < layer) ? layer : 0;
-            layer = (activeButton.childCount - 1 > layer) ? layer : activeButton.childCount - 1;
+            select = (0 < select) ? select : 0;
+            select = (activeButton.childCount - 1 > select) ? select : activeButton.childCount - 1;
             timer = 0;
         }
 
-        selectNumber = layer;
+        selectNumber = select;
 
         if (h == 0)
             timer = interval;
@@ -183,7 +184,7 @@ public class ResultSceneManager : MonoBehaviour
 
         //changeTime毎に選択中のボタンの縁を点滅させる
         colorTimer++;
-        if (colorTimer > changeTime * outlines.Length - 1)
+        if (colorTimer > changeTime * colors.Length - 1)
             colorTimer = 0;
         outlines[selectNumber].effectColor = colors[colorTimer / changeTime];
 

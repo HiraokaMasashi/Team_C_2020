@@ -2093,6 +2093,7 @@ MonoBehaviour:
   - Stage3
   - Option
   - Title
+  bgm: Menu
   seList:
   - choice1
   - enter1
