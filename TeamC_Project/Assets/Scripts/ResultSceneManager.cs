@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ResultSceneManager : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class ResultSceneManager : MonoBehaviour
     [SerializeField]
     private string se;
 
+    [SerializeField]
+    private Text getScoreText;
+    private int playedStageNumber;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,8 @@ public class ResultSceneManager : MonoBehaviour
         {
             resultText.text = "Game Over..";
         }
+
+        playedStageNumber = GameManager.GetStageNumber();
 
         scoreManager = ScoreManager.Instance;
         scores = scoreManager.GetScoreRanking();
@@ -85,5 +92,7 @@ public class ResultSceneManager : MonoBehaviour
             hiScoreText.color = Color.red;
             rankTexts[0].color = Color.red;
         }
+
+        getScoreText.text = scoreManager.GetTotalScore().ToString();
     }
 }

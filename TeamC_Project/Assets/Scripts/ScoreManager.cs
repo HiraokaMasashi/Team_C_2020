@@ -14,7 +14,7 @@ public class ScoreRanking
 
 public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 {
-    private int totalScore;//合計スコア
+    private static int totalScore;//合計スコア
     private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
     static string path;

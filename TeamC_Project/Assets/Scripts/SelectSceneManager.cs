@@ -80,7 +80,11 @@ public class SelectSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sceneManager.IsFadeIn || sceneManager.IsFadeOut) return;
+        if (sceneManager.IsFadeIn || sceneManager.IsFadeOut)
+        {
+            SetEnvisivle();
+            return;
+        }
 
         Select(); //カーソルによるメニュー選択
 
@@ -238,6 +242,8 @@ public class SelectSceneManager : MonoBehaviour
     //選択中のボタンの演出を書く
     private void ActiveButton(int number)
     {
+        summary.enabled = true;
+
         //選択されていないボタンはデフォルトカラーに
         foreach (var o in outlines)
             o.effectColor = Color.white;
@@ -274,5 +280,11 @@ public class SelectSceneManager : MonoBehaviour
             summary.fontSize = 35;
             scoreText.enabled = false;
         }
+    }
+
+    private void SetEnvisivle()
+    {
+        scoreText.enabled = false;
+        summary.enabled = false;
     }
 }

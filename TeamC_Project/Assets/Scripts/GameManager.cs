@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     //private Text hpText;
     [SerializeField]
     private BossHPGauge bossHPGauge;
+
+    private static int stageNumber;
 
     public enum ResultMode
     {
@@ -57,6 +60,8 @@ public class GameManager : MonoBehaviour
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         result = ResultMode.NONE;
+        stageNumber = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(stageNumber);
 
         scoreManager = ScoreManager.Instance;
         scoreManager.InitScore();
@@ -188,15 +193,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void DisplayBossHP()
-    {
-        if (bossHealth == null) return;
-        if (bossHPSlider.value >= bossHealth.Hp)
-        {
-            bossHPSlider.value = bossHealth.Hp;
-            return;
-        }
+    //private void DisplayBossHP()
+    //{
+    //    if (bossHealth == null) return;
+    //    if (bossHPSlider.value >= bossHealth.Hp)
+    //    {
+    //        bossHPSlider.value = bossHealth.Hp;
+    //        return;
+    //    }
 
-        bossHPSlider.value += 1;
+    //    bossHPSlider.value += 1;
+    //}
+
+    public static int GetStageNumber()
+    {
+        return stageNumber;
     }
 }
