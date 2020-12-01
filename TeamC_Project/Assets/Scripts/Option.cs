@@ -11,22 +11,25 @@ public class Option : MonoBehaviour
     private SoundManager soundManager;
     [SerializeField]
     private string se;
+    private bool isEnter;
 
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         soundManager =SoundManager.Instance;
+        isEnter = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ExitOption())
+        if (ExitOption() && !isEnter)
         {
             soundManager.SaveVolume();
             soundManager.PlaySeByName(se);
             fadeScene.ChangeNextScene("Select");
+            isEnter = true;
         }
     }
 
