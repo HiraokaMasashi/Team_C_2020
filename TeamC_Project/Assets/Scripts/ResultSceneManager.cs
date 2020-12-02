@@ -91,8 +91,6 @@ public class ResultSceneManager : MonoBehaviour
         rank = scoreManager.GetRank();
         soundManager = SoundManager.Instance;
         soundManager.PlayBgmByName(bgm);
-
-        Debug.Log(buttonNames.Length);
     }
 
     // Update is called once per frame
