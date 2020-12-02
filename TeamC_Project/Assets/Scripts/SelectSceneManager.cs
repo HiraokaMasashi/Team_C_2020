@@ -52,6 +52,8 @@ public class SelectSceneManager : MonoBehaviour
     [SerializeField]
     private Text scoreText;
 
+    [SerializeField]
+    private Font scoreFont, sentenceFont;
 
     // Start is called before the first frame update
     void Start()
@@ -235,7 +237,6 @@ public class SelectSceneManager : MonoBehaviour
         //1フレーム前と選択番号が違っていればカーソル移動音を流す
         if (currentNum != beforeNum)
         {
-            Debug.Log("t");
             soundManager.PlaySeByName(seList[0]);
         }
         beforeNum = selectNumber;
@@ -264,25 +265,28 @@ public class SelectSceneManager : MonoBehaviour
         //テキストボックスにメニュー概要やスコアを表示
         if (number <= 2)
         {
+            summary.font = scoreFont;
             scoreManager.LoadFile(sceneNames[number]);
             scores = scoreManager.GetScoreRanking();
 
             summary.text =
-                "1位　\n" +
-                "2位　\n" +
-                "3位　\n" +
-                "4位　\n" +
+                "スコア \n\n" +
+                "1位　\n\n" +
+                "2位　\n\n" +
+                "3位　\n\n" +
+                "4位　\n\n" +
                 "5位　";
-            summary.fontSize = 60;
+            summary.fontSize = 40;
             scoreText.enabled = true;
-            scoreText.text = scores[0].ToString() + "\n" +
-                scores[1].ToString() + "\n" +
-                scores[2].ToString() + "\n" +
-                scores[3].ToString() + "\n" +
+            scoreText.text = "\n\n" + scores[0].ToString() + "\n\n" +
+                scores[1].ToString() + "\n\n" +
+                scores[2].ToString() + "\n\n" +
+                scores[3].ToString() + "\n\n" +
                 scores[4].ToString();
         }
         else
         {
+            summary.font = sentenceFont;
             summary.text = summaries[number];
             summary.fontSize = 35;
             scoreText.enabled = false;
