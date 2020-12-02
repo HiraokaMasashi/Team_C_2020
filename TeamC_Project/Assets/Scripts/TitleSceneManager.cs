@@ -68,11 +68,7 @@ public class TitleSceneManager : MonoBehaviour
 
             if (GameExit())
             {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-                UnityEngine.Application.Quit();
-#endif
+                sceneManager.GameQuitFadeOut();
             }
         }
     }

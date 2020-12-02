@@ -83,7 +83,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         if (hiScoreText == null) return;
 
         UpdateHiScore();
-        hiScoreText.text =hiScore.ToString();
+        hiScoreText.text = hiScore.ToString();
     }
 
     /// <summary>
@@ -199,10 +199,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 
     private void SetFilePath(string stageName = "")
     {
-        if (SceneManager.GetActiveScene().name == "Select")
-        {
-            path = Application.persistentDataPath + "/" + stageName + fileName;
-        }
+        path = Application.persistentDataPath + "/" + stageName + fileName;
     }
 
     public void LoadFile(string stageName = "")

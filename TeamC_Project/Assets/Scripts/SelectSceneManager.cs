@@ -74,6 +74,7 @@ public class SelectSceneManager : MonoBehaviour
         colors[5] = Color.magenta;
 
         scoreManager = ScoreManager.Instance;
+        scoreManager.LoadFile("Stage1");
         scores = scoreManager.GetScoreRanking();
         scoreText.enabled = false;
 
@@ -125,12 +126,7 @@ public class SelectSceneManager : MonoBehaviour
             {
                 endTimer++;
                 if (endTimer >= endTime)
-
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-                UnityEngine.Application.Quit();
-#endif
+                    sceneManager.GameQuitFadeOut();
             }
         }
         else if (!Input.GetB_Button())

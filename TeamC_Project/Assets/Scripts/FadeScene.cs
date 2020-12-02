@@ -30,6 +30,12 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
         private set;
     } = false;
 
+    public bool IsGameQuit
+    {
+        get;
+        private set;
+    } = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +83,16 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
             IsFadeOut = false;
             if (nextSceneName != "Select" && nextSceneName != "Option")
                 SoundStop();
-            SceneManager.LoadScene(nextSceneName);
+            if (!IsGameQuit)
+                SceneManager.LoadScene(nextSceneName);
+            else
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+                UnityEngine.Application.Quit();
+#endif
+            }
         }
     }
 
@@ -102,5 +117,12 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
     public static string GetBeforeSceneName()
     {
         return beforeSceneName;
+    }
+
+    public void GameQuitFadeOut()
+    {
+        IsGameQuit = true;
+        IsFadeOut = true;
+        fadeImage.enabled = true;
     }
 }

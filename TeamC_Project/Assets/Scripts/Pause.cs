@@ -17,6 +17,7 @@ public class Pause : MonoBehaviour
     private FadeScene fadeScene;
 
     SoundManager soundManager;
+    GameManager gameManager;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Pause : MonoBehaviour
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         //initSelect.Select();
         soundManager = SoundManager.Instance;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -67,6 +69,9 @@ public class Pause : MonoBehaviour
     /// </summary>
     void PauseSwich()
     {
+        if (fadeScene.IsFadeIn || fadeScene.IsFadeOut
+            || gameManager.IsPerformance) return;
+
         isPause = !isPause;
 
         if (isPause)
@@ -105,10 +110,6 @@ public class Pause : MonoBehaviour
     /// </summary>
     void GameQuit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-      UnityEngine.Application.Quit();
-#endif
+        fadeScene.GameQuitFadeOut();
     }
 }
