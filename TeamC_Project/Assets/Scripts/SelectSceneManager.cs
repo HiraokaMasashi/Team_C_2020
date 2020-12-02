@@ -162,8 +162,6 @@ public class SelectSceneManager : MonoBehaviour
 
         backSlider.value = backTimer / backTime;
         endSlider.value = endTimer / endTime;
-
-        ActiveButton(selectNumber); //選択中のボタンの演出
     }
 
     private void Select()
@@ -241,6 +239,11 @@ public class SelectSceneManager : MonoBehaviour
         if (currentNum != beforeNum)
             soundManager.PlaySeByName(seList[0]);
         beforeNum = selectNumber;
+    }
+
+    void FixedUpdate()
+    {
+        ActiveButton(selectNumber); //選択中のボタンの演出
     }
 
     //選択中のボタンの演出を書く
