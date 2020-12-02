@@ -166,7 +166,6 @@ public class SelectSceneManager : MonoBehaviour
 
     private void Select()
     {
-        currentNum = selectNumber;
         vTimer++;
         hTimer++;
         float v = -Input.GetL_Stick_Vertical();
@@ -235,9 +234,14 @@ public class SelectSceneManager : MonoBehaviour
             vTimer = interval;
         if (h == 0)
             hTimer = interval;
+
+        currentNum = selectNumber;
         //1フレーム前と選択番号が違っていればカーソル移動音を流す
         if (currentNum != beforeNum)
+        {
+            Debug.Log("t");
             soundManager.PlaySeByName(seList[0]);
+        }
         beforeNum = selectNumber;
     }
 
