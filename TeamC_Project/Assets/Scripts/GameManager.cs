@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private Player playerS;
 
+    public Vector3 playerStartPosition;
+
     public enum ResultMode
     {
         NONE,
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour
             player.transform.position += new Vector3(0, 7, 0)*Time.deltaTime;
 
         //Start地点に到着したら
-        if (player.transform.position.y >= Vector3.zero.y)
+        if (player.transform.position.y >= playerStartPosition.y)
         {
             if (!fadeScene.IsFadeIn)
             {
