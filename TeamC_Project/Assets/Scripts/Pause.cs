@@ -70,7 +70,7 @@ public class Pause : MonoBehaviour
     void PauseSwich()
     {
         if (fadeScene.IsFadeIn || fadeScene.IsFadeOut
-            || gameManager.IsPerformance) return;
+            || gameManager.IsPerformance || gameManager.IsEnd) return;
 
         isPause = !isPause;
 

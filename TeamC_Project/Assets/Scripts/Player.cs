@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
         if (!gameManager.IsGameStart) return;
-        if (gameManager.IsPerformance)
+        if (gameManager.IsPerformance || gameManager.IsEnd)
         {
             //通常状態でなければ、通常状態に戻す
             if (currentMode != Mode.NORMAL)
