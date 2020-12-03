@@ -7,8 +7,11 @@ public class TitleSceneManager : MonoBehaviour
 {
     [SerializeField]
     private RectTransform titleLogo;
+    //[SerializeField]
+    //private Text pressLogo;
     [SerializeField]
-    private Text pressLogo;
+    private RectTransform screwLogo;
+    private float rotationSpeed;
     private bool moveEnd;
     [SerializeField]
     private InputManager Input;
@@ -23,8 +26,9 @@ public class TitleSceneManager : MonoBehaviour
 
     void Awake()
     {
-        pressLogo.gameObject.SetActive(false);
-        titleLogo.transform.position += Vector3.up * 775;
+        //pressLogo.gameObject.SetActive(false);
+        rotationSpeed = 4;
+        titleLogo.transform.position -= Vector3.up * 775;
         moveEnd = false;
         soundManager = SoundManager.Instance;
     }
@@ -47,17 +51,17 @@ public class TitleSceneManager : MonoBehaviour
             {
                 moveEnd = true;
                 titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 100);
-                pressLogo.gameObject.SetActive(true);
+                //pressLogo.gameObject.SetActive(true);
             }
             Opening();
             return;
         }
         else
         {
-            if ((int)Time.time % 2 == 0)
-                pressLogo.gameObject.SetActive(false);
-            else
-                pressLogo.gameObject.SetActive(true);
+            //if ((int)Time.time % 2 == 0)
+            //    pressLogo.gameObject.SetActive(false);
+            //else
+            //    pressLogo.gameObject.SetActive(true);
 
             //ムービー終了後にボタンを押すと次のシーンへ
             if (PressAnyButton())
@@ -81,14 +85,20 @@ public class TitleSceneManager : MonoBehaviour
     private void Opening()
     {
         //タイトルロゴを動かす
-        titleLogo.position -= Vector3.up * 2;
+        titleLogo.position += Vector3.up * 2;
+
+        //スクリュー画像を回す
+        screwLogo.eulerAngles += Vector3.back * 4;
 
         //ロゴが指定の位置に来たら終了
-        if (titleLogo.anchoredPosition.y <= 100)
+        if (titleLogo.anchoredPosition.y >= 200)
         {
-            titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 100);
-            pressLogo.gameObject.SetActive(true);
-            moveEnd = true;
+            titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 200);
+            //pressLogo.gameObject.SetActive(true);
+            if (screwLogo.eulerAngles.z <= 0)
+            {
+                moveEnd = true;
+            }
         }
     }
 
