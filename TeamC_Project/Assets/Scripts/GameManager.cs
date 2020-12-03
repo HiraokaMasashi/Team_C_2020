@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private Player playerS;
 
-    public Vector3 playerStartPosition;
-
+    public Vector3 playerDestinationPosition;
+    [SerializeField]
+    private float speed;
     public enum ResultMode
     {
         NONE,
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
         //Playerが生成される処理ではなかったのでScene内のPlayerを使用
         player = GameObject.Find("Player");
         playerS = player.GetComponent<Player>();
-        player.transform.position = new Vector3(0, -14, 0);
+        player.transform.position = new Vector3(0, -10, 0);
     }
 
     // Update is called once per frame
@@ -94,11 +95,13 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         if (IsGameStart) return;
-            //Start地点まで移動する処理
-            player.transform.position += new Vector3(0, 7, 0)*Time.deltaTime;
+        //Start地点まで移動する処理
+        //player.transform.position += 
+        Vector3 vec = (playerDestinationPosition - player.transform.position).normalized;
+        player.transform.position += vec/speed;
 
         //Start地点に到着したら
-        if (player.transform.position.y >= playerStartPosition.y)
+        if (Vector3.Distance(player.transform.position, playerDestinationPosition) <= 0.1f)
         {
             if (!fadeScene.IsFadeIn)
             {
