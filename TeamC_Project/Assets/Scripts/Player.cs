@@ -361,7 +361,7 @@ public class Player : MonoBehaviour
             //制限範囲を超える場合は範囲に収める
             if (alignmentPositionX >= setUpScrew.ClapmPosition.x)
                 alignmentPositionX = setUpScrew.ClapmPosition.x;
-            if (alignmentPositionY >= setUpScrew.ClapmPosition.y) 
+            if (alignmentPositionY >= setUpScrew.ClapmPosition.y)
                 alignmentPositionY = setUpScrew.ClapmPosition.y;
 
             enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(alignmentPositionX, alignmentPositionY, screw);
@@ -383,7 +383,7 @@ public class Player : MonoBehaviour
         inhaleScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(0);
         inhaleScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.INHALE);
         screw.GetComponent<ParticleManager>().StartParticle(inhaleScrewObject);
-        soundManager.PlaySeByName(ses[0],true);
+        soundManager.PlaySeByName(ses[0], true);
         isExistScrew = true;
     }
 
@@ -500,7 +500,8 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             health.HitDeath();
-            other.GetComponent<Health>().HitDeath();
+            if (!other.gameObject.name.Contains("Boss"))
+                other.GetComponent<Health>().HitDeath();
         }
     }
 
