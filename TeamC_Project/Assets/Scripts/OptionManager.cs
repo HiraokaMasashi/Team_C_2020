@@ -31,8 +31,6 @@ public class OptionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = SoundManager.Instance;
-        soundManager.LoadVolume();
         selectNumber = 0;
         length = option.transform.childCount;
         options = new Slider[length];
@@ -40,8 +38,15 @@ public class OptionManager : MonoBehaviour
         {
             options[i] = option.transform.GetChild(i).GetComponent<Slider>();
         }
+
         selectBase = select.GetComponent<RectTransform>();
         basePos = selectBase.position;
+
+        soundManager = SoundManager.Instance;
+        soundManager.LoadVolume();
+        options[0].value = soundManager.MasterVolume;
+        options[1].value = soundManager.BgmVolume;
+        options[2].value = soundManager.SeVolume;
     }
 
     // Update is called once per frame

@@ -24,6 +24,8 @@ public class Option : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (fadeScene.IsFadeIn) return;
+
         if (ExitOption() && !isEnter)
         {
             soundManager.SaveVolume();
