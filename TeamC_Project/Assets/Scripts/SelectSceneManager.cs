@@ -42,12 +42,6 @@ public class SelectSceneManager : MonoBehaviour
     [SerializeField, TextArea]
     private string[] summaries; //選択中のメニューの説明文
 
-    [SerializeField]
-    private Slider backSlider, endSlider; //終了、タイトルのゲージ
-    [SerializeField]
-    private float backTime, endTime; //終了、タイトルに必要な長押しの時間
-    private float backTimer, endTimer; //長押し時間計測用
-
     private ScoreManager scoreManager;
     private int[] scores;
 
@@ -56,6 +50,7 @@ public class SelectSceneManager : MonoBehaviour
 
     [SerializeField]
     private Font scoreFont, sentenceFont;
+    private bool endFlag; //ゲーム終了フラグ
 
     // Start is called before the first frame update
     void Start()
@@ -100,68 +95,40 @@ public class SelectSceneManager : MonoBehaviour
         //Aかメニューボタンで選択中のシーンへ
         if (Input.GetA_ButtonDown() || Input.GetMenu_ButtonDown())
         {
-            if (selectNumber != 4 && selectNumber != 5)
+            if (selectNumber == 5)
+            {
+                if (!endFlag)
+                    endFlag = true;
+                else
+                {
+                    soundManager.PlaySeByName(seList[1]);
+                    sceneManager.GameQuitFadeOut();
+                }
+            }
+            else
             {
                 soundManager.PlaySeByName(seList[1]);
                 sceneManager.ChangeNextScene(sceneNames[selectNumber]);
             }
         }
 
-        //タイトルと終了は長押しで
-        if (Input.GetA_Button() || Input.GetMenu_Button())
-        {
-            if (selectNumber == 4)
-            {
-                if (Input.GetB_Button())
-                {
-                    backTimer = 0;
-                }
-                else
-                {
-                    backTimer += Time.deltaTime;
-                    if (backTimer >= backTime)
-                    {
-                        soundManager.PlaySeByName(seList[2]);
-                        sceneManager.ChangeNextScene("Title");
-                    }
-                }
-            }
-            if (selectNumber == 5)
-            {
-                endTimer += Time.deltaTime;
-                if (endTimer >= endTime)
-                    sceneManager.GameQuitFadeOut();
-            }
-        }
-        else if (!Input.GetB_Button())
-        {
-            backTimer = 0;
-            endTimer = 0;
-        }
-
         //Bボタンでタイトルへ
-        if (Input.GetB_Button())
+        if (Input.GetB_ButtonDown())
         {
-            if (endTimer == 0)
+            if (endFlag)
+                endFlag = false;
+            else if (selectNumber != 4)
             {
                 vLayer = 2;
                 hLayer = 0;
                 selectNumber = 4;
-                backTimer++;
-                if (backTimer >= backTime)
-                {
-                    soundManager.PlaySeByName(seList[2]);
-                    sceneManager.ChangeNextScene("Title");
-                }
+            }
+            else if (selectNumber == 4)
+            {
+                soundManager.PlaySeByName(seList[2]);
+                sceneManager.ChangeNextScene("Title");
             }
         }
-        else if (!Input.GetA_Button() && selectNumber == 4)
-            backTimer = 0;
-        backTimer = endTimer == 0 ? backTimer : 0;
-        endTimer = backTimer == 0 ? endTimer : 0;
-
-        backSlider.value = backTimer / backTime;
-        endSlider.value = endTimer / endTime;
     }
 
     private void Select()
@@ -178,7 +145,7 @@ public class SelectSceneManager : MonoBehaviour
         if (vTimer >= interval && vAbs > 0.3f)
         {
             vLayer += (int)(1 * (v / vAbs)); //左スティックの入力を１か-1かで取る
-            //オーバーフロー処理
+                                             //オーバーフロー処理
             vLayer = (0 < vLayer) ? vLayer : 0;
             vLayer = (2 > vLayer) ? vLayer : 2;
             vTimer = 0;
@@ -186,7 +153,7 @@ public class SelectSceneManager : MonoBehaviour
         if (hTimer >= interval && hAbs > 0.3f)
         {
             hLayer += (int)(1 * (h / hAbs)); //左スティックの入力を１か-1かで取る
-            //オーバーフロー処理
+                                             //オーバーフロー処理
             hLayer = (0 < hLayer) ? hLayer : 0;
             hLayer = (2 > hLayer) ? hLayer : 2;
             hTimer = 0;
@@ -230,6 +197,8 @@ public class SelectSceneManager : MonoBehaviour
                 break;
         }
 
+        if (selectNumber != 5)
+            endFlag = false;
         if (v == 0)
             vTimer = interval;
         if (h == 0)
@@ -284,6 +253,11 @@ public class SelectSceneManager : MonoBehaviour
                 scores[2].ToString() + "\n\n" +
                 scores[3].ToString() + "\n\n" +
                 scores[4].ToString();
+        }
+        else if (endFlag)
+        {
+            summary.fontSize = 30;
+            summary.text = "ゲームを終了してよろしいですか？\nA：はい　　B：いいえ";
         }
         else
         {

@@ -61,7 +61,7 @@ public class OptionManager : MonoBehaviour
         if(hAbs >= 0.5f && hTimer > interval)
         {
             float num = (float)((int)(1 * (h / hAbs))) / 10;
-            if(selectNumber == 2)
+            if(selectNumber != 1)
             {
                 if(!(options[selectNumber].value == 1 && num > 0))
                 soundManager.PlaySeByName(testSound);

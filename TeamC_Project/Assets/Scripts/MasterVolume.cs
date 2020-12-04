@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class MasterVolume : MonoBehaviour
 {
-    Slider slider;
-    SoundManager soundManager;
+    private Slider slider;
+    private SoundManager soundManager;
 
     void Start()
     {
@@ -15,11 +15,13 @@ public class MasterVolume : MonoBehaviour
         slider.value = soundManager.MasterVolume;
 
         //Masterを初期選択
-        slider.Select();
+        //slider.Select();
     }
 
     public void OnValueChanged()
     {
-        soundManager.MasterVolume = slider.value;
+        //soundManager.MasterVolume = slider.value;
+        soundManager.BgmVolume = slider.value;
+        soundManager.SeVolume = slider.value;
     }
 }

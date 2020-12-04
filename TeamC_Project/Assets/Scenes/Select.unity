@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 3, y: 3}
+  m_EffectDistance: {x: 0, y: 0}
   m_UseGraphicAlpha: 1
 --- !u!114 &109950984
 MonoBehaviour:
@@ -387,8 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0.7529412}
+  m_Material: {fileID: 2100000, guid: 051a5d298ecc05340a65d66ab4bd5360, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1029,8 +1029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
-  m_EffectDistance: {x: 2, y: 2}
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 0, y: 0}
   m_UseGraphicAlpha: 1
 --- !u!114 &607859392
 MonoBehaviour:
@@ -1044,8 +1044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  m_Material: {fileID: 2100000, guid: 051a5d298ecc05340a65d66ab4bd5360, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1427,7 +1427,7 @@ PrefabInstance:
     - target: {fileID: 5862794616843637778, guid: 6f90d95d4554c844c84cf90dda8ca629,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5862794616843637778, guid: 6f90d95d4554c844c84cf90dda8ca629,
         type: 3}
@@ -2183,13 +2183,10 @@ MonoBehaviour:
   - 
   - 
   - 
-  - "\u97F3\u91CF\u306E\u8A2D\u5B9A\u3092\u3057\u307E\u3059\u3002"
-  - "\u30BF\u30A4\u30C8\u30EB\u753B\u9762\u306B\u623B\u308A\u307E\u3059\u3002\n(\u9577\u62BC\u3057)"
-  - "\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3057\u307E\u3059\u3002\n(\u9577\u62BC\u3057)"
-  backSlider: {fileID: 428792949}
-  endSlider: {fileID: 1976306455}
-  backTime: 60
-  endTime: 120
+  - "\u97F3\u91CF\u306E\u8A2D\u5B9A\u3092\u3057\u307E\u3059"
+  - "\u30BF\u30A4\u30C8\u30EB\u753B\u9762\u306B\u623B\u308A\u307E\u3059"
+  - "\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3057\u307E\u3059"
+  - 
   scoreText: {fileID: 707665588}
   scoreFont: {fileID: 12800000, guid: b08248f23c639944b9174fafcc4d91ff, type: 3}
   sentenceFont: {fileID: 12800000, guid: 67fe3a6e87a4ebe40ac2fe365bac098c, type: 3}
@@ -2839,8 +2836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
-  m_EffectDistance: {x: 2, y: 2}
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 0, y: 0}
   m_UseGraphicAlpha: 1
 --- !u!114 &1892527955
 MonoBehaviour:
@@ -2854,8 +2851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  m_Material: {fileID: 2100000, guid: 051a5d298ecc05340a65d66ab4bd5360, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3291,7 +3288,7 @@ PrefabInstance:
     - target: {fileID: 7006159071141324672, guid: f8db2feb4fc587d49a4e17e23b777f0b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7006159071141324672, guid: f8db2feb4fc587d49a4e17e23b777f0b,
         type: 3}
