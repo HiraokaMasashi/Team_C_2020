@@ -373,6 +373,21 @@ PrefabInstance:
       propertyPath: fadeScene
       value: 
       objectReference: {fileID: 601637477}
+    - target: {fileID: 1566428895339433387, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: activeColor.r
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566428895339433387, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: activeColor.g
+      value: 0.867816
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566428895339433387, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: activeColor.b
+      value: 0.493948
+      objectReference: {fileID: 0}
     - target: {fileID: 1566428895339433388, guid: d3fd2a46c6719a045ad73573d77be5e1,
         type: 3}
       propertyPath: m_Name
@@ -627,6 +642,7 @@ MonoBehaviour:
   - {fileID: 1778727467}
   - {fileID: 1778727465}
   bossHPGauge: {fileID: 1778727480}
+  playerStartPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1034462876
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1778727464}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 

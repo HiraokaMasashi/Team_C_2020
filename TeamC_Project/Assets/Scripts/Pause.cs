@@ -15,9 +15,17 @@ public class Pause : MonoBehaviour
     InputManager inputManager;
     [SerializeField]
     private FadeScene fadeScene;
+    [SerializeField]
+    private Text[] menus;
 
     SoundManager soundManager;
     GameManager gameManager;
+    private int selectNumber;
+    [SerializeField]
+    private float textTime;
+    private float timer;
+    [SerializeField]
+    private Color activeColor;
 
     void Start()
     {
@@ -33,23 +41,40 @@ public class Pause : MonoBehaviour
         //ポーズ中のみの動作
         if (isPause)
         {
-            //Escキー+左右どちらかのshift
-            if ((Input.GetKeyDown(KeyCode.Escape)) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            float stick = inputManager.GetL_Stick_Vertical();
+            float v = Mathf.Abs(stick);
+
+            if (Mathf.Abs(stick) >= 0.5f)
             {
-                GameQuit();
+                selectNumber -= (int)(1 * (v / stick));
+                selectNumber = selectNumber < 0 ? 0 : selectNumber;
+                selectNumber = selectNumber > 1 ? 1 : selectNumber;
             }
+            //Escキー+左右どちらかのshift
+            //if ((Input.GetKeyDown(KeyCode.Escape)) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            //{
+            //    GameQuit();
+            //}
 
             //Viue(startの反対側にあるボタン　backって書いてあったりもする)ボタン
-            if (inputManager.GetView_ButtonDown())
-            {
-                GameQuit();
-            }
+            //if (inputManager.GetView_ButtonDown())
+            //{
+            //    GameQuit();
+            //}
 
             if (inputManager.GetA_ButtonDown())
             {
-                fadeScene.ChangeNextScene("Select");
-                Resume();
+                if (selectNumber == 1)
+                {
+                    fadeScene.ChangeNextScene("Select");
+                    Resume();
+                }
+                else if (selectNumber == 0)
+                {
+                    Resume();
+                }
             }
+            ActiveText();
         }
 
         //コントローラーメニューボタン
@@ -57,6 +82,26 @@ public class Pause : MonoBehaviour
         {
             PauseSwich();
         }
+    }
+
+    private void ActiveText()
+    {
+        timer += Time.unscaledDeltaTime;
+        Debug.Log(Time.deltaTime);
+        if (timer <= textTime / 2)
+        {
+            menus[selectNumber].color = activeColor;
+            menus[selectNumber].fontSize = 18;
+        }
+        else
+        {
+            menus[selectNumber].color = Color.white;
+            menus[selectNumber].fontSize = 14;
+        }
+        if (timer >= textTime * 2)
+            timer = 0;
+        menus[1 - selectNumber].color = Color.white;
+        menus[1 - selectNumber].fontSize = 14;
     }
 
     public void OnClickResume()
