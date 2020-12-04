@@ -393,6 +393,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1566428895339433388, guid: d3fd2a46c6719a045ad73573d77be5e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3fd2a46c6719a045ad73573d77be5e1, type: 3}
 --- !u!1001 &601637476
@@ -956,7 +961,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: maxWave
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -1006,6 +1011,38 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3319677223591885970, guid: 7b7169b6887ea1a478d6874b0c17ac33,
         type: 3}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: textTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: textPercent
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bossFont
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d47c5c7f22c7a04ba4024e007501909,
+        type: 3}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: normalFont
+      value: 
+      objectReference: {fileID: 12800000, guid: 41f31a8ef93e9ba4ab13400adc54f220,
+        type: 3}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bossTextTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bossTextPercent
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: m_Name
@@ -1247,11 +1284,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 581790775681515070, guid: aa15ba123e28cc0428a46427fb938165,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1430764934149031374, guid: aa15ba123e28cc0428a46427fb938165,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1288,31 +1320,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3456882978706295327, guid: aa15ba123e28cc0428a46427fb938165,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213364955775045025, guid: aa15ba123e28cc0428a46427fb938165,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213364955775045027, guid: aa15ba123e28cc0428a46427fb938165,
-        type: 3}
-      propertyPath: m_Value
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213364955801662557, guid: aa15ba123e28cc0428a46427fb938165,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213364955801662557, guid: aa15ba123e28cc0428a46427fb938165,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213364956986791084, guid: aa15ba123e28cc0428a46427fb938165,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
