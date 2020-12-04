@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public Vector3 playerStartPosition;
 
+    private EnemyManager enemyManager;
+
     public enum ResultMode
     {
         NONE,
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
         scoreManager = ScoreManager.Instance;
         scoreManager.InitScore();
 
+        enemyManager = GameObject.Find("EnemyCreater").GetComponent<EnemyManager>();
 
         //Playerが生成される処理ではなかったのでScene内のPlayerを使用
         player = GameObject.Find("Player");
@@ -99,6 +102,7 @@ public class GameManager : MonoBehaviour
             if (!fadeScene.IsFadeIn)
             {
                 IsGameStart = true;
+                enemyManager.StartInstanceEnemy();
             }
         }
 

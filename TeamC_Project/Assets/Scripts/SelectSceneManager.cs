@@ -11,7 +11,7 @@ public class SelectSceneManager : MonoBehaviour
     private int vLayer, hLayer; //メニューの階層
     private int selectNumber; //現在選択中のメニューナンバー
     [SerializeField]
-    private float interval; //カーソル移動のインターバルフレーム
+    private float interval = 0.5f; //カーソル移動のインターバルフレーム
     private float vTimer, hTimer; //移動インターバル管理タイマー
     //private float eTimer;
 
@@ -32,9 +32,11 @@ public class SelectSceneManager : MonoBehaviour
 
     private Outline[] outlines; //ボタンの縁
     private Color[] colors; //点滅させる色
-    private int colorTimer; //点滅速度管理タイマー
+    private float colorTimer; //点滅速度管理タイマー
     [SerializeField]
     private int changeTime = 10; //点滅速度
+    [SerializeField]
+    private float changeSpeed = 5.0f;//カラー変更速度
     [SerializeField]
     private Text summary; //選択中のメニューの説明文
     [SerializeField, TextArea]
@@ -116,7 +118,7 @@ public class SelectSceneManager : MonoBehaviour
                 }
                 else
                 {
-                    backTimer++;
+                    backTimer += Time.deltaTime;
                     if (backTimer >= backTime)
                     {
                         soundManager.PlaySeByName(seList[2]);
@@ -126,7 +128,7 @@ public class SelectSceneManager : MonoBehaviour
             }
             if (selectNumber == 5)
             {
-                endTimer++;
+                endTimer += Time.deltaTime;
                 if (endTimer >= endTime)
                     sceneManager.GameQuitFadeOut();
             }
@@ -164,8 +166,8 @@ public class SelectSceneManager : MonoBehaviour
 
     private void Select()
     {
-        vTimer++;
-        hTimer++;
+        vTimer += Time.deltaTime;
+        hTimer += Time.deltaTime;
         float v = -Input.GetL_Stick_Vertical();
         float h = Input.GetL_Stick_Horizontal();
         float vAbs = Mathf.Abs(v);
@@ -251,16 +253,15 @@ public class SelectSceneManager : MonoBehaviour
     private void ActiveButton(int number)
     {
         summary.enabled = true;
-
         //選択されていないボタンはデフォルトカラーに
         foreach (var o in outlines)
             o.effectColor = Color.white;
 
         //changeTime毎に選択中のボタンの縁を点滅させる
-        colorTimer++;
-        if (colorTimer > changeTime * outlines.Length - 1)
+        colorTimer += Time.deltaTime * changeSpeed;
+        if (colorTimer > changeTime * colors.Length - 1)
             colorTimer = 0;
-        outlines[number].effectColor = colors[colorTimer / changeTime];
+        outlines[selectNumber].effectColor = colors[(int)colorTimer / changeTime];
 
         //テキストボックスにメニュー概要やスコアを表示
         if (number <= 2)

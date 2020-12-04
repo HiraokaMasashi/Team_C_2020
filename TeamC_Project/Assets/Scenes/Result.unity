@@ -2611,8 +2611,9 @@ MonoBehaviour:
   activeButtons:
   - {fileID: 476880412}
   - {fileID: 1815629757}
-  interval: 30
-  changeTime: 10
+  interval: 0.5
+  changeTime: 1
+  changeSpeed: 5
 --- !u!4 &1814403768
 Transform:
   m_ObjectHideFlags: 0

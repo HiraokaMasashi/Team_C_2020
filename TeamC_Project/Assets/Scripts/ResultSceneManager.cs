@@ -41,14 +41,16 @@ public class ResultSceneManager : MonoBehaviour
     private int select;
     private int selectNumber; //現在選択中のメニューナンバー
     [SerializeField]
-    private float interval = 30; //カーソル移動のインターバルフレーム
+    private float interval = 0.5f; //カーソル移動のインターバルフレーム
     private float timer;
 
     private Outline[] outlines; //ボタンの縁
     private Color[] colors; //点滅させる色
-    private int colorTimer; //点滅速度管理タイマー
+    private float colorTimer; //点滅速度管理タイマー
     [SerializeField]
     private int changeTime = 10; //点滅速度
+    [SerializeField]
+    private float changeSpeed = 5.0f;//カラー変更速度
 
     // Start is called before the first frame update
     void Start()
@@ -150,7 +152,7 @@ public class ResultSceneManager : MonoBehaviour
     private void Select()
     {
         currentNum = selectNumber;
-        timer++;
+        timer += Time.deltaTime;
         float h = inputManager.GetL_Stick_Horizontal();
         float hAbs = Mathf.Abs(h);
 
@@ -181,10 +183,10 @@ public class ResultSceneManager : MonoBehaviour
             o.effectColor = Color.white;
 
         //changeTime毎に選択中のボタンの縁を点滅させる
-        colorTimer++;
+        colorTimer += Time.deltaTime * changeSpeed;
         if (colorTimer > changeTime * colors.Length - 1)
             colorTimer = 0;
-        outlines[selectNumber].effectColor = colors[colorTimer / changeTime];
+        outlines[selectNumber].effectColor = colors[(int)colorTimer / changeTime];
 
     }
 }

@@ -2162,7 +2162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes: {fileID: 143631446}
-  interval: 20
+  interval: 0.5
   Input: {fileID: 1403194779}
   sceneManager: {fileID: 2061709770}
   sceneNames:
@@ -2176,7 +2176,8 @@ MonoBehaviour:
   - choice1
   - enter1
   - cansel1
-  changeTime: 10
+  changeTime: 1
+  changeSpeed: 5
   summary: {fileID: 1491281785}
   summaries:
   - 

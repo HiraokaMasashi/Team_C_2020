@@ -56,7 +56,7 @@ public class EnemyManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        StartCoroutine(InstanceEnemy(wave));
+        //StartCoroutine(InstanceEnemy(wave));
     }
 
     // Update is called once per frame
@@ -188,5 +188,13 @@ public class EnemyManager : MonoBehaviour
             waveText.text = "Wave: " + (wave + 1).ToString("D2") + " / " + maxWave.ToString("D2");
         else
             waveText.text = "BOSS Battle";
+    }
+
+    /// <summary>
+    /// 外部クラスから初めの生成を行う
+    /// </summary>
+    public void StartInstanceEnemy()
+    {
+        StartCoroutine(InstanceEnemy(wave));
     }
 }
