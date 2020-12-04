@@ -240,12 +240,12 @@ public class SelectSceneManager : MonoBehaviour
             scores = scoreManager.GetScoreRanking();
 
             summary.text =
-                "スコア \n\n" +
-                "1位　\n\n" +
-                "2位　\n\n" +
-                "3位　\n\n" +
-                "4位　\n\n" +
-                "5位　";
+                "スコア\n\n" +
+                "　　　1位\n\n" +
+                "　　　2位\n\n" +
+                "　　　3位\n\n" +
+                "　　　4位\n\n" +
+                "　　　5位";
             summary.fontSize = 40;
             scoreText.enabled = true;
             scoreText.text = "\n\n" + scores[0].ToString() + "\n\n" +
