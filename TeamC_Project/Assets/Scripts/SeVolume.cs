@@ -15,6 +15,11 @@ public class SeVolume : MonoBehaviour
         slider.value = soundManager.SeVolume;
     }
 
+    void LateUpdate()
+    {
+        slider.value = soundManager.SeVolume;
+    }
+
     public void OnValueChanged()
     {
         soundManager.SeVolume = slider.value;
