@@ -5,23 +5,29 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 destroyZone;
+    private Vector3 destroyZone;//死亡範囲
     [SerializeField]
-    private float destroyZoneMinY = -11.0f;
+    private float destroyZoneMinY = -11.0f;//y軸での生存範囲最低値
 
     private ScoreManager scoreManager;
     private ParticleManager particleManager;
 
-    private Vector3 direction;
+    private Vector3 direction;//進行方向
     [SerializeField]
-    private float moveSpeed = 1.0f;
+    private float moveSpeed = 1.0f;//移動速度
 
+    /// <summary>
+    /// 攻撃力
+    /// </summary>
     public int Attack
     {
         get;
         set;
     } = 1;
 
+    /// <summary>
+    /// 貫通弾か
+    /// </summary>
     public bool IsPenetrate
     {
         get;
@@ -41,6 +47,9 @@ public class Bullet : MonoBehaviour
             Disconnect();
     }
 
+    /// <summary>
+    /// 移動処理
+    /// </summary>
     private void Move()
     {
         Vector3 position = transform.position;
@@ -48,11 +57,16 @@ public class Bullet : MonoBehaviour
         transform.position = position;
     }
 
+    /// <summary>
+    /// 死亡時に呼ぶ処理
+    /// </summary>
     public void Disconnect()
     {
         if (transform.childCount == 0) return;
 
         GameObject particle = null;
+        //子オブジェクトについているパーティクルを切り離す
+        //なければ行わない
         foreach (Transform child in transform)
         {
             if (child.name.Contains("Trail"))
@@ -68,6 +82,10 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// 現在位置を調べる
+    /// </summary>
+    /// <returns></returns>
     private bool GetIsDestroy()
     {
         bool isDestroy = false;
@@ -79,6 +97,10 @@ public class Bullet : MonoBehaviour
         return isDestroy;
     }
 
+    /// <summary>
+    /// 進行方向の設定
+    /// </summary>
+    /// <param name="dir"></param>
     public void SetDirection(Vector3 dir)
     {
         direction = dir;
@@ -86,26 +108,31 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //プレイヤーの弾がスクリューにヒットしたら、貫通弾にする
         if (transform.tag == "PlayerBullet" && other.transform.tag == "Screw")
-        {
             IsPenetrate = true;
-            //GetComponent<Renderer>().material.color = Color.red;
-        }
 
+        //プレイヤーの弾がエネミーにヒットしたら、またはエネミーの弾がプレイヤーにヒットしたら
         if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
         {
+            //ヒットしたのがシールドを持ったステージ3のボスだったらreturn
             if (other.transform.name.Contains("Boss3") && other.transform.childCount != 0) return;
 
+            //攻撃力分のダメージ
             Health health = other.transform.GetComponent<Health>();
             health.Damage(Attack);
+            //ヒットエフェクトを再生
             GameObject particle = particleManager.GenerateParticle(1);
             particle.transform.position = other.ClosestPointOnBounds(transform.position);
             particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             particleManager.OncePlayParticle(particle);
 
-            if (other.transform.tag == "Enemy")
+
+            //エネミーが死亡したら、スコアを加算する
+            if (health.IsDead && other.transform.tag == "Enemy")
             {
+                //スクリューにヒットしている最中のオブジェクトなら、リストから削除する
                 GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
                 for (int i = screws.Length - 1; i >= 0; i--)
                 {
@@ -116,13 +143,11 @@ public class Bullet : MonoBehaviour
                             screws[i].GetComponent<ScrewCollision>().RemoveObject(j);
                     }
                 }
-            }
 
-            if (health.IsDead && other.transform.tag == "Enemy")
-            {
                 Score score = other.transform.GetComponent<Score>();
                 scoreManager.AddScore(score.GetScore());
             }
+            //貫通弾でなければ弾を削除する
             if (!IsPenetrate) Disconnect();
         }
 

@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
             //通常状態でなければ、通常状態に戻す
             if (currentMode != Mode.NORMAL)
             {
-                StopScrew();
+                StopScrew_Drill();
                 RotationDefault();
             }
             return;
@@ -132,18 +132,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void ShotBullet()
     {
-        //shotBulletElapsedTime += Time.deltaTime;
-
         //通常状態以外には撃てない
         if (currentMode != Mode.NORMAL) return;
 
         if (inputManager.GetA_ButtonDown())
-        {
-            //if (shotBulletElapsedTime < shotBulletInterval) return;
-
-            //shotBulletElapsedTime = 0.0f;
             InstanceBullet();
-        }
 
         if (inputManager.GetA_Button())
         {
@@ -153,16 +146,10 @@ public class Player : MonoBehaviour
 
             shotBulletElapsedTime = 0.0f;
             InstanceBullet();
-            //IsRapidFire = true;
         }
 
         if (inputManager.GetA_ButtonUp())
-        {
-            //if (!IsRapidFire) return;
-
-            //IsRapidFire = false;
             shotBulletElapsedTime = 0.0f;
-        }
     }
 
     /// <summary>
@@ -177,7 +164,6 @@ public class Player : MonoBehaviour
 
         bulletController.GenerateBullet(shotPosition, Vector3.up, 3.0f);
         chargeBullet.DecreaseCharge();
-        //chargeBullet.ResetCharge();
     }
 
     /// <summary>
@@ -236,19 +222,19 @@ public class Player : MonoBehaviour
                             inhaleScrewObject.transform.position = transform.position + Vector3.up * 10.0f;
                         }
                         else
-                            StopScrew();
+                            StopScrew_Drill();
                     }
                     else
                     {
                         if (drill == null)
                         {
                             IsEquipmentDrill = false;
-                            StopScrew();
+                            StopScrew_Drill();
                             currentMode = Mode.ROTATION_NORMAL;
                         }
 
                         if (isUse) UseDrill();
-                        else StopScrew();
+                        else StopScrew_Drill();
                     }
                 }
                 else if (isShotScrew)
@@ -278,59 +264,76 @@ public class Player : MonoBehaviour
 
         //死亡時にパーティクルを生成していれば切り離す
         if (health.IsDead)
-            StopScrew();
+            StopScrew_Drill();
     }
 
+    /// <summary>
+    /// スクリューの発射処理
+    /// </summary>
     private void ShotScrew()
     {
+        //撃てる状態でなければreturn
         if (shotScrewElapsedTime < shotScrewInterval) return;
 
+        //すでに存在していたら
         if (shotScrewObject != null)
         {
+            //エネミーの回復処理を実行
             EnemyRecoveryStart(shotScrewObject);
+            //パーティクルを停止
             screw.GetComponent<ParticleManager>().StopParticle(shotScrewObject);
         }
 
+        //パーティクルを再生
         shotScrewObject = screw.GetComponent<ParticleManager>().GenerateParticle(1);
         shotScrewObject.transform.position = transform.position;
         shotScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.SHOT);
         screw.GetComponent<ParticleManager>().StartParticle(shotScrewObject);
-        soundManager.PlaySeByName(ses[1]);
+        soundManager.PlaySeByName(ses[1], true);
 
         shotScrewElapsedTime = 0.0f;
     }
 
+    /// <summary>
+    /// 通常状態への回転開始処理
+    /// </summary>
     private void RotationInterval()
     {
         rotationElapsedTime += Time.deltaTime;
+        //回転開始時間まではreturn
         if (rotationElapsedTime < rotationInterval) return;
 
         currentMode = Mode.ROTATION_NORMAL;
         rotationElapsedTime = 0.0f;
-
-        if (drill != null)
-            drill.GetComponent<BoxCollider>().enabled = false;
-        else
-            IsEquipmentDrill = false;
     }
 
+    //射出したスクリューの削除
     private void DestroyShotScrew()
     {
+        //射出したスクリューがなければreturn
         if (shotScrewObject == null) return;
 
         destroyShotScrewTime += Time.deltaTime;
-
+        //削除時間まではreturn
         if (destroyShotScrewTime < shotScrewDestroyTime) return;
 
+        //スクリューのあたり判定をなくす
         shotScrewObject.GetComponent<BoxCollider>().enabled = false;
         shotScrewObject.GetComponent<Screw>().SetScrewType(Screw.ScrewType.NONE);
+        //エネミーの回復処理を実行
         EnemyRecoveryStart(shotScrewObject);
+        //パーティクルを停止
         screw.GetComponent<ParticleManager>().StopParticle(shotScrewObject);
         shotScrewObject = null;
         destroyShotScrewTime = 0.0f;
+        //SEを止める
         soundManager.StopSe();
     }
 
+    /// <summary>
+    /// エネミーの回復開始処理
+    /// </summary>
+    /// <param name="screw"></param>
     private void EnemyRecoveryStart(GameObject screw)
     {
         //スクリューがなければ行わない
@@ -385,9 +388,9 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// スクリューの停止
+    /// スクリュー又はドリルの停止
     /// </summary>
-    private void StopScrew()
+    private void StopScrew_Drill()
     {
         //パーティクルが生成されたときだけ
         if (inhaleScrewObject != null)
@@ -400,14 +403,17 @@ public class Player : MonoBehaviour
             inhaleScrewObject = null;
         }
 
+        //ドリルがあれば
         if (drill != null)
         {
+            //ドリルを切り離す
             drill.GetComponent<BoxCollider>().enabled = false;
             drill.GetComponent<Drill>().IsThrowAway = true;
             drill.transform.parent = null;
             drill = null;
             IsEquipmentDrill = false;
         }
+        //SEを止める
         soundManager.StopSe();
 
         if (currentMode == Mode.SCREW)
@@ -451,6 +457,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ドリルの使用
+    /// </summary>
     private void UseDrill()
     {
         if (drill == null) return;
@@ -463,6 +472,9 @@ public class Player : MonoBehaviour
         isPlayDrillSE = true;
     }
 
+    /// <summary>
+    /// ドリルの射出
+    /// </summary>
     private void ShotDrill()
     {
         if (drill == null) return;
@@ -473,6 +485,9 @@ public class Player : MonoBehaviour
         soundManager.PlaySeByName(ses[2]);
     }
 
+    /// <summary>
+    /// ドリルの装着処理
+    /// </summary>
     public void EquipmentDrill()
     {
         drill = Instantiate(drillPrefab, transform.position - transform.up * 1.5f, Quaternion.identity, transform);
@@ -489,6 +504,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 現在の状態を返す
+    /// </summary>
+    /// <returns></returns>
     public Mode GetCurrentMode()
     {
         return currentMode;

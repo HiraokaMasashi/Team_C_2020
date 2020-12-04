@@ -7,43 +7,46 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int hp = 1;
+    private int hp = 1;//現在の体力
+    /// <summary>
+    /// 最大体力
+    /// </summary>
     public int MaxHp
     {
         get;
         private set;
     }
 
-    private ParticleManager particleManager;
+    private ParticleManager particleManager;//パーティクルマネージャー
     private SoundManager soundManager;
     [SerializeField]
-    private string deadSe;
+    private string deadSe;//死亡SE
     [SerializeField]
-    private string damageSe;
+    private string damageSe;//ダメージSE
 
     [SerializeField]
-    private GameObject dropPrefab;
+    private GameObject dropPrefab;//死亡時のドロップアイテム
     [SerializeField, Tooltip("生成位置の調整")]
     private Vector3 adjustPosition;
 
-    private bool isDamageEffect;
+    private bool isDamageEffect;//ダメージ演出中か
     [SerializeField]
-    private MeshRenderer[] meshRenderers;
+    private MeshRenderer[] meshRenderers;//透過させるメッシュ
     [SerializeField]
-    private float effectTime = 2.0f;
-    private float effectElapsedTime;
+    private float effectTime = 2.0f;//演出時間
+    private float effectElapsedTime;//演出経過時間
     [SerializeField]
-    private float effectSpeed = 0.5f;
+    private float effectSpeed = 0.5f;//演出速度
 
-    private GameManager gameManager;
+    private GameManager gameManager;//ゲームマネージャー
     [SerializeField]
-    private float particleInstanceTime = 0.5f;
+    private float particleInstanceTime = 0.5f;//パーティクル生成時間
 
     [SerializeField]
-    private Vector3 minScale = Vector3.one;
+    private Vector3 minScale = Vector3.one;//ボス死亡時の縮小値
 
     /// <summary>
-    /// 体力
+    /// 現在の体力を返す
     /// </summary>
     public int Hp
     {
@@ -84,6 +87,7 @@ public class Health : MonoBehaviour
     {
         if (!IsDead) return;
 
+        //ボス以外
         if (!transform.name.Contains("Boss"))
         {
             GameObject particle = particleManager.GenerateParticle();
@@ -100,6 +104,7 @@ public class Health : MonoBehaviour
         }
         else
         {
+            //ボスの死亡演出処理の実行
             if (gameManager.IsPerformance) return;
 
             gameManager.IsPerformance = true;
@@ -141,13 +146,19 @@ public class Health : MonoBehaviour
             isDamageEffect = true;
     }
 
+    /// <summary>
+    /// ダメージ演出処理
+    /// </summary>
     private void DamageEffect()
     {
+        //ダメージ演出中でない、またはポーズ中はreturn
         if (!isDamageEffect || Time.timeScale == 0) return;
 
         effectElapsedTime += Time.deltaTime;
+        //演出時間を過ぎたら
         if (effectElapsedTime >= effectTime)
         {
+            //配列に格納したメッシュを全て映す
             foreach (var mesh in meshRenderers)
             {
                 mesh.enabled = true;
@@ -157,12 +168,18 @@ public class Health : MonoBehaviour
             return;
         }
 
+        //メッシュの描画を切り替える
         foreach (var mesh in meshRenderers)
         {
             mesh.enabled = !mesh.enabled;
         }
     }
 
+    /// <summary>
+    /// 爆発エフェクトの生成処理
+    /// </summary>
+    /// <param name="adjustPositionX">x方向の調整</param>
+    /// <param name="adjustPositionY">y方向の調整</param>
     private void ExplosionInstance(float adjustPositionX = 0.0f, float adjustPositionY = 0.0f)
     {
         GameObject particle = particleManager.GenerateParticle(1);
@@ -173,17 +190,23 @@ public class Health : MonoBehaviour
         particleManager.OncePlayParticle(particle);
     }
 
+    /// <summary>
+    /// ボスの死亡演出処理
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator BossDeadEffect()
     {
         Vector3 scale = transform.localScale;
         float elapsedTime = 0;
         while (true)
         {
+            //ボスのスケールを縮小する
             scale -= Vector3.one * Time.deltaTime * effectSpeed;
             transform.localScale = scale;
             transform.rotation *= Quaternion.Euler(5 * Time.deltaTime, 0, 10 * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
+            //一定時間毎に爆発パーティクルを生成
             if (elapsedTime >= particleInstanceTime)
             {
                 float x = Random.Range(-0.5f, 0.5f);
@@ -192,6 +215,7 @@ public class Health : MonoBehaviour
                 elapsedTime = 0;
             }
 
+            //最小縮小値までいったら削除
             if (transform.localScale.x <= minScale.x || transform.localScale.y <= minScale.y || transform.localScale.z <= minScale.z)
             {
                 gameManager.IsPerformance = false;

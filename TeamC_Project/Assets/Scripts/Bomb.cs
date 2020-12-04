@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    private GameObject player;
-    private ParticleManager particleManager;
-    private NormalBoss boss;
+    private GameObject player;//プレイヤー
+    private ParticleManager particleManager;//パーティクルマネージャー
+    private NormalBoss boss;//ボス
     private SetUpScrew setUpScrew;
 
-    private Vector3 direction;
+    private Vector3 direction;//進行方向
     [SerializeField]
-    private float moveSpeed = 0.5f;
+    private float moveSpeed = 0.5f;//移動速度
 
     [SerializeField]
-    private Vector3 destroyZone = new Vector3(16, -11, 0);
+    private Vector3 destroyZone = new Vector3(16, -11, 0);//死亡範囲
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,7 @@ public class Bomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //スタン中はreturn
         if (setUpScrew.IsStan) return;
 
         Move();
@@ -37,6 +38,9 @@ public class Bomb : MonoBehaviour
             DisConnect();
     }
 
+    /// <summary>
+    /// 移動処理
+    /// </summary>
     private void Move()
     {
         Vector3 position = transform.position;
@@ -44,6 +48,10 @@ public class Bomb : MonoBehaviour
         transform.position = position;
     }
 
+    /// <summary>
+    /// 現在位置を調べる
+    /// </summary>
+    /// <returns></returns>
     private bool GetIsDestroy()
     {
         bool isDestroy = false;
@@ -55,6 +63,9 @@ public class Bomb : MonoBehaviour
         return isDestroy;
     }
 
+    /// <summary>
+    /// 死亡処理
+    /// </summary>
     private void DisConnect()
     {
         boss.RemoveBomb(gameObject);
@@ -63,11 +74,14 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //プレイヤーの弾に当たったら
         if (other.gameObject.tag == "PlayerBullet")
         {
+            //弾が貫通弾でなければ、弾を削除する
             if (!other.gameObject.GetComponent<Bullet>().IsPenetrate)
                 other.gameObject.GetComponent<Bullet>().Disconnect();
 
+            //スクリューにヒットしていたら、リストから削除
             GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
             for (int i = screws.Length - 1; i >= 0; i--)
             {
@@ -78,6 +92,7 @@ public class Bomb : MonoBehaviour
                 }
             }
 
+            //爆風エフェクトを再生し、削除
             GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
@@ -85,8 +100,10 @@ public class Bomb : MonoBehaviour
             DisConnect();
         }
 
+        //プレイヤーまたは、爆風エフェクトに当たったら
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Blast")
         {
+            //スクリューにヒットしていたら、リストから削除
             GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
             for (int i = screws.Length - 1; i >= 0; i--)
             {
@@ -97,6 +114,7 @@ public class Bomb : MonoBehaviour
                 }
             }
 
+            //爆風エフェクトを再生し、削除
             GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = transform.position;
             particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
