@@ -132,10 +132,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         //再生中のSEの再生時間を更新(カウントダウン)

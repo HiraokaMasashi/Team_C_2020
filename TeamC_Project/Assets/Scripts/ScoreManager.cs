@@ -188,6 +188,9 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         return ranking.rank;
     }
 
+    /// <summary>
+    /// ファイルパスの設定
+    /// </summary>
     public void SetFilePath()
     {
         if (SceneManager.GetActiveScene().name != "Result")
@@ -197,11 +200,19 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
         }
     }
 
+    /// <summary>
+    /// ファイルパスの設定
+    /// </summary>
+    /// <param name="stageName"></param>
     private void SetFilePath(string stageName = "")
     {
         path = Application.persistentDataPath + "/" + stageName + fileName;
     }
 
+    /// <summary>
+    /// 指定したファイルの読込
+    /// </summary>
+    /// <param name="stageName"></param>
     public void LoadFile(string stageName = "")
     {
         SetFilePath(stageName);

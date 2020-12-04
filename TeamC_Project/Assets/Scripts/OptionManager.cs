@@ -31,6 +31,7 @@ public class OptionManager : MonoBehaviour
     void Start()
     {
         soundManager = SoundManager.Instance;
+        soundManager.LoadVolume();
         selectNumber = 0;
         length = option.transform.childCount;
         options = new Slider[length];
