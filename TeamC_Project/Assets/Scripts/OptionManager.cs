@@ -12,6 +12,7 @@ public class OptionManager : MonoBehaviour
     private Slider[] options; //Sliderを格納する変数
     [SerializeField]
     private GameObject select; //選択中であることを示すオブジェクト
+    private RectTransform selectBase; 
     private Vector3 basePos; //↑の初期位置
     private int selectNumber; //選択中の番号
     private int length; //要素の上限数
@@ -39,7 +40,8 @@ public class OptionManager : MonoBehaviour
         {
             options[i] = option.transform.GetChild(i).GetComponent<Slider>();
         }
-        basePos = select.transform.position;
+        selectBase = select.GetComponent<RectTransform>();
+        basePos = selectBase.position;
     }
 
     // Update is called once per frame
@@ -70,7 +72,7 @@ public class OptionManager : MonoBehaviour
             options[selectNumber].value += num;
             hTimer = 0;
         }
-        select.transform.position = basePos - Vector3.up * 194 * selectNumber;
+        select.transform.position = basePos - Vector3.up * selectBase.sizeDelta.y * selectNumber;
 
         if (v == 0)
             vTimer = interval;
