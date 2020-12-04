@@ -31,6 +31,13 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField]
     private Text waveText;
+    [SerializeField]
+    private float textTime, textPercent;
+    [SerializeField]
+    private float bossTextTime, bossTextPercent;
+    [SerializeField]
+    private Font normalFont, bossFont;
+    private float timer;
 
     private GameManager gameManager;
     private GameObject player;
@@ -67,6 +74,8 @@ public class EnemyManager : MonoBehaviour
         NextWave();
         DisPlayWave();
         PerformancePlayerPosition();
+        if (waveText.enabled)
+            TextEffect();
     }
 
     private void NextWave()
@@ -185,9 +194,43 @@ public class EnemyManager : MonoBehaviour
         if (waveText == null) return;
 
         if (wave < maxWave)
-            waveText.text = "Wave: " + (wave + 1).ToString("D2") + " / " + maxWave.ToString("D2");
+        {
+            waveText.text = "Wave " + (wave + 1).ToString("D2") + " / " + maxWave.ToString("D2");
+            waveText.fontSize = 70;
+            waveText.font = normalFont;
+            waveText.fontStyle = FontStyle.Italic;
+        }
         else
+        {
             waveText.text = "BOSS Battle";
+            waveText.fontSize = 100;
+            waveText.font = bossFont;
+            waveText.fontStyle = FontStyle.Normal;
+        }
+    }
+
+    private void TextEffect()
+    {
+        timer += Time.deltaTime;
+        Color c = waveText.color;
+        if (wave < maxWave)
+        {
+            if (timer <= textTime * (1 - textPercent))
+                waveText.color = new Color(c.r, c.g, c.b, 1);
+            else
+                waveText.color = new Color(c.r, c.g, c.b, 0);
+            if (timer >= textTime)
+                timer = 0;
+        }
+        else
+        {
+            if (timer <= bossTextTime * (1 - bossTextPercent))
+                waveText.color = new Color(c.r, c.g, c.b, 1);
+            else
+                waveText.color = new Color(c.r, c.g, c.b, 0);
+            if (timer >= bossTextTime)
+                timer = 0;
+        }
     }
 
     /// <summary>

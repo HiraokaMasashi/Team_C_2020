@@ -509,6 +509,38 @@ PrefabInstance:
       propertyPath: waveText
       value: 
       objectReference: {fileID: 1982548850}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: textTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: textPercent
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bossTextTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bossTextPercent
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: normalFont
+      value: 
+      objectReference: {fileID: 12800000, guid: 41f31a8ef93e9ba4ab13400adc54f220,
+        type: 3}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: bossFont
+      value: 
+      objectReference: {fileID: 12800000, guid: 1d47c5c7f22c7a04ba4024e007501909,
+        type: 3}
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: m_Name
@@ -1098,6 +1130,7 @@ MonoBehaviour:
   - {fileID: 1982548835}
   - {fileID: 1982548833}
   bossHPGauge: {fileID: 1982548848}
+  playerStartPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1585005901
 Transform:
   m_ObjectHideFlags: 0
@@ -1765,7 +1798,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1982548832}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
