@@ -61,6 +61,7 @@ public class TitleSceneManager : MonoBehaviour
                 titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 150);
                 screwLogo.eulerAngles = new Vector3(0,0,4);
                 bubbleParticle.position += Vector3.up * 100;
+                buttons.anchoredPosition = Vector3.zero;
                 //pressLogo.gameObject.SetActive(true);
             }
             Opening();
@@ -121,7 +122,6 @@ public class TitleSceneManager : MonoBehaviour
             if (buttons.anchoredPosition.y <= 0)
             {
                 buttons.position += Vector3.up * 3;
-                Debug.Log("AAAAA");
             }
             else
             {
