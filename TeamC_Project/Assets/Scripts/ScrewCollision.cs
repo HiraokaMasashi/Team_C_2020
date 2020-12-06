@@ -15,6 +15,8 @@ public class ScrewCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (player == null) return;
+
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bomb")
         {
             if (other.gameObject.name.Contains("Boss")) return;

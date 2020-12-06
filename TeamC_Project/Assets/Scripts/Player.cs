@@ -346,6 +346,7 @@ public class Player : MonoBehaviour
         alignmentPositionY = screw.transform.position.y - 2.0f;
 
         List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetObjects();
+        if (enemies == null) return;
         int count = 0;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
