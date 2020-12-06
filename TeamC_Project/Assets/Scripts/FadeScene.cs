@@ -25,7 +25,7 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
     {
         get;
         private set;
-    } = false;
+    } = true;
 
     /// <summary>
     /// フェードアウト中か
@@ -50,6 +50,7 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
     {
         fadeImage = GetComponent<Image>();
         IsFadeIn = true;
+        IsFadeOut = false;
         fadeColor = fadeImage.color;
         fadeColor.a = 1.0f;
         if (GameObject.Find("SoundManager") != null)
@@ -99,7 +100,7 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
         if (fadeColor.a >= 1.0f)
         {
             fadeColor.a = 1.0f;
-            IsFadeOut = false;
+            //IsFadeOut = false;
             //次のシーンがセレクトもしくは、オプションでなければBGMを止める
             if (nextSceneName != "Select" && nextSceneName != "Option")
                 SoundStop();
@@ -133,15 +134,15 @@ public class FadeScene : SingletonMonoBehaviour<FadeScene>
     /// <param name="SceneName"></param>
     public void ChangeNextScene(string SceneName)
     {
-        //フェードイン中は実行しない
-        if (IsFadeIn) return;
+        //フェード中は実行しない
+        if (IsFadeIn || IsFadeOut) return;
 
         IsFadeOut = true;
         fadeImage.enabled = true;
-        //次のシーン名を格納
-        nextSceneName = SceneName;
         //現在のシーンを前のシーンとして格納
         beforeSceneName = SceneManager.GetActiveScene().name;
+        //次のシーン名を格納
+        nextSceneName = SceneName;
     }
 
     /// <summary>

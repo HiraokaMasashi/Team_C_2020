@@ -87,7 +87,6 @@ public class Pause : MonoBehaviour
     private void ActiveText()
     {
         timer += Time.unscaledDeltaTime;
-        Debug.Log(Time.deltaTime);
         if (timer <= textTime / 2)
         {
             menus[selectNumber].color = activeColor;
@@ -137,7 +136,6 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0;
         panel.SetActive(true);
         soundManager.PlaySeByName("pose1");
-        Debug.Log("Pause");
     }
 
     /// <summary>
@@ -147,7 +145,6 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1;
         panel.SetActive(false);
-        Debug.Log("Resume");
     }
 
     /// <summary>

@@ -109,13 +109,16 @@ public class SetUpScrew : MonoBehaviour
     /// <param name="basePosition"></param>
     public virtual void StanMove(Vector3 basePosition)
     {
+        if (Time.timeScale == 0) return;
+
         Vector3 position = transform.position;
         SetDestination(basePosition, position, ref distance, ref destination);
         CheckDistance(basePosition, position, ref distance, ref destination);
 
         //目的地に向かう
-        float currentLocation = (Time.deltaTime * speed) / distance;
-        transform.position = Vector3.Lerp(position, destination, currentLocation);
+        //float currentLocation = (Time.deltaTime * speed) / distance;
+        Vector3 dir = (destination - position).normalized;
+        transform.position += dir * Time.deltaTime * speed;
     }
 
     /// <summary>
