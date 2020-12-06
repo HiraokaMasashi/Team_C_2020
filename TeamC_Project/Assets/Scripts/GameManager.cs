@@ -32,9 +32,10 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private Player playerS;
 
-    public Vector3 playerDestinationPosition;
     [SerializeField]
-    private float speed;
+    private Vector3 playerDestinationPosition = new Vector3(0, 0, 0);//プレイヤーの開始地点
+    [SerializeField]
+    private float speed = 10;//開始地点まで移動させるプレイヤーのスピード
     public enum ResultMode
     {
         NONE,
@@ -95,10 +96,10 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         if (IsGameStart) return;
-        //Start地点まで移動する処理
-        //player.transform.position += 
+        
         Vector3 vec = (playerDestinationPosition - player.transform.position).normalized;
-        player.transform.position += vec/speed;
+        //プレイヤーを目的地まで移動させる
+        player.transform.position += vec * speed * Time.deltaTime;
 
         //Start地点に到着したら
         if (Vector3.Distance(player.transform.position, playerDestinationPosition) <= 0.1f)
