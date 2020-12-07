@@ -28,12 +28,11 @@ public class GameManager : MonoBehaviour
     private BossHPGauge bossHPGauge;
 
     private GameObject player;
-    private Player playerS;
-
-    public Vector3 playerStartPosition;
 
     private EnemyManager enemyManager;
 
+    [SerializeField]
+    private Vector3 playerStartPosition = new Vector3(0, -10, 0);
     [SerializeField]
     private Vector3 playerDestinationPosition = new Vector3(0, 0, 0);//プレイヤーの開始地点
     [SerializeField]
@@ -78,8 +77,9 @@ public class GameManager : MonoBehaviour
 
         //Playerが生成される処理ではなかったのでScene内のPlayerを使用
         player = GameObject.Find("Player");
-        playerS = player.GetComponent<Player>();
-        player.transform.position = new Vector3(0, -10, 0);
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+        player.transform.position = playerStartPosition;
     }
 
     // Update is called once per frame
@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
         GameStart();
         DisplayPlayerHP();
         bossHPGauge.DisplayGauge();
-        //DisplayBossHP();
         ChangeResultScene();
     }
 
@@ -98,7 +97,8 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         if (IsGameStart) return;
-        
+        if (fadeScene.IsFadeIn) return;
+
         Vector3 vec = (playerDestinationPosition - player.transform.position).normalized;
         //プレイヤーを目的地まで移動させる
         player.transform.position += vec * speed * Time.deltaTime;
@@ -106,11 +106,8 @@ public class GameManager : MonoBehaviour
         //Start地点に到着したら
         if (Vector3.Distance(player.transform.position, playerDestinationPosition) <= 0.1f)
         {
-            if (!fadeScene.IsFadeIn)
-            {
-                IsGameStart = true;
+            IsGameStart = true;
                 enemyManager.StartInstanceEnemy();
-            }
         }
 
     }
@@ -158,7 +155,6 @@ public class GameManager : MonoBehaviour
         {
             bossHPGauge.gameObject.SetActive(false);
             result = ResultMode.GAMECLEAR;
-            //IsPerformance = true;
             IsEnd = true;
             scoreManager.UpdateScoreRanking();
         }
@@ -182,23 +178,10 @@ public class GameManager : MonoBehaviour
         bossHealth = bossEnemy.GetComponent<Health>();
         bossHPGauge.SetBossHealth(bossHealth);
         bossHPGauge.gameObject.SetActive(true);
-        //bossHPSlider.gameObject.SetActive(true);
-        //bossHPSlider.maxValue = bossHealth.Hp;
     }
 
     private void DisplayPlayerHP()
     {
-        //if (hpText == null) return;
-
-        //hpText.text = "HP: " + playerHealth.Hp + " / " + playerHealth.MaxHp;
-
-        //if (playerHealth.Hp <= playerHealth.MaxHp * (1.0f / 3.0f))
-        //    hpText.color = Color.red;
-        //else if (playerHealth.Hp <= playerHealth.MaxHp * (2.0f / 3.0f))
-        //    hpText.color = Color.yellow;
-        //else
-        //    hpText.color = Color.green;
-
         if (playerHPGauges.Length == 0) return;
 
         for (int i = 0; i < playerHealth.MaxHp; i++)
@@ -217,16 +200,4 @@ public class GameManager : MonoBehaviour
             playerHPImages[i].color = hpColor;
         }
     }
-
-    //private void DisplayBossHP()
-    //{
-    //    if (bossHealth == null) return;
-    //    if (bossHPSlider.value >= bossHealth.Hp)
-    //    {
-    //        bossHPSlider.value = bossHealth.Hp;
-    //        return;
-    //    }
-
-    //    bossHPSlider.value += 1;
-    //}
 }
