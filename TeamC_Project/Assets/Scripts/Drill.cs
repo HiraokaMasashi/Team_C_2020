@@ -109,6 +109,13 @@ public class Drill : MonoBehaviour
             }
             else
             {
+                //シールドを持っていたらヒット判定を行わない
+                if (other.transform.childCount >= 1)
+                {
+                    if (other.transform.GetChild(0).gameObject.name.Contains("Shield"))
+                        return;
+                }
+
                 otherHealth.Damage(10);
                 if (otherHealth.IsDead)
                 {
