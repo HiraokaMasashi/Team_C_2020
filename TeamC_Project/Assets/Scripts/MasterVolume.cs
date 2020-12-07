@@ -21,7 +21,9 @@ public class MasterVolume : MonoBehaviour
     public void OnValueChanged()
     {
         soundManager.MasterVolume = slider.value;
-        soundManager.BgmVolume = slider.value;
-        soundManager.SeVolume = slider.value;
+        if (soundManager.BgmVolume > slider.value)
+            soundManager.BgmVolume = slider.value;
+        if (soundManager.SeVolume > slider.value)
+            soundManager.SeVolume = slider.value;
     }
 }
