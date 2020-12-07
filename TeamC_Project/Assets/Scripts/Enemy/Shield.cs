@@ -15,6 +15,7 @@ public class Shield : MonoBehaviour
     void Update()
     {
         ComeOff();
+        MoveDown();
     }
 
     private void ComeOff()
@@ -25,8 +26,30 @@ public class Shield : MonoBehaviour
 
             isDown = true;
             transform.parent = null;
-            StartCoroutine(MoveDown());
+            GetComponent<BoxCollider>().enabled = false;
         }
+    }
+
+    private void MoveDown()
+    {
+        if (!isDown) return;
+
+        Vector3 dir = (destination - transform.position).normalized;
+        transform.position += dir * Time.deltaTime * moveSpeed;
+
+        Quaternion rotation = transform.rotation;
+        rotation *= Quaternion.Euler(-20 * Time.deltaTime, 0, 0);
+        transform.rotation = rotation;
+
+        Vector3 scale = transform.localScale;
+        if (!(scale.x <= 0 || scale.y <= 0 || scale.z <= 0))
+        {
+            scale -= Vector3.one * Time.deltaTime;
+            transform.localScale = scale;
+        }
+
+        if (Vector3.Distance(transform.position, destination) <= 0.1f)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,19 +63,5 @@ public class Shield : MonoBehaviour
         {
             if (other.GetComponent<Drill>().IsShot) Destroy(other.gameObject);
         }
-    }
-
-    private IEnumerator MoveDown()
-    {
-        while (Vector3.Distance(transform.position, destination) > 0.01f)
-        {
-            Vector3 position = Vector3.Lerp(transform.position, destination, Time.deltaTime * moveSpeed);
-            transform.position = position;
-            transform.Rotate(new Vector3(-360, 0, 0) * Time.deltaTime);
-            yield return null;
-        }
-
-        Destroy(gameObject);
-        yield break;
     }
 }

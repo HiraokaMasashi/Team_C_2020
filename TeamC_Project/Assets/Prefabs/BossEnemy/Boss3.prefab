@@ -111,9 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screwDamageInterval: 1
   drillDamageInterval: 0.1
-  moveSpeed: 1
+  moveSpeed: 5
   throwAwayPositionY: -10
   minScale: {x: 15, y: 20, z: 15}
+  se: 
 --- !u!114 &1227512603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,9 +261,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screwDamageInterval: 1
   drillDamageInterval: 0.1
-  moveSpeed: 1
+  moveSpeed: 5
   throwAwayPositionY: -10
   minScale: {x: 15, y: 20, z: 15}
+  se: 
 --- !u!114 &106078137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: -15, z: 0}
-  moveSpeed: 1
+  moveSpeed: 3
 --- !u!1 &7985128295584331834
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,7 +67,7 @@ public class ShieldScrew : MonoBehaviour
     private void ThrowDown()
     {
         Quaternion rotation = transform.rotation;
-        rotation *= Quaternion.Euler(0, 0, 180 * Time.deltaTime);
+        rotation *= Quaternion.Euler(10 * Time.deltaTime, 0, 180 * Time.deltaTime);
         transform.rotation = rotation;
 
         Vector3 scale = transform.localScale;
