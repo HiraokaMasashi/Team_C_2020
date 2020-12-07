@@ -60,6 +60,9 @@ public class Player : MonoBehaviour
     private float screwRotation = -180.0f;
     //通常時の角度
     private float normalRotation = 0.0f;
+    [SerializeField]
+    private float screwUseTime = 3.0f;
+    private float screwElapsedTime;
 
     [SerializeField]
     private float rotationInterval = 1.0f;
@@ -72,12 +75,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private string[] ses;
     private bool isPlayDrillSE;
-
-    //public bool IsRapidFire
-    //{
-    //    get;
-    //    private set;
-    //} = false;//連射中か
 
     public bool IsEquipmentDrill
     {
@@ -103,6 +100,8 @@ public class Player : MonoBehaviour
         rotationElapsedTime = 0.0f;
         soundManager = SoundManager.Instance;
         isPlayDrillSE = false;
+
+        screwElapsedTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -215,11 +214,11 @@ public class Player : MonoBehaviour
 
                     if (!IsEquipmentDrill)
                     {
-
-                        if (isUse)
+                        if (isUse && screwElapsedTime < screwUseTime)
                         {
                             GenerateScrew();
                             inhaleScrewObject.transform.position = transform.position + Vector3.up * 10.0f;
+                            screwElapsedTime += Time.deltaTime;
                         }
                         else
                             StopScrew_Drill();
@@ -340,8 +339,11 @@ public class Player : MonoBehaviour
         if (screw == null) return;
         //スクリューを中心に整列させる
         float alignmentPositionX, alignmentPositionY;
-        if (screw == shotScrewObject) alignmentPositionX = shotScrewObject.transform.position.x;
-        else alignmentPositionX = transform.position.x;
+        float stanTime = screw.GetComponent<Screw>().StanTime;
+        if (screw == shotScrewObject)
+            alignmentPositionX = shotScrewObject.transform.position.x;
+        else
+            alignmentPositionX = transform.position.x;
         //スクリューの中心より低い位置を基準にする
         alignmentPositionY = screw.transform.position.y - 2.0f;
 
@@ -365,7 +367,7 @@ public class Player : MonoBehaviour
             if (alignmentPositionY >= setUpScrew.ClapmPosition.y)
                 alignmentPositionY = setUpScrew.ClapmPosition.y;
 
-            enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(alignmentPositionX, alignmentPositionY, screw);
+            enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(alignmentPositionX, alignmentPositionY, stanTime);
             screw.GetComponent<ScrewCollision>().RemoveObject(i);
             alignmentPositionY += 2.0f;
             count++;
@@ -402,6 +404,7 @@ public class Player : MonoBehaviour
             inhaleScrewObject.GetComponent<BoxCollider>().enabled = false;
             isExistScrew = false;
             inhaleScrewObject = null;
+            screwElapsedTime = 0;
         }
 
         //ドリルがあれば

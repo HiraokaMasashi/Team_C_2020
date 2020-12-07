@@ -77,10 +77,6 @@ public class Bomb : MonoBehaviour
         //プレイヤーの弾に当たったら
         if (other.gameObject.tag == "PlayerBullet")
         {
-            //弾が貫通弾でなければ、弾を削除する
-            if (!other.gameObject.GetComponent<Bullet>().IsPenetrate)
-                other.gameObject.GetComponent<Bullet>().Disconnect();
-
             //スクリューにヒットしていたら、リストから削除
             GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
             for (int i = screws.Length - 1; i >= 0; i--)

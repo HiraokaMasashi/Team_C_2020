@@ -22,6 +22,13 @@ public class Screw : MonoBehaviour
     [SerializeField]
     private float maxPositionY;//最大位置
 
+    [SerializeField]
+    private float stanTime = 2.0f;
+    public float StanTime
+    {
+        get { return stanTime; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

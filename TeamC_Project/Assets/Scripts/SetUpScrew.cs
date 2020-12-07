@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SetUpScrew : MonoBehaviour
 {
-    [SerializeField]
-    private float recoveryTime = 5.0f;
+    private float recoveryTime;
     private float stanElapsedTime;
 
     protected float distanceY;
@@ -203,10 +202,10 @@ public class SetUpScrew : MonoBehaviour
     /// <summary>
     /// スクリューから外れたときに呼ぶ処理
     /// </summary>
-    public void ReleaseScrew(float positionX, float positionY, GameObject screw)
+    public void ReleaseScrew(float positionX, float positionY, float stanTime)
     {
         NotRecovery = false;
-        //float x = Random.Range(-1.0f, 1.0f);
+        recoveryTime = stanTime;
         alignmentPositionX = positionX;
         alignmentPositionY = positionY;
 

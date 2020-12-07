@@ -25,15 +25,6 @@ public class Bullet : MonoBehaviour
         set;
     } = 1;
 
-    /// <summary>
-    /// 貫通弾か
-    /// </summary>
-    public bool IsPenetrate
-    {
-        get;
-        set;
-    } = false;
-
     private void Start()
     {
         scoreManager = ScoreManager.Instance;
@@ -108,10 +99,6 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //プレイヤーの弾がスクリューにヒットしたら、貫通弾にする
-        if (transform.tag == "PlayerBullet" && other.transform.tag == "Screw")
-            IsPenetrate = true;
-
         //プレイヤーの弾がエネミーにヒットしたら、またはエネミーの弾がプレイヤーにヒットしたら
         if ((other.transform.tag == "Player" && transform.tag == "EnemyBullet")
             || (other.transform.tag == "Enemy" && transform.tag == "PlayerBullet"))
@@ -127,7 +114,6 @@ public class Bullet : MonoBehaviour
             particle.transform.position = other.ClosestPointOnBounds(transform.position);
             particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             particleManager.OncePlayParticle(particle);
-
 
             //エネミーが死亡したら、スコアを加算する
             if (health.IsDead && other.transform.tag == "Enemy")
@@ -147,14 +133,12 @@ public class Bullet : MonoBehaviour
                 Score score = other.transform.GetComponent<Score>();
                 scoreManager.AddScore(score.GetScore());
             }
-            //貫通弾でなければ弾を削除する
-            if (!IsPenetrate) Disconnect();
+
+            if (other.gameObject.name.Contains("Boss"))
+                Disconnect();
         }
 
-        if ((other.transform.tag == "PlayerBullet" && transform.tag == "EnemyBullet")
-            || (other.transform.tag == "EnemyBullet" && transform.tag == "PlayerBullet" && !IsPenetrate))
-        {
+        if (other.transform.tag == "PlayerBullet" && transform.tag == "EnemyBullet")
             Disconnect();
-        }
     }
 }
