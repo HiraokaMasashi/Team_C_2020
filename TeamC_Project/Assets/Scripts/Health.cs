@@ -88,7 +88,7 @@ public class Health : MonoBehaviour
         if (!IsDead) return;
 
         //ボス以外
-        if (!transform.name.Contains("Boss"))
+        if (!transform.name.Contains("Boss") && !transform.name.Contains("Screw"))
         {
             GameObject particle = particleManager.GenerateParticle();
             if (particle != null)
@@ -102,7 +102,8 @@ public class Health : MonoBehaviour
                 soundManager.PlaySeByName(deadSe);
             Destroy(gameObject);
         }
-        else
+
+        if(transform.name.Contains("Boss"))
         {
             //ボスの死亡演出処理の実行
             if (gameManager.IsPerformance) return;
