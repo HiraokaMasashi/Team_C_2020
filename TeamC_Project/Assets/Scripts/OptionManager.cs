@@ -43,11 +43,6 @@ public class OptionManager : MonoBehaviour
         basePos = selectBase.position;
 
         soundManager = SoundManager.Instance;
-        soundManager.LoadVolume();
-
-        options[0].value = soundManager.MasterVolume;
-        options[1].value = soundManager.BgmVolume;
-        options[2].value = soundManager.SeVolume;
     }
 
     // Update is called once per frame

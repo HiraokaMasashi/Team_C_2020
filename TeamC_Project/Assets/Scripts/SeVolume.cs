@@ -23,5 +23,7 @@ public class SeVolume : MonoBehaviour
     public void OnValueChanged()
     {
         soundManager.SeVolume = slider.value;
+        if (soundManager.MasterVolume <= slider.value)
+            soundManager.MasterVolume = slider.value;
     }
 }

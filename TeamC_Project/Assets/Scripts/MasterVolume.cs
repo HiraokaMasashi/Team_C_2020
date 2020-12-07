@@ -18,6 +18,11 @@ public class MasterVolume : MonoBehaviour
         //slider.Select();
     }
 
+    private void LateUpdate()
+    {
+        slider.value = soundManager.MasterVolume;
+    }
+
     public void OnValueChanged()
     {
         soundManager.MasterVolume = slider.value;
