@@ -133,6 +133,11 @@ public class EnemyManager : MonoBehaviour
             enemies[i] = enemy;
             //生成した敵の座標を決定する
             enemies[i].transform.position = instancePattern[number].GetChild(i).position;
+
+            if(enemy.gameObject.name.Contains("Rush"))
+            {
+                enemy.GetComponent<RushEnemy>().SetWaitTime(i);
+            }
         }
         waveEnemeis = enemies;
         StartCoroutine(FrameIn(enemies));

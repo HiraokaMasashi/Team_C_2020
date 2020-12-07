@@ -64,7 +64,9 @@ public class Enemy : MonoBehaviour
 
     protected void Death()
     {
-        if (transform.position.y <= destroyZone.y)
+        if (transform.position.y <= destroyZone.y ||
+            transform.position.x >= destroyZone.x ||
+            transform.position.x <= -destroyZone.x)
         {
             Destroy(gameObject);
         }
