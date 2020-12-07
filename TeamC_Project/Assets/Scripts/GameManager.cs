@@ -30,8 +30,10 @@ public class GameManager : MonoBehaviour
     private static int stageNumber;
 
     private GameObject player;
-    private Player playerS;
 
+
+    [SerializeField]
+    private Vector3 playerStartPosition = new Vector3(0, -10, 0);
     [SerializeField]
     private Vector3 playerDestinationPosition = new Vector3(0, 0, 0);//プレイヤーの開始地点
     [SerializeField]
@@ -76,8 +78,12 @@ public class GameManager : MonoBehaviour
 
         //Playerが生成される処理ではなかったのでScene内のPlayerを使用
         player = GameObject.Find("Player");
-        playerS = player.GetComponent<Player>();
-        player.transform.position = new Vector3(0, -10, 0);
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+        player.transform.position = playerStartPosition;
+
+        ///
+        //IsGameStart = false;
     }
 
     // Update is called once per frame
@@ -96,7 +102,8 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         if (IsGameStart) return;
-        
+        if (fadeScene.IsFadeIn) return;
+
         Vector3 vec = (playerDestinationPosition - player.transform.position).normalized;
         //プレイヤーを目的地まで移動させる
         player.transform.position += vec * speed * Time.deltaTime;
@@ -104,10 +111,7 @@ public class GameManager : MonoBehaviour
         //Start地点に到着したら
         if (Vector3.Distance(player.transform.position, playerDestinationPosition) <= 0.1f)
         {
-            if (!fadeScene.IsFadeIn)
-            {
-                IsGameStart = true;
-            }
+            IsGameStart = true;            
         }
 
     }
