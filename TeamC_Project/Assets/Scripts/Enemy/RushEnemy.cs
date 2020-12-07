@@ -5,16 +5,16 @@ using UnityEngine;
 public class RushEnemy : Enemy
 {
     [SerializeField]
-    private float rushSpeed = 2.0f;
-    private bool isRush;
+    private float rushSpeed = 2.0f;//突進速度
+    private bool isRush;//突進中か
     [SerializeField]
-    private float waitTime = 1.0f;
+    private float waitTime = 1.0f;//待機時間
     private float waitElapedTime;
 
     private Vector3 direction;
 
     [SerializeField]
-    private float standbyPositionY = 15.0f;
+    private float standbyPositionY = 15.0f;//準備位置
 
     // Start is called before the first frame update
     protected override void Start()
@@ -36,6 +36,9 @@ public class RushEnemy : Enemy
         Death();
     }
 
+    /// <summary>
+    /// 進行方向設定
+    /// </summary>
     private void SetDirection()
     {
         if (direction != Vector3.zero) return;
@@ -50,6 +53,9 @@ public class RushEnemy : Enemy
         transform.position = position;
     }
 
+    /// <summary>
+    /// 突進準備
+    /// </summary>
     private void RushStandby()
     {
         if (isRush) return;
@@ -69,6 +75,10 @@ public class RushEnemy : Enemy
         isRush = true;
     }
 
+    /// <summary>
+    /// 待機時間の設定
+    /// </summary>
+    /// <param name="addWaitTime"></param>
     public void SetWaitTime(int addWaitTime)
     {
         waitTime += addWaitTime;

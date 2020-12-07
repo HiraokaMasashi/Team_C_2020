@@ -144,7 +144,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hpText
       value: 
-      objectReference: {fileID: 613549694}
+      objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407095, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
       propertyPath: chargeSliders.Array.size
@@ -154,7 +154,7 @@ PrefabInstance:
         type: 3}
       propertyPath: chargeSlider
       value: 
-      objectReference: {fileID: 552120385}
+      objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407095, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
       propertyPath: chargeSliders.Array.data[0]
@@ -529,7 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16e36f6e850214eb2c9d2c330ce309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossHPSlider: {fileID: 1185259607}
   fadeScene: {fileID: 1672643944}
   changeSceneTime: 2
   playerHPGauges:
@@ -562,18 +561,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &552120385 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4213364957422558645, guid: aa15ba123e28cc0428a46427fb938165,
-    type: 3}
-  m_PrefabInstance: {fileID: 4213364956892540404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &598753690 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4729060638065680114, guid: aa15ba123e28cc0428a46427fb938165,
@@ -584,18 +571,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &613549694 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4213364957355092874, guid: aa15ba123e28cc0428a46427fb938165,
-    type: 3}
-  m_PrefabInstance: {fileID: 4213364956892540404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &634305419
@@ -897,7 +872,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 2669841131913891094, guid: 2b9b42c83e6011747bd1d5dc7c982129,
+      objectReference: {fileID: 5516234694478458265, guid: c7cf563aba94d2f4ba643876baa24deb,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -949,7 +924,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bossHpSlider
       value: 
-      objectReference: {fileID: 1185259605}
+      objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: enemyPrefabs.Array.data[1]
@@ -1008,24 +983,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1185259605 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4213364955775045025, guid: aa15ba123e28cc0428a46427fb938165,
-    type: 3}
-  m_PrefabInstance: {fileID: 4213364956892540404}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1185259607 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4213364955775045027, guid: aa15ba123e28cc0428a46427fb938165,
-    type: 3}
-  m_PrefabInstance: {fileID: 4213364956892540404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1185259605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1283779458 stripped
