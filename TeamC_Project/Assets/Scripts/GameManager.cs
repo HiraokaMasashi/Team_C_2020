@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
     private Health playerHealth;//プレイヤーの体力スクリプト
     private Health bossHealth;//ボスの体力スクリプト
-    [SerializeField]
-    private Slider bossHPSlider;
 
     [SerializeField]
     private FadeScene fadeScene;//フェードスクリプト
@@ -23,7 +21,6 @@ public class GameManager : MonoBehaviour
     private Slider[] playerHPGauges;
     [SerializeField]
     private Image[] playerHPImages;
-    //private Text hpText;
     [SerializeField]
     private BossHPGauge bossHPGauge;
 

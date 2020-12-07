@@ -545,6 +545,9 @@ MonoBehaviour:
   - {fileID: 2095425435}
   - {fileID: 172024898}
   bossHPGauge: {fileID: 4213364956892540405}
+  playerStartPosition: {x: 0, y: 0, z: 0}
+  playerDestinationPosition: {x: 0, y: 0, z: 0}
+  speed: 10
 --- !u!4 &507480042
 Transform:
   m_ObjectHideFlags: 0
@@ -888,7 +891,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bossPrefab
       value: 
-      objectReference: {fileID: 8821889771494764613, guid: 423f01e9f922ca245bc2005495a0e8f4,
+      objectReference: {fileID: 7985128295584331834, guid: eff649ed5c68f1b4dad2ed000939d01c,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -909,7 +912,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: maxWave
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -1044,7 +1047,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4213364956892540404}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
