@@ -136,6 +136,9 @@ public class Bullet : MonoBehaviour
 
             if (other.gameObject.name.Contains("Boss"))
                 Disconnect();
+
+            if (transform.tag == "EnemyBullet")
+                Disconnect();
         }
 
         if (other.transform.tag == "PlayerBullet" && transform.tag == "EnemyBullet")

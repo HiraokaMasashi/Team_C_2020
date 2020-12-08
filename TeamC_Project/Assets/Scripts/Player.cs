@@ -345,11 +345,15 @@ public class Player : MonoBehaviour
         float alignmentPositionX, alignmentPositionY;
         float stanTime = screw.GetComponent<Screw>().StanTime;
         if (screw == shotScrewObject)
+        {
             alignmentPositionX = shotScrewObject.transform.position.x;
+            alignmentPositionY = screw.transform.position.y + 4.0f;
+        }
         else
+        {
             alignmentPositionX = transform.position.x;
-        //スクリューの中心より低い位置を基準にする
-        alignmentPositionY = screw.transform.position.y - 2.0f;
+            alignmentPositionY = screw.transform.position.y - 2.0f;
+        }
 
         List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetObjects();
         if (enemies == null) return;
@@ -362,7 +366,10 @@ public class Player : MonoBehaviour
             {
                 count = 0;
                 alignmentPositionX += 2.0f;
-                alignmentPositionY = screw.transform.position.y - 2.0f;
+                if (screw != shotScrewObject)
+                    alignmentPositionY = screw.transform.position.y - 2.0f;
+                else
+                    alignmentPositionY = screw.transform.position.y + 4.0f;
             }
 
             //制限範囲を超える場合は範囲に収める
