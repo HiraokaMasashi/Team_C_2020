@@ -727,6 +727,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2c4cb6965738a4d9414a8f8640a108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &461521801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8794000709607395340, guid: aa15ba123e28cc0428a46427fb938165,
+    type: 3}
+  m_PrefabInstance: {fileID: 461521784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &461521802 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4213364955551188113, guid: aa15ba123e28cc0428a46427fb938165,
@@ -1583,6 +1595,11 @@ PrefabInstance:
       propertyPath: playerHPImages.Array.data[4]
       value: 
       objectReference: {fileID: 461521785}
+    - target: {fileID: 9150244332108051916, guid: be2721b5c071e9d4b9afc14637982efc,
+        type: 3}
+      propertyPath: stageNameText
+      value: 
+      objectReference: {fileID: 461521801}
     - target: {fileID: 9150244332108051917, guid: be2721b5c071e9d4b9afc14637982efc,
         type: 3}
       propertyPath: m_Name

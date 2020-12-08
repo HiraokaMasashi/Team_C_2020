@@ -1370,6 +1370,11 @@ PrefabInstance:
       propertyPath: fadeScene
       value: 
       objectReference: {fileID: 1251568894}
+    - target: {fileID: 9150244332108051916, guid: be2721b5c071e9d4b9afc14637982efc,
+        type: 3}
+      propertyPath: stageNameText
+      value: 
+      objectReference: {fileID: 1982548833}
     - target: {fileID: 9150244332108051917, guid: be2721b5c071e9d4b9afc14637982efc,
         type: 3}
       propertyPath: m_Name
@@ -1764,6 +1769,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa15ba123e28cc0428a46427fb938165, type: 3}
+--- !u!114 &1982548833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8794000709607395340, guid: aa15ba123e28cc0428a46427fb938165,
+    type: 3}
+  m_PrefabInstance: {fileID: 1982548832}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1982548843 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6772760506997765487, guid: aa15ba123e28cc0428a46427fb938165,

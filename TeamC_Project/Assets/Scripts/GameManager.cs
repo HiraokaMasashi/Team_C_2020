@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float speed = 10;//開始地点まで移動させるプレイヤーのスピード
 
+    [SerializeField]
+    private Text stageNameText;
+
     public enum ResultMode
     {
         NONE,
@@ -75,8 +78,10 @@ public class GameManager : MonoBehaviour
         //Playerが生成される処理ではなかったのでScene内のPlayerを使用
         player = GameObject.Find("Player");
         player = GameObject.FindGameObjectWithTag("Player");
-        
+
         player.transform.position = playerStartPosition;
+
+        stageNameText.text = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
@@ -103,8 +108,9 @@ public class GameManager : MonoBehaviour
         //Start地点に到着したら
         if (Vector3.Distance(player.transform.position, playerDestinationPosition) <= 0.1f)
         {
+            stageNameText.enabled = false;
             IsGameStart = true;
-                enemyManager.StartInstanceEnemy();
+            enemyManager.StartInstanceEnemy();
         }
 
     }
