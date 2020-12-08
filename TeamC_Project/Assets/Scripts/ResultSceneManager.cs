@@ -98,11 +98,13 @@ public class ResultSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DisplayRanking();
+        if (fadeScene.IsFadeIn || fadeScene.IsFadeOut) return;
+
         Select();
         ActiveButton(selectNumber);
 
         NextScene();
-        DisplayRanking();
     }
 
     private void NextScene()

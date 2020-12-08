@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5208d5cbf576bc9438b7d40cfe7bdef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoveryTime: 5
   speed: 10
   maxDistance: 12
   destroyZoneY: 22
@@ -131,11 +130,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
   dropPrefab: {fileID: 0}
   adjustPosition: {x: 0, y: 0, z: 0}
+  meshRenderers: []
+  effectTime: 2
+  effectSpeed: 0.5
+  particleInstanceTime: 0.5
+  minScale: {x: 1, y: 1, z: 1}
 --- !u!114 &7492139034897630038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  destroyZone: {x: 0, y: -11, z: 0}
+  destroyZone: {x: 20, y: -11, z: 0}
   minInterval: 1
   maxInterval: 5
   minSpeed: 2

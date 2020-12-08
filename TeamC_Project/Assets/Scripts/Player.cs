@@ -82,11 +82,14 @@ public class Player : MonoBehaviour
         private set;
     } = false;
 
+    private FadeScene fadeScene;
+
     // Start is called before the first frame update
     void Start()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        fadeScene = GameObject.Find("FadeScene").GetComponent<FadeScene>();
         health = GetComponent<Health>();
         chargeBullet = GetComponent<ChargeBullet>();
         bulletController = GetComponent<BulletController>();
@@ -108,6 +111,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Time.timeScale == 0) return;
+        if (fadeScene.IsFadeOut) return;
         if (!gameManager.IsGameStart) return;
         if (gameManager.IsPerformance || gameManager.IsEnd)
         {

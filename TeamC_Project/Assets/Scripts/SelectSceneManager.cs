@@ -85,10 +85,7 @@ public class SelectSceneManager : MonoBehaviour
     void Update()
     {
         if (sceneManager.IsFadeIn || sceneManager.IsFadeOut)
-        {
-            SetEnvisivle();
             return;
-        }
 
         Select(); //カーソルによるメニュー選択
 
