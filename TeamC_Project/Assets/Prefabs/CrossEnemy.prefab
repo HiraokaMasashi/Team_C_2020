@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edade03de038144458452e3cbf24a1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   destroyZone: {x: 20, y: -11, z: 0}
   minInterval: 1
   maxInterval: 5
