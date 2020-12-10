@@ -391,7 +391,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -417,6 +417,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 145, y: 180, z: 0}
+--- !u!114 &279182900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8794000709607395340, guid: aa15ba123e28cc0428a46427fb938165,
+    type: 3}
+  m_PrefabInstance: {fileID: 4213364956892540404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &382588687
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +559,7 @@ MonoBehaviour:
   playerStartPosition: {x: 0, y: 0, z: 0}
   playerDestinationPosition: {x: 0, y: 0, z: 0}
   speed: 10
+  stageNameText: {fileID: 279182900}
 --- !u!4 &507480042
 Transform:
   m_ObjectHideFlags: 0
@@ -872,7 +885,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 5516234694478458265, guid: c7cf563aba94d2f4ba643876baa24deb,
+      objectReference: {fileID: 2444842678565588161, guid: c262afe0acfe766458a158842b020a49,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}

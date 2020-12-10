@@ -11,6 +11,9 @@ public class RushEnemy : Enemy
     private float waitTime = 1.0f;//待機時間
     private float waitElapedTime;
 
+    [SerializeField, Range(0.1f, 1.0f)]
+    private float addPercentTime = 1.0f;
+
     private Vector3 direction;
 
     [SerializeField]
@@ -81,6 +84,7 @@ public class RushEnemy : Enemy
     /// <param name="addWaitTime"></param>
     public void SetWaitTime(int addWaitTime)
     {
-        waitTime += addWaitTime;
+        float addTime = addWaitTime * addPercentTime;
+        waitTime += addTime;
     }
 }
