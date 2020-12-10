@@ -49,7 +49,13 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sceneManager.IsFadeIn || sceneManager.IsFadeOut) return;
+        if (sceneManager.IsFadeIn) return;
+        if (sceneManager.IsFadeOut)
+        {
+            rotationSpeed += 0.05f;
+            screwLogo.eulerAngles += Vector3.back * rotationSpeed;
+            return;
+        }
 
         //ムービー再生
         if (!moveEnd)
@@ -84,9 +90,11 @@ public class TitleSceneManager : MonoBehaviour
             //ムービー終了後にボタンを押すと次のシーンへ
             if (PressAnyButton())
             {
+                rotationSpeed = 3;
                 soundManager.PlaySeByName(se);
                 sceneManager.ChangeNextScene("Select");
             }
+
 
             if (GameExit())
             {
@@ -107,21 +115,23 @@ public class TitleSceneManager : MonoBehaviour
         if (!rotateStop)
         {
             //スクリュー画像を回す
-            screwLogo.eulerAngles += Vector3.back * 4;
+            screwLogo.eulerAngles += Vector3.back * rotationSpeed;
         }
 
         //ロゴが指定の位置に来たら終了
         if (titleLogo.anchoredPosition.y >= 150)
         {
             titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 150);
+            rotationSpeed -=0.03f;
             //pressLogo.gameObject.SetActive(true);
             if (screwLogo.eulerAngles.z <= 0)
             {
                 rotateStop = true;
             }
+
             if (buttons.anchoredPosition.y <= 0)
             {
-                buttons.position += Vector3.up * 3;
+                buttons.position += Vector3.up * 2;
             }
             else
             {
