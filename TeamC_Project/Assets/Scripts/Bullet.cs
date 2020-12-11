@@ -122,10 +122,10 @@ public class Bullet : MonoBehaviour
                 GameObject[] screws = GameObject.FindGameObjectsWithTag("Screw");
                 for (int i = screws.Length - 1; i >= 0; i--)
                 {
-                    int length = screws[i].GetComponent<ScrewCollision>().GetObjects().Count;
-                    for (int j = length - 1; j >= 0; j--)
+                    List<GameObject> hitScrewObjects = screws[i].GetComponent<ScrewCollision>().GetObjects();
+                    for (int j = hitScrewObjects.Count - 1; j >= 0; j--)
                     {
-                        if (health.IsDead)
+                        if (hitScrewObjects[j] == gameObject)
                             screws[i].GetComponent<ScrewCollision>().RemoveObject(j);
                     }
                 }

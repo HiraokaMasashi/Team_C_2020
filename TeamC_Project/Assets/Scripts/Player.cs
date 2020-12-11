@@ -360,6 +360,7 @@ public class Player : MonoBehaviour
         int count = 0;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
+            if (enemies[i] == null) continue;
             SetUpScrew setUpScrew = enemies[i].GetComponent<SetUpScrew>();
             //整列数が5体以上いたら、新しい列をつくる
             if (count >= 5)

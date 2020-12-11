@@ -44,6 +44,7 @@ public class RushEnemy : Enemy
     /// </summary>
     private void SetDirection()
     {
+        if (player == null) return;
         if (direction != Vector3.zero) return;
 
         direction = (player.transform.position - transform.position).normalized;

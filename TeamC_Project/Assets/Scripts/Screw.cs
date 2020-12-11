@@ -74,6 +74,7 @@ public class Screw : MonoBehaviour
         if (enemies == null) return;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
+            if (enemies[i] == null) continue;
             enemies[i].GetComponent<SetUpScrew>().StanMove(basePosition);
         }
     }
