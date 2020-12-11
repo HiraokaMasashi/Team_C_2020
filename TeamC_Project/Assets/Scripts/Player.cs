@@ -427,7 +427,6 @@ public class Player : MonoBehaviour
             drill.GetComponent<Drill>().IsThrowAway = true;
             drill.transform.parent = null;
             drill = null;
-            IsEquipmentDrill = false;
         }
         //SEを止める
         soundManager.StopSe();
@@ -470,6 +469,7 @@ public class Player : MonoBehaviour
             currentMode = Mode.NORMAL;
             isStartScrew = false;
             isShotScrew = false;
+            IsEquipmentDrill = false;
         }
     }
 

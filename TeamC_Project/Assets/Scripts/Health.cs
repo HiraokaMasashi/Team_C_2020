@@ -148,7 +148,7 @@ public class Health : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
-            if (score != null)
+            if (score != null && !gameObject.name.Contains("Boss"))
                 scoreManager.AddScore(score.GetScore());
 
             if (dropPrefab != null)
