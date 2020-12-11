@@ -9,12 +9,13 @@ using UnityEngine.SceneManagement;
 public class ScoreRanking
 {
     public int[] bestScores;
-    public int rank;
 }
 
 public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
 {
     private static int totalScore;//合計スコア
+    private static int rank;
+    private bool isEndChangeRank;
     private int hiScore;
     ScoreRanking ranking = new ScoreRanking();
     static string path;
@@ -63,7 +64,8 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     {
         totalScore = 0;
         hiScore = ranking.bestScores[0];
-        ranking.rank = -1;
+        rank = -1;
+        isEndChangeRank = false;
     }
 
     /// <summary>
@@ -119,18 +121,20 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     /// </summary>
     public void UpdateScoreRanking()
     {
-        int score = totalScore;
+        if (isEndChangeRank) return;
 
+        int score = totalScore;
         for (int i = 0; i < ranking.bestScores.Length; i++)
         {
             if (score <= ranking.bestScores[i]) continue;
 
-            if (ranking.rank == -1) ranking.rank = i;
+            if (rank == -1) rank = i;
             int s = ranking.bestScores[i];
             ranking.bestScores[i] = score;
             score = s;
         }
 
+        isEndChangeRank = true;
         SaveScore();
     }
 
@@ -185,7 +189,7 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     /// <returns></returns>
     public int GetRank()
     {
-        return ranking.rank;
+        return rank;
     }
 
     /// <summary>
@@ -193,11 +197,10 @@ public class ScoreManager : SingletonMonoBehaviour<ScoreManager>
     /// </summary>
     public void SetFilePath()
     {
-        if (SceneManager.GetActiveScene().name != "Result")
-        {
-            stageName = SceneManager.GetActiveScene().name;
-            path = Application.persistentDataPath + "/" + stageName + fileName;
-        }
+        if (SceneManager.GetActiveScene().name == "Result") return;
+
+        stageName = SceneManager.GetActiveScene().name;
+        path = Application.persistentDataPath + "/" + stageName + fileName;
     }
 
     /// <summary>

@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
             changeSceneTime -= Time.deltaTime;
             if (changeSceneTime > 0.0f) return;
 
+            scoreManager.UpdateScoreRanking();
             fadeScene.ChangeNextScene("Result");
         }
     }
@@ -145,7 +146,6 @@ public class GameManager : MonoBehaviour
         {
             result = ResultMode.GAMEOVER;
             IsEnd = true;
-            scoreManager.UpdateScoreRanking();
         }
     }
 
@@ -159,7 +159,6 @@ public class GameManager : MonoBehaviour
             bossHPGauge.gameObject.SetActive(false);
             result = ResultMode.GAMECLEAR;
             IsEnd = true;
-            scoreManager.UpdateScoreRanking();
         }
     }
 
