@@ -105,6 +105,7 @@ public class ShieldBoss : Boss
                     else
                         rad -= 30;
                 }
+                SoundManager.Instance.PlaySeByName(shotSe);
                 yield return new WaitForSeconds(0.1f);
             }
 

@@ -42,6 +42,7 @@ public class FallEnemy : Enemy
             Vector3 position = transform.position + Vector3.down;
             Vector3 direction = Vector3.down;
             bulletController.GenerateBullet(position, direction, 3.0f, "Enemy");
+            SoundManager.Instance.PlaySeByName(shotSe);
             elapsedTime = 0;
         }
     }

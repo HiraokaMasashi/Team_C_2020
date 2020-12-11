@@ -90,14 +90,6 @@ public class NormalBoss : Boss
 
         isShot = true;
         StartCoroutine(RapidShot());
-        //countbullet += 1;
-        //roopIntervalTime = 0;
-        //if (countbullet >= 5)
-        //{
-        //    countIntervalTime = 0;
-        //    roopIntervalTime = 0;
-        //    countbullet = 0;
-        //}
     }
 
     private void ShotBomb()
@@ -108,7 +100,7 @@ public class NormalBoss : Boss
 
         shotElapsedTime += Time.deltaTime;
 
-        if(shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
+        if (shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
         {
             isPlayAlert = true;
             SoundManager.Instance.PlaySeByName(alertSe);
@@ -119,9 +111,10 @@ public class NormalBoss : Boss
         {
             Vector3 position = shotTransforms[i].position;
             Vector3 direction = (player.transform.position - shotTransforms[i].position).normalized;
-            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction, bombSe));
+            bombs.Add(bulletController.GenerateBomb(bombPrefab, position, direction));
         }
 
+        SoundManager.Instance.PlaySeByName(bombSe);
         shotElapsedTime = 0.0f;
         endShot = true;
     }
@@ -165,6 +158,7 @@ public class NormalBoss : Boss
                     Vector3 position = shotTransforms[j].position;
                     bulletController.GenerateBullet(position, dir, destroyTime, "Enemy");
                 }
+                SoundManager.Instance.PlaySeByName(shotSe);
                 yield return new WaitForSeconds(0.5f);
             }
 

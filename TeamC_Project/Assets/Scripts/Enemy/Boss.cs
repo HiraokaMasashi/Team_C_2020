@@ -51,6 +51,8 @@ public class Boss : MonoBehaviour
 
     [SerializeField]
     protected string alertSe = "alert";
+    [SerializeField]
+    protected string shotSe;
     protected bool isPlayAlert;
 
     protected Health health;

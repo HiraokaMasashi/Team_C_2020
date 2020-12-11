@@ -9,10 +9,6 @@ public class DrillBoss : Boss
 
     private GameObject player;
 
-    //[SerializeField]
-    //private float shotDrillPower = 300.0f;
-    //[SerializeField]
-    //private float normalRespawnTime = 2.0f;
     //ドリルのリスポーン時間
     [SerializeField]
     private float destroyRespawnTime = 5.0f;
@@ -260,8 +256,6 @@ public class DrillBoss : Boss
     public void SetRespawn()
     {
         respawnTime = destroyRespawnTime;
-        //else respawnTime = normalRespawnTime;
-
         nowRespawn = true;
     }
 
@@ -335,6 +329,7 @@ public class DrillBoss : Boss
                         bulletController.GenerateBullet(position, dir, destroyTime, "Enemy");
                     }
                 }
+                SoundManager.Instance.PlaySeByName(shotSe);
                 yield return new WaitForSeconds(0.2f);
             }
 

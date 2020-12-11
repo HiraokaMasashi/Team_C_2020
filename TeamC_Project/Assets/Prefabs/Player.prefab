@@ -296,7 +296,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
-  hpText: {fileID: 0}
   deadSe: dead
   damageSe: damage
   dropPrefab: {fileID: 0}
@@ -401,6 +400,7 @@ MonoBehaviour:
   shotScrewInterval: 3
   shotScrewDestroyTime: 3
   magnificationSpeed: 3
+  screwUseTime: 3
   rotationInterval: 1
   drillPrefab: {fileID: 6111796149867733879, guid: be96b709edb94dc41ac93634e5ef4bc4,
     type: 3}
@@ -408,6 +408,7 @@ MonoBehaviour:
   - screw5
   - screwattack1
   - drill1
+  - shot1
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,14 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c712c295430e44b8c2d26fe9928b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageSliderColor:
-  - {r: 0.50482273, g: 1, b: 0, a: 1}
-  - {r: 0.93450105, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.53611743, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.28782463, a: 1}
-  - {r: 1, g: 0, b: 0.61351156, a: 1}
-  - {r: 0.56523514, g: 0, b: 1, a: 1}
-  chargeSlider: {fileID: 0}
+  chargeSliders: []
 --- !u!114 &2732371690843407089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +436,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 160549529051412272, guid: cf29c2571b84ec94980bcedf1645a5c3,
     type: 3}
-  shotSe: shot1
 --- !u!54 &1998912523
 Rigidbody:
   m_ObjectHideFlags: 0

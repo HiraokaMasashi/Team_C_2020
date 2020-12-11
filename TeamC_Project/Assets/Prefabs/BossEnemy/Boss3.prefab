@@ -613,6 +613,7 @@ MonoBehaviour:
     type: 3}
   summonInterval: 5
   alertSe: alert
+  shotSe: shot2
   shotBulletCount: 30
   shotBarrageRows: 4
   summonCount: 2

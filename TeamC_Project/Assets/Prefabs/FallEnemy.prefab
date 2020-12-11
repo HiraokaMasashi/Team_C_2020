@@ -213,5 +213,6 @@ MonoBehaviour:
   destroyZone: {x: 20, y: -11, z: 0}
   minInterval: 1
   maxInterval: 5
+  shotSe: shot2
   minSpeed: 3
   maxSpeed: 5

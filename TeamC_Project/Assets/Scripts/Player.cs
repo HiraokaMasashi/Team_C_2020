@@ -166,6 +166,7 @@ public class Player : MonoBehaviour
         Vector3 shotPosition = transform.position + Vector3.up;
 
         bulletController.GenerateBullet(shotPosition, Vector3.up, 3.0f);
+        soundManager.PlaySeByName(ses[3]);
         chargeBullet.DecreaseCharge();
     }
 

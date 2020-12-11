@@ -20,6 +20,9 @@ public class Enemy : MonoBehaviour
     protected float elapsedTime;
     protected GameObject player;
 
+    [SerializeField]
+    protected string shotSe;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -58,6 +61,7 @@ public class Enemy : MonoBehaviour
             Vector3 position = transform.position + Vector3.down;
             Vector3 direction = player.transform.position - transform.position;
             bulletController.GenerateBullet(position, direction, 3.0f, "Enemy");
+            SoundManager.Instance.PlaySeByName(shotSe);
             elapsedTime = 0;
         }
     }
