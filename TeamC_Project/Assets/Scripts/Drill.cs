@@ -102,11 +102,7 @@ public class Drill : MonoBehaviour
             Health otherHealth = other.GetComponent<Health>();
 
             if (!other.gameObject.name.Contains("Boss"))
-            {
                 otherHealth.HitDeath();
-                Score score = other.transform.GetComponent<Score>();
-                scoreManager.AddScore(score.GetScore());
-            }
             else
             {
                 //シールドを持っていたらヒット判定を行わない
@@ -117,11 +113,6 @@ public class Drill : MonoBehaviour
                 }
 
                 otherHealth.Damage(10);
-                if (otherHealth.IsDead)
-                {
-                    Score score = other.transform.GetComponent<Score>();
-                    scoreManager.AddScore(score.GetScore());
-                }
             }
 
             if (!IsShot)

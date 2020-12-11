@@ -129,9 +129,6 @@ public class Bullet : MonoBehaviour
                             screws[i].GetComponent<ScrewCollision>().RemoveObject(j);
                     }
                 }
-
-                Score score = other.transform.GetComponent<Score>();
-                scoreManager.AddScore(score.GetScore());
             }
 
             if (other.gameObject.name.Contains("Boss"))

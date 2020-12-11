@@ -45,6 +45,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Vector3 minScale = Vector3.one;//ボス死亡時の縮小値
 
+    private Score score;
+    private ScoreManager scoreManager;
+
     /// <summary>
     /// 現在の体力を返す
     /// </summary>
@@ -72,6 +75,10 @@ public class Health : MonoBehaviour
         effectElapsedTime = 0;
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        scoreManager = ScoreManager.Instance;
+
+        if (GetComponent<Score>() != null)
+            score = GetComponent<Score>();
     }
 
     private void Update()
@@ -103,7 +110,7 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(transform.name.Contains("Boss"))
+        if (transform.name.Contains("Boss"))
         {
             //ボスの死亡演出処理の実行
             if (gameManager.IsPerformance) return;
@@ -122,6 +129,8 @@ public class Health : MonoBehaviour
     public void HitDeath()
     {
         hp = 0;
+        if (score != null)
+            scoreManager.AddScore(score.GetScore());
 
         if (dropPrefab != null)
             Instantiate(dropPrefab, transform.position + adjustPosition, Quaternion.identity);
@@ -139,6 +148,8 @@ public class Health : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
+            if (score != null)
+                scoreManager.AddScore(score.GetScore());
 
             if (dropPrefab != null)
                 Instantiate(dropPrefab, transform.position + adjustPosition, Quaternion.identity);
@@ -152,6 +163,8 @@ public class Health : MonoBehaviour
     /// </summary>
     private void DamageEffect()
     {
+        if (IsDead) return;
+
         //ダメージ演出中でない、またはポーズ中はreturn
         if (!isDamageEffect || Time.timeScale == 0) return;
 
@@ -197,6 +210,11 @@ public class Health : MonoBehaviour
     /// <returns></returns>
     private IEnumerator BossDeadEffect()
     {
+        //メッシュの描画を切り替える
+        foreach (var mesh in meshRenderers)
+        {
+            mesh.enabled = true;
+        }
         Vector3 scale = transform.localScale;
         float elapsedTime = 0;
         while (true)
@@ -219,6 +237,8 @@ public class Health : MonoBehaviour
             //最小縮小値までいったら削除
             if (transform.localScale.x <= minScale.x || transform.localScale.y <= minScale.y || transform.localScale.z <= minScale.z)
             {
+                if (score != null)
+                    scoreManager.AddScore(score.GetScore());
                 gameManager.IsPerformance = false;
                 ExplosionInstance();
                 Destroy(gameObject);

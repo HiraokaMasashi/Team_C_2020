@@ -12,16 +12,10 @@ public class Blast : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
-        {
             other.gameObject.GetComponent<Health>().Damage(playerDamage);
-        }
 
         if (other.gameObject.tag == "Enemy")
-        {
             other.gameObject.GetComponent<Health>().Damage(enemyDamage);
-            if (other.gameObject.GetComponent<Health>().IsDead)
-                ScoreManager.Instance.AddScore(other.gameObject.GetComponent<Score>().GetScore());
-        }
     }
 
 }
