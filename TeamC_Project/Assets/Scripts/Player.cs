@@ -357,7 +357,6 @@ public class Player : MonoBehaviour
         }
 
         List<GameObject> enemies = screw.GetComponent<ScrewCollision>().GetObjects();
-        if (enemies == null) return;
         int count = 0;
         for (int i = enemies.Count - 1; i >= 0; i--)
         {
@@ -379,7 +378,7 @@ public class Player : MonoBehaviour
             if (alignmentPositionY >= setUpScrew.ClapmPosition.y)
                 alignmentPositionY = setUpScrew.ClapmPosition.y;
 
-            enemies[i].GetComponent<SetUpScrew>().ReleaseScrew(alignmentPositionX, alignmentPositionY, stanTime);
+            setUpScrew.ReleaseScrew(alignmentPositionX, alignmentPositionY, stanTime);
             screw.GetComponent<ScrewCollision>().RemoveObject(i);
             alignmentPositionY += 2.0f;
             count++;
