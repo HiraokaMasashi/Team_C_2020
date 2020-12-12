@@ -54,10 +54,15 @@ MonoBehaviour:
   maxWave: 3
   bossPrefab: {fileID: 0}
   bossPattern: {fileID: 0}
-  bossRotate: {x: 0, y: 0, z: 0}
   bgms:
   - Play 1
   - Boss
   waveText: {fileID: 0}
+  textTime: 0
+  textPercent: 0
+  bossTextTime: 0
+  bossTextPercent: 0
+  normalFont: {fileID: 12800000, guid: 67fe3a6e87a4ebe40ac2fe365bac098c, type: 3}
+  bossFont: {fileID: 12800000, guid: 67fe3a6e87a4ebe40ac2fe365bac098c, type: 3}
   performancePosition: {x: 0, y: -4, z: 0}
   performanceSpeed: 5

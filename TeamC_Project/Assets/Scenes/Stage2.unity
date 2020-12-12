@@ -533,13 +533,13 @@ PrefabInstance:
         type: 3}
       propertyPath: normalFont
       value: 
-      objectReference: {fileID: 12800000, guid: 41f31a8ef93e9ba4ab13400adc54f220,
+      objectReference: {fileID: 12800000, guid: 67fe3a6e87a4ebe40ac2fe365bac098c,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: bossFont
       value: 
-      objectReference: {fileID: 12800000, guid: 1d47c5c7f22c7a04ba4024e007501909,
+      objectReference: {fileID: 12800000, guid: 67fe3a6e87a4ebe40ac2fe365bac098c,
         type: 3}
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
