@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float destroyZoneMinY = -11.0f;//y軸での生存範囲最低値
 
-    private ScoreManager scoreManager;
     private ParticleManager particleManager;
 
     private Vector3 direction;//進行方向
@@ -27,7 +26,6 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        scoreManager = ScoreManager.Instance;
         particleManager = GetComponent<ParticleManager>();
     }
 
