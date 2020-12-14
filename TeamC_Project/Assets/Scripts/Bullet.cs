@@ -140,7 +140,7 @@ public class Bullet : MonoBehaviour
         {
             //ヒットエフェクトを再生
             GameObject particle = particleManager.GenerateParticle(2);
-            particle.transform.position = other.ClosestPointOnBounds(transform.position);
+            particle.transform.position = other.ClosestPointOnBounds(transform.position + Vector3.right);
             particle.transform.rotation = Quaternion.Euler(-60.0f, 0.0f, 0.0f);
             particleManager.OncePlayParticle(particle);
         }
