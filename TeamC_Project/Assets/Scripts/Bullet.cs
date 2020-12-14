@@ -139,9 +139,9 @@ public class Bullet : MonoBehaviour
         if(transform.tag == "PlayerBullet" && other.transform.tag == "Shield")
         {
             //ヒットエフェクトを再生
-            GameObject particle = particleManager.GenerateParticle(1);
+            GameObject particle = particleManager.GenerateParticle(2);
             particle.transform.position = other.ClosestPointOnBounds(transform.position);
-            particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+            particle.transform.rotation = Quaternion.Euler(-60.0f, 0.0f, 0.0f);
             particleManager.OncePlayParticle(particle);
         }
 
