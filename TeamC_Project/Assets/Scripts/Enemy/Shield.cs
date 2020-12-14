@@ -20,7 +20,7 @@ public class Shield : MonoBehaviour
 
     private void ComeOff()
     {
-        if (transform.childCount == 0)
+        if (transform.childCount <= 2)
         {
             if (isDown) return;
 
@@ -42,11 +42,13 @@ public class Shield : MonoBehaviour
         transform.rotation = rotation;
 
         Vector3 scale = transform.localScale;
-        if (!(scale.x <= 0 || scale.y <= 0 || scale.z <= 0))
+        if (!(scale.x <= 1 || scale.y <= 1 || scale.z <= 1))
         {
             scale -= Vector3.one * Time.deltaTime;
             transform.localScale = scale;
         }
+        //else
+        //    Destroy(gameObject);
 
         if (Vector3.Distance(transform.position, destination) <= 0.1f)
             Destroy(gameObject);
