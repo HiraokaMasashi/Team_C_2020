@@ -138,6 +138,15 @@ public class Bullet : MonoBehaviour
                 Disconnect();
         }
 
+        if(transform.tag == "PlayerBullet" && other.transform.tag == "Shield")
+        {
+            //ヒットエフェクトを再生
+            GameObject particle = particleManager.GenerateParticle(1);
+            particle.transform.position = other.ClosestPointOnBounds(transform.position);
+            particle.transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+            particleManager.OncePlayParticle(particle);
+        }
+
         if (other.transform.tag == "PlayerBullet" && transform.tag == "EnemyBullet")
             Disconnect();
     }

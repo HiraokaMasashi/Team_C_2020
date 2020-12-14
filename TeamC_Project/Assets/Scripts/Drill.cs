@@ -34,8 +34,6 @@ public class Drill : MonoBehaviour
     private float hitInterval;
     private float hitElpsedTime;
 
-    private ScoreManager scoreManager;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +41,6 @@ public class Drill : MonoBehaviour
         health = GetComponent<Health>();
         hitInterval = equipmentHitInterval;
         hitElpsedTime = 0.0f;
-
-        scoreManager = ScoreManager.Instance;
     }
 
     // Update is called once per frame
@@ -124,6 +120,13 @@ public class Drill : MonoBehaviour
     {
         if (other.gameObject.name.Contains("Boss"))
         {
+            //シールドを持っていたらヒット判定を行わない
+            if (other.transform.childCount >= 1)
+            {
+                if (other.transform.GetChild(0).gameObject.name.Contains("Shield"))
+                    return;
+            }
+
             hitElpsedTime += Time.deltaTime;
             if (hitElpsedTime < hitInterval) return;
 
