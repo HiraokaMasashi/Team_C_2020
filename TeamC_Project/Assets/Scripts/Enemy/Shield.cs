@@ -47,8 +47,6 @@ public class Shield : MonoBehaviour
             scale -= Vector3.one * Time.deltaTime;
             transform.localScale = scale;
         }
-        //else
-        //    Destroy(gameObject);
 
         if (Vector3.Distance(transform.position, destination) <= 0.1f)
             Destroy(gameObject);
