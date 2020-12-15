@@ -4807,7 +4807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2.5
   maxPositionY: 16
-  stanTime: 2
+  stanTime: 6
 --- !u!1 &6927782863092955765
 GameObject:
   m_ObjectHideFlags: 0

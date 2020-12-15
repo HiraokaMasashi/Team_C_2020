@@ -76,6 +76,9 @@ public class Player : MonoBehaviour
     private string[] ses;
     private bool isPlayDrillSE;
 
+    [SerializeField, Tooltip("列の幅")]
+    private float adjsutAlignment = 2.0f;
+
     public bool IsEquipmentDrill
     {
         get;
@@ -345,11 +348,13 @@ public class Player : MonoBehaviour
         //スクリューを中心に整列させる
         float alignmentPositionX, alignmentPositionY;
         float stanTime = screw.GetComponent<Screw>().StanTime;
+        //射出スクリューなら
         if (screw == shotScrewObject)
         {
-            alignmentPositionX = shotScrewObject.transform.position.x;
+            alignmentPositionX = shotScrewObject.transform.position.x - 4.0f;
             alignmentPositionY = screw.transform.position.y + 4.0f;
         }
+        //通常のスクリューなら
         else
         {
             alignmentPositionX = transform.position.x;
@@ -366,11 +371,18 @@ public class Player : MonoBehaviour
             if (count >= 5)
             {
                 count = 0;
-                alignmentPositionX += 2.0f;
-                if (screw != shotScrewObject)
-                    alignmentPositionY = screw.transform.position.y - 2.0f;
+                //射出したスクリューなら
+                if (screw == shotScrewObject)
+                {
+                    alignmentPositionY += adjsutAlignment;
+                    alignmentPositionX = screw.transform.position.x - 4.0f;
+                }
+                //通常スクリューなら
                 else
+                {
+                    alignmentPositionX += adjsutAlignment;
                     alignmentPositionY = screw.transform.position.y + 4.0f;
+                }
             }
 
             //制限範囲を超える場合は範囲に収める
@@ -381,7 +393,12 @@ public class Player : MonoBehaviour
 
             setUpScrew.ReleaseScrew(alignmentPositionX, alignmentPositionY, stanTime);
             screw.GetComponent<ScrewCollision>().RemoveObject(i);
-            alignmentPositionY += 2.0f;
+            //射出したスクリューなら
+            if (screw == shotScrewObject)
+                alignmentPositionX += adjsutAlignment;
+            //通常スクリューなら
+            else
+                alignmentPositionY += adjsutAlignment;
             count++;
         }
     }
