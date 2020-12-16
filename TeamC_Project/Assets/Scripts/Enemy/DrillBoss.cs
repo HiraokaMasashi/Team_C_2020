@@ -193,7 +193,7 @@ public class DrillBoss : Boss
         for (int i = 0; i < instanceTransforms.Length; i++)
         {
             Vector3 position = instanceTransforms[i].position;
-            Instantiate(summonObject, position, Quaternion.identity);
+            Instantiate(summonObject, position, Quaternion.Euler(40, 180, 0));
         }
         summonElapsedTime = 0.0f;
         isSummon = true;
