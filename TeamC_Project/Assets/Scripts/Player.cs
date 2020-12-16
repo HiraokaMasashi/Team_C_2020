@@ -381,7 +381,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     alignmentPositionX += adjsutAlignment;
-                    alignmentPositionY = screw.transform.position.y + 4.0f;
+                    alignmentPositionY = screw.transform.position.y - 2.0f;
                 }
             }
 
