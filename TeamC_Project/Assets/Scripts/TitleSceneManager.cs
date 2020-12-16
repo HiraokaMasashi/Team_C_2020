@@ -7,8 +7,8 @@ public class TitleSceneManager : MonoBehaviour
 {
     [SerializeField]
     private RectTransform titleLogo;
-    //[SerializeField]
-    //private Text pressLogo;
+    [SerializeField]
+    private Text pressLogo;
     [SerializeField]
     private RectTransform screwLogo;
     [SerializeField]
@@ -31,11 +31,11 @@ public class TitleSceneManager : MonoBehaviour
 
     void Awake()
     {
-        //pressLogo.gameObject.SetActive(false);
+        pressLogo.gameObject.SetActive(false);
         rotationSpeed = 4;
         titleLogo.transform.position -= Vector3.up * 2000;
-        buttons.transform.position -= Vector3.up * 350;
-        bubbleParticle.position -= Vector3.up * 60;
+        buttons.transform.position -= Vector3.up * 500;
+        //bubbleParticle.position -= Vector3.up * 60;
         moveEnd = false;
         rotateStop = false;
         soundManager = SoundManager.Instance;
@@ -66,26 +66,26 @@ public class TitleSceneManager : MonoBehaviour
                 moveEnd = true;
                 titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 150);
                 screwLogo.eulerAngles = new Vector3(0,0,4);
-                bubbleParticle.position += Vector3.up * 100;
+                //bubbleParticle.position += Vector3.up * 100;
                 buttons.anchoredPosition = Vector3.zero;
-                //pressLogo.gameObject.SetActive(true);
+                pressLogo.gameObject.SetActive(true);
             }
             Opening();
             return;
         }
         else
         {
-            //if ((int)Time.time % 2 == 0)
-            //    pressLogo.gameObject.SetActive(false);
-            //else
-            //    pressLogo.gameObject.SetActive(true);
+            if ((int)Time.time % 2 == 0)
+                pressLogo.gameObject.SetActive(false);
+            else
+                pressLogo.gameObject.SetActive(true);
 
             //一定間隔で泡がのぼる
-            bubbleParticle.position += Vector3.up * 0.2f;
-            if ((int)Time.time % 10 == 0)
-            {
-                bubbleParticle.position = new Vector3(0, -100, -10);
-            }
+            //bubbleParticle.position += Vector3.up * 0.2f;
+            //if ((int)Time.time % 10 == 0)
+            //{
+            //    bubbleParticle.position = new Vector3(0, -100, -10);
+            //}
 
             //ムービー終了後にボタンを押すと次のシーンへ
             if (PressAnyButton())
@@ -111,7 +111,7 @@ public class TitleSceneManager : MonoBehaviour
     private void Opening()
     {
         //泡パーティクルを動かす
-        bubbleParticle.position += Vector3.up * 0.2f;
+        //bubbleParticle.position += Vector3.up * 0.2f;
 
         //タイトルロゴを動かす
         titleLogo.position += Vector3.up * 2;
@@ -127,7 +127,7 @@ public class TitleSceneManager : MonoBehaviour
         {
             titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 150);
             rotationSpeed -=0.03f;
-            //pressLogo.gameObject.SetActive(true);
+            pressLogo.gameObject.SetActive(true);
             if (screwLogo.eulerAngles.z <= 0)
             {
                 rotateStop = true;
@@ -135,7 +135,7 @@ public class TitleSceneManager : MonoBehaviour
 
             if (buttons.anchoredPosition.y <= 0)
             {
-                buttons.position += Vector3.up * 2;
+                buttons.position += Vector3.up * 2.77f;
             }
             else
             {
