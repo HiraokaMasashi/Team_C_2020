@@ -231,6 +231,8 @@ public class Health : MonoBehaviour
                 float x = Random.Range(-0.5f, 0.5f);
                 float y = Random.Range(-0.5f, 0.5f);
                 ExplosionInstance(x, y);
+                if (damageSe != "")
+                    soundManager.PlaySeByName(damageSe);
                 elapsedTime = 0;
             }
 
@@ -241,6 +243,8 @@ public class Health : MonoBehaviour
                     scoreManager.AddScore(score.GetScore());
                 gameManager.IsPerformance = false;
                 ExplosionInstance();
+                if (deadSe != "")
+                    soundManager.PlaySeByName(deadSe);
                 Destroy(gameObject);
                 yield break;
             }

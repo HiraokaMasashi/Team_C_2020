@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 5603479332625542553}
   - component: {fileID: 5366542273912157631}
   - component: {fileID: 415048591306991354}
+  - component: {fileID: 1493957537742463624}
   m_Layer: 0
   m_Name: BombBoss
   m_TagString: Enemy
@@ -363,8 +364,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4803011, y: 2.0577288, z: 4.477964}
-  m_Center: {x: 0.004740596, y: -0.05760753, z: -0.94372344}
+  m_Size: {x: 3.4803011, y: 2.0577288, z: 3.872285}
+  m_Center: {x: 0.004740596, y: -0.05760753, z: -0.7462189}
 --- !u!114 &1514967407594491587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +405,7 @@ MonoBehaviour:
   effectSpeed: 0.2
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  bossDeadSe: damage
 --- !u!114 &4577994661093772295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +420,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5236733656101201018, guid: 407c4fff055baf04985ccdcbba434f16,
     type: 3}
-  shotSe: shot2
 --- !u!114 &5603479332625542553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,3 +478,16 @@ MonoBehaviour:
   bombPrefab: {fileID: 9185736474104399769, guid: f9728854970b8064985ae16bcd8d847e,
     type: 3}
   bombSe: shot2
+--- !u!65 &1493957537742463624
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821889771494764613}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 2, z: 0.65}
+  m_Center: {x: 0, y: 0, z: -3}

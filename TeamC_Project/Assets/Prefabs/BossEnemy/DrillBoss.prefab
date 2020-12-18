@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 3730908732933718932}
   - component: {fileID: 3730908732933718935}
   - component: {fileID: 3730908732933718934}
-  - component: {fileID: 3730908732933718889}
   - component: {fileID: 3730908732933718933}
   - component: {fileID: 3730908732933718930}
   - component: {fileID: 3730908732933718931}
   - component: {fileID: 3730908732933718929}
   - component: {fileID: 3730908732933718928}
   - component: {fileID: 3730908732933718942}
+  - component: {fileID: 3801987213916115091}
   m_Layer: 0
   m_Name: DrillBoss
   m_TagString: Enemy
@@ -90,19 +90,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3730908732933718889
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3730908732933718888}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9999999, y: 1, z: 1.7182267}
-  m_Center: {x: -0, y: 2.4947649e-15, z: -0.35911438}
 --- !u!54 &3730908732933718933
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -167,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5236733656101201018, guid: 407c4fff055baf04985ccdcbba434f16,
     type: 3}
-  shotSe: shot2
 --- !u!114 &3730908732933718929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +192,7 @@ MonoBehaviour:
   effectSpeed: 0.2
   particleInstanceTime: 0.5
   minScale: {x: 4, y: 4, z: 4}
+  bossDeadSe: damage
 --- !u!114 &3730908732933718942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 3000
+--- !u!64 &3801987213916115091
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3730908732933718888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 2e70299eae7fff74a9cfef859bc18b5a, type: 3}
 --- !u!1 &3730908733320819931
 GameObject:
   m_ObjectHideFlags: 0
