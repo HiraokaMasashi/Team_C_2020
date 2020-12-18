@@ -71,6 +71,7 @@ public class Pause : MonoBehaviour
                 }
                 else if (selectNumber == 0)
                 {
+                    isPause = false;
                     Resume();
                 }
             }
