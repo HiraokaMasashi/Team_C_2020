@@ -91,17 +91,17 @@ public class Pause : MonoBehaviour
         if (timer <= textTime / 2)
         {
             menus[selectNumber].color = activeColor;
-            menus[selectNumber].fontSize = 18;
+            menus[selectNumber].fontSize = 65;
         }
         else
         {
             menus[selectNumber].color = Color.white;
-            menus[selectNumber].fontSize = 14;
+            menus[selectNumber].fontSize = 55;
         }
         if (timer >= textTime * 2)
             timer = 0;
         menus[1 - selectNumber].color = Color.white;
-        menus[1 - selectNumber].fontSize = 14;
+        menus[1 - selectNumber].fontSize = 30;
     }
 
     public void OnClickResume()
@@ -145,6 +145,9 @@ public class Pause : MonoBehaviour
     void Resume()
     {
         Time.timeScale = 1;
+        menus[selectNumber].color = Color.white;
+        menus[selectNumber].fontSize = 30;
+        selectNumber = 0;
         panel.SetActive(false);
     }
 
