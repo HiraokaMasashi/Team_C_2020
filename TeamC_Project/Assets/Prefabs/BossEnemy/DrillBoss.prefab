@@ -139,7 +139,8 @@ MonoBehaviour:
   attackInterval: 3
   chnageBehaviourCount: 2
   instanceTransform: {fileID: 2382001453842637989}
-  adjustPosition: {x: 1.25, y: 0, z: 0}
+  adjustInstancePosition: {x: 0, y: -3, z: 0}
+  adjustDestinationPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3730908732933718931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +193,9 @@ MonoBehaviour:
   effectSpeed: 0.2
   particleInstanceTime: 0.5
   minScale: {x: 4, y: 4, z: 4}
+  instanceEffectPositionX: 3
+  instanceEffectPositionY: 3
+  instanceEffectPositionZ: -5
 --- !u!114 &3730908732933718942
 MonoBehaviour:
   m_ObjectHideFlags: 0

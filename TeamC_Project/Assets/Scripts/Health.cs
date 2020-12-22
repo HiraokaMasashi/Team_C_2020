@@ -48,6 +48,14 @@ public class Health : MonoBehaviour
     private Score score;
     private ScoreManager scoreManager;
 
+    [Header("ボスの死亡エフェクトの表示位置の設定")]
+    [SerializeField, Range(1.0f, 5.0f)]
+    private float instanceEffectPositionX = 1.0f;
+    [SerializeField, Range(1.0f, 5.0f)]
+    private float instanceEffectPositionY = 1.0f;
+    [SerializeField]
+    private float instanceEffectPositionZ = -1.0f;
+
     /// <summary>
     /// 現在の体力を返す
     /// </summary>
@@ -197,7 +205,7 @@ public class Health : MonoBehaviour
     private void ExplosionInstance(float adjustPositionX = 0.0f, float adjustPositionY = 0.0f)
     {
         GameObject particle = particleManager.GenerateParticle(1);
-        particle.transform.position = transform.position + new Vector3(adjustPositionX, adjustPositionY, 0.5f);
+        particle.transform.position = transform.position + new Vector3(adjustPositionX, adjustPositionY, instanceEffectPositionZ);
         float randomScale = Random.Range(0.5f, 1.0f);
         particle.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
         particle.transform.rotation = Quaternion.Euler(90, 0, 0);
@@ -228,8 +236,8 @@ public class Health : MonoBehaviour
             //一定時間毎に爆発パーティクルを生成
             if (elapsedTime >= particleInstanceTime)
             {
-                float x = Random.Range(-0.5f, 0.5f);
-                float y = Random.Range(-0.5f, 0.5f);
+                float x = Random.Range(-instanceEffectPositionX, instanceEffectPositionX);
+                float y = Random.Range(-instanceEffectPositionY, instanceEffectPositionY);
                 ExplosionInstance(x, y);
                 if (damageSe != "")
                     soundManager.PlaySeByName(damageSe);

@@ -137,7 +137,7 @@ MonoBehaviour:
   effectSpeed: 0.5
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
-  bossDeadSe: 
+  instanceEffectPositionZ: 1
 --- !u!114 &1227512604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
   effectSpeed: 0.5
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
-  bossDeadSe: 
+  instanceEffectPositionZ: 1
 --- !u!114 &106078138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,7 +738,7 @@ MonoBehaviour:
   effectSpeed: 0.2
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
-  bossDeadSe: damage
+  instanceEffectPositionZ: -1
 --- !u!114 &1184275786
 MonoBehaviour:
   m_ObjectHideFlags: 0
