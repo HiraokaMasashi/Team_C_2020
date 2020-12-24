@@ -36,7 +36,7 @@ public class DropedDrill : MonoBehaviour
 
     private void Rotate()
     {
-        transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime * rotateSpeed, 0);
+        transform.rotation *= Quaternion.Euler(0, 0, 360 * Time.deltaTime * rotateSpeed);
     }
 
     void OnTriggerEnter(Collider other)
