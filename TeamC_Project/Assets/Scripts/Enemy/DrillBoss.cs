@@ -67,7 +67,7 @@ public class DrillBoss : Boss
         endMove = false;
         attackElapsedTime = 0.0f;
         attackPosition = Vector3.zero;
-        drill = transform.GetChild(2).gameObject;
+        drill = transform.GetChild(3).gameObject;
 
         base.Start();
     }
@@ -139,7 +139,7 @@ public class DrillBoss : Boss
     private void SummonNextPattern()
     {
         //ドリル攻撃をするまでに一連の行動を行った回数が2回未満なら
-        if (endBehaviourPattern < chnageBehaviourCount)
+        if (endBehaviourPattern < 0)
         {
             //ランダムで次の行動を選ぶ
             int random = Random.Range(0, 3);
@@ -230,6 +230,7 @@ public class DrillBoss : Boss
 
         Vector3 position = (attackPosition - transform.position).normalized;
         transform.position += position * Time.deltaTime * attackSpeed;
+        drill.transform.rotation *= Quaternion.Euler(0, 0, 360 * Time.deltaTime);
         if (Vector3.Distance(transform.position, attackPosition) <= 0.1f)
         {
             transform.position = attackPosition;

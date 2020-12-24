@@ -34,6 +34,8 @@ public class Drill : MonoBehaviour
     private float hitInterval;
     private float hitElpsedTime;
 
+    private bool isRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class Drill : MonoBehaviour
         health = GetComponent<Health>();
         hitInterval = equipmentHitInterval;
         hitElpsedTime = 0.0f;
+        isRotation = false;
     }
 
     // Update is called once per frame
@@ -71,7 +74,12 @@ public class Drill : MonoBehaviour
             if (transform.parent == null && player != null)
             {
                 transform.position = player.transform.position - player.transform.up * 2f;
-                transform.rotation = Quaternion.Euler(-30, 0, 180);
+                if (!isRotation)
+                {
+                    transform.rotation = Quaternion.Euler(-30, 0, 180);
+                    isRotation = true;
+                }
+                transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime, 0);
             }
         }
         else
@@ -79,6 +87,7 @@ public class Drill : MonoBehaviour
             Vector3 position = transform.position;
             position += Vector3.up * moveSpeed * Time.deltaTime;
             transform.position = position;
+            transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime, 0);
         }
     }
 
