@@ -9,25 +9,34 @@ public class DropedDrill : MonoBehaviour
     [SerializeField]
     protected Vector3 destroyZone = new Vector3(0.0f, -11.0f, 0.0f);
 
+    [SerializeField]
+    private float rotateSpeed = 0.5f;
+
     void Update()
     {
         Move();
         Death();
+        Rotate();
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 position = transform.position;
         position += Vector3.down * moveSpeed * Time.deltaTime;
         transform.position = position;
     }
 
-    void Death()
+    private void Death()
     {
         if (transform.position.y <= destroyZone.y)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Rotate()
+    {
+        transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime * rotateSpeed, 0);
     }
 
     void OnTriggerEnter(Collider other)

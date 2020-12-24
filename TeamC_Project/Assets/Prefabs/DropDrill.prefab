@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   destroyZone: {x: 0, y: -11, z: 0}
+  rotateSpeed: 0.5
 --- !u!1001 &6756717103221598536
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -126,6 +126,9 @@ MonoBehaviour:
   effectSpeed: 0.5
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  instanceEffectPositionX: 1
+  instanceEffectPositionY: 1
+  instanceEffectPositionZ: -1
 --- !u!114 &2669841131913891091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +188,8 @@ MonoBehaviour:
   destroyZone: {x: 20, y: -11, z: 0}
   minInterval: 1
   maxInterval: 5
+  shotSe: 
+  rotateSpeed: 2
 --- !u!136 &4442757388502589378
 CapsuleCollider:
   m_ObjectHideFlags: 0
