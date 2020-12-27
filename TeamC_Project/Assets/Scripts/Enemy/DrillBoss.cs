@@ -143,7 +143,7 @@ public class DrillBoss : Boss
     private void SummonNextPattern()
     {
         //ドリル攻撃をするまでに一連の行動を行った回数が2回未満なら
-        if (endBehaviourPattern < 0)
+        if (endBehaviourPattern < chnageBehaviourCount)
         {
             //ランダムで次の行動を選ぶ
             int random = Random.Range(0, 3);
