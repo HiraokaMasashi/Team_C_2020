@@ -7,10 +7,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2783775491089777041, guid: f82e1e5c5d315984ebb31fd99e894c7f,
+        type: 3}
+      propertyPath: minStopPositionY
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -2783775491089777041, guid: f82e1e5c5d315984ebb31fd99e894c7f,
+        type: 3}
+      propertyPath: maxStopPositionY
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -2783775491089777041, guid: f82e1e5c5d315984ebb31fd99e894c7f,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2783775491089777041, guid: f82e1e5c5d315984ebb31fd99e894c7f,
+        type: 3}
+      propertyPath: maxInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2783775491089777041, guid: f82e1e5c5d315984ebb31fd99e894c7f,
+        type: 3}
+      propertyPath: minInterval
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4843197333187964143, guid: f82e1e5c5d315984ebb31fd99e894c7f,
         type: 3}
       propertyPath: m_Name
-      value: SnipeEnemy
+      value: SnipeEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4843197333187964144, guid: f82e1e5c5d315984ebb31fd99e894c7f,
         type: 3}

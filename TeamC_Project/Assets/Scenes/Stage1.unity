@@ -686,31 +686,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: screwUseTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407088, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: shotScrewInterval
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407090, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: hpText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407095, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: chargeSliders.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407095, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: chargeSlider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407095, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
       propertyPath: chargeSliders.Array.data[0]
@@ -740,11 +715,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732371690843407096, guid: 71a1efe5b49f2894ea1b3e94775625cd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2732371690843407099, guid: 71a1efe5b49f2894ea1b3e94775625cd,
         type: 3}
@@ -917,7 +887,7 @@ PrefabInstance:
         type: 3}
       propertyPath: instancePattern.Array.data[0]
       value: 
-      objectReference: {fileID: 2250165428737128842, guid: 1bf5d0cb8c8a4f444a16489f0a67c72d,
+      objectReference: {fileID: 8477017488156782521, guid: 520091065bca4c748afd593f90ae757a,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -1039,7 +1009,7 @@ PrefabInstance:
         type: 3}
       propertyPath: instancePattern.Array.data[5]
       value: 
-      objectReference: {fileID: 6125105270634316458, guid: ab2c355ced0e4b74d8387fb5b2d426f9,
+      objectReference: {fileID: 8477017488156782521, guid: 520091065bca4c748afd593f90ae757a,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}

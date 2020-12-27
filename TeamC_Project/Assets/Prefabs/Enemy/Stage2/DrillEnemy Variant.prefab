@@ -65,7 +65,12 @@ PrefabInstance:
     - target: {fileID: 2669841131913891094, guid: 2b9b42c83e6011747bd1d5dc7c982129,
         type: 3}
       propertyPath: m_Name
-      value: DrillEnemy
+      value: DrillEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669841131913891095, guid: 2b9b42c83e6011747bd1d5dc7c982129,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b9b42c83e6011747bd1d5dc7c982129, type: 3}

@@ -65,7 +65,57 @@ PrefabInstance:
     - target: {fileID: 6595290001749366965, guid: 942425bb22a28e6429da51a6e9ddca40,
         type: 3}
       propertyPath: m_Name
-      value: CrossEnemy
+      value: CrossEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: minInterval
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: maxInterval
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: minLeftDestinationRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: minLeftDestinationRange.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: maxLeftDestinationRange.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: maxLeftDestinationRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: minRightDestinationRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: maxRightDestinationRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: maxRightDestinationRange.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304725606620776576, guid: 942425bb22a28e6429da51a6e9ddca40,
+        type: 3}
+      propertyPath: minRightDestinationRange.y
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 942425bb22a28e6429da51a6e9ddca40, type: 3}
