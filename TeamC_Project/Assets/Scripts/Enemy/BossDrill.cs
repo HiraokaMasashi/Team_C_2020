@@ -26,7 +26,7 @@ public class BossDrill : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Drill")
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<Drill>().DisConnect();
 
         if (other.transform.tag == "PlayerBullet")
         {

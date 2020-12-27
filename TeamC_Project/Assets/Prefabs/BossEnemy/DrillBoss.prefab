@@ -170,6 +170,7 @@ MonoBehaviour:
   particles:
   - {fileID: 8755195976421148173, guid: ceae577695439b9418d557059047c2ee, type: 3}
   - {fileID: 6062054386788731765, guid: dff33eb216d23d040a1808a82892043a, type: 3}
+  - {fileID: 4321492120636439290, guid: a1f3654177b2d0d4f9044599cd1078b8, type: 3}
 --- !u!114 &3730908732933718928
 MonoBehaviour:
   m_ObjectHideFlags: 0

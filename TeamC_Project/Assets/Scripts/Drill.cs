@@ -89,7 +89,7 @@ public class Drill : MonoBehaviour
                 {
                     rotateEffect = particleManager.GenerateParticleInChildren(1);
                     rotateEffect.transform.position = transform.position;
-                    rotateEffect.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -180);
+                    rotateEffect.transform.rotation = transform.rotation;
                     particleManager.StartParticle(rotateEffect);
                 }
             }
@@ -104,7 +104,7 @@ public class Drill : MonoBehaviour
             {
                 rotateEffect = particleManager.GenerateParticleInChildren(1);
                 rotateEffect.transform.position = transform.position;
-                rotateEffect.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -180);
+                rotateEffect.transform.rotation = transform.rotation;
                 particleManager.StartParticle(rotateEffect);
             }
         }
@@ -119,6 +119,13 @@ public class Drill : MonoBehaviour
         hitInterval = shotHitInterval;
     }
 
+    public void DisConnect()
+    {
+        rotateEffect.transform.parent = null;
+        particleManager.StopParticle(rotateEffect);
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Enemy")
@@ -126,10 +133,7 @@ public class Drill : MonoBehaviour
             Health otherHealth = other.GetComponent<Health>();
 
             if (!other.gameObject.name.Contains("Boss"))
-            {
                 otherHealth.HitDeath();
-
-            }
             else
             {
                 //シールドを持っていたらヒット判定を行わない
@@ -144,6 +148,9 @@ public class Drill : MonoBehaviour
 
             if (!IsShot)
                 health.Damage(1);
+
+            if (health.IsDead)
+                DisConnect();
 
             GameObject particle = particleManager.GenerateParticle();
             particle.transform.position = other.ClosestPointOnBounds(transform.position + Vector3.left * 1.2f);

@@ -54,6 +54,9 @@ public class DrillBoss : Boss
     [SerializeField]
     private Vector3 adjustDestinationPosition = new Vector3(0, 1.0f, 0);
 
+    private ParticleManager particleManager;
+    private GameObject particle;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -68,6 +71,7 @@ public class DrillBoss : Boss
         attackElapsedTime = 0.0f;
         attackPosition = Vector3.zero;
         drill = transform.GetChild(3).gameObject;
+        particleManager = GetComponent<ParticleManager>();
 
         base.Start();
     }
@@ -214,6 +218,8 @@ public class DrillBoss : Boss
         if (drill == null)
         {
             endAttack = true;
+            if (particle != null)
+                particleManager.StopParticle(particle);
             return;
         }
 
@@ -231,9 +237,18 @@ public class DrillBoss : Boss
         Vector3 position = (attackPosition - transform.position).normalized;
         transform.position += position * Time.deltaTime * attackSpeed;
         drill.transform.rotation *= Quaternion.Euler(0, 0, 360 * Time.deltaTime);
+
+        if (particle == null)
+        {
+            particle = particleManager.GenerateParticleInChildren(2);
+            particle.transform.position = drill.transform.position + Vector3.down * 3.0f;
+            particleManager.StartParticle(particle);
+        }
+
         if (Vector3.Distance(transform.position, attackPosition) <= 0.1f)
         {
             transform.position = attackPosition;
+            particleManager.StopParticle(particle);
             endAttack = true;
         }
     }

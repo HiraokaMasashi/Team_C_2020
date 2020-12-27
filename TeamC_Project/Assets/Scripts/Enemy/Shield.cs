@@ -61,7 +61,8 @@ public class Shield : MonoBehaviour
 
         if (other.transform.tag == "Drill")
         {
-            if (other.GetComponent<Drill>().IsShot) Destroy(other.gameObject);
+            if (other.GetComponent<Drill>().IsShot)
+                other.gameObject.GetComponent<Drill>().DisConnect();
         }
     }
 }
