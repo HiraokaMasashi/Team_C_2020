@@ -36,6 +36,9 @@ public class Drill : MonoBehaviour
 
     private bool isRotation;
 
+    private ParticleManager particleManager;
+    private GameObject rotateEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,8 @@ public class Drill : MonoBehaviour
         hitInterval = equipmentHitInterval;
         hitElpsedTime = 0.0f;
         isRotation = false;
+        particleManager = GetComponent<ParticleManager>();
+        rotateEffect = null;
     }
 
     // Update is called once per frame
@@ -76,10 +81,17 @@ public class Drill : MonoBehaviour
                 transform.position = player.transform.position - player.transform.up * 2f;
                 if (!isRotation)
                 {
-                    transform.rotation = Quaternion.Euler(-30, 0, 180);
+                    transform.rotation = Quaternion.Euler(0, 0, 180);
                     isRotation = true;
                 }
                 transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime, 0);
+                if (rotateEffect == null)
+                {
+                    rotateEffect = particleManager.GenerateParticleInChildren(1);
+                    rotateEffect.transform.position = transform.position;
+                    rotateEffect.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -180);
+                    particleManager.StartParticle(rotateEffect);
+                }
             }
         }
         else
@@ -88,6 +100,13 @@ public class Drill : MonoBehaviour
             position += Vector3.up * moveSpeed * Time.deltaTime;
             transform.position = position;
             transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime, 0);
+            if (rotateEffect == null)
+            {
+                rotateEffect = particleManager.GenerateParticleInChildren(1);
+                rotateEffect.transform.position = transform.position;
+                rotateEffect.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -180);
+                particleManager.StartParticle(rotateEffect);
+            }
         }
     }
 
@@ -107,7 +126,10 @@ public class Drill : MonoBehaviour
             Health otherHealth = other.GetComponent<Health>();
 
             if (!other.gameObject.name.Contains("Boss"))
+            {
                 otherHealth.HitDeath();
+
+            }
             else
             {
                 //シールドを持っていたらヒット判定を行わない
@@ -122,6 +144,11 @@ public class Drill : MonoBehaviour
 
             if (!IsShot)
                 health.Damage(1);
+
+            GameObject particle = particleManager.GenerateParticle();
+            particle.transform.position = other.ClosestPointOnBounds(transform.position + Vector3.left * 1.2f);
+            particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            particleManager.OncePlayParticle(particle);
         }
     }
 
@@ -142,6 +169,11 @@ public class Drill : MonoBehaviour
             other.GetComponent<Health>().Damage(10);
             hitElpsedTime = 0.0f;
             health.Damage(1);
+
+            GameObject particle = particleManager.GenerateParticle();
+            particle.transform.position = other.ClosestPointOnBounds(transform.position + Vector3.left * 1.2f);
+            particle.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            particleManager.OncePlayParticle(particle);
         }
     }
 }
