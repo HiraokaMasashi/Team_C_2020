@@ -305,6 +305,9 @@ MonoBehaviour:
   effectSpeed: 0.5
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  instanceEffectPositionX: 1
+  instanceEffectPositionY: 1
+  instanceEffectPositionZ: -1
 --- !u!114 &2732371690843407098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +402,7 @@ MonoBehaviour:
   screw: {fileID: 479286963}
   shotScrewInterval: 3
   shotScrewDestroyTime: 3
-  magnificationSpeed: 3
+  magnificationSpeed: 9
   screwUseTime: 3
   rotationInterval: 1
   drillPrefab: {fileID: 6111796149867733879, guid: be96b709edb94dc41ac93634e5ef4bc4,
@@ -409,6 +412,7 @@ MonoBehaviour:
   - screwattack1
   - drill1
   - shot1
+  adjsutAlignment: 2
 --- !u!114 &2732371690843407095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +425,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c712c295430e44b8c2d26fe9928b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeSliders: []
+  chargeSliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2732371690843407089
 MonoBehaviour:
   m_ObjectHideFlags: 0

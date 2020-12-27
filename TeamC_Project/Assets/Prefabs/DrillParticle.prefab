@@ -1700,7 +1700,7 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -4
+      scalar: -5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1965,7 +1965,7 @@ ParticleSystem:
     radial:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -2
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3949,7 +3949,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0.5058824}
+      maxColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0.18431373}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4779,14 +4779,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5028335538128671836}
-  m_LocalRotation: {x: -0.111520655, y: -0, z: -0.9937622, w: 0}
+  m_LocalRotation: {x: -0.11152099, y: 0.000000031324046, z: -0.9937621, w: 0.00000027912816}
   m_LocalPosition: {x: 0, y: 10.09, z: 0}
   m_LocalScale: {x: 1, y: 1.5000007, z: 1}
   m_Children:
   - {fileID: 301372247544029655}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 12.806001, z: -179.99998}
 --- !u!198 &7285716014770699222
 ParticleSystem:
   m_ObjectHideFlags: 0

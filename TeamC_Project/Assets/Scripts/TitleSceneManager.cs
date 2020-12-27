@@ -110,7 +110,7 @@ public class TitleSceneManager : MonoBehaviour
         //bubbleParticle.position += Vector3.up * 0.2f;
 
         //タイトルロゴを動かす
-        titleLogo.position += Vector3.up * 2;
+        titleLogo.position += Vector3.up * 8;
 
         if (!rotateStop)
         {

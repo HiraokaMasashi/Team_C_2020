@@ -65,7 +65,17 @@ PrefabInstance:
     - target: {fileID: 5516234694478458265, guid: c7cf563aba94d2f4ba643876baa24deb,
         type: 3}
       propertyPath: m_Name
-      value: HiScoreEnemy
+      value: HiScoreEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417215250290504917, guid: c7cf563aba94d2f4ba643876baa24deb,
+        type: 3}
+      propertyPath: waitTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417215250290504917, guid: c7cf563aba94d2f4ba643876baa24deb,
+        type: 3}
+      propertyPath: waitSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7cf563aba94d2f4ba643876baa24deb, type: 3}

@@ -7,6 +7,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1884251446145032845, guid: 1861da97ea8bec243a90b84a8c0e4044,
+        type: 3}
+      propertyPath: maxInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884251446145032845, guid: 1861da97ea8bec243a90b84a8c0e4044,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884251446145032845, guid: 1861da97ea8bec243a90b84a8c0e4044,
+        type: 3}
+      propertyPath: minInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884251446145032845, guid: 1861da97ea8bec243a90b84a8c0e4044,
+        type: 3}
+      propertyPath: minSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884251446145032845, guid: 1861da97ea8bec243a90b84a8c0e4044,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7492139034897630028, guid: 1861da97ea8bec243a90b84a8c0e4044,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -65,7 +90,7 @@ PrefabInstance:
     - target: {fileID: 7492139034897630035, guid: 1861da97ea8bec243a90b84a8c0e4044,
         type: 3}
       propertyPath: m_Name
-      value: FallEnemy
+      value: FallEnemy Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1861da97ea8bec243a90b84a8c0e4044, type: 3}

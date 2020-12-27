@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2444842678565588161, guid: c262afe0acfe766458a158842b020a49,
         type: 3}
       propertyPath: m_Name
-      value: RushEnemy
+      value: RushEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2444842678565588190, guid: c262afe0acfe766458a158842b020a49,
         type: 3}
@@ -66,6 +66,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572142892218074705, guid: c262afe0acfe766458a158842b020a49,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572142892218074705, guid: c262afe0acfe766458a158842b020a49,
+        type: 3}
+      propertyPath: waitTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c262afe0acfe766458a158842b020a49, type: 3}
