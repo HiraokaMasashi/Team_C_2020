@@ -11,17 +11,24 @@ public class DrillEnemy : Enemy
     private ParticleManager particleManager;
     private GameObject particle;
 
+    private SetUpScrew setUpScrew;
+
     protected override void Start()
     {
         base.Start();
         drill = transform.GetChild(0).gameObject;
         particleManager = GetComponent<ParticleManager>();
         particle = null;
+        setUpScrew = GetComponent<SetUpScrew>();
     }
 
     protected override void Update()
     {
-        if (setupScrew.IsStan) return;
+        if (setupScrew.IsStan)
+        {
+            particleManager.StopParticle(particle);
+            return;
+        }
 
         Move();
         Death();
@@ -32,7 +39,7 @@ public class DrillEnemy : Enemy
     {
         drill.transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime * rotateSpeed, 0);
 
-        if (particle != null) return;
+        if (particle != null || setupScrew.IsStan) return;
         particle = particleManager.GenerateParticleInChildren(1);
         particle.transform.position = drill.transform.position;
         particle.transform.rotation = drill.transform.rotation;
