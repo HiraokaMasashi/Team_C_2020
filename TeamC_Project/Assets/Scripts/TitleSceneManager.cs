@@ -65,7 +65,7 @@ public class TitleSceneManager : MonoBehaviour
             {
                 moveEnd = true;
                 titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 150);
-                screwLogo.eulerAngles = new Vector3(0,0,4);
+                screwLogo.eulerAngles = new Vector3(0, 0, 4);
                 //bubbleParticle.position += Vector3.up * 100;
                 buttons.anchoredPosition = Vector3.zero;
                 pressLogo.gameObject.SetActive(true);
@@ -96,10 +96,10 @@ public class TitleSceneManager : MonoBehaviour
             }
 
 
-            if (GameExit())
-            {
-                sceneManager.GameQuitFadeOut();
-            }
+            //if (GameExit())
+            //{
+            //    sceneManager.GameQuitFadeOut();
+            //}
         }
     }
 
@@ -122,7 +122,7 @@ public class TitleSceneManager : MonoBehaviour
         if (titleLogo.anchoredPosition.y >= 150)
         {
             titleLogo.anchoredPosition = new Vector3(titleLogo.anchoredPosition.x, 150);
-            rotationSpeed -=0.03f;
+            rotationSpeed -= 0.03f;
             pressLogo.gameObject.SetActive(true);
             if (screwLogo.eulerAngles.z <= 0)
             {
@@ -146,7 +146,19 @@ public class TitleSceneManager : MonoBehaviour
     {
         if (Input.GetA_ButtonDown() || Input.GetB_ButtonDown()
         || Input.GetX_ButtonDown() || Input.GetY_ButtonDown()
-        || Input.GetMenu_ButtonDown())
+        || Input.GetMenu_ButtonDown() || Input.GetView_ButtonDown()
+        || Input.GetR_ButtonDown() || Input.GetL_ButtonDown()
+        || Input.GetL_StickDown() || Input.GetR_StickDown()
+        || GetValueNotZero())
+            return true;
+        else
+            return false;
+    }
+
+    private bool GetValueNotZero()
+    {
+        if (Input.GetD_Pad_Horizontal() != 0 || Input.GetD_Pad_Vertical() != 0
+            || Input.GetL_R_Trigger() != 0)
             return true;
         else
             return false;
