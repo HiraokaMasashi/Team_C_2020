@@ -425,6 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c712c295430e44b8c2d26fe9928b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxBulletCount: 3
+  chargeSpeed: 1
   chargeSliders:
   - {fileID: 0}
   - {fileID: 0}
