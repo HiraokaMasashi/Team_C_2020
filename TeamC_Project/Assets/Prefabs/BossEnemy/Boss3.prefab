@@ -137,6 +137,8 @@ MonoBehaviour:
   effectSpeed: 0.5
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  instanceEffectPositionX: 1
+  instanceEffectPositionY: 1
   instanceEffectPositionZ: 1
 --- !u!114 &1227512604
 MonoBehaviour:
@@ -288,6 +290,8 @@ MonoBehaviour:
   effectSpeed: 0.5
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  instanceEffectPositionX: 1
+  instanceEffectPositionY: 1
   instanceEffectPositionZ: 1
 --- !u!114 &106078138
 MonoBehaviour:
@@ -633,6 +637,7 @@ GameObject:
   - component: {fileID: 1184275788}
   - component: {fileID: 7965680253894279013}
   - component: {fileID: 7026368024626863942}
+  - component: {fileID: 756073845365310259}
   m_Layer: 0
   m_Name: Boss3
   m_TagString: Enemy
@@ -738,6 +743,8 @@ MonoBehaviour:
   effectSpeed: 0.2
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  instanceEffectPositionX: 1
+  instanceEffectPositionY: 1
   instanceEffectPositionZ: -1
 --- !u!114 &1184275786
 MonoBehaviour:
@@ -822,3 +829,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 28723f10c2a8e094a9351e892f5271b8, type: 3}
+--- !u!95 &756073845365310259
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7985128295584331834}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 430abd834320d1b41a8b28090f451af0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
