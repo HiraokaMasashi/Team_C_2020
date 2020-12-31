@@ -16,19 +16,40 @@ public class ShieldBoss : Boss
     [SerializeField]
     private int summonCount = 5;
 
+    private Animator animator;
+    [SerializeField]
+    private float animatorInterval = 1.0f;
+    private float animatorElapsedTime;
+    [SerializeField]
+    private float enterTime = 2.0f;
+    private float enterElapsedTime;
+
+    private GameObject shieldObject;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         isTurnRight = true;
         shotCount = 0;
 
+        animator = GetComponent<Animator>();
+        shieldObject = transform.GetChild(0).gameObject;
+        animatorElapsedTime = 0.0f;
+        enterElapsedTime = 0.0f;
         base.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isFrameIn) return;
+        if (!isFrameIn || gameManager.IsPerformance)
+        {
+            enterElapsedTime += Time.deltaTime;
+            if (enterElapsedTime < enterTime)
+                return;
+
+            gameManager.IsPerformance = false;
+        }
 
         if (health.IsDead || gameManager.IsEnd)
         {
@@ -36,9 +57,10 @@ public class ShieldBoss : Boss
             return;
         }
 
+        Animation();
         ChangePattern();
 
-        Shot();
+        //Shot();
         SummonEnemy();
     }
 
@@ -68,24 +90,24 @@ public class ShieldBoss : Boss
         }
     }
 
-    private void Shot()
+    public void Shot()
     {
-        if (pattern != BehaviourPattern.SHOT) return;
+        //if (pattern != BehaviourPattern.SHOT) return;
 
-        if (isShot) return;
+        //if (isShot) return;
 
-        shotElapsedTime += Time.deltaTime;
+        //shotElapsedTime += Time.deltaTime;
 
-        if (shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
-        {
-            isPlayAlert = true;
-            SoundManager.Instance.PlaySeByName(alertSe);
-        }
-        if (shotElapsedTime < shotInterval) return;
+        //if (shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
+        //{
+        //    isPlayAlert = true;
+        //    SoundManager.Instance.PlaySeByName(alertSe);
+        //}
+        //if (shotElapsedTime < shotInterval) return;
 
         isShot = true;
         StartCoroutine(ShotBarrage());
-        shotElapsedTime = 0.0f;
+        //shotElapsedTime = 0.0f;
     }
 
     private IEnumerator ShotBarrage()
@@ -109,7 +131,7 @@ public class ShieldBoss : Boss
                 yield return new WaitForSeconds(0.1f);
             }
 
-            isPlayAlert = false;
+            //isPlayAlert = false;
             isShot = false;
             shotCount++;
             yield break;
@@ -132,5 +154,22 @@ public class ShieldBoss : Boss
         }
         summonElapsedTime = 0.0f;
         isSummon = true;
+    }
+
+    public void RemoveSheild()
+    {
+        shieldObject = null;
+    }
+
+    private void Animation()
+    {
+        if (shieldObject != null) return;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BossMove")) return;
+
+        animatorElapsedTime += Time.deltaTime;
+        if (animatorElapsedTime < animatorInterval) return;
+
+        animatorElapsedTime = 0.0f;
+        animator.SetTrigger("IsMove");
     }
 }

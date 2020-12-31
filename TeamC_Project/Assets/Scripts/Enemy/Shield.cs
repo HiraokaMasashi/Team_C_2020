@@ -25,6 +25,8 @@ public class Shield : MonoBehaviour
             if (isDown) return;
 
             isDown = true;
+            transform.parent.GetComponent<Animator>().SetTrigger("IsMove");
+            transform.parent.GetComponent<ShieldBoss>().RemoveSheild();
             transform.parent = null;
             GetComponent<BoxCollider>().enabled = false;
         }

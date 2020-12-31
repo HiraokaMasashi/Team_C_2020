@@ -799,6 +799,8 @@ MonoBehaviour:
   shotBulletCount: 30
   shotBarrageRows: 4
   summonCount: 2
+  animatorInterval: 1
+  enterTime: 3
 --- !u!54 &7965680253894279013
 Rigidbody:
   m_ObjectHideFlags: 0

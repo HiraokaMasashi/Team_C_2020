@@ -134,7 +134,7 @@ public class EnemyManager : MonoBehaviour
             //生成した敵の座標を決定する
             enemies[i].transform.position = instancePattern[number].GetChild(i).position;
 
-            if(enemy.gameObject.name.Contains("Rush"))
+            if (enemy.gameObject.name.Contains("Rush"))
             {
                 enemy.GetComponent<RushEnemy>().SetWaitTime(i);
             }
@@ -190,7 +190,8 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
 
         InstanceBoss();
-        gameManager.IsPerformance = false;
+        if (bossPrefab.GetComponent<Animator>() == null)
+            gameManager.IsPerformance = false;
         waveText.enabled = false;
     }
 

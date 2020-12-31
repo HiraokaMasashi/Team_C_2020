@@ -76,9 +76,7 @@ public class GameManager : MonoBehaviour
         enemyManager = GameObject.Find("EnemyCreater").GetComponent<EnemyManager>();
 
         //Playerが生成される処理ではなかったのでScene内のPlayerを使用
-        player = GameObject.Find("Player");
         player = GameObject.FindGameObjectWithTag("Player");
-
         player.transform.position = playerStartPosition;
 
         stageNameText.text = SceneManager.GetActiveScene().name;
