@@ -46,6 +46,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private float performanceSpeed = 2.0f;
 
+    [SerializeField]
+    private GameObject hiScoreObject;
+    private int instanceWave;
+    private int instanceNumber;
+
     //Waveエンドフラグ
     public bool IsEnd
     {
@@ -63,6 +68,7 @@ public class EnemyManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
 
+        instanceWave = Random.Range(0, maxWave);
         //StartCoroutine(InstanceEnemy(wave));
     }
 
@@ -125,11 +131,17 @@ public class EnemyManager : MonoBehaviour
     {
         int length = instancePattern[number].transform.childCount;
         GameObject[] enemies = new GameObject[length];
+        if (number == instanceWave)
+            instanceNumber = Random.Range(0, length);
         //Debug.Log(length);
         for (int i = 0; i < length; i++)
         {
             //enemyをインスタンス化する(生成する)
-            GameObject enemy = Instantiate(enemyPrefabs[number]);
+            GameObject enemy;
+            if (i == instanceNumber && number == instanceWave && hiScoreObject != null)
+                enemy = Instantiate(hiScoreObject);
+            else
+                enemy = Instantiate(enemyPrefabs[number]);
             enemies[i] = enemy;
             //生成した敵の座標を決定する
             enemies[i].transform.position = instancePattern[number].GetChild(i).position;

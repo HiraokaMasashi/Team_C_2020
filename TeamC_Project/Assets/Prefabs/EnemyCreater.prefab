@@ -66,3 +66,5 @@ MonoBehaviour:
   bossFont: {fileID: 12800000, guid: 67fe3a6e87a4ebe40ac2fe365bac098c, type: 3}
   performancePosition: {x: 0, y: -4, z: 0}
   performanceSpeed: 5
+  hiScoreObject: {fileID: 5516234694478458265, guid: c7cf563aba94d2f4ba643876baa24deb,
+    type: 3}

@@ -900,7 +900,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: maxWave
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -949,6 +949,12 @@ PrefabInstance:
       propertyPath: instancePattern.Array.data[1]
       value: 
       objectReference: {fileID: 3319677223591885970, guid: 7b7169b6887ea1a478d6874b0c17ac33,
+        type: 3}
+    - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
+        type: 3}
+      propertyPath: hiScoreObject
+      value: 
+      objectReference: {fileID: 5516234694478458265, guid: c7cf563aba94d2f4ba643876baa24deb,
         type: 3}
     - target: {fileID: 5432887579036557077, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
