@@ -46,7 +46,12 @@ public class ShieldBoss : Boss
 
         if (gameManager.IsPerformance)
         {
-            if (health.IsDead) return;
+            if (health.IsDead)
+            {
+                animator.speed = 0;
+                DestroyOtherObject();
+                return;
+            }
 
             enterElapsedTime += Time.deltaTime;
             if (enterElapsedTime < enterTime)
