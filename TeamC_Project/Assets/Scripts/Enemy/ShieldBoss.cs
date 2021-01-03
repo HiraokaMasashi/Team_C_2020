@@ -42,12 +42,17 @@ public class ShieldBoss : Boss
     // Update is called once per frame
     void Update()
     {
-        if (!isFrameIn || gameManager.IsPerformance)
+        if (!isFrameIn) return;
+
+        if (gameManager.IsPerformance)
         {
+            if (health.IsDead) return;
+
             enterElapsedTime += Time.deltaTime;
             if (enterElapsedTime < enterTime)
                 return;
 
+            animator.enabled = false;
             gameManager.IsPerformance = false;
         }
 
@@ -57,10 +62,11 @@ public class ShieldBoss : Boss
             return;
         }
 
+        StartAnimation();
         Animation();
         ChangePattern();
 
-        //Shot();
+        ShotOnScript();
         SummonEnemy();
     }
 
@@ -110,6 +116,24 @@ public class ShieldBoss : Boss
         //shotElapsedTime = 0.0f;
     }
 
+    private void ShotOnScript()
+    {
+        if (shieldObject == null) return;
+        if (pattern != BehaviourPattern.SHOT) return;
+        if (isShot) return;
+
+        shotElapsedTime += Time.deltaTime;
+        if (shotElapsedTime >= shotInterval - 1.0f && !isPlayAlert)
+        {
+            isPlayAlert = true;
+            SoundManager.Instance.PlaySeByName(alertSe);
+        }
+        if (shotElapsedTime < shotInterval) return;
+
+        Shot();
+        shotElapsedTime = 0.0f;
+    }
+
     private IEnumerator ShotBarrage()
     {
         int rad = 0;
@@ -156,9 +180,10 @@ public class ShieldBoss : Boss
         isSummon = true;
     }
 
-    public void RemoveSheild()
+    private void StartAnimation()
     {
-        shieldObject = null;
+        if (shieldObject == null && !animator.enabled)
+            animator.enabled = true;
     }
 
     private void Animation()

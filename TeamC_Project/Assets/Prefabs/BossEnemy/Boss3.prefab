@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: -15, z: 0}
-  moveSpeed: 3
+  moveSpeed: 5
 --- !u!1 &5890837408140722820
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,8 +773,8 @@ MonoBehaviour:
   shotBulletCount: 30
   shotBarrageRows: 4
   summonCount: 2
-  animatorInterval: 1
-  enterTime: 3
+  animatorInterval: 3
+  enterTime: 4.5
 --- !u!54 &7965680253894279013
 Rigidbody:
   m_ObjectHideFlags: 0
