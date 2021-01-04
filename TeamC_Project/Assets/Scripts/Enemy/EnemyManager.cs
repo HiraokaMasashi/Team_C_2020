@@ -185,6 +185,7 @@ public class EnemyManager : MonoBehaviour
     private void PerformancePlayerPosition()
     {
         if (!gameManager.IsPerformance) return;
+        if (boss != null) return;
 
         if (Vector3.Distance(player.transform.position, performancePosition) > 0.1)
         {
