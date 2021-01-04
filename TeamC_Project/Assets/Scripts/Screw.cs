@@ -50,7 +50,7 @@ public class Screw : MonoBehaviour
     {
         //スクリューのタイプが射出型でなければreturn
         if (screwType != ScrewType.SHOT) return;
-
+        
         Vector3 position = transform.position;
         position += Vector3.up * moveSpeed * Time.deltaTime;
         transform.position = position;

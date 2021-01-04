@@ -401,7 +401,7 @@ MonoBehaviour:
   playerMoveSpeed: 10
   screw: {fileID: 479286963}
   shotScrewInterval: 3
-  shotScrewDestroyTime: 3
+  shotScrewDestroyTime: 1.5
   magnificationSpeed: 9
   screwUseTime: 3
   rotationInterval: 1
