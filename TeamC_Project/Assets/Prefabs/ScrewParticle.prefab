@@ -4782,7 +4782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af764ebdc004544f97b521e8d4be639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWait: 5
 --- !u!114 &7329952959991381326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4795,4 +4794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fde78f91788d4498bf37fdb5edeb37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 0
+  maxPositionY: 0
+  stanTime: 2
