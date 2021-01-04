@@ -385,7 +385,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 4898696957384133635, guid: 682b1f5def1d76c4f933fb4e63e200f7,
+      objectReference: {fileID: 4477053974706107016, guid: bcd6e49cfd8cb494eae833748976053f,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -408,7 +408,7 @@ PrefabInstance:
         type: 3}
       propertyPath: instancePattern.Array.data[4]
       value: 
-      objectReference: {fileID: 8477017488156782521, guid: 520091065bca4c748afd593f90ae757a,
+      objectReference: {fileID: 6125105270634316458, guid: ab2c355ced0e4b74d8387fb5b2d426f9,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
