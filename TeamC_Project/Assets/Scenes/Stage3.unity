@@ -1132,7 +1132,7 @@ PrefabInstance:
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
       propertyPath: maxWave
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -1174,7 +1174,7 @@ PrefabInstance:
         type: 3}
       propertyPath: instancePattern.Array.data[9]
       value: 
-      objectReference: {fileID: 6125105270634316458, guid: ab2c355ced0e4b74d8387fb5b2d426f9,
+      objectReference: {fileID: 3319677223591885970, guid: 7b7169b6887ea1a478d6874b0c17ac33,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
@@ -1276,7 +1276,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefabs.Array.data[9]
       value: 
-      objectReference: {fileID: 489630010710044653, guid: e772827aef7859e41ae7c28fece8264b,
+      objectReference: {fileID: 513336989669154910, guid: 58d772340b2c7a041a152f574e7c84f5,
         type: 3}
     - target: {fileID: 5432887579036557076, guid: fb5eb642eb27c8240b8cc2cb6ce25568,
         type: 3}
