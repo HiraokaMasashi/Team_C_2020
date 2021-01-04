@@ -23,6 +23,8 @@ public class SetUpScrew : MonoBehaviour
     [SerializeField]
     private Vector3 clampPosition;
 
+    private MissedEnemy missedEnemy;
+
     public Vector3 ClapmPosition
     {
         get { return clampPosition; }
@@ -60,6 +62,7 @@ public class SetUpScrew : MonoBehaviour
         distanceY = 0.0f;
         adjustPositionX = 0.0f;
         currentDirection = MoveDirection.NONE;
+        missedEnemy = GameObject.Find("MissedEnemy").GetComponent<MissedEnemy>();
     }
 
     // Update is called once per frame
@@ -83,6 +86,8 @@ public class SetUpScrew : MonoBehaviour
         {
             if (transform.tag == "Bomb")
                 GameObject.Find("BombBoss(Clone)").GetComponent<NormalBoss>().RemoveBomb(gameObject);
+            else if (transform.tag == "Enemy")
+                missedEnemy.MissCountUp();
             Destroy(gameObject);
         }
     }

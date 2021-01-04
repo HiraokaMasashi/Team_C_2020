@@ -15,6 +15,9 @@ public class ResultSceneManager : MonoBehaviour
     [SerializeField]
     private Text hiScoreText;
 
+    [SerializeField]
+    private Text missText;
+
     private InputManager inputManager;
     [SerializeField]
     private FadeScene fadeScene;
@@ -149,6 +152,7 @@ public class ResultSceneManager : MonoBehaviour
         }
 
         getScoreText.text = scoreManager.GetTotalScore().ToString();
+        missText.text = MissedEnemy.GetMissedEnemyCount().ToString();
     }
 
     private void Select()

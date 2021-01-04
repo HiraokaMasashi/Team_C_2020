@@ -44,7 +44,10 @@ public class HiSocreEnemy : Enemy
         transform.position = position;
 
         if (transform.position.y >= withdrawalZoneY)
+        {
+            missedEnemy.MissCountUp();
             Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -54,7 +57,7 @@ public class HiSocreEnemy : Enemy
     {
         if (isWithdrawal) return;
 
-        if(transform.position.y >= standbyPositionY)
+        if (transform.position.y >= standbyPositionY)
         {
             Vector3 position = transform.position;
             position += Vector3.down * moveSpeed * Time.deltaTime;

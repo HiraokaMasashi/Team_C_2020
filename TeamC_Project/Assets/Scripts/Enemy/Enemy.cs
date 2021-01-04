@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected string shotSe;
 
+    protected MissedEnemy missedEnemy;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour
         bulletController = GetComponent<BulletController>();
         shotInterval = Random.Range(minInterval, maxInterval);
         player = GameObject.FindGameObjectWithTag("Player");
+        missedEnemy = GameObject.Find("MissedEnemy").GetComponent<MissedEnemy>();
     }
 
     // Update is called once per frame
@@ -72,6 +75,7 @@ public class Enemy : MonoBehaviour
             transform.position.x >= destroyZone.x ||
             transform.position.x <= -destroyZone.x)
         {
+            missedEnemy.MissCountUp();
             Destroy(gameObject);
         }
     }
