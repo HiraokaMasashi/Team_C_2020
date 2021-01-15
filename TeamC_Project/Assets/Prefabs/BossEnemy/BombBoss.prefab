@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25d0592b7520134499a67de34a023f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 80
+  hp: 150
   deadSe: dead
   damageSe: damage
   dropPrefab: {fileID: 0}
@@ -405,6 +405,8 @@ MonoBehaviour:
   effectSpeed: 0.2
   particleInstanceTime: 0.5
   minScale: {x: 1, y: 1, z: 1}
+  instanceEffectPositionX: 1
+  instanceEffectPositionY: 1
   instanceEffectPositionZ: -1
 --- !u!114 &4577994661093772295
 MonoBehaviour:

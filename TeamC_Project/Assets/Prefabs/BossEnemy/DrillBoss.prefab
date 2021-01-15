@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25d0592b7520134499a67de34a023f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 180
+  hp: 260
   deadSe: dead
   damageSe: damage
   dropPrefab: {fileID: 0}
