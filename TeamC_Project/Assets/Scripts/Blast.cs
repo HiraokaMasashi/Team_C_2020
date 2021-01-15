@@ -9,13 +9,18 @@ public class Blast : MonoBehaviour
     [SerializeField]
     private int enemyDamage = 10;
 
+    private bool isDamage = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
             other.gameObject.GetComponent<Health>().Damage(playerDamage);
 
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && !isDamage)
+        {
             other.gameObject.GetComponent<Health>().Damage(enemyDamage);
+            isDamage = true;
+        }
     }
 
 }
