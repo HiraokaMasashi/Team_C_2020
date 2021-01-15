@@ -118,7 +118,7 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (transform.name.Contains("Boss"))
+        if (transform.name.Contains("Boss") && transform.tag == "Enemy")
         {
             //ボスの死亡演出処理の実行
             if (gameManager.IsPerformance) return;

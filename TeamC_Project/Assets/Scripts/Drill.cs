@@ -121,6 +121,8 @@ public class Drill : MonoBehaviour
 
     public void DisConnect()
     {
+        if (rotateEffect.transform.parent == null) return;
+
         rotateEffect.transform.parent = null;
         particleManager.StopParticle(rotateEffect);
         Destroy(gameObject);
